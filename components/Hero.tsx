@@ -74,6 +74,7 @@ export function Hero() {
               fill
               priority={i === 0}
               draggable={false}
+              quality={100}
               className="object-cover object-center select-none"
               sizes="100vw"
             />

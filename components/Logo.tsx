@@ -3,28 +3,34 @@
 import Image from "next/image";
 import Link from "next/link";
 
+const VARIANTS = {
+  original: { src: "/images/logo/sw-logo-original.png", ratio: 1024 / 512 },
+  full: { src: "/images/logo/sw-logo.png", ratio: 1 },
+  mark: { src: "/images/logo/sw-mark.png", ratio: 328 / 243 },
+} as const;
+
 export function Logo({
   height = 56,
   className = "",
-  variant = "full",
+  variant = "original",
 }: {
   height?: number;
   className?: string;
-  variant?: "full" | "mark";
+  variant?: keyof typeof VARIANTS;
 }) {
-  const src = variant === "mark" ? "/images/logo/sw-mark.png" : "/images/logo/sw-logo.png";
-  const ratio = variant === "mark" ? 328 / 243 : 1;
+  const { src, ratio } = VARIANTS[variant];
   const width = Math.round(height * ratio);
   return (
-    <Link href="/" className={`inline-flex ${className}`} aria-label="Scents Wave">
+    <Link href="/" className={`inline-flex shrink-0 ${className}`} aria-label="Scents Wave">
       <Image
         src={src}
-        alt="Scents Wave — موجة عطر"
+        alt="Scents Wave — موجة عطر — Luxury Solid Perfume"
         width={width}
         height={height}
         priority
-        className="h-auto w-auto object-contain"
-        style={{ height, width: "auto" }}
+        quality={100}
+        className="h-auto w-auto object-contain object-left"
+        style={{ height, width: "auto", maxWidth: "none" }}
       />
     </Link>
   );

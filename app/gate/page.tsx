@@ -9,13 +9,11 @@ export default async function GatePage({
   const { error } = await searchParams;
 
   return (
-    <div className="flex min-h-[80vh] flex-col items-center justify-center px-6 py-16 text-center">
-      <Logo variant="mark" height={56} />
-      <p className="mt-8 text-[12px] tracking-[0.32em] uppercase text-[#b08a4a]">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-black px-6 py-16 text-center text-[#f4efe6]">
+      <Logo variant="original" height={96} />
+      <p className="mt-8 text-[12px] tracking-[0.32em] uppercase text-[#c9b48a]">
         قريبا بالاسواق
       </p>
-      <h1 className="serif mt-4 text-4xl">Scents Wave</h1>
-      <p className="mt-2 text-sm text-[var(--muted)]">موجة عطر</p>
       <form action={unlockSite} className="mt-10 w-full max-w-xs">
         <input
           type="password"
@@ -23,10 +21,10 @@ export default async function GatePage({
           required
           autoFocus
           placeholder="كلمة السر"
-          className="w-full border-0 border-b border-[var(--ink)] bg-transparent py-3 text-center outline-none"
+          className="w-full border-0 border-b border-white/35 bg-transparent py-3 text-center text-white outline-none placeholder:text-white/40"
         />
         {error && (
-          <p className="mt-3 text-sm text-[var(--muted)]">كلمة السر غير صحيحة</p>
+          <p className="mt-3 text-sm text-white/55">كلمة السر غير صحيحة</p>
         )}
         <button type="submit" className="cta mt-8 w-full">
           دخول

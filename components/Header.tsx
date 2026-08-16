@@ -37,65 +37,60 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-white">
-      <div className="wrap grid h-[80px] grid-cols-[1fr_auto_1fr] items-center">
-        <div className="flex items-center gap-3 justify-self-start">
-          <button type="button" className="lg:hidden" onClick={() => setOpen((v) => !v)} aria-label="menu">
+    <header className="site-header sticky top-0 z-50">
+      <div className="wrap grid h-[100px] grid-cols-[auto_1fr_auto] items-center gap-4 md:h-[120px]">
+        <div className="flex items-center gap-3">
+          <button type="button" className="header-icon lg:hidden" onClick={() => setOpen((v) => !v)} aria-label="menu">
             <Bars />
           </button>
-          <Logo variant="mark" height={42} className="hidden sm:inline-flex" />
+          <Logo variant="original" height={96} className="hidden md:inline-flex" />
+          <Logo variant="original" height={68} className="md:hidden" />
         </div>
-        <div className="justify-self-center">
-          <Logo variant="mark" height={36} className="sm:hidden" />
-          <nav className="hidden items-center gap-6 xl:gap-8 lg:flex">
-            {nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-[11px] tracking-[0.18em] uppercase text-[#333] hover:opacity-55"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-        <div className="flex items-center gap-4 justify-self-end text-[#222]">
+        <nav className="hidden items-center justify-center gap-6 xl:gap-9 lg:flex">
+          {nav.map((item) => (
+            <Link key={item.href} href={item.href} className="nav-link">
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="flex items-center gap-5 justify-self-end">
           <button
             type="button"
             onClick={() => setLocale(locale === "ar" ? "en" : "ar")}
-            className="hidden items-center gap-1.5 text-[11px] tracking-[0.08em] sm:flex"
+            className="header-meta hidden sm:flex"
           >
-            <span aria-hidden>🇸🇦</span>
-            <span>/ {copy.sar}</span>
+            {locale === "ar" ? "AR" : "EN"} / {copy.sar}
           </button>
-          <button type="button" onClick={() => setSearch((v) => !v)} aria-label="search">
+          <button type="button" className="header-icon" onClick={() => setSearch((v) => !v)} aria-label="search">
             <Search />
           </button>
-          <Link href="/contact" aria-label={copy.stores} className="hidden sm:block">
+          <Link href="/contact" aria-label={copy.stores} className="header-icon hidden sm:grid">
             <Pin />
           </Link>
-          <Link href="/account" aria-label={copy.account} className="hidden sm:block">
+          <Link href="/account" aria-label={copy.account} className="header-icon hidden sm:grid">
             <User />
           </Link>
-          <button type="button" onClick={openCart} className="relative" aria-label={copy.cart}>
+          <button type="button" onClick={openCart} className="header-icon relative" aria-label={copy.cart}>
             <Bag />
-            <span className="absolute -top-2 -end-2 min-w-3 text-center text-[10px]">{cartCount}</span>
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -end-2 min-w-3 text-center text-[10px] text-[#f4efe6]">{cartCount}</span>
+            )}
           </button>
         </div>
       </div>
       {search && (
-        <form onSubmit={onSearch} className="border-t border-[var(--line)]">
+        <form onSubmit={onSearch} className="border-t border-white/15">
           <input
             autoFocus
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder={copy.searchPlaceholder}
-            className="wrap w-full bg-transparent py-5 text-lg outline-none"
+            className="wrap w-full bg-transparent py-5 text-lg text-white outline-none placeholder:text-white/40"
           />
         </form>
       )}
       {open && (
-        <div className="border-t border-[var(--line)] bg-white px-5 py-8 lg:hidden">
+        <div className="border-t border-white/15 px-5 py-8 lg:hidden">
           <div className="flex flex-col gap-5 text-[12px] tracking-[0.16em] uppercase">
             {nav.map((item) => (
               <Link key={item.href} href={item.href}>{item.label}</Link>

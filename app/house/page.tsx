@@ -13,7 +13,7 @@ export default function HousePage() {
   return (
     <div>
       <section className="wrap py-12 text-center md:py-16">
-        <Logo height={88} className="justify-center" />
+        <Logo variant="full" height={88} className="justify-center" />
         <h1 className="serif mx-auto mt-8 max-w-2xl text-4xl md:text-5xl">{copy.philosophyTitle}</h1>
         <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-[var(--muted)]">{copy.philosophyBody}</p>
       </section>

@@ -3,8 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useStore } from "@/components/store";
-import { concentrationLabel, getBrand, productShort } from "@/lib/catalog";
-import { descriptor } from "@/lib/fragrance";
+import { concentrationLabel, productShort } from "@/lib/catalog";
 import { formatMoney } from "@/lib/format";
 import { t } from "@/lib/i18n";
 import type { Product } from "@/lib/types";
@@ -12,7 +11,6 @@ import type { Product } from "@/lib/types";
 export function ProductCard({ product }: { product: Product }) {
   const { locale, addToCart } = useStore();
   const copy = t(locale);
-  const brand = getBrand(product.brand);
   const image = product.images[0];
 
   return (
@@ -40,19 +38,17 @@ export function ProductCard({ product }: { product: Product }) {
           aria-label={copy.addToCart}
           onClick={() => addToCart(product.slug, 1)}
         >
-          +
+          <BagMini />
         </button>
       </div>
       <div className="pt-3">
-        <Link href={`/product/${product.slug}`} className="serif text-[18px] leading-snug">
+        <Link href={`/product/${product.slug}`} className="serif text-[22px] leading-snug">
           {productShort(product, locale)}
         </Link>
         <p className="mt-1 text-[13px] text-[var(--muted)]">
-          {brand ? (locale === "ar" ? brand.nameAr : brand.nameEn) + " · " : ""}
           {concentrationLabel(product, locale)}
         </p>
-        <p className="mt-1 text-[13px]">{formatMoney(product.price, locale)}</p>
-        <p className="mt-1 text-[12px] text-[var(--muted)]">{descriptor(product, locale)}</p>
+        <p className="mt-1 text-[14px] font-medium">{formatMoney(product.price, locale)}</p>
       </div>
     </article>
   );
@@ -66,5 +62,14 @@ export function ProductGrid({ products }: { products: Product[] }) {
         <ProductCard key={product.slug} product={product} />
       ))}
     </div>
+  );
+}
+
+function BagMini() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
+      <path d="M7 8h10l-.6 11H7.6L7 8z" />
+      <path d="M9 8V7a3 3 0 0 1 6 0v1" />
+    </svg>
   );
 }

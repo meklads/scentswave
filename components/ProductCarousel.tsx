@@ -37,33 +37,9 @@ export function ProductCarousel({
 
   if (!current) return null;
 
-  return (
-    <section className={bar ? "" : "wrap py-12 md:py-16"}>
-      {bar ? (
-        <div className="hp-tabs">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              type="button"
-              onClick={() => setActive(tab.id)}
-              className={`hp-tab ${active === tab.id ? "is-on" : ""}`}
-            >
-              {tab.label}
-            </button>
-          ))}
-          <div className="hp-pager">
-            <button type="button" className="arrow" onClick={() => move(-1)} aria-label={copy.prev}>
-              <Chevron dir={locale === "ar" ? "right" : "left"} />
-            </button>
-            <span className="text-[12px] tracking-[0.12em]">
-              {page}/{pages}
-            </span>
-            <button type="button" className="arrow" onClick={() => move(1)} aria-label={copy.next}>
-              <Chevron dir={locale === "ar" ? "left" : "right"} />
-            </button>
-          </div>
-        </div>
-      ) : (
+  if (!bar) {
+    return (
+      <section className="wrap py-12 md:py-16">
         <div className="mb-6 flex items-end justify-between gap-4">
           <div className="flex flex-wrap items-center gap-6">
             {tabs.map((tab) => (
@@ -87,12 +63,52 @@ export function ProductCarousel({
             </button>
           </div>
         </div>
-      )}
-      <div className={bar ? "wrap py-8 md:py-10" : ""}>
         <div ref={rail} className="rail">
           {current.products.map((product) => (
             <ProductCard key={product.slug} product={product} />
           ))}
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="hp-section">
+      <div className="hp-head">
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            type="button"
+            onClick={() => {
+              setActive(tab.id);
+              setPage(1);
+              rail.current?.scrollTo({ left: 0 });
+            }}
+            className={`hp-tab ${active === tab.id ? "is-on" : ""}`}
+          >
+            {tab.label}
+          </button>
+        ))}
+        <div className="hp-pager">
+          <button type="button" className="arrow" onClick={() => move(-1)} aria-label={copy.prev}>
+            <Chevron dir={locale === "ar" ? "right" : "left"} />
+          </button>
+          <span>
+            {page}/{pages}
+          </span>
+          <button type="button" className="arrow" onClick={() => move(1)} aria-label={copy.next}>
+            <Chevron dir={locale === "ar" ? "left" : "right"} />
+          </button>
+        </div>
+      </div>
+      <div className="wrap py-8 md:py-10">
+        <div ref={rail} className="rail">
+          {current.products.map((product) => (
+            <ProductCard key={product.slug} product={product} />
+          ))}
+        </div>
+        <div className="hp-track">
+          <span style={{ width: `${(page / pages) * 100}%` }} />
         </div>
       </div>
     </section>
@@ -101,7 +117,7 @@ export function ProductCarousel({
 
 function Chevron({ dir }: { dir: "left" | "right" }) {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
       {dir === "left" ? <path d="M15 5 8 12l7 7" /> : <path d="M9 5l7 7-7 7" />}
     </svg>
   );
