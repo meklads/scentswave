@@ -1,10 +1,18 @@
 ---
-description: Commit and push to GitHub after every completed change set
+description: Always commit and push to GitHub after every change. Never wait to be asked.
 alwaysApply: true
 ---
 
-# GitHub push
+# Always push to GitHub
 
-After finishing a set of code or design changes in this repo, create a git commit and push to `origin` (`https://github.com/meklads/scentswave`) without waiting to be asked.
+This is a standing order. The user will not repeat it.
+
+After every completed set of code or design changes in this repo:
+
+1. Create a git commit.
+2. Push to `origin` (`https://github.com/meklads/scentswave`) immediately.
+3. Do this without being asked, reminded, or told "ارفع" / "push".
+
+Never wait for permission to commit or push finished work on this project.
 
 Do not push secrets, `.env` files, or unrelated files.
