@@ -10,7 +10,14 @@ function ShopInner() {
   const q = useSearchParams().get("q") || "";
   const { locale } = useStore();
   const copy = t(locale);
-  return <CatalogBrowser titleAr={copy.shop} titleEn={copy.shop} query={q} />;
+  return (
+    <CatalogBrowser
+      titleAr={copy.shop}
+      titleEn={copy.shop}
+      query={q}
+      intro={copy.philosophyBody}
+    />
+  );
 }
 
 export default function ShopPage() {

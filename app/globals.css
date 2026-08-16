@@ -1,18 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #ffffff;
-  --bg-soft: #f5f3ef;
-  --ink: #141414;
-  --muted: #7a756e;
-  --line: #ebe7e1;
-  --accent: #8a6a3d;
-  --accent-soft: #f1ebe2;
-  --cream: var(--bg-soft);
-  --gold: var(--accent);
-  --gold-dark: #6e542f;
-  --background: var(--bg);
-  --foreground: var(--ink);
+  --ivory: #f7f4ee;
+  --porcelain: #fbfaf7;
+  --cream: #f1ece4;
+  --sand: #e7dfd3;
+  --champagne: #cbb79a;
+  --gold: #9d8660;
+  --charcoal: #2b2723;
+  --muted: #8a847c;
+  --line: #e4ddd3;
+  --bg: var(--ivory);
+  --ink: var(--charcoal);
+  --bg-soft: #f1ece4;
+  --accent: var(--gold);
+  --gold-dark: #7d6a48;
+  --background: var(--ivory);
+  --foreground: var(--charcoal);
 }
 
 @theme inline {
@@ -22,14 +26,16 @@
   --font-display: var(--font-display);
 }
 
-* {
-  box-sizing: border-box;
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
 }
 
 html,
 body {
-  background: var(--bg);
-  color: var(--ink);
+  background: var(--ivory);
+  color: var(--charcoal);
   min-height: 100%;
 }
 
@@ -38,98 +44,93 @@ body {
   font-weight: 400;
   display: flex;
   flex-direction: column;
-  letter-spacing: 0.01em;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-img {
-  max-width: 100%;
-}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
 
 ::selection {
-  background: var(--accent-soft);
-  color: var(--ink);
+  background: var(--sand);
+  color: var(--charcoal);
 }
 
-input,
-select,
-textarea,
-button {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
-.lux {
-  width: min(1240px, calc(100% - 40px));
+.shell {
+  width: min(1360px, calc(100% - 32px));
   margin-inline: auto;
 }
-
 @media (min-width: 768px) {
-  .lux {
-    width: min(1240px, calc(100% - 80px));
-  }
+  .shell { width: min(1360px, calc(100% - 72px)); }
 }
 
-.eyebrow {
-  font-size: 11px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--accent);
-  font-weight: 500;
-}
-
-.display {
-  font-family: var(--font-sans), system-ui, sans-serif;
-  font-weight: 300;
+.serif {
+  font-family: var(--font-display), "Times New Roman", serif;
+  font-weight: 400;
   letter-spacing: -0.03em;
-  line-height: 1.15;
+  line-height: 1.08;
 }
 
-html[lang="en"] .display {
-  font-family: var(--font-display), serif;
+.caps {
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
   font-weight: 500;
 }
 
-.btn {
+.link-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 4px;
+}
+
+.cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 0 28px;
-  font-size: 13px;
-  letter-spacing: 0.12em;
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  min-height: 52px;
+  padding: 0 32px;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+.cta-solid {
+  background: var(--charcoal);
+  color: var(--ivory);
+}
+.cta-solid:hover { background: #1c1916; }
+.cta-ghost {
+  color: var(--charcoal);
+  border-bottom: 1px solid var(--charcoal);
+  min-height: auto;
+  padding: 8px 0;
+  letter-spacing: 0.24em;
 }
 
-.btn-dark {
-  background: var(--ink);
-  color: #fff;
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+.rise { animation: rise 1.15s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.rise-2 { animation-delay: 0.15s; }
+.rise-3 { animation-delay: 0.3s; }
+
+.img-ken {
+  transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .img-ken { transform: scale(1.035); }
+
+.stone {
+  background: var(--cream);
 }
 
-.btn-dark:hover {
-  background: #2a2a2a;
-}
-
-.btn-line {
-  border: 1px solid var(--ink);
-  background: transparent;
-  color: var(--ink);
-}
-
-.btn-line:hover {
-  background: var(--ink);
-  color: #fff;
-}
-
-.hairline {
-  height: 1px;
-  background: var(--line);
-  border: 0;
+@media (prefers-reduced-motion: reduce) {
+  .rise, .img-ken, .cta { animation: none; transition: none; }
 }

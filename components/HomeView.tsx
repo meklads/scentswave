@@ -4,197 +4,178 @@ import Image from "next/image";
 import Link from "next/link";
 import { ProductGrid } from "@/components/ProductCard";
 import { useStore } from "@/components/store";
-import { brands, products } from "@/lib/catalog";
+import { products } from "@/lib/catalog";
 import { t } from "@/lib/i18n";
 
 export function HomeView() {
   const { locale } = useStore();
   const copy = t(locale);
-  const featured = products.filter((item) => item.featured).slice(0, 8);
-  const men = products.filter((item) => item.gender === "men").slice(0, 4);
-  const women = products.filter((item) => item.gender === "women").slice(0, 4);
-  const [heroLine1, heroLine2] = copy.heroTitle.split("\n");
+  const signature = products.filter((item) => item.featured).slice(0, 3);
+  const best = products.slice(0, 6);
+  const men = products.find((item) => item.gender === "men");
+  const women = products.find((item) => item.gender === "women");
 
   return (
     <div>
-      <section className="grid min-h-[calc(100vh-108px)] lg:grid-cols-2">
-        <div className="flex flex-col justify-center px-8 py-16 md:px-16 lg:px-20">
-          <p className="eyebrow mb-6">{copy.heroEyebrow}</p>
-          <h1 className="display text-[42px] md:text-[64px] lg:text-[72px]">
-            {heroLine1}
-            {heroLine2 ? (
-              <>
-                <br />
-                {heroLine2}
-              </>
-            ) : null}
+      <section className="grid min-h-[92vh] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <div className="flex flex-col justify-end px-6 py-16 md:px-12 lg:px-16 lg:py-24">
+          <p className="caps rise">{copy.heroEyebrow}</p>
+          <h1 className="serif rise rise-2 mt-8 max-w-xl text-5xl md:text-7xl lg:text-[92px]">
+            {copy.heroLine}
           </h1>
-          <p className="mt-7 max-w-md text-[15px] leading-8 text-[var(--muted)]">
+          <p className="rise rise-3 mt-8 max-w-sm font-light leading-8 text-[var(--muted)]">
             {copy.heroBody}
           </p>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Link href="/shop" className="btn btn-dark">
+          <div className="rise rise-3 mt-12 flex flex-wrap items-center gap-8">
+            <Link href="/shop" className="cta cta-solid">
               {copy.heroCta}
             </Link>
-            <Link href="/category/picks" className="btn btn-line">
-              {copy.picks}
+            <Link href="/house" className="cta cta-ghost">
+              {copy.heroCta2}
             </Link>
           </div>
         </div>
-        <div className="relative min-h-[420px] bg-[var(--bg-soft)]">
+        <div className="relative min-h-[70vh] overflow-hidden bg-[var(--cream)] lg:min-h-[92vh]">
           <Image
             src="/images/products/full-Dior-Sauvage-Eau-de-Parfum.jpg"
-            alt="Dior Sauvage"
+            alt="Scents Wave"
             fill
             priority
-            className="object-contain p-10 md:p-16"
-            sizes="50vw"
+            className="object-contain p-[12%] md:p-[14%]"
+            sizes="(max-width: 1024px) 100vw, 55vw"
           />
+        </div>
+      </section>
+
+      <section className="shell py-28 md:py-36">
+        <p className="caps">{copy.signature}</p>
+        <h2 className="serif mt-5 max-w-2xl text-4xl md:text-6xl">{copy.featured}</h2>
+        <div className="mt-20">
+          <ProductGrid products={signature} />
+        </div>
+      </section>
+
+      <section className="border-y border-[var(--line)] bg-[var(--porcelain)]">
+        <div className="shell grid gap-16 py-28 md:py-36 lg:grid-cols-2 lg:items-end">
+          <div>
+            <p className="caps">{copy.house}</p>
+            <h2 className="serif mt-6 max-w-xl text-4xl md:text-6xl">{copy.philosophyTitle}</h2>
+          </div>
+          <p className="max-w-lg text-[17px] font-light leading-9 text-[var(--muted)]">
+            {copy.philosophyBody}
+          </p>
+        </div>
+      </section>
+
+      <section className="grid lg:grid-cols-2">
+        <Link href="/category/men" className="group relative min-h-[78vh] overflow-hidden bg-[var(--cream)]">
+          {men && (
+            <Image src={men.images[0]} alt={copy.men} fill className="img-ken object-contain p-16 md:p-24" />
+          )}
+          <div className="absolute inset-x-0 bottom-0 p-10 md:p-14">
+            <p className="caps">{copy.artTitle}</p>
+            <h3 className="serif mt-3 text-4xl md:text-5xl">{copy.men}</h3>
+          </div>
+        </Link>
+        <Link href="/category/women" className="group relative min-h-[78vh] overflow-hidden bg-[var(--sand)]">
+          {women && (
+            <Image src={women.images[0]} alt={copy.women} fill className="img-ken object-contain p-16 md:p-24" />
+          )}
+          <div className="absolute inset-x-0 bottom-0 p-10 md:p-14">
+            <p className="caps">{copy.artTitle}</p>
+            <h3 className="serif mt-3 text-4xl md:text-5xl">{copy.women}</h3>
+          </div>
+        </Link>
+      </section>
+
+      <section className="shell py-28 md:py-36">
+        <p className="caps">{copy.featured}</p>
+        <h2 className="serif mt-5 text-4xl md:text-5xl">{copy.picks}</h2>
+        <div className="mt-20">
+          <ProductGrid products={best} />
+        </div>
+      </section>
+
+      <section className="grid items-stretch lg:grid-cols-2">
+        <div className="relative min-h-[70vh] bg-[var(--cream)]">
+          <Image
+            src="/images/products/full-Tom-Ford-Ombre-Leather.jpg"
+            alt=""
+            fill
+            className="object-contain p-16 md:p-24"
+          />
+        </div>
+        <div className="flex flex-col justify-center px-8 py-20 md:px-16 lg:px-20">
+          <p className="caps">{copy.journal}</p>
+          <h2 className="serif mt-6 max-w-md text-4xl md:text-5xl">{copy.artTitle}</h2>
+          <p className="mt-7 max-w-md text-[17px] font-light leading-9 text-[var(--muted)]">
+            {copy.artBody}
+          </p>
+          <Link href="/journal" className="cta cta-ghost mt-10 self-start">
+            {copy.journal}
+          </Link>
         </div>
       </section>
 
       <section className="border-y border-[var(--line)]">
-        <div className="lux grid grid-cols-2 gap-8 py-8 md:grid-cols-4 md:py-10">
-          {[copy.original, copy.fastShip, copy.cash, copy.mada].map((label) => (
-            <p
-              key={label}
-              className="text-center text-[12px] tracking-[0.18em] text-[var(--muted)]"
-            >
-              {label}
-            </p>
+        <div className="shell grid gap-16 py-28 md:grid-cols-3 md:py-36">
+          {[
+            [copy.craftTitle, copy.craftBody],
+            [copy.authenticity, copy.philosophyBody],
+            [copy.packagingTitle, copy.packagingBody],
+          ].map(([title, body]) => (
+            <div key={title}>
+              <h3 className="serif text-3xl md:text-4xl">{title}</h3>
+              <p className="mt-6 text-[15px] font-light leading-8 text-[var(--muted)]">{body}</p>
+            </div>
           ))}
         </div>
       </section>
 
-      <section className="lux py-24">
-        <div className="mb-12 flex items-end justify-between">
+      <section className="shell py-28 md:py-36">
+        <div className="flex items-end justify-between gap-8">
           <div>
-            <p className="eyebrow mb-3">{copy.collections}</p>
-            <h2 className="display text-4xl md:text-5xl">{copy.discover}</h2>
+            <p className="caps">{copy.shop}</p>
+            <h2 className="serif mt-5 text-4xl md:text-5xl">{copy.viewAll}</h2>
           </div>
-        </div>
-        <div className="grid gap-5 md:grid-cols-2">
-          <Link href="/category/men" className="group relative min-h-[520px] overflow-hidden bg-[var(--bg-soft)]">
-            <Image
-              src="/images/products/full-Chanel-Bleu-De-For.jpg"
-              alt={copy.men}
-              fill
-              className="object-contain p-16 transition duration-700 group-hover:scale-[1.03]"
-            />
-            <div className="absolute inset-x-0 bottom-0 p-8">
-              <p className="eyebrow mb-2">{copy.maison}</p>
-              <h3 className="display text-3xl">{copy.men}</h3>
-              <span className="mt-3 inline-block text-sm tracking-[0.14em] text-[var(--muted)]">
-                {copy.shopMen}
-              </span>
-            </div>
+          <Link href="/shop" className="cta cta-ghost hidden sm:inline-flex">
+            {copy.viewAll}
           </Link>
-          <Link href="/category/women" className="group relative min-h-[520px] overflow-hidden bg-[var(--bg-soft)]">
+        </div>
+        <div className="mt-20">
+          <ProductGrid products={products.slice(8, 14)} />
+        </div>
+      </section>
+
+      <section className="bg-[var(--cream)]">
+        <div className="shell grid items-center gap-16 py-28 lg:grid-cols-2 lg:py-36">
+          <div className="relative min-h-[52vh] bg-[var(--sand)]">
             <Image
               src="/images/products/full-La-vie-est-belle-LANCOME.jpg"
-              alt={copy.women}
+              alt=""
               fill
-              className="object-contain p-16 transition duration-700 group-hover:scale-[1.03]"
+              className="object-contain p-16"
             />
-            <div className="absolute inset-x-0 bottom-0 p-8">
-              <p className="eyebrow mb-2">{copy.maison}</p>
-              <h3 className="display text-3xl">{copy.women}</h3>
-              <span className="mt-3 inline-block text-sm tracking-[0.14em] text-[var(--muted)]">
-                {copy.shopWomen}
-              </span>
-            </div>
-          </Link>
+          </div>
+          <div className="max-w-md">
+            <p className="caps">{copy.packagingTitle}</p>
+            <h2 className="serif mt-6 text-4xl md:text-5xl">{copy.packagingBody}</h2>
+          </div>
         </div>
       </section>
 
-      <section className="bg-[var(--bg-soft)] py-24">
-        <div className="lux">
-          <SectionHead title={copy.picks} href="/category/picks" action={copy.viewAll} eyebrow={copy.featured} />
-          <ProductGrid products={featured} />
-        </div>
+      <section className="py-32 text-center md:py-40">
+        <p className="serif mx-auto max-w-3xl px-6 text-4xl italic md:text-6xl">
+          {copy.brandStatement}
+        </p>
       </section>
 
-      <section className="overflow-hidden py-16">
-        <div className="lux mb-10">
-          <p className="eyebrow">{copy.brands}</p>
-        </div>
-        <div className="flex flex-wrap items-center justify-center gap-x-14 gap-y-8 px-8">
-          {brands
-            .filter((brand) => brand.logo)
-            .map((brand) => (
-              <Link
-                key={brand.slug}
-                href={`/category/${brand.slug}`}
-                className="opacity-45 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
-              >
-                <Image
-                  src={brand.logo as string}
-                  alt={locale === "ar" ? brand.nameAr : brand.nameEn}
-                  width={120}
-                  height={44}
-                  className="h-10 w-[120px] object-contain"
-                />
-              </Link>
-            ))}
-        </div>
+      <section className="shell flex flex-col items-center pb-32 text-center">
+        <h2 className="serif text-4xl md:text-5xl">{copy.heroLine}</h2>
+        <Link href="/shop" className="cta cta-solid mt-12">
+          {copy.finalCta}
+        </Link>
       </section>
-
-      <section className="lux grid gap-16 py-24 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div className="relative min-h-[460px] bg-[var(--bg-soft)]">
-          <Image
-            src="/images/products/full-Tom-Ford-Ombre-Leather.jpg"
-            alt="Tom Ford"
-            fill
-            className="object-contain p-12"
-          />
-        </div>
-        <div className="max-w-lg">
-          <p className="eyebrow mb-5">{copy.maison}</p>
-          <h2 className="display text-4xl md:text-5xl leading-tight">{copy.storyTitle}</h2>
-          <p className="mt-6 text-[15px] leading-8 text-[var(--muted)]">{copy.storyBody}</p>
-          <Link href="/shop" className="btn btn-line mt-10">
-            {copy.heroCta}
-          </Link>
-        </div>
-      </section>
-
-      <section className="border-t border-[var(--line)] py-24">
-        <div className="lux">
-          <SectionHead title={copy.men} href="/category/men" action={copy.viewAll} eyebrow={copy.collections} />
-          <ProductGrid products={men} />
-        </div>
-      </section>
-
-      <section className="bg-[var(--bg-soft)] py-24">
-        <div className="lux">
-          <SectionHead title={copy.women} href="/category/women" action={copy.viewAll} eyebrow={copy.collections} />
-          <ProductGrid products={women} />
-        </div>
-      </section>
-    </div>
-  );
-}
-
-function SectionHead({
-  title,
-  href,
-  action,
-  eyebrow,
-}: {
-  title: string;
-  href: string;
-  action: string;
-  eyebrow: string;
-}) {
-  return (
-    <div className="mb-12 flex items-end justify-between gap-6">
-      <div>
-        <p className="eyebrow mb-3">{eyebrow}</p>
-        <h2 className="display text-4xl md:text-5xl">{title}</h2>
-      </div>
-      <Link href={href} className="text-[12px] tracking-[0.16em] text-[var(--muted)] hover:text-[var(--ink)]">
-        {action}
-      </Link>
     </div>
   );
 }

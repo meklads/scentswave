@@ -8,26 +8,25 @@ export default function TrackOrderPage() {
   const copy = t(locale);
 
   return (
-    <div className="mx-auto max-w-md px-4 py-16">
-      <h1 className="mb-6 font-[family-name:var(--font-display)] text-4xl">
-        {copy.track}
-      </h1>
-      <p className="mb-6 text-sm text-[var(--muted)]">
+    <div className="shell max-w-lg py-20 md:py-28">
+      <p className="caps">{copy.customerCare}</p>
+      <h1 className="serif mt-5 text-5xl md:text-6xl">{copy.track}</h1>
+      <p className="mt-6 font-light leading-8 text-[var(--muted)]">
         {locale === "ar"
-          ? "أدخل رقم الطلب والبريد الإلكتروني للفاتورة لعرض حالة الشحن."
-          : "Enter your order number and billing email to see shipping status."}
+          ? "أدخل رقم الطلب والبريد لعرض حالة الشحن."
+          : "Enter your order number and email to see shipping status."}
       </p>
-      <form className="space-y-3 bg-white p-6">
+      <form className="mt-12 space-y-5">
         <input
           placeholder={copy.orderNumber}
-          className="w-full border border-[var(--line)] px-4 py-3"
+          className="w-full border-0 border-b border-[var(--line)] bg-transparent py-3 outline-none"
         />
         <input
           type="email"
           placeholder={copy.email}
-          className="w-full border border-[var(--line)] px-4 py-3"
+          className="w-full border-0 border-b border-[var(--line)] bg-transparent py-3 outline-none"
         />
-        <button type="button" className="w-full rounded-full bg-[var(--ink)] py-3 text-white">
+        <button type="button" className="cta cta-solid mt-6">
           {copy.trackBtn}
         </button>
       </form>

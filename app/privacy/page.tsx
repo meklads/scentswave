@@ -2,34 +2,25 @@
 
 import { useStore } from "@/components/store";
 import { EMAIL } from "@/lib/format";
+import { t } from "@/lib/i18n";
 
 export default function PrivacyPage() {
   const { locale } = useStore();
+  const copy = t(locale);
   return (
-    <article className="mx-auto max-w-3xl px-4 py-12 leading-8">
-      <h1 className="mb-6 font-[family-name:var(--font-display)] text-4xl">
-        {locale === "ar" ? "سياسة الخصوصية" : "Privacy policy"}
-      </h1>
+    <article className="shell max-w-2xl py-20 md:py-28">
+      <p className="caps">{copy.customerCare}</p>
+      <h1 className="serif mt-5 text-5xl md:text-6xl">{copy.privacy}</h1>
       {locale === "ar" ? (
-        <>
-          <p>
-            تجمع موجة عطر البيانات اللازمة لتنفيذ الطلبات: الاسم، وسيلة التواصل،
-            عنوان الشحن، وتفاصيل الطلب. لا نخزّن بيانات البطاقات؛ الدفع يتم عبر
-            مزود الدفع.
-          </p>
-          <p className="mt-4">
-            لأي طلب يتعلق ببياناتك راسلنا على {EMAIL}.
-          </p>
-        </>
+        <div className="mt-10 space-y-6 font-light leading-9 text-[var(--muted)]">
+          <p>نجمع فقط ما يلزم لتنفيذ الطلب: الاسم، وسيلة التواصل، عنوان الشحن، وتفاصيل الطلب. لا نخزّن بيانات البطاقات.</p>
+          <p>لأي طلب يتعلق ببياناتك: {EMAIL}.</p>
+        </div>
       ) : (
-        <>
-          <p>
-            Scents Wave collects only what is needed to fulfill orders: name,
-            contact details, shipping address, and order data. Card details are
-            processed by the payment provider, not stored on this site.
-          </p>
-          <p className="mt-4">Privacy requests: {EMAIL}.</p>
-        </>
+        <div className="mt-10 space-y-6 font-light leading-9 text-[var(--muted)]">
+          <p>We collect only what is needed to fulfill an order. Card details are processed by the payment provider, never stored here.</p>
+          <p>Privacy requests: {EMAIL}.</p>
+        </div>
       )}
     </article>
   );

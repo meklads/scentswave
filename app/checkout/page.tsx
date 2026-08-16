@@ -45,13 +45,13 @@ export default function CheckoutPage() {
   if (done) {
     return (
       <div className="mx-auto max-w-xl px-4 py-24 text-center">
-        <h1 className="display text-5xl">
+        <h1 className="serif text-5xl">
           {locale === "ar" ? "تم استلام طلبك" : "Order received"}
         </h1>
         <p className="mt-4 text-[var(--muted)]">
           {locale === "ar" ? "رقم الطلب" : "Order number"}: {done}
         </p>
-        <Link href="/shop" className="btn btn-dark mt-8">
+        <Link href="/shop" className="cta cta-solid mt-8">
           {copy.continueShopping}
         </Link>
       </div>
@@ -62,7 +62,7 @@ export default function CheckoutPage() {
     return (
       <div className="mx-auto max-w-xl px-4 py-24 text-center">
         <p>{copy.emptyCart}</p>
-        <Link href="/shop" className="mt-6 inline-block text-[var(--gold-dark)]">
+        <Link href="/shop" className="cta cta-ghost mt-8 inline-flex">
           {copy.continueShopping}
         </Link>
       </div>
@@ -96,9 +96,9 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="lux grid gap-16 py-16 lg:grid-cols-[1fr_340px]">
+    <div className="shell grid gap-16 py-16 lg:grid-cols-[1fr_340px]">
       <form onSubmit={onSubmit} className="space-y-4">
-        <h1 className="display text-5xl">
+        <h1 className="serif text-5xl">
           {copy.checkout}
         </h1>
         <p className="text-sm text-[var(--muted)]">{copy.guestHint}</p>
@@ -126,7 +126,7 @@ export default function CheckoutPage() {
             {copy.payCod}
           </label>
         </fieldset>
-        <button className="btn btn-dark mt-4 w-full">
+        <button className="cta cta-solid mt-4 w-full">
           {copy.orderWhatsapp}
         </button>
       </form>

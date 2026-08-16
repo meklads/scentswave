@@ -14,16 +14,33 @@ function CategoryInner() {
   const brand = getBrand(slug);
 
   if (slug === "men" || slug === "fragrance_men") {
-    return <CatalogBrowser titleAr={copy.men} titleEn={copy.men} gender="men" />;
+    return (
+      <CatalogBrowser
+        titleAr={copy.men}
+        titleEn={copy.men}
+        gender="men"
+        intro={copy.artBody}
+      />
+    );
   }
   if (slug === "women" || slug === "fragrance_women") {
     return (
-      <CatalogBrowser titleAr={copy.women} titleEn={copy.women} gender="women" />
+      <CatalogBrowser
+        titleAr={copy.women}
+        titleEn={copy.women}
+        gender="women"
+        intro={copy.artBody}
+      />
     );
   }
   if (slug === "picks") {
     return (
-      <CatalogBrowser titleAr={copy.picks} titleEn={copy.picks} featured />
+      <CatalogBrowser
+        titleAr={copy.picks}
+        titleEn={copy.picks}
+        featured
+        intro={copy.philosophyBody}
+      />
     );
   }
   if (brand) {

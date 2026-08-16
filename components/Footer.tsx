@@ -1,11 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { brandName, brands } from "@/lib/catalog";
+import { Logo } from "@/components/Logo";
+import { useStore } from "@/components/store";
 import { EMAIL, PHONE_DISPLAY } from "@/lib/format";
 import { t } from "@/lib/i18n";
-import { useStore } from "@/components/store";
 
 export function Footer() {
   const { locale } = useStore();
@@ -13,69 +12,61 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto border-t border-[var(--line)] bg-white">
-      <div className="lux grid gap-12 py-20 md:grid-cols-4">
-        <div className="md:col-span-1 space-y-4">
-          <p className="text-2xl font-light">{copy.storeName}</p>
-          <p className="max-w-xs text-sm leading-8 text-[var(--muted)]">
-            {copy.footerAbout}
+    <footer className="mt-auto border-t border-[var(--line)] bg-[var(--ivory)]">
+      <div className="shell py-24">
+        <div className="max-w-xl">
+          <Logo height={88} />
+          <p className="mt-10 text-[11px] tracking-[0.42em] uppercase text-[var(--muted)]">
+            Scents Wave
+          </p>
+          <p className="mt-2 text-lg font-light">{copy.storeName}</p>
+          <p className="serif mt-10 text-3xl md:text-4xl italic text-[var(--charcoal)]">
+            {copy.brandStatement}
           </p>
         </div>
-        <div>
-          <p className="eyebrow mb-5">{copy.customerService}</p>
-          <div className="flex flex-col gap-3 text-sm text-[var(--muted)]">
-            <Link href="/contact" className="hover:text-[var(--ink)]">{copy.contact}</Link>
-            <Link href="/faq" className="hover:text-[var(--ink)]">{copy.faq}</Link>
-            <Link href="/shipping" className="hover:text-[var(--ink)]">{copy.shippingInfo}</Link>
-            <Link href="/track-order" className="hover:text-[var(--ink)]">{copy.track}</Link>
-            <Link href="/terms" className="hover:text-[var(--ink)]">{copy.terms}</Link>
-            <Link href="/privacy" className="hover:text-[var(--ink)]">{copy.privacy}</Link>
-          </div>
-        </div>
-        <div>
-          <p className="eyebrow mb-5">{copy.brands}</p>
-          <div className="flex flex-col gap-3 text-sm text-[var(--muted)]">
-            {brands.slice(0, 7).map((brand) => (
-              <Link key={brand.slug} href={`/category/${brand.slug}`} className="hover:text-[var(--ink)]">
-                {brandName(brand, locale)}
-              </Link>
-            ))}
-            <Link href="/brands" className="hover:text-[var(--ink)]">{copy.allBrands}</Link>
-          </div>
-        </div>
-        <div>
-          <p className="eyebrow mb-5">{copy.newsletter}</p>
-          <p className="mb-5 text-sm leading-7 text-[var(--muted)]">{copy.newsletterHint}</p>
-          <form className="flex border-b border-[var(--ink)]" action="/contact">
-            <input
-              type="email"
-              required
-              placeholder={copy.email}
-              className="w-full bg-transparent py-2 text-sm outline-none"
-            />
-            <button className="text-sm tracking-[0.12em]">{copy.subscribe}</button>
-          </form>
-          <p className="mt-8 text-sm leading-7 text-[var(--muted)]">
-            {copy.hours}
-            <br />
-            {PHONE_DISPLAY}
-            <br />
-            {EMAIL}
-          </p>
-          <Image
-            src="/images/ui/Mada_Logo-1.svg"
-            alt="Mada"
-            width={52}
-            height={22}
-            className="mt-5 h-5 w-auto opacity-70"
-          />
+        <div className="mt-20 grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+          <Col title={copy.shop}>
+            <Link href="/shop">{copy.shop}</Link>
+            <Link href="/collections">{copy.collections}</Link>
+            <Link href="/category/men">{copy.men}</Link>
+            <Link href="/category/women">{copy.women}</Link>
+          </Col>
+          <Col title={copy.house}>
+            <Link href="/house">{copy.house}</Link>
+            <Link href="/journal">{copy.journal}</Link>
+            <Link href="/discover">{copy.discover}</Link>
+          </Col>
+          <Col title={copy.customerCare}>
+            <Link href="/shipping">{copy.shippingInfo}</Link>
+            <Link href="/faq">{copy.faq}</Link>
+            <Link href="/track-order">{copy.track}</Link>
+            <Link href="/terms">{copy.terms}</Link>
+            <Link href="/privacy">{copy.privacy}</Link>
+          </Col>
+          <Col title={copy.contact}>
+            <p>{PHONE_DISPLAY}</p>
+            <p>{EMAIL}</p>
+            <p>{copy.hours}</p>
+            <form action="/contact" className="mt-4 border-b border-[var(--charcoal)]">
+              <input name="email" type="email" required placeholder={copy.email} className="w-full bg-transparent py-2 text-sm outline-none" />
+            </form>
+          </Col>
         </div>
       </div>
       <div className="border-t border-[var(--line)]">
-        <p className="lux py-5 text-[11px] tracking-[0.14em] text-[var(--muted)]">
+        <p className="shell py-6 text-[10px] tracking-[0.22em] uppercase text-[var(--muted)]">
           © {year} Scents Wave · {copy.rights}
         </p>
       </div>
     </footer>
+  );
+}
+
+function Col({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <p className="caps mb-5">{title}</p>
+      <div className="flex flex-col gap-3 text-sm text-[var(--muted)]">{children}</div>
+    </div>
   );
 }

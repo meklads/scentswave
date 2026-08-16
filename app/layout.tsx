@@ -6,22 +6,22 @@ import "./globals.css";
 const sans = IBM_Plex_Sans_Arabic({
   variable: "--font-sans",
   subsets: ["arabic", "latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500"],
 });
 
 const display = Cormorant_Garamond({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "موجة عطر | Scents Wave",
-    template: "%s | Scents Wave",
+    default: "Scents Wave — موجة عطر",
+    template: "%s — Scents Wave",
   },
-  description:
-    "متجر موجة عطر للعطور الأصلية — رجالي ونسائي من دور العطور العالمية، شحن داخل السعودية، مدى والدفع عند الاستلام.",
+  description: "The art of wearing scent. A modern luxury fragrance house.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -31,7 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       dir="rtl"
       className={`${sans.variable} ${display.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[var(--bg)] text-[var(--ink)]">
+      <body className="min-h-full flex flex-col bg-[var(--ivory)] text-[var(--charcoal)]">
         <SiteShell>{children}</SiteShell>
       </body>
     </html>

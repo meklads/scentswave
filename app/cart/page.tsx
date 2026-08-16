@@ -24,11 +24,11 @@ export default function CartPage() {
 
   if (lines.length === 0) {
     return (
-      <div className="lux py-32 text-center">
-        <p className="eyebrow mb-4">{copy.maison}</p>
-        <h1 className="display text-5xl">{copy.cart}</h1>
+      <div className="shell py-32 text-center">
+        <p className="caps mb-4">{copy.maison}</p>
+        <h1 className="serif text-5xl">{copy.cart}</h1>
         <p className="mt-5 text-[var(--muted)]">{copy.emptyCart}</p>
-        <Link href="/shop" className="btn btn-dark mt-10">
+        <Link href="/shop" className="cta cta-solid mt-10">
           {copy.continueShopping}
         </Link>
       </div>
@@ -36,9 +36,9 @@ export default function CartPage() {
   }
 
   return (
-    <div className="lux grid gap-16 py-16 lg:grid-cols-[1fr_340px]">
+    <div className="shell grid gap-16 py-16 lg:grid-cols-[1fr_340px]">
       <div>
-        <h1 className="display mb-10 text-5xl">{copy.cart}</h1>
+        <h1 className="serif mb-10 text-5xl">{copy.cart}</h1>
         <ul className="divide-y divide-[var(--line)]">
           {lines.map((line) => (
             <li key={line.slug} className="flex gap-5 py-6">
@@ -92,7 +92,7 @@ export default function CartPage() {
           <span>{copy.total}</span>
           <span>{formatMoney(subtotal + shipping, locale)}</span>
         </p>
-        <Link href="/checkout" className="btn btn-dark mt-8 w-full">
+        <Link href="/checkout" className="cta cta-solid mt-8 w-full">
           {copy.checkout}
         </Link>
       </aside>
