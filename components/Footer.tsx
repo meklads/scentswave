@@ -31,7 +31,7 @@ export function Footer() {
             type="email"
             required
             placeholder={copy.email}
-            className="w-full bg-transparent py-2 text-[16px] outline-none"
+            className="w-full bg-transparent py-2 text-[15px] outline-none"
           />
           <button type="submit" className="caps pb-2">
             {copy.validate}
@@ -74,7 +74,7 @@ export function Footer() {
 function Col({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="mb-4 text-[16px] font-semibold">{title}</p>
+      <p className="mb-4 text-[17px] font-medium">{title}</p>
       <div className="flex flex-col gap-2.5 text-[13px] font-medium text-[var(--muted)]">
         {children}
       </div>

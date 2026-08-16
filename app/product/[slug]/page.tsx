@@ -109,7 +109,7 @@ export default function ProductPage() {
           </button>
           <div className="mt-10 grid gap-8 border-t border-[var(--line)] pt-8 sm:grid-cols-2">
             <div>
-              <p className="text-[16px] font-semibold">{copy.theNotes}</p>
+              <p className="text-[17px] font-medium">{copy.theNotes}</p>
               <ul className="mt-3 space-y-2 text-sm">
                 <li><span className="text-[var(--muted)]">{copy.topNotes} — </span>{p.top}</li>
                 <li><span className="text-[var(--muted)]">{copy.heartNotes} — </span>{p.heart}</li>
@@ -117,7 +117,7 @@ export default function ProductPage() {
               </ul>
             </div>
             <div>
-              <p className="text-[16px] font-semibold">{copy.howToWear}</p>
+              <p className="text-[17px] font-medium">{copy.howToWear}</p>
               <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
                 {locale === "ar" ? "على النبض. بلا مبالغة. دعه يتحرك معك." : "On the pulse. Without excess. Let it move with you."}
               </p>

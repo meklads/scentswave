@@ -23,7 +23,7 @@ export default function HousePage() {
       <section className="wrap grid gap-10 py-12 md:grid-cols-3 md:py-16">
         {[copy.artTitle, copy.craftTitle, copy.packagingTitle].map((title, i) => (
           <div key={title}>
-            <h2 className="text-[16px] font-semibold">{title}</h2>
+            <h2 className="text-[17px] font-medium">{title}</h2>
             <p className="mt-4 text-sm leading-7 text-[var(--muted)]">
               {[copy.artBody, copy.craftBody, copy.packagingBody][i]}
             </p>

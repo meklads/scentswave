@@ -33,7 +33,7 @@ export default function CollectionsPage() {
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
               />
             </div>
-            <h2 className="mt-3 text-[16px] font-semibold">{tile.title}</h2>
+            <h2 className="mt-3 text-[17px] font-medium">{tile.title}</h2>
           </Link>
         ))}
       </div>

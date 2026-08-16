@@ -85,13 +85,13 @@ export function Header() {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder={copy.searchPlaceholder}
-            className="wrap w-full bg-transparent py-5 text-[16px] text-white outline-none placeholder:text-white/40"
+            className="wrap w-full bg-transparent py-5 text-[15px] text-white outline-none placeholder:text-white/40"
           />
         </form>
       )}
       {open && (
         <div className="border-t border-white/15 px-5 py-8 lg:hidden">
-          <div className="flex flex-col gap-5 text-[14px] font-medium">
+          <div className="flex flex-col gap-5 text-[15px] font-bold">
             {nav.map((item) => (
               <Link key={item.href} href={item.href}>{item.label}</Link>
             ))}

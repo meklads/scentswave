@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Readex_Pro } from "next/font/google";
+import { Tajawal } from "next/font/google";
 import { SiteShell } from "@/components/SiteShell";
 import "./globals.css";
 
-const sans = Readex_Pro({
+const sans = Tajawal({
   variable: "--font-sans",
   subsets: ["arabic", "latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "700", "800"],
 });
 
 export const metadata: Metadata = {

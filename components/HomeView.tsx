@@ -55,7 +55,7 @@ export function HomeView() {
                   <Image src={item.img} alt={item.title} fill className="object-contain p-8 transition-transform duration-500 group-hover:scale-[1.04]" />
                 )}
               </div>
-              <p className="mt-3 text-[16px] font-semibold">{item.title}</p>
+              <p className="mt-3 text-[17px] font-medium">{item.title}</p>
             </Link>
           ))}
         </div>
@@ -73,7 +73,7 @@ export function HomeView() {
             <div className="relative aspect-[4/3] overflow-hidden bg-[var(--paper)]">
               <Image src={tile.img} alt="" fill className="object-cover" />
             </div>
-            <h3 className="mt-5 text-[16px] font-semibold">{tile.title}</h3>
+            <h3 className="mt-5 text-[17px] font-medium">{tile.title}</h3>
             <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{tile.body}</p>
             <Link href={tile.href} className="u-link mt-4">
               {tile.cta}
@@ -96,7 +96,7 @@ export function HomeView() {
               <div className="relative aspect-square bg-[var(--paper)]">
                 <Image src={item.images[0]} alt="" fill className="object-contain p-8 transition-transform duration-500 group-hover:scale-[1.04]" />
               </div>
-              <h3 className="mt-3 text-[16px] font-semibold">{locale === "ar" ? item.shortAr : item.shortEn}</h3>
+              <h3 className="mt-3 text-[17px] font-medium">{locale === "ar" ? item.shortAr : item.shortEn}</h3>
               <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
                 {locale === "ar" ? item.descriptionAr : item.descriptionEn}
               </p>

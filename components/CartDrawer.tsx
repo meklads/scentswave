@@ -36,7 +36,7 @@ export function CartDrawer() {
         <div className="flex-1 overflow-auto px-6">
           {lines.length === 0 ? (
             <div className="py-12">
-              <p className="text-[16px] font-semibold">{copy.emptyCart}</p>
+              <p className="text-[17px] font-medium">{copy.emptyCart}</p>
               <p className="mt-3 text-sm text-[var(--muted)]">{copy.bagEmptyHint}</p>
               <Link href="/shop" onClick={closeCart} className="u-link mt-6">
                 {copy.continueShopping}
@@ -50,7 +50,7 @@ export function CartDrawer() {
                     <Image src={line.product.images[0]} alt="" fill className="object-contain p-2" />
                   </Link>
                   <div className="flex-1">
-                    <Link href={`/product/${line.slug}`} onClick={closeCart} className="text-[12px] font-normal">
+                    <Link href={`/product/${line.slug}`} onClick={closeCart} className="text-[13px] font-normal">
                       {productShort(line.product, locale)}
                     </Link>
                     <p className="mt-1 text-sm">{formatMoney(line.product.price, locale)}</p>

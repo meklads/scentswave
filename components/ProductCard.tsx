@@ -53,16 +53,16 @@ export function ProductCard({ product }: { product: Product }) {
         </button>
       </div>
       <div className="flex flex-col gap-1 pt-2">
-        <p className="line-clamp-1 text-[12px] font-semibold">
+        <p className="line-clamp-1 text-[13px] font-medium">
           {brand ? brandName(brand, locale) : product.brand}
         </p>
-        <Link href={`/product/${product.slug}`} className="line-clamp-2 min-h-8 text-[12px] font-normal leading-snug">
+        <Link href={`/product/${product.slug}`} className="line-clamp-2 min-h-8 text-[13px] font-normal leading-snug">
           {productShort(product, locale)}
         </Link>
-        <p className="text-[12px] font-normal text-[var(--muted)]">
+        <p className="text-[13px] font-normal text-[var(--muted)]">
           {concentrationLabel(product, locale)}
         </p>
-        <p className="text-[16px] font-semibold">{formatMoney(product.price, locale)}</p>
+        <p className="text-[15px] font-medium">{formatMoney(product.price, locale)}</p>
       </div>
     </article>
   );
