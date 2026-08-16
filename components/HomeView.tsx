@@ -24,9 +24,9 @@ export function HomeView() {
   ];
 
   const tiles = [
-    { title: copy.tile1Title, body: copy.tile1Body, cta: copy.tile1Cta, href: "/house", img: "/images/logo/baner1.png" },
-    { title: copy.tile2Title, body: copy.tile2Body, cta: copy.tile2Cta, href: "/shipping", img: "/images/logo/baner2.png" },
-    { title: copy.tile3Title, body: copy.tile3Body, cta: copy.tile3Cta, href: "/category/picks", img: "/images/logo/baner3.png" },
+    { title: copy.tile1Title, body: copy.tile1Body, cta: copy.tile1Cta, href: "/house", img: "/images/logo/bannet1.png" },
+    { title: copy.tile2Title, body: copy.tile2Body, cta: copy.tile2Cta, href: "/shipping", img: "/images/logo/bannet2.png" },
+    { title: copy.tile3Title, body: copy.tile3Body, cta: copy.tile3Cta, href: "/category/picks", img: "/images/logo/bannet3.png" },
   ];
 
   const collections = featured.slice(0, 3);
@@ -108,7 +108,7 @@ export function HomeView() {
 
       <section className="relative h-[48vh] min-h-[340px] overflow-hidden bg-black">
         <Image
-          src="/images/logo/baner2.png"
+          src="/images/logo/bannet2.png"
           alt=""
           fill
           className="object-cover"

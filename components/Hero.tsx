@@ -7,19 +7,19 @@ import { t } from "@/lib/i18n";
 
 const SLIDES = [
   {
-    src: "/images/logo/baner1.png",
-    titleAr: "فخامة وعطر لا يقاوم",
-    titleEn: "An irresistible scent",
+    src: "/images/logo/bannet1.png",
+    titleAr: "قريبا",
+    titleEn: "Soon",
   },
   {
-    src: "/images/logo/baner2.png",
-    titleAr: "قريبا بالاسواق",
-    titleEn: "Coming soon",
+    src: "/images/logo/bannet2.png",
+    titleAr: "قريبا",
+    titleEn: "Soon",
   },
   {
-    src: "/images/logo/baner3.png",
-    titleAr: "عطر يلامس أنوثتك",
-    titleEn: "A scent that moves with you",
+    src: "/images/logo/bannet3.png",
+    titleAr: "قريبا",
+    titleEn: "Soon",
   },
 ];
 

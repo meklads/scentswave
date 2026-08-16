@@ -10,10 +10,10 @@ export default function CollectionsPage() {
   const copy = t(locale);
 
   const tiles = [
-    { href: "/category/men", title: copy.men, img: "/images/logo/baner1.png" },
-    { href: "/category/women", title: copy.women, img: "/images/logo/baner2.png" },
-    { href: "/category/picks", title: copy.picks, img: "/images/logo/baner3.png" },
-    { href: "/shop", title: copy.fragrances, img: "/images/logo/baner1.png" },
+    { href: "/category/men", title: copy.men, img: "/images/logo/bannet1.png" },
+    { href: "/category/women", title: copy.women, img: "/images/logo/bannet2.png" },
+    { href: "/category/picks", title: copy.picks, img: "/images/logo/bannet3.png" },
+    { href: "/shop", title: copy.fragrances, img: "/images/logo/bannet1.png" },
   ];
 
   return (

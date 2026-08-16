@@ -18,7 +18,7 @@ export default function HousePage() {
         <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-[var(--muted)]">{copy.philosophyBody}</p>
       </section>
       <section className="relative h-[50vh] min-h-[360px] bg-[var(--paper)]">
-        <Image src="/images/logo/baner1.png" alt="" fill className="object-cover" />
+        <Image src="/images/logo/bannet1.png" alt="" fill className="object-cover" />
       </section>
       <section className="wrap grid gap-10 py-12 md:grid-cols-3 md:py-16">
         {[copy.artTitle, copy.craftTitle, copy.packagingTitle].map((title, i) => (
