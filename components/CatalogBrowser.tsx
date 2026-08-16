@@ -38,9 +38,9 @@ export function CatalogBrowser({
     <div>
       <section className="wrap py-10 md:py-14">
         <p className="caps text-[var(--muted)]">{copy.collections}</p>
-        <h1 className="serif mt-3 text-4xl md:text-5xl">{locale === "ar" ? titleAr : titleEn}</h1>
+        <h1 className="serif mt-3">{locale === "ar" ? titleAr : titleEn}</h1>
         {intro && <p className="mt-3 max-w-xl text-sm leading-7 text-[var(--muted)]">{intro}</p>}
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-4 text-[12px] uppercase tracking-[0.12em] text-[var(--muted)]">
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-4 text-[13px] font-medium text-[var(--muted)]">
           <p>
             {list.length} {copy.results}
           </p>

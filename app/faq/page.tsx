@@ -50,11 +50,11 @@ export default function FaqPage() {
   return (
     <div className="wrap max-w-3xl py-12 md:py-16">
       <p className="caps">{copy.customerCare}</p>
-      <h1 className="serif mt-5 text-5xl md:text-6xl">{copy.faq}</h1>
+      <h1 className="serif mt-5">{copy.faq}</h1>
       <div className="mt-16 space-y-12">
         {items.map((item) => (
           <section key={item.q}>
-            <h2 className="serif text-2xl md:text-3xl">{item.q}</h2>
+            <h2 className="serif">{item.q}</h2>
             <p className="mt-4 font-light leading-8 text-[var(--muted)]">{item.a}</p>
           </section>
         ))}

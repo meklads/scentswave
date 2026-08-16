@@ -10,7 +10,7 @@ export default function AccountPage() {
   return (
     <div className="wrap max-w-lg py-12 md:py-16">
       <p className="caps">{copy.maison}</p>
-      <h1 className="serif mt-5 text-5xl md:text-6xl">{copy.account}</h1>
+      <h1 className="serif mt-5">{copy.account}</h1>
       <p className="mt-6 font-light text-[var(--muted)]">{copy.accountHint}</p>
       <form className="mt-12 space-y-5">
         <input
@@ -29,7 +29,7 @@ export default function AccountPage() {
         <button type="button" className="cta cta-solid mt-6">
           {copy.login}
         </button>
-        <p className="text-center text-[12px] tracking-[0.16em] uppercase text-[var(--muted)]">
+        <p className="text-center text-[13px] font-medium text-[var(--muted)]">
           {copy.forgot}
         </p>
       </form>

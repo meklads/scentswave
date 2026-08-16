@@ -26,7 +26,7 @@ export default function CartPage() {
     return (
       <div className="wrap py-16 text-center">
         <p className="caps mb-4">{copy.maison}</p>
-        <h1 className="serif text-5xl">{copy.cart}</h1>
+        <h1 className="serif">{copy.cart}</h1>
         <p className="mt-5 text-[var(--muted)]">{copy.emptyCart}</p>
         <Link href="/shop" className="cta cta-solid mt-10">
           {copy.continueShopping}
@@ -38,7 +38,7 @@ export default function CartPage() {
   return (
     <div className="wrap grid gap-12 py-12 lg:grid-cols-[1fr_320px]">
       <div>
-        <h1 className="serif mb-10 text-5xl">{copy.cart}</h1>
+        <h1 className="serif mb-10">{copy.cart}</h1>
         <ul className="divide-y divide-[var(--line)]">
           {lines.map((line) => (
             <li key={line.slug} className="flex gap-5 py-6">
@@ -69,7 +69,7 @@ export default function CartPage() {
                   <button
                     type="button"
                     onClick={() => removeFromCart(line.slug)}
-                    className="text-[12px] tracking-[0.12em] text-[var(--muted)]"
+                    className="text-[13px] font-medium text-[var(--muted)]"
                   >
                     {copy.remove}
                   </button>

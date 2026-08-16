@@ -38,7 +38,7 @@ export default function DiscoverPage() {
   return (
     <div>
       <section className="wrap py-10 md:py-14">
-        <h1 className="serif text-4xl md:text-5xl">{copy.discover}</h1>
+        <h1 className="serif">{copy.discover}</h1>
         <div className="mt-8 space-y-4">
           <Row>
             <Chip active={edit === "all"} onClick={() => setEdit("all")}>{copy.allBrands}</Chip>
@@ -69,7 +69,7 @@ export default function DiscoverPage() {
         </div>
       </section>
       <div className="wrap pb-16">
-        <p className="mb-8 text-[12px] uppercase tracking-[0.12em] text-[var(--muted)]">
+        <p className="mb-8 text-[13px] font-medium text-[var(--muted)]">
           {shown.length} {copy.results}
         </p>
         <ProductGrid products={shown} />

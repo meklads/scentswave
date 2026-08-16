@@ -36,7 +36,7 @@ export function CartDrawer() {
         <div className="flex-1 overflow-auto px-6">
           {lines.length === 0 ? (
             <div className="py-12">
-              <p className="serif text-2xl">{copy.emptyCart}</p>
+              <p className="text-[16px] font-semibold">{copy.emptyCart}</p>
               <p className="mt-3 text-sm text-[var(--muted)]">{copy.bagEmptyHint}</p>
               <Link href="/shop" onClick={closeCart} className="u-link mt-6">
                 {copy.continueShopping}
@@ -50,7 +50,7 @@ export function CartDrawer() {
                     <Image src={line.product.images[0]} alt="" fill className="object-contain p-2" />
                   </Link>
                   <div className="flex-1">
-                    <Link href={`/product/${line.slug}`} onClick={closeCart} className="serif text-lg">
+                    <Link href={`/product/${line.slug}`} onClick={closeCart} className="text-[12px] font-normal">
                       {productShort(line.product, locale)}
                     </Link>
                     <p className="mt-1 text-sm">{formatMoney(line.product.price, locale)}</p>
@@ -62,7 +62,7 @@ export function CartDrawer() {
                         onChange={(e) => setQty(line.slug, Number(e.target.value))}
                         className="w-12 border-b border-[var(--line)] bg-transparent py-1 text-sm outline-none"
                       />
-                      <button type="button" onClick={() => removeFromCart(line.slug)} className="text-[11px] uppercase tracking-[0.12em] text-[var(--muted)]">
+                      <button type="button" onClick={() => removeFromCart(line.slug)} className="text-[13px] font-medium text-[var(--muted)]">
                         {copy.remove}
                       </button>
                     </div>

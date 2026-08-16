@@ -24,14 +24,14 @@ export function Footer() {
       </div>
 
       <div className="wrap py-12 text-center">
-        <h2 className="serif text-3xl">{copy.newsletterTitle}</h2>
+        <h2 className="serif">{copy.newsletterTitle}</h2>
         <p className="mt-2 text-sm text-[var(--muted)]">{copy.newsletterSub}</p>
         <form className="mx-auto mt-6 flex max-w-md items-end gap-4 border-b border-[var(--ink)]">
           <input
             type="email"
             required
             placeholder={copy.email}
-            className="w-full bg-transparent py-2 text-sm uppercase tracking-[0.14em] outline-none"
+            className="w-full bg-transparent py-2 text-[16px] outline-none"
           />
           <button type="submit" className="caps pb-2">
             {copy.validate}
@@ -61,7 +61,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-[var(--line)]">
-        <div className="wrap grid grid-cols-[1fr_auto_1fr] items-center py-5 text-[11px] tracking-[0.12em] uppercase text-[var(--muted)]">
+        <div className="wrap grid grid-cols-[1fr_auto_1fr] items-center py-5 text-[13px] font-medium text-[var(--muted)]">
           <p>© {year} {copy.rights}</p>
           <Logo height={32} variant="mark" />
           <p className="justify-self-end">{copy.ksa}</p>
@@ -74,8 +74,8 @@ export function Footer() {
 function Col({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="serif mb-4 text-xl">{title}</p>
-      <div className="flex flex-col gap-2 text-[12px] tracking-[0.12em] uppercase text-[var(--muted)]">
+      <p className="mb-4 text-[16px] font-semibold">{title}</p>
+      <div className="flex flex-col gap-2.5 text-[13px] font-medium text-[var(--muted)]">
         {children}
       </div>
     </div>

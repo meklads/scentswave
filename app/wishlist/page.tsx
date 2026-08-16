@@ -14,7 +14,7 @@ export default function WishlistPage() {
   return (
     <div className="wrap py-12 md:py-16">
       <p className="caps">{copy.maison}</p>
-      <h1 className="serif mt-5 mb-16 text-5xl md:text-6xl">{copy.wishlist}</h1>
+      <h1 className="serif mt-5 mb-16">{copy.wishlist}</h1>
       {list.length === 0 ? (
         <div className="py-16">
           <p className="text-[var(--muted)]">{copy.emptyWishlist}</p>

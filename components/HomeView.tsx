@@ -45,7 +45,7 @@ export function HomeView() {
       />
 
       <section className="wrap py-10 md:py-14">
-        <h2 className="serif text-3xl md:text-4xl">{copy.shopByCategory}</h2>
+        <h2 className="serif">{copy.shopByCategory}</h2>
         <p className="mt-3 max-w-xl text-sm text-[var(--muted)]">{copy.shopByCategoryBody}</p>
         <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
           {categories.map((item) => (
@@ -55,13 +55,13 @@ export function HomeView() {
                   <Image src={item.img} alt={item.title} fill className="object-contain p-8 transition-transform duration-500 group-hover:scale-[1.04]" />
                 )}
               </div>
-              <p className="serif mt-3 text-lg">{item.title}</p>
+              <p className="mt-3 text-[16px] font-semibold">{item.title}</p>
             </Link>
           ))}
         </div>
       </section>
 
-      <p className="divider-label wrap py-6 serif text-2xl">{copy.picks}</p>
+      <p className="divider-label wrap py-6 serif">{copy.picks}</p>
 
       <ProductCarousel
         tabs={[{ id: "signature", label: copy.picks, products: featured.concat(trending).slice(0, 12) }]}
@@ -73,7 +73,7 @@ export function HomeView() {
             <div className="relative aspect-[4/3] overflow-hidden bg-[var(--paper)]">
               <Image src={tile.img} alt="" fill className="object-cover" />
             </div>
-            <h3 className="serif mt-5 text-2xl">{tile.title}</h3>
+            <h3 className="mt-5 text-[16px] font-semibold">{tile.title}</h3>
             <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{tile.body}</p>
             <Link href={tile.href} className="u-link mt-4">
               {tile.cta}
@@ -84,7 +84,7 @@ export function HomeView() {
 
       <section className="wrap grid items-start gap-10 border-t border-[var(--line)] py-12 md:grid-cols-[280px_1fr] md:py-16">
         <div>
-          <h2 className="serif text-3xl md:text-4xl">{copy.collections}</h2>
+          <h2 className="serif">{copy.collections}</h2>
           <p className="mt-4 text-sm leading-7 text-[var(--muted)]">{copy.collectionsBody}</p>
           <Link href="/collections" className="u-link mt-5">
             {copy.discoverAll}
@@ -96,7 +96,7 @@ export function HomeView() {
               <div className="relative aspect-square bg-[var(--paper)]">
                 <Image src={item.images[0]} alt="" fill className="object-contain p-8 transition-transform duration-500 group-hover:scale-[1.04]" />
               </div>
-              <h3 className="serif mt-3 text-xl">{locale === "ar" ? item.shortAr : item.shortEn}</h3>
+              <h3 className="mt-3 text-[16px] font-semibold">{locale === "ar" ? item.shortAr : item.shortEn}</h3>
               <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
                 {locale === "ar" ? item.descriptionAr : item.descriptionEn}
               </p>

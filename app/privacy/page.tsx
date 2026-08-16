@@ -10,7 +10,7 @@ export default function PrivacyPage() {
   return (
     <article className="wrap max-w-2xl py-12 md:py-16">
       <p className="caps">{copy.customerCare}</p>
-      <h1 className="serif mt-5 text-5xl md:text-6xl">{copy.privacy}</h1>
+      <h1 className="serif mt-5">{copy.privacy}</h1>
       {locale === "ar" ? (
         <div className="mt-10 space-y-6 font-light leading-9 text-[var(--muted)]">
           <p>نجمع فقط ما يلزم لتنفيذ الطلب: الاسم، وسيلة التواصل، عنوان الشحن، وتفاصيل الطلب. لا نخزّن بيانات البطاقات.</p>

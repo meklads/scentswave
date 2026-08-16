@@ -1,19 +1,12 @@
 import type { Metadata } from "next";
-import { EB_Garamond, IBM_Plex_Sans_Arabic } from "next/font/google";
+import { Readex_Pro } from "next/font/google";
 import { SiteShell } from "@/components/SiteShell";
 import "./globals.css";
 
-const sans = IBM_Plex_Sans_Arabic({
+const sans = Readex_Pro({
   variable: "--font-sans",
   subsets: ["arabic", "latin"],
-  weight: ["300", "400", "500"],
-});
-
-const display = EB_Garamond({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -29,7 +22,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="ar"
       dir="rtl"
-      className={`${sans.variable} ${display.variable} h-full antialiased`}
+      className={`${sans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white text-[var(--ink)]">
         <SiteShell>{children}</SiteShell>

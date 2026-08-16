@@ -12,7 +12,7 @@ export default function BrandsPage() {
   return (
     <div className="wrap py-12 md:py-16">
       <p className="caps">{copy.maison}</p>
-      <h1 className="serif mt-5 mb-20 text-5xl md:text-7xl">{copy.brands}</h1>
+      <h1 className="serif mt-5 mb-20">{copy.brands}</h1>
       <div className="grid gap-x-10 gap-y-8 sm:grid-cols-2 md:grid-cols-3">
         {brands.map((brand) => (
           <Link

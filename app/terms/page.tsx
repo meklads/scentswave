@@ -9,7 +9,7 @@ export default function TermsPage() {
   return (
     <article className="wrap max-w-2xl py-12 md:py-16">
       <p className="caps">{copy.customerCare}</p>
-      <h1 className="serif mt-5 text-5xl md:text-6xl">{copy.terms}</h1>
+      <h1 className="serif mt-5">{copy.terms}</h1>
       {locale === "ar" ? (
         <div className="mt-10 space-y-6 font-light leading-9 text-[var(--muted)]">
           <p>يمكن إرجاع أي منتج غير مفتوح بحالته الأصلية مع العبوة خلال ١٤ يومًا من التسليم. العطور المفتوحة غير قابلة للإرجاع.</p>

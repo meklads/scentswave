@@ -71,7 +71,7 @@ export default function ProductPage() {
               {locale === "ar" ? brand.nameAr : brand.nameEn}
             </Link>
           )}
-          <h1 className="serif mt-3 text-4xl md:text-5xl">{productName(product, locale)}</h1>
+          <h1 className="serif mt-3">{productName(product, locale)}</h1>
           <p className="mt-3 text-sm text-[var(--muted)]">
             {concentrationLabel(product, locale)} · {descriptor(product, locale)}
           </p>
@@ -104,12 +104,12 @@ export default function ProductPage() {
               {copy.buyNow}
             </Link>
           </div>
-          <button type="button" onClick={() => toggleWishlist(product.slug)} className="mt-2 self-start text-[11px] tracking-[0.14em] uppercase text-[var(--muted)]">
+          <button type="button" onClick={() => toggleWishlist(product.slug)} className="mt-2 self-start text-[13px] font-medium text-[var(--muted)]">
             {loved ? copy.added : copy.wishlist}
           </button>
           <div className="mt-10 grid gap-8 border-t border-[var(--line)] pt-8 sm:grid-cols-2">
             <div>
-              <p className="serif text-xl">{copy.theNotes}</p>
+              <p className="text-[16px] font-semibold">{copy.theNotes}</p>
               <ul className="mt-3 space-y-2 text-sm">
                 <li><span className="text-[var(--muted)]">{copy.topNotes} — </span>{p.top}</li>
                 <li><span className="text-[var(--muted)]">{copy.heartNotes} — </span>{p.heart}</li>
@@ -117,7 +117,7 @@ export default function ProductPage() {
               </ul>
             </div>
             <div>
-              <p className="serif text-xl">{copy.howToWear}</p>
+              <p className="text-[16px] font-semibold">{copy.howToWear}</p>
               <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
                 {locale === "ar" ? "على النبض. بلا مبالغة. دعه يتحرك معك." : "On the pulse. Without excess. Let it move with you."}
               </p>
@@ -128,7 +128,7 @@ export default function ProductPage() {
 
       {related.length > 0 && (
         <section className="wrap py-14">
-          <p className="serif text-3xl">{copy.related}</p>
+          <p className="serif">{copy.related}</p>
           <div className="mt-8">
             <ProductGrid products={related} />
           </div>
@@ -136,7 +136,7 @@ export default function ProductPage() {
       )}
       {recent.length > 0 && (
         <section className="wrap pb-16">
-          <p className="serif text-3xl">{locale === "ar" ? "شوهد مؤخرًا" : "Recently viewed"}</p>
+          <p className="serif">{locale === "ar" ? "شوهد مؤخرًا" : "Recently viewed"}</p>
           <div className="mt-8">
             <ProductGrid products={recent} />
           </div>

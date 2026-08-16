@@ -12,7 +12,7 @@ export default function ContactPage() {
     <div className="wrap grid gap-10 py-12 md:py-16 lg:grid-cols-2">
       <div>
         <p className="caps">{copy.customerCare}</p>
-        <h1 className="serif mt-5 text-5xl md:text-6xl">{copy.contact}</h1>
+        <h1 className="serif mt-5">{copy.contact}</h1>
         <p className="mt-6 max-w-sm font-light leading-8 text-[var(--muted)]">
           {copy.customerService} · {copy.hours}
         </p>

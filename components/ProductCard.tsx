@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useStore } from "@/components/store";
-import { concentrationLabel, productShort } from "@/lib/catalog";
+import { concentrationLabel, getBrand, brandName, productShort } from "@/lib/catalog";
 import { formatMoney } from "@/lib/format";
 import { t } from "@/lib/i18n";
 import type { Product } from "@/lib/types";
@@ -13,12 +13,13 @@ export function ProductCard({ product }: { product: Product }) {
   const copy = t(locale);
   const primary = product.images[0];
   const hover = product.images[1];
+  const brand = getBrand(product.brand);
 
   return (
     <article className="group">
       <div className="relative aspect-[4/5] overflow-hidden bg-[var(--paper)]">
         {product.featured && (
-          <span className="absolute start-3 top-3 z-10 text-[10px] tracking-[0.12em] uppercase text-[var(--muted)]">
+          <span className="absolute start-3 top-3 z-10 text-[11px] font-medium text-[var(--muted)]">
             {copy.exclusive}
           </span>
         )}
@@ -51,14 +52,17 @@ export function ProductCard({ product }: { product: Product }) {
           <BagMini />
         </button>
       </div>
-      <div className="pt-3">
-        <Link href={`/product/${product.slug}`} className="serif text-[22px] leading-snug">
+      <div className="flex flex-col gap-1 pt-2">
+        <p className="line-clamp-1 text-[12px] font-semibold">
+          {brand ? brandName(brand, locale) : product.brand}
+        </p>
+        <Link href={`/product/${product.slug}`} className="line-clamp-2 min-h-8 text-[12px] font-normal leading-snug">
           {productShort(product, locale)}
         </Link>
-        <p className="mt-1 text-[13px] text-[var(--muted)]">
+        <p className="text-[12px] font-normal text-[var(--muted)]">
           {concentrationLabel(product, locale)}
         </p>
-        <p className="mt-1 text-[14px] font-medium">{formatMoney(product.price, locale)}</p>
+        <p className="text-[16px] font-semibold">{formatMoney(product.price, locale)}</p>
       </div>
     </article>
   );

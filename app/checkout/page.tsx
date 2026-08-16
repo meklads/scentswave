@@ -45,7 +45,7 @@ export default function CheckoutPage() {
   if (done) {
     return (
       <div className="mx-auto max-w-xl px-4 py-24 text-center">
-        <h1 className="serif text-5xl">
+        <h1 className="serif">
           {locale === "ar" ? "تم استلام طلبك" : "Order received"}
         </h1>
         <p className="mt-4 text-[var(--muted)]">
@@ -98,7 +98,7 @@ export default function CheckoutPage() {
   return (
     <div className="wrap grid gap-12 py-12 lg:grid-cols-[1fr_320px]">
       <form onSubmit={onSubmit} className="space-y-4">
-        <h1 className="serif text-5xl">
+        <h1 className="serif">
           {copy.checkout}
         </h1>
         <p className="text-sm text-[var(--muted)]">{copy.guestHint}</p>
