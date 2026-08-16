@@ -33,20 +33,21 @@ export function CatalogBrowser({
   );
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10">
-      <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+    <div className="lux py-16 md:py-20">
+      <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
-          <h1 className="font-[family-name:var(--font-display)] text-4xl">
+          <p className="eyebrow mb-4">{copy.collections}</p>
+          <h1 className="display text-4xl md:text-6xl">
             {locale === "ar" ? titleAr : titleEn}
           </h1>
-          <p className="mt-2 text-sm text-[var(--muted)]">
+          <p className="mt-4 text-sm text-[var(--muted)]">
             {list.length} {copy.results}
           </p>
         </div>
-        <label className="text-sm">
+        <label className="text-[12px] tracking-[0.14em] text-[var(--muted)]">
           {copy.sort}
           <select
-            className="ms-3 rounded-full border border-[var(--line)] bg-white px-3 py-2"
+            className="ms-3 border-0 border-b border-[var(--line)] bg-transparent py-2 text-[var(--ink)] outline-none"
             value={sort}
             onChange={(e) => {
               const next = new URLSearchParams(params.toString());
@@ -63,12 +64,12 @@ export function CatalogBrowser({
       </div>
 
       {!brand && !gender && !featured && (
-        <div className="mb-8 flex flex-wrap gap-2">
+        <div className="mb-12 flex flex-wrap gap-x-6 gap-y-3">
           {brands.map((item) => (
             <a
               key={item.slug}
               href={`/category/${item.slug}`}
-              className="rounded-full border border-[var(--line)] px-3 py-1 text-xs hover:border-[var(--ink)]"
+              className="text-[12px] tracking-[0.12em] text-[var(--muted)] hover:text-[var(--ink)]"
             >
               {locale === "ar" ? item.nameAr : item.nameEn}
             </a>
@@ -77,7 +78,7 @@ export function CatalogBrowser({
       )}
 
       {list.length === 0 ? (
-        <p className="py-20 text-center text-[var(--muted)]">{copy.noResults}</p>
+        <p className="py-24 text-center text-[var(--muted)]">{copy.noResults}</p>
       ) : (
         <ProductGrid products={list} />
       )}

@@ -7,140 +7,169 @@ import { useStore } from "@/components/store";
 import { brands, products } from "@/lib/catalog";
 import { t } from "@/lib/i18n";
 
-const HERO = [
-  {
-    src: "/images/banners/Scents-Wave-Final5.png",
-    href: "/category/men",
-  },
-  {
-    src: "/images/banners/Scents-Wave-Final6.png",
-    href: "/category/women",
-  },
-  {
-    src: "/images/banners/Scents-Wave-Final7.png",
-    href: "/shop",
-  },
-];
-
-const ADS = [
-  { src: "/images/banners/AD3.jpg", href: "/category/dior" },
-  { src: "/images/banners/AD4.jpg", href: "/category/chanel" },
-  { src: "/images/banners/AD5.jpg", href: "/category/tom-ford" },
-];
-
 export function HomeView() {
   const { locale } = useStore();
   const copy = t(locale);
   const featured = products.filter((item) => item.featured).slice(0, 8);
-  const men = products.filter((item) => item.gender === "men").slice(0, 8);
-  const women = products.filter((item) => item.gender === "women").slice(0, 8);
+  const men = products.filter((item) => item.gender === "men").slice(0, 4);
+  const women = products.filter((item) => item.gender === "women").slice(0, 4);
+  const [heroLine1, heroLine2] = copy.heroTitle.split("\n");
 
   return (
     <div>
-      <section className="grid md:grid-cols-3">
-        {HERO.map((slide) => (
-          <Link key={slide.src} href={slide.href} className="relative min-h-[280px] md:min-h-[420px] overflow-hidden">
+      <section className="grid min-h-[calc(100vh-108px)] lg:grid-cols-2">
+        <div className="flex flex-col justify-center px-8 py-16 md:px-16 lg:px-20">
+          <p className="eyebrow mb-6">{copy.heroEyebrow}</p>
+          <h1 className="display text-[42px] md:text-[64px] lg:text-[72px]">
+            {heroLine1}
+            {heroLine2 ? (
+              <>
+                <br />
+                {heroLine2}
+              </>
+            ) : null}
+          </h1>
+          <p className="mt-7 max-w-md text-[15px] leading-8 text-[var(--muted)]">
+            {copy.heroBody}
+          </p>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <Link href="/shop" className="btn btn-dark">
+              {copy.heroCta}
+            </Link>
+            <Link href="/category/picks" className="btn btn-line">
+              {copy.picks}
+            </Link>
+          </div>
+        </div>
+        <div className="relative min-h-[420px] bg-[var(--bg-soft)]">
+          <Image
+            src="/images/products/full-Dior-Sauvage-Eau-de-Parfum.jpg"
+            alt="Dior Sauvage"
+            fill
+            priority
+            className="object-contain p-10 md:p-16"
+            sizes="50vw"
+          />
+        </div>
+      </section>
+
+      <section className="border-y border-[var(--line)]">
+        <div className="lux grid grid-cols-2 gap-8 py-8 md:grid-cols-4 md:py-10">
+          {[copy.original, copy.fastShip, copy.cash, copy.mada].map((label) => (
+            <p
+              key={label}
+              className="text-center text-[12px] tracking-[0.18em] text-[var(--muted)]"
+            >
+              {label}
+            </p>
+          ))}
+        </div>
+      </section>
+
+      <section className="lux py-24">
+        <div className="mb-12 flex items-end justify-between">
+          <div>
+            <p className="eyebrow mb-3">{copy.collections}</p>
+            <h2 className="display text-4xl md:text-5xl">{copy.discover}</h2>
+          </div>
+        </div>
+        <div className="grid gap-5 md:grid-cols-2">
+          <Link href="/category/men" className="group relative min-h-[520px] overflow-hidden bg-[var(--bg-soft)]">
             <Image
-              src={slide.src}
-              alt={copy.storeName}
+              src="/images/products/full-Chanel-Bleu-De-For.jpg"
+              alt={copy.men}
               fill
-              priority
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-contain p-16 transition duration-700 group-hover:scale-[1.03]"
             />
+            <div className="absolute inset-x-0 bottom-0 p-8">
+              <p className="eyebrow mb-2">{copy.maison}</p>
+              <h3 className="display text-3xl">{copy.men}</h3>
+              <span className="mt-3 inline-block text-sm tracking-[0.14em] text-[var(--muted)]">
+                {copy.shopMen}
+              </span>
+            </div>
           </Link>
-        ))}
+          <Link href="/category/women" className="group relative min-h-[520px] overflow-hidden bg-[var(--bg-soft)]">
+            <Image
+              src="/images/products/full-La-vie-est-belle-LANCOME.jpg"
+              alt={copy.women}
+              fill
+              className="object-contain p-16 transition duration-700 group-hover:scale-[1.03]"
+            />
+            <div className="absolute inset-x-0 bottom-0 p-8">
+              <p className="eyebrow mb-2">{copy.maison}</p>
+              <h3 className="display text-3xl">{copy.women}</h3>
+              <span className="mt-3 inline-block text-sm tracking-[0.14em] text-[var(--muted)]">
+                {copy.shopWomen}
+              </span>
+            </div>
+          </Link>
+        </div>
       </section>
 
-      <section className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-4 py-10 md:grid-cols-4">
-        {[
-          { src: "/images/ui/100-Original.svg", label: copy.original },
-          { src: "/images/ui/shipping-fast-svgrepo-com.svg", label: copy.fastShip },
-          { src: "/images/ui/hand-money-cash-hold-svgrepo-com.svg", label: copy.cash },
-          { src: "/images/ui/Mada_Logo-1.svg", label: copy.mada },
-        ].map((item) => (
-          <div key={item.label} className="flex items-center gap-3">
-            <Image src={item.src} alt="" width={36} height={36} className="h-9 w-9 object-contain" />
-            <span className="text-sm">{item.label}</span>
-          </div>
-        ))}
+      <section className="bg-[var(--bg-soft)] py-24">
+        <div className="lux">
+          <SectionHead title={copy.picks} href="/category/picks" action={copy.viewAll} eyebrow={copy.featured} />
+          <ProductGrid products={featured} />
+        </div>
       </section>
 
-      <section className="mx-auto grid max-w-6xl gap-4 px-4 pb-12 md:grid-cols-2">
-        <Link href="/category/men" className="relative min-h-56 overflow-hidden bg-[var(--ink)] text-[var(--cream)]">
-          <Image
-            src="/images/banners/sw-baner-main.jpg"
-            alt={copy.men}
-            fill
-            className="object-cover opacity-60"
-          />
-          <div className="absolute inset-0 flex flex-col items-start justify-end p-8">
-            <h2 className="font-[family-name:var(--font-display)] text-4xl">{copy.men}</h2>
-            <span className="mt-2 text-sm tracking-wide">{copy.shopMen}</span>
-          </div>
-        </Link>
-        <Link href="/category/women" className="relative min-h-56 overflow-hidden bg-[var(--gold-dark)] text-white">
-          <Image
-            src="/images/banners/ad.jpg"
-            alt={copy.women}
-            fill
-            className="object-cover opacity-50"
-          />
-          <div className="absolute inset-0 flex flex-col items-start justify-end p-8">
-            <h2 className="font-[family-name:var(--font-display)] text-4xl">{copy.women}</h2>
-            <span className="mt-2 text-sm tracking-wide">{copy.shopWomen}</span>
-          </div>
-        </Link>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 pb-16">
-        <SectionHead title={copy.picks} href="/category/picks" action={copy.viewAll} />
-        <ProductGrid products={featured} />
-      </section>
-
-      <section className="border-y border-[var(--line)] bg-white py-10">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-8 px-4">
+      <section className="overflow-hidden py-16">
+        <div className="lux mb-10">
+          <p className="eyebrow">{copy.brands}</p>
+        </div>
+        <div className="flex flex-wrap items-center justify-center gap-x-14 gap-y-8 px-8">
           {brands
             .filter((brand) => brand.logo)
             .map((brand) => (
-              <Link key={brand.slug} href={`/category/${brand.slug}`} className="opacity-80 hover:opacity-100">
+              <Link
+                key={brand.slug}
+                href={`/category/${brand.slug}`}
+                className="opacity-45 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
+              >
                 <Image
                   src={brand.logo as string}
                   alt={locale === "ar" ? brand.nameAr : brand.nameEn}
-                  width={110}
-                  height={48}
-                  className="h-12 w-[110px] object-contain"
+                  width={120}
+                  height={44}
+                  className="h-10 w-[120px] object-contain"
                 />
               </Link>
             ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-16">
-        <SectionHead title={copy.men} href="/category/men" action={copy.viewAll} />
-        <ProductGrid products={men} />
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 pb-16">
-        <SectionHead title={copy.women} href="/category/women" action={copy.viewAll} />
-        <ProductGrid products={women} />
-      </section>
-
-      <section className="mx-auto grid max-w-6xl gap-4 px-4 pb-16 md:grid-cols-3">
-        {ADS.map((ad) => (
-          <Link key={ad.src} href={ad.href} className="relative min-h-44 overflow-hidden">
-            <Image src={ad.src} alt="" fill className="object-cover" />
+      <section className="lux grid gap-16 py-24 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div className="relative min-h-[460px] bg-[var(--bg-soft)]">
+          <Image
+            src="/images/products/full-Tom-Ford-Ombre-Leather.jpg"
+            alt="Tom Ford"
+            fill
+            className="object-contain p-12"
+          />
+        </div>
+        <div className="max-w-lg">
+          <p className="eyebrow mb-5">{copy.maison}</p>
+          <h2 className="display text-4xl md:text-5xl leading-tight">{copy.storyTitle}</h2>
+          <p className="mt-6 text-[15px] leading-8 text-[var(--muted)]">{copy.storyBody}</p>
+          <Link href="/shop" className="btn btn-line mt-10">
+            {copy.heroCta}
           </Link>
-        ))}
+        </div>
       </section>
 
-      <section className="relative mx-4 mb-16 overflow-hidden md:mx-auto md:max-w-6xl min-h-32">
-        <Image
-          src="/images/ui/top-shipping.webp"
-          alt={copy.fastShip}
-          fill
-          className="object-cover"
-        />
+      <section className="border-t border-[var(--line)] py-24">
+        <div className="lux">
+          <SectionHead title={copy.men} href="/category/men" action={copy.viewAll} eyebrow={copy.collections} />
+          <ProductGrid products={men} />
+        </div>
+      </section>
+
+      <section className="bg-[var(--bg-soft)] py-24">
+        <div className="lux">
+          <SectionHead title={copy.women} href="/category/women" action={copy.viewAll} eyebrow={copy.collections} />
+          <ProductGrid products={women} />
+        </div>
       </section>
     </div>
   );
@@ -150,15 +179,20 @@ function SectionHead({
   title,
   href,
   action,
+  eyebrow,
 }: {
   title: string;
   href: string;
   action: string;
+  eyebrow: string;
 }) {
   return (
-    <div className="mb-8 flex items-end justify-between">
-      <h2 className="font-[family-name:var(--font-display)] text-3xl">{title}</h2>
-      <Link href={href} className="text-sm text-[var(--gold-dark)]">
+    <div className="mb-12 flex items-end justify-between gap-6">
+      <div>
+        <p className="eyebrow mb-3">{eyebrow}</p>
+        <h2 className="display text-4xl md:text-5xl">{title}</h2>
+      </div>
+      <Link href={href} className="text-[12px] tracking-[0.16em] text-[var(--muted)] hover:text-[var(--ink)]">
         {action}
       </Link>
     </div>

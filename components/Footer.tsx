@@ -2,11 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { brands } from "@/lib/catalog";
+import { brandName, brands } from "@/lib/catalog";
 import { EMAIL, PHONE_DISPLAY } from "@/lib/format";
 import { t } from "@/lib/i18n";
 import { useStore } from "@/components/store";
-import { brandName } from "@/lib/catalog";
 
 export function Footer() {
   const { locale } = useStore();
@@ -14,76 +13,68 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto border-t border-[var(--line)] bg-[var(--ink)] text-[var(--cream)]">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-4">
-        <div className="space-y-3">
-          <p className="font-[family-name:var(--font-display)] text-2xl">
-            {copy.storeName}
+    <footer className="mt-auto border-t border-[var(--line)] bg-white">
+      <div className="lux grid gap-12 py-20 md:grid-cols-4">
+        <div className="md:col-span-1 space-y-4">
+          <p className="text-2xl font-light">{copy.storeName}</p>
+          <p className="max-w-xs text-sm leading-8 text-[var(--muted)]">
+            {copy.footerAbout}
           </p>
-          <p className="text-sm text-white/70 leading-7">{copy.footerAbout}</p>
         </div>
         <div>
-          <p className="mb-3 text-sm tracking-wide text-[var(--gold)]">
-            {copy.customerService}
-          </p>
-          <div className="flex flex-col gap-2 text-sm text-white/80">
-            <Link href="/contact">{copy.contact}</Link>
-            <Link href="/faq">{copy.faq}</Link>
-            <Link href="/shipping">{copy.shippingInfo}</Link>
-            <Link href="/track-order">{copy.track}</Link>
-            <Link href="/terms">{copy.terms}</Link>
-            <Link href="/privacy">{copy.privacy}</Link>
+          <p className="eyebrow mb-5">{copy.customerService}</p>
+          <div className="flex flex-col gap-3 text-sm text-[var(--muted)]">
+            <Link href="/contact" className="hover:text-[var(--ink)]">{copy.contact}</Link>
+            <Link href="/faq" className="hover:text-[var(--ink)]">{copy.faq}</Link>
+            <Link href="/shipping" className="hover:text-[var(--ink)]">{copy.shippingInfo}</Link>
+            <Link href="/track-order" className="hover:text-[var(--ink)]">{copy.track}</Link>
+            <Link href="/terms" className="hover:text-[var(--ink)]">{copy.terms}</Link>
+            <Link href="/privacy" className="hover:text-[var(--ink)]">{copy.privacy}</Link>
           </div>
         </div>
         <div>
-          <p className="mb-3 text-sm tracking-wide text-[var(--gold)]">
-            {copy.brands}
-          </p>
-          <div className="flex flex-col gap-2 text-sm text-white/80">
-            {brands.slice(0, 8).map((brand) => (
-              <Link key={brand.slug} href={`/category/${brand.slug}`}>
+          <p className="eyebrow mb-5">{copy.brands}</p>
+          <div className="flex flex-col gap-3 text-sm text-[var(--muted)]">
+            {brands.slice(0, 7).map((brand) => (
+              <Link key={brand.slug} href={`/category/${brand.slug}`} className="hover:text-[var(--ink)]">
                 {brandName(brand, locale)}
               </Link>
             ))}
-            <Link href="/brands">{copy.allBrands}</Link>
+            <Link href="/brands" className="hover:text-[var(--ink)]">{copy.allBrands}</Link>
           </div>
         </div>
         <div>
-          <p className="mb-3 text-sm tracking-wide text-[var(--gold)]">
-            {copy.newsletter}
-          </p>
-          <p className="mb-4 text-sm text-white/70">{copy.newsletterHint}</p>
-          <form className="flex gap-2" action="/contact">
+          <p className="eyebrow mb-5">{copy.newsletter}</p>
+          <p className="mb-5 text-sm leading-7 text-[var(--muted)]">{copy.newsletterHint}</p>
+          <form className="flex border-b border-[var(--ink)]" action="/contact">
             <input
               type="email"
               required
               placeholder={copy.email}
-              className="w-full rounded-full bg-white/10 px-4 py-2 text-sm outline-none"
+              className="w-full bg-transparent py-2 text-sm outline-none"
             />
-            <button className="rounded-full bg-[var(--gold)] px-4 py-2 text-sm text-[var(--ink)]">
-              {copy.subscribe}
-            </button>
+            <button className="text-sm tracking-[0.12em]">{copy.subscribe}</button>
           </form>
-          <p className="mt-6 text-sm text-white/70">
+          <p className="mt-8 text-sm leading-7 text-[var(--muted)]">
             {copy.hours}
             <br />
             {PHONE_DISPLAY}
             <br />
             {EMAIL}
           </p>
-          <div className="mt-4 flex items-center gap-3">
-            <Image
-              src="/images/ui/Mada_Logo-1.svg"
-              alt="Mada"
-              width={54}
-              height={24}
-              className="h-6 w-auto invert"
-            />
-          </div>
+          <Image
+            src="/images/ui/Mada_Logo-1.svg"
+            alt="Mada"
+            width={52}
+            height={22}
+            className="mt-5 h-5 w-auto opacity-70"
+          />
         </div>
       </div>
-      <div className="border-t border-white/10 py-4 text-center text-xs text-white/50">
-        © {year} Scents Wave · {copy.rights}
+      <div className="border-t border-[var(--line)]">
+        <p className="lux py-5 text-[11px] tracking-[0.14em] text-[var(--muted)]">
+          © {year} Scents Wave · {copy.rights}
+        </p>
       </div>
     </footer>
   );

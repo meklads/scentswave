@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-import { Cairo, Cormorant_Garamond } from "next/font/google";
+import { Cormorant_Garamond, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { SiteShell } from "@/components/SiteShell";
 import "./globals.css";
 
-const cairo = Cairo({
-  variable: "--font-cairo",
+const sans = IBM_Plex_Sans_Arabic({
+  variable: "--font-sans",
   subsets: ["arabic", "latin"],
+  weight: ["300", "400", "500", "600"],
 });
 
 const display = Cormorant_Garamond({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -28,9 +29,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="ar"
       dir="rtl"
-      className={`${cairo.variable} ${display.variable} h-full antialiased`}
+      className={`${sans.variable} ${display.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[var(--cream)] text-[var(--ink)]">
+      <body className="min-h-full flex flex-col bg-[var(--bg)] text-[var(--ink)]">
         <SiteShell>{children}</SiteShell>
       </body>
     </html>

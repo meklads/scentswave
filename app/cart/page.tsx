@@ -24,12 +24,11 @@ export default function CartPage() {
 
   if (lines.length === 0) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-24 text-center">
-        <h1 className="font-[family-name:var(--font-display)] text-4xl">
-          {copy.cart}
-        </h1>
-        <p className="mt-4 text-[var(--muted)]">{copy.emptyCart}</p>
-        <Link href="/shop" className="mt-6 inline-block rounded-full bg-[var(--ink)] px-6 py-3 text-sm text-white">
+      <div className="lux py-32 text-center">
+        <p className="eyebrow mb-4">{copy.maison}</p>
+        <h1 className="display text-5xl">{copy.cart}</h1>
+        <p className="mt-5 text-[var(--muted)]">{copy.emptyCart}</p>
+        <Link href="/shop" className="btn btn-dark mt-10">
           {copy.continueShopping}
         </Link>
       </div>
@@ -37,15 +36,16 @@ export default function CartPage() {
   }
 
   return (
-    <div className="mx-auto grid max-w-6xl gap-10 px-4 py-10 lg:grid-cols-[1fr_320px]">
+    <div className="lux grid gap-16 py-16 lg:grid-cols-[1fr_340px]">
       <div>
-        <h1 className="mb-8 font-[family-name:var(--font-display)] text-4xl">
-          {copy.cart}
-        </h1>
-        <ul className="divide-y divide-[var(--line)] bg-white">
+        <h1 className="display mb-10 text-5xl">{copy.cart}</h1>
+        <ul className="divide-y divide-[var(--line)]">
           {lines.map((line) => (
-            <li key={line.slug} className="flex gap-4 p-4">
-              <Link href={`/product/${line.slug}`} className="relative h-24 w-24 shrink-0 bg-[#f3eee7]">
+            <li key={line.slug} className="flex gap-5 py-6">
+              <Link
+                href={`/product/${line.slug}`}
+                className="relative h-28 w-24 shrink-0 bg-[var(--bg-soft)]"
+              >
                 <Image
                   src={line.product.images[0]}
                   alt=""
@@ -54,22 +54,22 @@ export default function CartPage() {
                 />
               </Link>
               <div className="flex-1">
-                <Link href={`/product/${line.slug}`}>
+                <Link href={`/product/${line.slug}`} className="font-light">
                   {productShort(line.product, locale)}
                 </Link>
-                <p className="mt-1 text-sm">{formatMoney(line.product.price, locale)}</p>
-                <div className="mt-3 flex items-center gap-3">
+                <p className="mt-2 text-sm">{formatMoney(line.product.price, locale)}</p>
+                <div className="mt-4 flex items-center gap-4">
                   <input
                     type="number"
                     min={1}
                     value={line.quantity}
                     onChange={(e) => setQty(line.slug, Number(e.target.value))}
-                    className="w-16 rounded border border-[var(--line)] px-2 py-1 text-sm"
+                    className="w-16 border-b border-[var(--line)] bg-transparent py-1 text-sm outline-none"
                   />
                   <button
                     type="button"
                     onClick={() => removeFromCart(line.slug)}
-                    className="text-xs text-[var(--muted)]"
+                    className="text-[12px] tracking-[0.12em] text-[var(--muted)]"
                   >
                     {copy.remove}
                   </button>
@@ -79,23 +79,20 @@ export default function CartPage() {
           ))}
         </ul>
       </div>
-      <aside className="h-fit bg-white p-6">
-        <p className="flex justify-between py-2">
-          <span>{copy.subtotal}</span>
+      <aside className="h-fit bg-[var(--bg-soft)] p-8">
+        <p className="flex justify-between py-2 text-sm">
+          <span className="text-[var(--muted)]">{copy.subtotal}</span>
           <span>{formatMoney(subtotal, locale)}</span>
         </p>
-        <p className="flex justify-between py-2">
-          <span>{copy.shipping}</span>
+        <p className="flex justify-between py-2 text-sm">
+          <span className="text-[var(--muted)]">{copy.shipping}</span>
           <span>{shipping === 0 ? copy.free : formatMoney(shipping, locale)}</span>
         </p>
-        <p className="mt-3 flex justify-between border-t border-[var(--line)] pt-4 text-lg">
+        <p className="mt-4 flex justify-between border-t border-[var(--line)] pt-5">
           <span>{copy.total}</span>
           <span>{formatMoney(subtotal + shipping, locale)}</span>
         </p>
-        <Link
-          href="/checkout"
-          className="mt-6 block rounded-full bg-[var(--ink)] py-3 text-center text-sm text-white"
-        >
+        <Link href="/checkout" className="btn btn-dark mt-8 w-full">
           {copy.checkout}
         </Link>
       </aside>

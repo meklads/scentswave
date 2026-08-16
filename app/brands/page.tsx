@@ -1,43 +1,40 @@
 "use client";
 
-import Link from "next/link";
-import { useStore } from "@/components/store";
-import { brands } from "@/lib/catalog";
-import { brandName } from "@/lib/catalog";
-import { t } from "@/lib/i18n";
 import Image from "next/image";
+import Link from "next/link";
+import { brandName, brands } from "@/lib/catalog";
+import { t } from "@/lib/i18n";
+import { useStore } from "@/components/store";
 
 export default function BrandsPage() {
   const { locale } = useStore();
   const copy = t(locale);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="mb-10 font-[family-name:var(--font-display)] text-4xl">
-        {copy.brands}
-      </h1>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+    <div className="lux py-16 md:py-20">
+      <p className="eyebrow mb-4">{copy.maison}</p>
+      <h1 className="display mb-16 text-5xl md:text-6xl">{copy.brands}</h1>
+      <div className="grid grid-cols-2 gap-px bg-[var(--line)] md:grid-cols-4">
         {brands.map((brand) => (
           <Link
             key={brand.slug}
             href={`/category/${brand.slug}`}
-            className="flex flex-col items-center gap-3 bg-white p-6 hover:bg-[#f3eee7]"
+            className="flex min-h-44 flex-col items-center justify-center gap-4 bg-white p-8 hover:bg-[var(--bg-soft)]"
           >
             {brand.logo ? (
               <Image
                 src={brand.logo}
                 alt={brandName(brand, locale)}
                 width={140}
-                height={64}
-                className="h-16 w-full object-contain"
+                height={56}
+                className="h-12 w-full object-contain"
               />
             ) : (
-              <span className="font-[family-name:var(--font-display)] text-2xl">
-                {brandName(brand, locale)}
-              </span>
+              <span className="display text-2xl">{brandName(brand, locale)}</span>
             )}
-            <span className="text-sm">{brandName(brand, locale)}</span>
-            <span className="text-xs text-[var(--muted)]">{brand.count}</span>
+            <span className="text-[12px] tracking-[0.14em] text-[var(--muted)]">
+              {brandName(brand, locale)}
+            </span>
           </Link>
         ))}
       </div>

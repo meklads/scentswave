@@ -45,13 +45,13 @@ export default function CheckoutPage() {
   if (done) {
     return (
       <div className="mx-auto max-w-xl px-4 py-24 text-center">
-        <h1 className="font-[family-name:var(--font-display)] text-4xl">
+        <h1 className="display text-5xl">
           {locale === "ar" ? "تم استلام طلبك" : "Order received"}
         </h1>
         <p className="mt-4 text-[var(--muted)]">
           {locale === "ar" ? "رقم الطلب" : "Order number"}: {done}
         </p>
-        <Link href="/shop" className="mt-8 inline-block rounded-full bg-[var(--ink)] px-6 py-3 text-white">
+        <Link href="/shop" className="btn btn-dark mt-8">
           {copy.continueShopping}
         </Link>
       </div>
@@ -96,17 +96,17 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="mx-auto grid max-w-6xl gap-10 px-4 py-10 lg:grid-cols-[1fr_320px]">
-      <form onSubmit={onSubmit} className="space-y-4 bg-white p-6">
-        <h1 className="font-[family-name:var(--font-display)] text-4xl">
+    <div className="lux grid gap-16 py-16 lg:grid-cols-[1fr_340px]">
+      <form onSubmit={onSubmit} className="space-y-4">
+        <h1 className="display text-5xl">
           {copy.checkout}
         </h1>
         <p className="text-sm text-[var(--muted)]">{copy.guestHint}</p>
-        <input name="name" required placeholder={copy.name} className="w-full border border-[var(--line)] px-4 py-3" />
-        <input name="phone" required placeholder={copy.phone} className="w-full border border-[var(--line)] px-4 py-3" />
-        <input name="email" type="email" placeholder={copy.email} className="w-full border border-[var(--line)] px-4 py-3" />
-        <input name="city" required placeholder={copy.city} className="w-full border border-[var(--line)] px-4 py-3" />
-        <textarea name="address" required placeholder={copy.address} className="w-full border border-[var(--line)] px-4 py-3" rows={3} />
+        <input name="name" required placeholder={copy.name} className="w-full border-0 border-b border-[var(--line)] bg-transparent px-0 py-3 outline-none" />
+        <input name="phone" required placeholder={copy.phone} className="w-full border-0 border-b border-[var(--line)] bg-transparent px-0 py-3 outline-none" />
+        <input name="email" type="email" placeholder={copy.email} className="w-full border-0 border-b border-[var(--line)] bg-transparent px-0 py-3 outline-none" />
+        <input name="city" required placeholder={copy.city} className="w-full border-0 border-b border-[var(--line)] bg-transparent px-0 py-3 outline-none" />
+        <textarea name="address" required placeholder={copy.address} className="w-full border-0 border-b border-[var(--line)] bg-transparent px-0 py-3 outline-none" rows={3} />
         <fieldset className="space-y-2">
           <legend className="mb-2 text-sm">{copy.payment}</legend>
           <label className="flex items-center gap-2 text-sm">
@@ -126,11 +126,11 @@ export default function CheckoutPage() {
             {copy.payCod}
           </label>
         </fieldset>
-        <button className="w-full rounded-full bg-[var(--ink)] py-3 text-white">
+        <button className="btn btn-dark mt-4 w-full">
           {copy.orderWhatsapp}
         </button>
       </form>
-      <aside className="h-fit bg-white p-6 text-sm">
+      <aside className="h-fit bg-[var(--bg-soft)] p-8 text-sm">
         {lines.map((line) => (
           <p key={line.slug} className="flex justify-between gap-3 py-2">
             <span>

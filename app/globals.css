@@ -1,20 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --cream: #f6f1ea;
-  --ink: #1c1612;
-  --gold: #c4a36a;
-  --gold-dark: #8c6a3a;
-  --muted: #6f675f;
-  --line: #e4d9cc;
-  --background: var(--cream);
+  --bg: #ffffff;
+  --bg-soft: #f5f3ef;
+  --ink: #141414;
+  --muted: #7a756e;
+  --line: #ebe7e1;
+  --accent: #8a6a3d;
+  --accent-soft: #f1ebe2;
+  --cream: var(--bg-soft);
+  --gold: var(--accent);
+  --gold-dark: #6e542f;
+  --background: var(--bg);
   --foreground: var(--ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-cairo);
+  --font-sans: var(--font-sans);
   --font-display: var(--font-display);
 }
 
@@ -24,15 +28,17 @@
 
 html,
 body {
-  background: var(--cream);
+  background: var(--bg);
   color: var(--ink);
   min-height: 100%;
 }
 
 body {
-  font-family: var(--font-cairo), system-ui, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 400;
   display: flex;
   flex-direction: column;
+  letter-spacing: 0.01em;
 }
 
 a {
@@ -45,7 +51,7 @@ img {
 }
 
 ::selection {
-  background: var(--gold);
+  background: var(--accent-soft);
   color: var(--ink);
 }
 
@@ -58,4 +64,72 @@ button {
 
 button {
   cursor: pointer;
+}
+
+.lux {
+  width: min(1240px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .lux {
+    width: min(1240px, calc(100% - 80px));
+  }
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.display {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+html[lang="en"] .display {
+  font-family: var(--font-display), serif;
+  font-weight: 500;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 28px;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.btn-dark {
+  background: var(--ink);
+  color: #fff;
+}
+
+.btn-dark:hover {
+  background: #2a2a2a;
+}
+
+.btn-line {
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn-line:hover {
+  background: var(--ink);
+  color: #fff;
+}
+
+.hairline {
+  height: 1px;
+  background: var(--line);
+  border: 0;
 }

@@ -1,0 +1,10 @@
+---
+description: Commit and push to GitHub after every completed change set
+alwaysApply: true
+---
+
+# GitHub push
+
+After finishing a set of code or design changes in this repo, create a git commit and push to `origin` (`https://github.com/meklads/scentswave`) without waiting to be asked.
+
+Do not push secrets, `.env` files, or unrelated files.
