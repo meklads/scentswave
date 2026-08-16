@@ -186,6 +186,56 @@ button { cursor: pointer; }
   background: var(--line);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+.hero-progress {
+  height: 2px;
+  width: min(220px, 40vw);
+  background: rgba(255,255,255,0.28);
+}
+.hero-progress > span {
+  display: block;
+  height: 100%;
+  background: #fff;
+  transition: width 0.6s ease;
+}
+
+.hero-arrow {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  opacity: 0.85;
+}
+.hero-arrow:hover { opacity: 1; }
+
+.hp-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  border-bottom: 1px solid var(--line);
+}
+.hp-tab {
+  min-height: 56px;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background: #f4f4f4;
+  color: var(--ink);
+}
+.hp-tab.is-on {
+  background: #1a1a1a;
+  color: #fff;
+}
+.hp-pager {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 0 18px;
+  min-width: 120px;
+  justify-content: center;
+  background: #fff;
+}
+@media (min-width: 768px) {
+  .hp-pager { display: flex; }
 }

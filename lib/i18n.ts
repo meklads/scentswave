@@ -177,6 +177,10 @@ export const dictionaries = {
     discoverAll: "اكتشف كل المجموعات",
     prev: "السابق",
     next: "التالي",
+    comingSoon: "قريبا بالاسواق",
+    stoneCapsule: "كبسولة الحجر",
+    heroMove: "عطر يتحرك معك",
+    sar: "ر.س",
   },
   en: {
     storeName: "Scents Wave",
@@ -354,6 +358,10 @@ export const dictionaries = {
     discoverAll: "Discover all collections",
     prev: "Previous",
     next: "Next",
+    comingSoon: "Coming soon",
+    stoneCapsule: "Stone Capsule",
+    heroMove: "A scent that moves with you",
+    sar: "SAR",
   },
 } as const;
 

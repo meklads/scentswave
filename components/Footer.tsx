@@ -63,7 +63,7 @@ export function Footer() {
       <div className="border-t border-[var(--line)]">
         <div className="wrap grid grid-cols-[1fr_auto_1fr] items-center py-5 text-[11px] tracking-[0.12em] uppercase text-[var(--muted)]">
           <p>© {year} {copy.rights}</p>
-          <Logo height={36} />
+          <Logo height={32} variant="mark" />
           <p className="justify-self-end">{copy.ksa}</p>
         </div>
       </div>

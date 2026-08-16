@@ -8,14 +8,18 @@ import type { Product } from "@/lib/types";
 
 export function ProductCarousel({
   tabs,
+  bar = false,
 }: {
   tabs: { id: string; label: string; products: Product[] }[];
+  bar?: boolean;
 }) {
   const { locale } = useStore();
   const copy = t(locale);
   const [active, setActive] = useState(tabs[0]?.id || "");
+  const [page, setPage] = useState(1);
   const rail = useRef<HTMLDivElement>(null);
   const current = tabs.find((tab) => tab.id === active) || tabs[0];
+  const pages = 3;
 
   function move(dir: number) {
     const node = rail.current;
@@ -23,39 +27,73 @@ export function ProductCarousel({
     const card = node.firstElementChild?.clientWidth || 280;
     const delta = (card + 16) * dir * (locale === "ar" ? -1 : 1);
     node.scrollBy({ left: delta, behavior: "smooth" });
+    setPage((n) => {
+      const next = n + dir;
+      if (next < 1) return pages;
+      if (next > pages) return 1;
+      return next;
+    });
   }
 
   if (!current) return null;
 
   return (
-    <section className="wrap py-12 md:py-16">
-      <div className="mb-6 flex items-end justify-between gap-4">
-        <div className="flex flex-wrap items-center gap-6">
+    <section className={bar ? "" : "wrap py-12 md:py-16"}>
+      {bar ? (
+        <div className="hp-tabs">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               type="button"
               onClick={() => setActive(tab.id)}
-              className={`caps pb-1 ${active === tab.id ? "border-b border-[var(--ink)]" : "text-[var(--muted)]"}`}
+              className={`hp-tab ${active === tab.id ? "is-on" : ""}`}
             >
               {tab.label}
             </button>
           ))}
+          <div className="hp-pager">
+            <button type="button" className="arrow" onClick={() => move(-1)} aria-label={copy.prev}>
+              <Chevron dir={locale === "ar" ? "right" : "left"} />
+            </button>
+            <span className="text-[12px] tracking-[0.12em]">
+              {page}/{pages}
+            </span>
+            <button type="button" className="arrow" onClick={() => move(1)} aria-label={copy.next}>
+              <Chevron dir={locale === "ar" ? "left" : "right"} />
+            </button>
+          </div>
         </div>
-        <div className="flex items-center gap-1">
-          <button type="button" className="arrow" onClick={() => move(-1)} aria-label={copy.prev}>
-            <Chevron dir={locale === "ar" ? "right" : "left"} />
-          </button>
-          <span className="text-[var(--muted)]">/</span>
-          <button type="button" className="arrow" onClick={() => move(1)} aria-label={copy.next}>
-            <Chevron dir={locale === "ar" ? "left" : "right"} />
-          </button>
+      ) : (
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <div className="flex flex-wrap items-center gap-6">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActive(tab.id)}
+                className={`caps pb-1 ${active === tab.id ? "border-b border-[var(--ink)]" : "text-[var(--muted)]"}`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+          <div className="flex items-center gap-1">
+            <button type="button" className="arrow" onClick={() => move(-1)} aria-label={copy.prev}>
+              <Chevron dir={locale === "ar" ? "right" : "left"} />
+            </button>
+            <span className="text-[var(--muted)]">/</span>
+            <button type="button" className="arrow" onClick={() => move(1)} aria-label={copy.next}>
+              <Chevron dir={locale === "ar" ? "left" : "right"} />
+            </button>
+          </div>
         </div>
-      </div>
-      <div ref={rail} className="rail">
-        {current.products.map((product) => (
-          <ProductCard key={product.slug} product={product} />
-        ))}
+      )}
+      <div className={bar ? "wrap py-8 md:py-10" : ""}>
+        <div ref={rail} className="rail">
+          {current.products.map((product) => (
+            <ProductCard key={product.slug} product={product} />
+          ))}
+        </div>
       </div>
     </section>
   );

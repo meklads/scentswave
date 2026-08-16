@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { Hero } from "@/components/Hero";
 import { ProductCarousel } from "@/components/ProductCarousel";
 import { useStore } from "@/components/store";
 import { products } from "@/lib/catalog";
@@ -15,32 +15,6 @@ export function HomeView() {
   const women = products.filter((item) => item.gender === "women");
   const featured = products.filter((item) => item.featured);
   const trending = products.slice(0, 12);
-
-  const slides = [
-    {
-      src: "/images/banners/AD3.jpg",
-      kicker: "Scents Wave",
-      title: locale === "ar" ? "أكوا دي جيو" : "Acqua di Giò",
-      href: "/product/acqua-di-gio",
-      light: true,
-    },
-    {
-      src: "/images/banners/AD4.jpg",
-      kicker: "Scents Wave",
-      title: locale === "ar" ? "بلو دو شانيل" : "Bleu de Chanel",
-      href: "/shop",
-      light: false,
-    },
-    {
-      src: "/images/products/full-La-vie-est-belle-LANCOME.jpg",
-      kicker: "Scents Wave",
-      title: locale === "ar" ? "لا في إي بيل" : "La Vie Est Belle",
-      href: "/category/women",
-      light: true,
-    },
-  ];
-  const [slide, setSlide] = useState(0);
-  const current = slides[slide];
 
   const categories = [
     { href: "/shop", title: copy.fragrances, img: men[1]?.images[0] },
@@ -59,45 +33,14 @@ export function HomeView() {
 
   return (
     <div>
-      <section className="relative h-[58vh] min-h-[420px] max-h-[640px] overflow-hidden bg-[#f3f1ec] md:h-[68vh]">
-        {slides.map((item, index) => (
-          <Image
-            key={item.src}
-            src={item.src}
-            alt={item.title}
-            fill
-            priority={index === 0}
-            className={`object-cover transition-opacity duration-700 ${index === slide ? "opacity-100" : "opacity-0"}`}
-            sizes="100vw"
-          />
-        ))}
-        <div className={`relative flex h-full flex-col justify-between p-6 md:p-10 ${current.light ? "text-[var(--ink)]" : "text-white"}`}>
-          <p className="serif text-xl md:text-2xl">Scents Wave</p>
-          <div className="self-end text-end">
-            <h1 className="serif text-4xl md:text-6xl">{current.title}</h1>
-            <Link href={current.href} className="u-link mt-4">
-              {copy.discoverCollection}
-            </Link>
-          </div>
-        </div>
-        <div className="absolute bottom-5 start-6 flex gap-2">
-          {slides.map((item, index) => (
-            <button
-              key={item.src}
-              type="button"
-              onClick={() => setSlide(index)}
-              className={`h-[3px] w-8 ${index === slide ? "bg-current" : "bg-current/30"}`}
-              aria-label={`${index + 1}`}
-            />
-          ))}
-        </div>
-      </section>
+      <Hero />
 
       <ProductCarousel
+        bar
         tabs={[
           { id: "fragrances", label: copy.fragrances, products: trending },
-          { id: "men", label: copy.men, products: men.slice(0, 12) },
-          { id: "women", label: copy.women, products: women.slice(0, 12) },
+          { id: "bath", label: copy.bath, products: featured.concat(women).slice(0, 12) },
+          { id: "trending", label: copy.trending, products: men.slice(0, 12) },
         ]}
       />
 
@@ -165,14 +108,15 @@ export function HomeView() {
 
       <section className="relative h-[48vh] min-h-[340px] overflow-hidden bg-black">
         <Image
-          src="/images/banners/ad2.jpg"
+          src="/images/campaign/hero-leather.jpg"
           alt=""
           fill
           className="object-cover opacity-80"
         />
         <div className="relative flex h-full items-end justify-end p-8 text-white md:p-12">
           <div className="text-end">
-            <h2 className="serif text-4xl md:text-5xl">{copy.consultTitle}</h2>
+            <p className="text-[12px] tracking-[0.28em] uppercase text-[#e4d2a8]">قريبا بالاسواق</p>
+            <h2 className="serif mt-3 text-4xl md:text-5xl">{copy.consultTitle}</h2>
             <Link href="/contact" className="u-link mt-4">
               {copy.consultCta}
             </Link>
