@@ -48,7 +48,7 @@ export default function FaqPage() {
   const items = FAQ[locale];
 
   return (
-    <div className="shell max-w-3xl py-20 md:py-28">
+    <div className="wrap max-w-3xl py-12 md:py-16">
       <p className="caps">{copy.customerCare}</p>
       <h1 className="serif mt-5 text-5xl md:text-6xl">{copy.faq}</h1>
       <div className="mt-16 space-y-12">

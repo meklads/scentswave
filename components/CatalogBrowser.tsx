@@ -36,40 +36,36 @@ export function CatalogBrowser({
 
   return (
     <div>
-      <section className="border-b border-[var(--line)] bg-[var(--cream)]">
-        <div className="shell py-20 md:py-28">
-          <p className="caps">{copy.collections}</p>
-          <h1 className="serif mt-5 max-w-3xl text-5xl md:text-7xl">
-            {locale === "ar" ? titleAr : titleEn}
-          </h1>
-          {intro && (
-            <p className="mt-6 max-w-lg font-light leading-8 text-[var(--muted)]">{intro}</p>
-          )}
-          <p className="mt-8 text-[12px] tracking-[0.18em] uppercase text-[var(--muted)]">
+      <section className="wrap py-10 md:py-14">
+        <p className="caps text-[var(--muted)]">{copy.collections}</p>
+        <h1 className="serif mt-3 text-4xl md:text-5xl">{locale === "ar" ? titleAr : titleEn}</h1>
+        {intro && <p className="mt-3 max-w-xl text-sm leading-7 text-[var(--muted)]">{intro}</p>}
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-4 text-[12px] uppercase tracking-[0.12em] text-[var(--muted)]">
+          <p>
             {list.length} {copy.results}
           </p>
+          <label>
+            {copy.sort}
+            <select
+              className="ms-2 border-0 bg-transparent py-1 text-[var(--ink)] outline-none"
+              value={sort}
+              onChange={(e) => {
+                const next = new URLSearchParams(params.toString());
+                next.set("sort", e.target.value);
+                router.push(`?${next.toString()}`);
+              }}
+            >
+              <option value="default">{copy.sortDefault}</option>
+              <option value="price-asc">{copy.sortPriceAsc}</option>
+              <option value="price-desc">{copy.sortPriceDesc}</option>
+              <option value="name">{copy.sortName}</option>
+            </select>
+          </label>
         </div>
       </section>
-      <div className="shell py-16 md:py-20">
-        <label className="mb-12 block text-[11px] tracking-[0.2em] uppercase text-[var(--muted)]">
-          {copy.sort}
-          <select
-            className="ms-4 border-0 bg-transparent py-1 text-[var(--charcoal)] outline-none"
-            value={sort}
-            onChange={(e) => {
-              const next = new URLSearchParams(params.toString());
-              next.set("sort", e.target.value);
-              router.push(`?${next.toString()}`);
-            }}
-          >
-            <option value="default">{copy.sortDefault}</option>
-            <option value="price-asc">{copy.sortPriceAsc}</option>
-            <option value="price-desc">{copy.sortPriceDesc}</option>
-            <option value="name">{copy.sortName}</option>
-          </select>
-        </label>
+      <div className="wrap pb-16">
         {list.length === 0 ? (
-          <p className="py-24 text-center text-[var(--muted)]">{copy.noResults}</p>
+          <p className="py-16 text-center text-[var(--muted)]">{copy.noResults}</p>
         ) : (
           <ProductGrid products={list} />
         )}

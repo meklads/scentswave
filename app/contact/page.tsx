@@ -9,7 +9,7 @@ export default function ContactPage() {
   const copy = t(locale);
 
   return (
-    <div className="shell grid gap-16 py-20 md:py-28 lg:grid-cols-2">
+    <div className="wrap grid gap-10 py-12 md:py-16 lg:grid-cols-2">
       <div>
         <p className="caps">{copy.customerCare}</p>
         <h1 className="serif mt-5 text-5xl md:text-6xl">{copy.contact}</h1>

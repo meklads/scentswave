@@ -24,7 +24,7 @@ export default function CartPage() {
 
   if (lines.length === 0) {
     return (
-      <div className="shell py-32 text-center">
+      <div className="wrap py-16 text-center">
         <p className="caps mb-4">{copy.maison}</p>
         <h1 className="serif text-5xl">{copy.cart}</h1>
         <p className="mt-5 text-[var(--muted)]">{copy.emptyCart}</p>
@@ -36,7 +36,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="shell grid gap-16 py-16 lg:grid-cols-[1fr_340px]">
+    <div className="wrap grid gap-12 py-12 lg:grid-cols-[1fr_320px]">
       <div>
         <h1 className="serif mb-10 text-5xl">{copy.cart}</h1>
         <ul className="divide-y divide-[var(--line)]">

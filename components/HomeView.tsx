@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ProductGrid } from "@/components/ProductCard";
+import { useState } from "react";
+import { ProductCarousel } from "@/components/ProductCarousel";
 import { useStore } from "@/components/store";
 import { products } from "@/lib/catalog";
 import { t } from "@/lib/i18n";
@@ -10,171 +11,173 @@ import { t } from "@/lib/i18n";
 export function HomeView() {
   const { locale } = useStore();
   const copy = t(locale);
-  const signature = products.filter((item) => item.featured).slice(0, 3);
-  const best = products.slice(0, 6);
-  const men = products.find((item) => item.gender === "men");
-  const women = products.find((item) => item.gender === "women");
+  const men = products.filter((item) => item.gender === "men");
+  const women = products.filter((item) => item.gender === "women");
+  const featured = products.filter((item) => item.featured);
+  const trending = products.slice(0, 12);
+
+  const slides = [
+    {
+      src: "/images/banners/AD3.jpg",
+      kicker: "Scents Wave",
+      title: locale === "ar" ? "أكوا دي جيو" : "Acqua di Giò",
+      href: "/product/acqua-di-gio",
+      light: true,
+    },
+    {
+      src: "/images/banners/AD4.jpg",
+      kicker: "Scents Wave",
+      title: locale === "ar" ? "بلو دو شانيل" : "Bleu de Chanel",
+      href: "/shop",
+      light: false,
+    },
+    {
+      src: "/images/products/full-La-vie-est-belle-LANCOME.jpg",
+      kicker: "Scents Wave",
+      title: locale === "ar" ? "لا في إي بيل" : "La Vie Est Belle",
+      href: "/category/women",
+      light: true,
+    },
+  ];
+  const [slide, setSlide] = useState(0);
+  const current = slides[slide];
+
+  const categories = [
+    { href: "/shop", title: copy.fragrances, img: men[1]?.images[0] },
+    { href: "/category/men", title: copy.men, img: men[0]?.images[0] },
+    { href: "/category/women", title: copy.women, img: women[0]?.images[0] },
+    { href: "/category/picks", title: copy.picks, img: featured[0]?.images[0] },
+  ];
+
+  const tiles = [
+    { title: copy.tile1Title, body: copy.tile1Body, cta: copy.tile1Cta, href: "/house", img: "/images/products/full-Tom-Ford-Ombre-Leather.jpg" },
+    { title: copy.tile2Title, body: copy.tile2Body, cta: copy.tile2Cta, href: "/shipping", img: "/images/products/full-Dior-Sauvage-Eau-de-Parfum.jpg" },
+    { title: copy.tile3Title, body: copy.tile3Body, cta: copy.tile3Cta, href: "/category/picks", img: "/images/products/full-Chanel-Bleu-De-For.jpg" },
+  ];
+
+  const collections = featured.slice(0, 3);
 
   return (
     <div>
-      <section className="grid min-h-[92vh] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-        <div className="flex flex-col justify-end px-6 py-16 md:px-12 lg:px-16 lg:py-24">
-          <p className="caps rise">{copy.heroEyebrow}</p>
-          <h1 className="serif rise rise-2 mt-8 max-w-xl text-5xl md:text-7xl lg:text-[92px]">
-            {copy.heroLine}
-          </h1>
-          <p className="rise rise-3 mt-8 max-w-sm font-light leading-8 text-[var(--muted)]">
-            {copy.heroBody}
-          </p>
-          <div className="rise rise-3 mt-12 flex flex-wrap items-center gap-8">
-            <Link href="/shop" className="cta cta-solid">
-              {copy.heroCta}
-            </Link>
-            <Link href="/house" className="cta cta-ghost">
-              {copy.heroCta2}
-            </Link>
-          </div>
-        </div>
-        <div className="relative min-h-[70vh] overflow-hidden bg-[var(--cream)] lg:min-h-[92vh]">
+      <section className="relative h-[58vh] min-h-[420px] max-h-[640px] overflow-hidden bg-[#f3f1ec] md:h-[68vh]">
+        {slides.map((item, index) => (
           <Image
-            src="/images/products/full-Dior-Sauvage-Eau-de-Parfum.jpg"
-            alt="Scents Wave"
+            key={item.src}
+            src={item.src}
+            alt={item.title}
             fill
-            priority
-            className="object-contain p-[12%] md:p-[14%]"
-            sizes="(max-width: 1024px) 100vw, 55vw"
+            priority={index === 0}
+            className={`object-cover transition-opacity duration-700 ${index === slide ? "opacity-100" : "opacity-0"}`}
+            sizes="100vw"
           />
-        </div>
-      </section>
-
-      <section className="shell py-28 md:py-36">
-        <p className="caps">{copy.signature}</p>
-        <h2 className="serif mt-5 max-w-2xl text-4xl md:text-6xl">{copy.featured}</h2>
-        <div className="mt-20">
-          <ProductGrid products={signature} />
-        </div>
-      </section>
-
-      <section className="border-y border-[var(--line)] bg-[var(--porcelain)]">
-        <div className="shell grid gap-16 py-28 md:py-36 lg:grid-cols-2 lg:items-end">
-          <div>
-            <p className="caps">{copy.house}</p>
-            <h2 className="serif mt-6 max-w-xl text-4xl md:text-6xl">{copy.philosophyTitle}</h2>
+        ))}
+        <div className={`relative flex h-full flex-col justify-between p-6 md:p-10 ${current.light ? "text-[var(--ink)]" : "text-white"}`}>
+          <p className="serif text-xl md:text-2xl">Scents Wave</p>
+          <div className="self-end text-end">
+            <h1 className="serif text-4xl md:text-6xl">{current.title}</h1>
+            <Link href={current.href} className="u-link mt-4">
+              {copy.discoverCollection}
+            </Link>
           </div>
-          <p className="max-w-lg text-[17px] font-light leading-9 text-[var(--muted)]">
-            {copy.philosophyBody}
-          </p>
         </div>
-      </section>
-
-      <section className="grid lg:grid-cols-2">
-        <Link href="/category/men" className="group relative min-h-[78vh] overflow-hidden bg-[var(--cream)]">
-          {men && (
-            <Image src={men.images[0]} alt={copy.men} fill className="img-ken object-contain p-16 md:p-24" />
-          )}
-          <div className="absolute inset-x-0 bottom-0 p-10 md:p-14">
-            <p className="caps">{copy.artTitle}</p>
-            <h3 className="serif mt-3 text-4xl md:text-5xl">{copy.men}</h3>
-          </div>
-        </Link>
-        <Link href="/category/women" className="group relative min-h-[78vh] overflow-hidden bg-[var(--sand)]">
-          {women && (
-            <Image src={women.images[0]} alt={copy.women} fill className="img-ken object-contain p-16 md:p-24" />
-          )}
-          <div className="absolute inset-x-0 bottom-0 p-10 md:p-14">
-            <p className="caps">{copy.artTitle}</p>
-            <h3 className="serif mt-3 text-4xl md:text-5xl">{copy.women}</h3>
-          </div>
-        </Link>
-      </section>
-
-      <section className="shell py-28 md:py-36">
-        <p className="caps">{copy.featured}</p>
-        <h2 className="serif mt-5 text-4xl md:text-5xl">{copy.picks}</h2>
-        <div className="mt-20">
-          <ProductGrid products={best} />
-        </div>
-      </section>
-
-      <section className="grid items-stretch lg:grid-cols-2">
-        <div className="relative min-h-[70vh] bg-[var(--cream)]">
-          <Image
-            src="/images/products/full-Tom-Ford-Ombre-Leather.jpg"
-            alt=""
-            fill
-            className="object-contain p-16 md:p-24"
-          />
-        </div>
-        <div className="flex flex-col justify-center px-8 py-20 md:px-16 lg:px-20">
-          <p className="caps">{copy.journal}</p>
-          <h2 className="serif mt-6 max-w-md text-4xl md:text-5xl">{copy.artTitle}</h2>
-          <p className="mt-7 max-w-md text-[17px] font-light leading-9 text-[var(--muted)]">
-            {copy.artBody}
-          </p>
-          <Link href="/journal" className="cta cta-ghost mt-10 self-start">
-            {copy.journal}
-          </Link>
-        </div>
-      </section>
-
-      <section className="border-y border-[var(--line)]">
-        <div className="shell grid gap-16 py-28 md:grid-cols-3 md:py-36">
-          {[
-            [copy.craftTitle, copy.craftBody],
-            [copy.authenticity, copy.philosophyBody],
-            [copy.packagingTitle, copy.packagingBody],
-          ].map(([title, body]) => (
-            <div key={title}>
-              <h3 className="serif text-3xl md:text-4xl">{title}</h3>
-              <p className="mt-6 text-[15px] font-light leading-8 text-[var(--muted)]">{body}</p>
-            </div>
+        <div className="absolute bottom-5 start-6 flex gap-2">
+          {slides.map((item, index) => (
+            <button
+              key={item.src}
+              type="button"
+              onClick={() => setSlide(index)}
+              className={`h-[3px] w-8 ${index === slide ? "bg-current" : "bg-current/30"}`}
+              aria-label={`${index + 1}`}
+            />
           ))}
         </div>
       </section>
 
-      <section className="shell py-28 md:py-36">
-        <div className="flex items-end justify-between gap-8">
-          <div>
-            <p className="caps">{copy.shop}</p>
-            <h2 className="serif mt-5 text-4xl md:text-5xl">{copy.viewAll}</h2>
-          </div>
-          <Link href="/shop" className="cta cta-ghost hidden sm:inline-flex">
-            {copy.viewAll}
+      <ProductCarousel
+        tabs={[
+          { id: "fragrances", label: copy.fragrances, products: trending },
+          { id: "men", label: copy.men, products: men.slice(0, 12) },
+          { id: "women", label: copy.women, products: women.slice(0, 12) },
+        ]}
+      />
+
+      <section className="wrap py-10 md:py-14">
+        <h2 className="serif text-3xl md:text-4xl">{copy.shopByCategory}</h2>
+        <p className="mt-3 max-w-xl text-sm text-[var(--muted)]">{copy.shopByCategoryBody}</p>
+        <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
+          {categories.map((item) => (
+            <Link key={item.href} href={item.href} className="group">
+              <div className="relative aspect-[3/4] bg-[var(--paper)]">
+                {item.img && (
+                  <Image src={item.img} alt={item.title} fill className="object-contain p-8 transition-transform duration-500 group-hover:scale-[1.04]" />
+                )}
+              </div>
+              <p className="serif mt-3 text-lg">{item.title}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <p className="divider-label wrap py-6 serif text-2xl">{copy.picks}</p>
+
+      <ProductCarousel
+        tabs={[{ id: "signature", label: copy.picks, products: featured.concat(trending).slice(0, 12) }]}
+      />
+
+      <section className="wrap grid gap-8 py-10 md:grid-cols-3 md:py-14">
+        {tiles.map((tile) => (
+          <article key={tile.title}>
+            <div className="relative aspect-[4/3] bg-[var(--paper)]">
+              <Image src={tile.img} alt="" fill className="object-contain p-8" />
+            </div>
+            <h3 className="serif mt-5 text-2xl">{tile.title}</h3>
+            <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{tile.body}</p>
+            <Link href={tile.href} className="u-link mt-4">
+              {tile.cta}
+            </Link>
+          </article>
+        ))}
+      </section>
+
+      <section className="wrap grid items-start gap-10 border-t border-[var(--line)] py-12 md:grid-cols-[280px_1fr] md:py-16">
+        <div>
+          <h2 className="serif text-3xl md:text-4xl">{copy.collections}</h2>
+          <p className="mt-4 text-sm leading-7 text-[var(--muted)]">{copy.collectionsBody}</p>
+          <Link href="/collections" className="u-link mt-5">
+            {copy.discoverAll}
           </Link>
         </div>
-        <div className="mt-20">
-          <ProductGrid products={products.slice(8, 14)} />
+        <div className="grid gap-5 sm:grid-cols-3">
+          {collections.map((item) => (
+            <Link key={item.slug} href={`/product/${item.slug}`} className="group">
+              <div className="relative aspect-square bg-[var(--paper)]">
+                <Image src={item.images[0]} alt="" fill className="object-contain p-8 transition-transform duration-500 group-hover:scale-[1.04]" />
+              </div>
+              <h3 className="serif mt-3 text-xl">{locale === "ar" ? item.shortAr : item.shortEn}</h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+                {locale === "ar" ? item.descriptionAr : item.descriptionEn}
+              </p>
+              <span className="u-link mt-3">{copy.discover}</span>
+            </Link>
+          ))}
         </div>
       </section>
 
-      <section className="bg-[var(--cream)]">
-        <div className="shell grid items-center gap-16 py-28 lg:grid-cols-2 lg:py-36">
-          <div className="relative min-h-[52vh] bg-[var(--sand)]">
-            <Image
-              src="/images/products/full-La-vie-est-belle-LANCOME.jpg"
-              alt=""
-              fill
-              className="object-contain p-16"
-            />
-          </div>
-          <div className="max-w-md">
-            <p className="caps">{copy.packagingTitle}</p>
-            <h2 className="serif mt-6 text-4xl md:text-5xl">{copy.packagingBody}</h2>
+      <section className="relative h-[48vh] min-h-[340px] overflow-hidden bg-black">
+        <Image
+          src="/images/banners/ad2.jpg"
+          alt=""
+          fill
+          className="object-cover opacity-80"
+        />
+        <div className="relative flex h-full items-end justify-end p-8 text-white md:p-12">
+          <div className="text-end">
+            <h2 className="serif text-4xl md:text-5xl">{copy.consultTitle}</h2>
+            <Link href="/contact" className="u-link mt-4">
+              {copy.consultCta}
+            </Link>
           </div>
         </div>
-      </section>
-
-      <section className="py-32 text-center md:py-40">
-        <p className="serif mx-auto max-w-3xl px-6 text-4xl italic md:text-6xl">
-          {copy.brandStatement}
-        </p>
-      </section>
-
-      <section className="shell flex flex-col items-center pb-32 text-center">
-        <h2 className="serif text-4xl md:text-5xl">{copy.heroLine}</h2>
-        <Link href="/shop" className="cta cta-solid mt-12">
-          {copy.finalCta}
-        </Link>
       </section>
     </div>
   );

@@ -12,36 +12,28 @@ export default function HousePage() {
 
   return (
     <div>
-      <section className="shell py-28 text-center">
-        <Logo height={120} className="justify-center" />
-        <h1 className="serif mx-auto mt-14 max-w-3xl text-5xl md:text-7xl">{copy.philosophyTitle}</h1>
-        <p className="mx-auto mt-8 max-w-xl font-light leading-9 text-[var(--muted)]">
-          {copy.philosophyBody}
-        </p>
+      <section className="wrap py-12 text-center md:py-16">
+        <Logo height={88} className="justify-center" />
+        <h1 className="serif mx-auto mt-8 max-w-2xl text-4xl md:text-5xl">{copy.philosophyTitle}</h1>
+        <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-[var(--muted)]">{copy.philosophyBody}</p>
       </section>
-      <section className="relative min-h-[70vh] bg-[var(--cream)]">
-        <Image
-          src="/images/products/full-Chanel-Bleu-De-For.jpg"
-          alt=""
-          fill
-          className="object-contain p-16"
-        />
+      <section className="relative h-[50vh] min-h-[360px] bg-[var(--paper)]">
+        <Image src="/images/banners/AD3.jpg" alt="" fill className="object-cover" />
       </section>
-      <section className="shell grid gap-20 py-28 md:grid-cols-3">
+      <section className="wrap grid gap-10 py-12 md:grid-cols-3 md:py-16">
         {[copy.artTitle, copy.craftTitle, copy.packagingTitle].map((title, i) => (
           <div key={title}>
-            <p className="caps">0{i + 1}</p>
-            <h2 className="serif mt-4 text-3xl">{title}</h2>
-            <p className="mt-5 font-light leading-8 text-[var(--muted)]">
+            <h2 className="serif text-2xl">{title}</h2>
+            <p className="mt-4 text-sm leading-7 text-[var(--muted)]">
               {[copy.artBody, copy.craftBody, copy.packagingBody][i]}
             </p>
           </div>
         ))}
       </section>
-      <section className="bg-[var(--cream)] py-32 text-center">
-        <p className="serif mx-auto max-w-2xl text-4xl italic md:text-5xl">{copy.brandStatement}</p>
-        <Link href="/shop" className="cta cta-solid mt-12 inline-flex">
-          {copy.finalCta}
+      <section className="bg-[var(--paper)] py-16 text-center">
+        <p className="serif mx-auto max-w-2xl text-3xl italic md:text-4xl">{copy.brandStatement}</p>
+        <Link href="/shop" className="u-link mt-8 inline-block">
+          {copy.discoverCollection}
         </Link>
       </section>
     </div>

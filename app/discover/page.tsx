@@ -33,27 +33,17 @@ export default function DiscoverPage() {
     });
   }, [family, mood, occasion, edit]);
 
-  const shown = edit === "bestsellers" ? list.slice(0, 12) : list.slice(0, 18);
+  const shown = edit === "bestsellers" ? list.slice(0, 12) : list.slice(0, 16);
 
   return (
     <div>
-      <section className="shell py-20 md:py-28">
-        <p className="caps">{copy.discover}</p>
-        <h1 className="serif mt-5 max-w-3xl text-5xl md:text-7xl">{copy.heroLine}</h1>
-        <p className="mt-6 max-w-lg font-light leading-8 text-[var(--muted)]">
-          {copy.philosophyBody}
-        </p>
-        <div className="mt-14 space-y-6">
+      <section className="wrap py-10 md:py-14">
+        <h1 className="serif text-4xl md:text-5xl">{copy.discover}</h1>
+        <div className="mt-8 space-y-4">
           <Row>
-            <Chip active={edit === "all"} onClick={() => setEdit("all")}>
-              {copy.allBrands}
-            </Chip>
-            <Chip active={edit === "signature"} onClick={() => setEdit("signature")}>
-              {copy.picks}
-            </Chip>
-            <Chip active={edit === "bestsellers"} onClick={() => setEdit("bestsellers")}>
-              {copy.featured}
-            </Chip>
+            <Chip active={edit === "all"} onClick={() => setEdit("all")}>{copy.allBrands}</Chip>
+            <Chip active={edit === "signature"} onClick={() => setEdit("signature")}>{copy.picks}</Chip>
+            <Chip active={edit === "bestsellers"} onClick={() => setEdit("bestsellers")}>{copy.trending}</Chip>
           </Row>
           <Row>
             {FAMILIES.map((item) => (
@@ -71,19 +61,15 @@ export default function DiscoverPage() {
           </Row>
           <Row>
             {OCCASIONS.map((item) => (
-              <Chip
-                key={item}
-                active={occasion === item}
-                onClick={() => setOccasion(occasion === item ? "all" : item)}
-              >
+              <Chip key={item} active={occasion === item} onClick={() => setOccasion(occasion === item ? "all" : item)}>
                 {labelOccasion(item, locale)}
               </Chip>
             ))}
           </Row>
         </div>
       </section>
-      <div className="shell pb-28">
-        <p className="mb-12 text-[12px] tracking-[0.18em] uppercase text-[var(--muted)]">
+      <div className="wrap pb-16">
+        <p className="mb-8 text-[12px] uppercase tracking-[0.12em] text-[var(--muted)]">
           {shown.length} {copy.results}
         </p>
         <ProductGrid products={shown} />
@@ -93,25 +79,15 @@ export default function DiscoverPage() {
 }
 
 function Row({ children }: { children: React.ReactNode }) {
-  return <div className="flex flex-wrap gap-x-8 gap-y-4">{children}</div>;
+  return <div className="flex flex-wrap gap-x-6 gap-y-3">{children}</div>;
 }
 
-function Chip({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
+function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`text-[11px] tracking-[0.22em] uppercase ${
-        active ? "border-b border-[var(--charcoal)] pb-1 text-[var(--charcoal)]" : "text-[var(--muted)]"
-      }`}
+      className={`caps ${active ? "border-b border-[var(--ink)] pb-1" : "text-[var(--muted)]"}`}
     >
       {children}
     </button>

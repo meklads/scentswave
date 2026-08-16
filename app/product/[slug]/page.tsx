@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { ProductGrid } from "@/components/ProductCard";
 import { useStore } from "@/components/store";
 import {
+  concentrationLabel,
   getBrand,
   getProduct,
   productName,
@@ -34,7 +35,7 @@ export default function ProductPage() {
   }, [product, viewProduct]);
 
   if (!product) {
-    return <p className="shell py-32 text-center text-[var(--muted)]">{copy.noResults}</p>;
+    return <p className="wrap py-20 text-center text-[var(--muted)]">{copy.noResults}</p>;
   }
 
   const brand = getBrand(product.brand);
@@ -43,140 +44,101 @@ export default function ProductPage() {
     .filter((item) => item !== product.slug)
     .map((item) => getProduct(item))
     .filter((item): item is NonNullable<typeof item> => Boolean(item))
-    .slice(0, 3);
+    .slice(0, 4);
   const loved = wishlist.includes(product.slug);
   const p = profile(product);
 
   return (
     <div>
-      <div className="grid min-h-[80vh] lg:grid-cols-2">
-        <div className="bg-[var(--cream)]">
+      <div className="grid lg:grid-cols-2">
+        <div className="bg-[var(--paper)]">
           {product.images.map((src) => (
-            <div key={src} className="relative min-h-[80vh] lg:sticky lg:top-[84px]">
+            <div key={src} className="relative min-h-[70vh]">
               <Image
                 src={src}
                 alt={productName(product, locale)}
                 fill
-                className="object-contain p-12 md:p-20"
+                className="object-contain p-10 md:p-16"
                 sizes="50vw"
                 priority
               />
             </div>
           ))}
         </div>
-        <div className="flex flex-col justify-center px-8 py-16 md:px-16 lg:px-20">
+        <div className="flex flex-col justify-center px-6 py-12 md:px-14 lg:px-16">
           {brand && (
-            <Link href={`/category/${brand.slug}`} className="caps">
+            <Link href={`/category/${brand.slug}`} className="caps text-[var(--muted)]">
               {locale === "ar" ? brand.nameAr : brand.nameEn}
             </Link>
           )}
-          <h1 className="serif mt-5 text-4xl md:text-5xl leading-tight">
-            {productName(product, locale)}
-          </h1>
-          <p className="mt-4 text-sm text-[var(--muted)]">{descriptor(product, locale)}</p>
-          <p className="mt-6 text-xl">{formatMoney(product.price, locale)}</p>
-          <p className="mt-6 max-w-md font-light leading-8 text-[var(--muted)]">
+          <h1 className="serif mt-3 text-4xl md:text-5xl">{productName(product, locale)}</h1>
+          <p className="mt-3 text-sm text-[var(--muted)]">
+            {concentrationLabel(product, locale)} · {descriptor(product, locale)}
+          </p>
+          <p className="mt-4 text-lg">{formatMoney(product.price, locale)}</p>
+          <p className="mt-5 max-w-md text-sm leading-7 text-[var(--muted)]">
             {locale === "ar" ? product.descriptionAr : product.descriptionEn}
           </p>
-          <dl className="mt-8 grid max-w-sm grid-cols-2 gap-y-3 text-sm">
+          <dl className="mt-6 grid max-w-sm grid-cols-2 gap-y-2 text-sm">
             <dt className="text-[var(--muted)]">{copy.family}</dt>
             <dd>{labelFamily(p.family, locale)}</dd>
             <dt className="text-[var(--muted)]">{copy.mood}</dt>
             <dd>{labelMood(p.mood, locale)}</dd>
             <dt className="text-[var(--muted)]">{copy.occasion}</dt>
             <dd>{labelOccasion(p.occasion, locale)}</dd>
-            <dt className="text-[var(--muted)]">{copy.size}</dt>
-            <dd>{product.sizeMl}ml · {product.concentration.toUpperCase()}</dd>
             <dt className="text-[var(--muted)]">{copy.inStock}</dt>
             <dd>{copy.inStock}</dd>
           </dl>
-          <div className="sticky bottom-0 mt-10 flex flex-col gap-4 bg-[var(--ivory)] py-4 sm:flex-row sm:items-center">
+          <div className="sticky bottom-0 mt-8 flex flex-wrap items-center gap-4 bg-white py-4">
             <input
               type="number"
               min={1}
               value={qty}
               onChange={(e) => setQty(Number(e.target.value) || 1)}
-              className="w-16 border-b border-[var(--line)] bg-transparent py-2 text-sm outline-none"
+              className="w-14 border-b border-[var(--line)] bg-transparent py-2 text-sm outline-none"
             />
-            <button type="button" onClick={() => addToCart(product.slug, qty)} className="cta cta-solid">
+            <button type="button" onClick={() => addToCart(product.slug, qty)} className="cta">
               {copy.addToCart}
             </button>
-            <Link href="/checkout" onClick={() => addToCart(product.slug, qty)} className="cta cta-ghost">
+            <Link href="/checkout" onClick={() => addToCart(product.slug, qty)} className="u-link">
               {copy.buyNow}
             </Link>
           </div>
-          <button type="button" onClick={() => toggleWishlist(product.slug)} className="mt-4 self-start text-[11px] tracking-[0.2em] uppercase text-[var(--muted)]">
+          <button type="button" onClick={() => toggleWishlist(product.slug)} className="mt-2 self-start text-[11px] tracking-[0.14em] uppercase text-[var(--muted)]">
             {loved ? copy.added : copy.wishlist}
           </button>
+          <div className="mt-10 grid gap-8 border-t border-[var(--line)] pt-8 sm:grid-cols-2">
+            <div>
+              <p className="serif text-xl">{copy.theNotes}</p>
+              <ul className="mt-3 space-y-2 text-sm">
+                <li><span className="text-[var(--muted)]">{copy.topNotes} — </span>{p.top}</li>
+                <li><span className="text-[var(--muted)]">{copy.heartNotes} — </span>{p.heart}</li>
+                <li><span className="text-[var(--muted)]">{copy.baseNotes} — </span>{p.base}</li>
+              </ul>
+            </div>
+            <div>
+              <p className="serif text-xl">{copy.howToWear}</p>
+              <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
+                {locale === "ar" ? "على النبض. بلا مبالغة. دعه يتحرك معك." : "On the pulse. Without excess. Let it move with you."}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <section className="shell grid gap-16 py-28 md:grid-cols-2">
-        <div>
-          <p className="caps">{copy.theScent}</p>
-          <p className="mt-6 max-w-md font-light leading-9 text-[var(--muted)]">
-            {locale === "ar" ? product.descriptionAr : product.descriptionEn}
-          </p>
-        </div>
-        <div>
-          <p className="caps">{copy.theNotes}</p>
-          <ul className="mt-6 space-y-4 text-sm">
-            <li><span className="text-[var(--muted)]">{copy.topNotes} — </span>{p.top}</li>
-            <li><span className="text-[var(--muted)]">{copy.heartNotes} — </span>{p.heart}</li>
-            <li><span className="text-[var(--muted)]">{copy.baseNotes} — </span>{p.base}</li>
-          </ul>
-        </div>
-        <div>
-          <p className="caps">{copy.theExperience}</p>
-          <p className="mt-6 max-w-md font-light leading-9 text-[var(--muted)]">
-            {copy.philosophyBody}
-          </p>
-        </div>
-        <div>
-          <p className="caps">{copy.theCraft}</p>
-          <p className="mt-6 max-w-md font-light leading-9 text-[var(--muted)]">
-            {copy.craftBody}
-          </p>
-        </div>
-        <div>
-          <p className="caps">{copy.howToWear}</p>
-          <p className="mt-6 max-w-md font-light leading-9 text-[var(--muted)]">
-            {locale === "ar"
-              ? "على النبض. بلا مبالغة. دعه يتحرك معك."
-              : "On the pulse. Without excess. Let it move with you."}
-          </p>
-        </div>
-        <div>
-          <p className="caps">{copy.ingredients}</p>
-          <p className="mt-6 max-w-md font-light leading-9 text-[var(--muted)]">
-            {product.sizeMl}ml · {product.concentration.toUpperCase()} · {copy.original}
-          </p>
-        </div>
-        <div>
-          <p className="caps">{copy.shippingInfo}</p>
-          <p className="mt-6 max-w-md font-light leading-9 text-[var(--muted)]">
-            {copy.fastShip}
-          </p>
-        </div>
-      </section>
-
       {related.length > 0 && (
-        <section className="border-t border-[var(--line)] py-28">
-          <div className="shell">
-            <p className="caps">{copy.related}</p>
-            <div className="mt-12">
-              <ProductGrid products={related} />
-            </div>
+        <section className="wrap py-14">
+          <p className="serif text-3xl">{copy.related}</p>
+          <div className="mt-8">
+            <ProductGrid products={related} />
           </div>
         </section>
       )}
       {recent.length > 0 && (
-        <section className="border-t border-[var(--line)] py-28">
-          <div className="shell">
-            <p className="caps">{locale === "ar" ? "شوهد مؤخرًا" : "Recently viewed"}</p>
-            <div className="mt-12">
-              <ProductGrid products={recent} />
-            </div>
+        <section className="wrap pb-16">
+          <p className="serif text-3xl">{locale === "ar" ? "شوهد مؤخرًا" : "Recently viewed"}</p>
+          <div className="mt-8">
+            <ProductGrid products={recent} />
           </div>
         </section>
       )}

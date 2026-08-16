@@ -12,7 +12,7 @@ export default function WishlistPage() {
   const list = products.filter((item) => wishlist.includes(item.slug));
 
   return (
-    <div className="shell py-20 md:py-28">
+    <div className="wrap py-12 md:py-16">
       <p className="caps">{copy.maison}</p>
       <h1 className="serif mt-5 mb-16 text-5xl md:text-6xl">{copy.wishlist}</h1>
       {list.length === 0 ? (

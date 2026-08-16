@@ -23,26 +23,34 @@ export function CartDrawer() {
 
   return (
     <div className="fixed inset-0 z-[60]">
-      <button type="button" className="absolute inset-0 bg-[var(--charcoal)]/25" onClick={closeCart} aria-label={copy.close} />
-      <aside className="absolute inset-y-0 end-0 flex w-full max-w-md flex-col bg-[var(--ivory)]">
+      <button type="button" className="absolute inset-0 bg-black/25" onClick={closeCart} aria-label={copy.close} />
+      <aside className="absolute inset-y-0 end-0 flex w-full max-w-[420px] flex-col bg-white">
         <div className="flex items-center justify-between border-b border-[var(--line)] px-6 py-5">
-          <p className="caps">{copy.cart}</p>
-          <button type="button" onClick={closeCart} className="text-[11px] tracking-[0.2em] uppercase">
+          <p className="text-sm">
+            {copy.bagTitle} ({cart.reduce((n, i) => n + i.quantity, 0)} {copy.items})
+          </p>
+          <button type="button" onClick={closeCart} className="caps">
             {copy.close}
           </button>
         </div>
         <div className="flex-1 overflow-auto px-6">
           {lines.length === 0 ? (
-            <p className="py-16 text-sm text-[var(--muted)]">{copy.emptyCart}</p>
+            <div className="py-12">
+              <p className="serif text-2xl">{copy.emptyCart}</p>
+              <p className="mt-3 text-sm text-[var(--muted)]">{copy.bagEmptyHint}</p>
+              <Link href="/shop" onClick={closeCart} className="u-link mt-6">
+                {copy.continueShopping}
+              </Link>
+            </div>
           ) : (
             <ul>
               {lines.map((line) => (
                 <li key={line.slug} className="flex gap-4 border-b border-[var(--line)] py-5">
-                  <Link href={`/product/${line.slug}`} onClick={closeCart} className="relative h-24 w-20 shrink-0 bg-[var(--cream)]">
+                  <Link href={`/product/${line.slug}`} onClick={closeCart} className="relative h-24 w-20 shrink-0 bg-[var(--paper)]">
                     <Image src={line.product.images[0]} alt="" fill className="object-contain p-2" />
                   </Link>
                   <div className="flex-1">
-                    <Link href={`/product/${line.slug}`} onClick={closeCart} className="text-sm">
+                    <Link href={`/product/${line.slug}`} onClick={closeCart} className="serif text-lg">
                       {productShort(line.product, locale)}
                     </Link>
                     <p className="mt-1 text-sm">{formatMoney(line.product.price, locale)}</p>
@@ -54,7 +62,7 @@ export function CartDrawer() {
                         onChange={(e) => setQty(line.slug, Number(e.target.value))}
                         className="w-12 border-b border-[var(--line)] bg-transparent py-1 text-sm outline-none"
                       />
-                      <button type="button" onClick={() => removeFromCart(line.slug)} className="text-[11px] tracking-[0.16em] uppercase text-[var(--muted)]">
+                      <button type="button" onClick={() => removeFromCart(line.slug)} className="text-[11px] uppercase tracking-[0.12em] text-[var(--muted)]">
                         {copy.remove}
                       </button>
                     </div>
@@ -67,15 +75,18 @@ export function CartDrawer() {
         {lines.length > 0 && (
           <div className="border-t border-[var(--line)] px-6 py-6">
             <p className="flex justify-between text-sm">
-              <span className="text-[var(--muted)]">{copy.subtotal}</span>
+              <span>{copy.subtotal}</span>
               <span>{formatMoney(subtotal, locale)}</span>
             </p>
-            <p className="mt-2 flex justify-between text-sm">
-              <span className="text-[var(--muted)]">{copy.shipping}</span>
+            <p className="mt-2 flex justify-between text-sm text-[var(--muted)]">
+              <span>{copy.shipping}</span>
               <span>{shipping === 0 ? copy.free : formatMoney(shipping, locale)}</span>
             </p>
-            <Link href="/checkout" onClick={closeCart} className="cta cta-solid mt-6 w-full">
+            <Link href="/checkout" onClick={closeCart} className="cta mt-5 w-full">
               {copy.checkout}
+            </Link>
+            <Link href="/shop" onClick={closeCart} className="u-link mt-4 w-full text-center">
+              {copy.continueShopping}
             </Link>
           </div>
         )}

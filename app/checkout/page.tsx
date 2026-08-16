@@ -96,7 +96,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="shell grid gap-16 py-16 lg:grid-cols-[1fr_340px]">
+    <div className="wrap grid gap-12 py-12 lg:grid-cols-[1fr_320px]">
       <form onSubmit={onSubmit} className="space-y-4">
         <h1 className="serif text-5xl">
           {copy.checkout}

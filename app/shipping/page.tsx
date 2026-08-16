@@ -8,7 +8,7 @@ export default function ShippingPage() {
   const { locale } = useStore();
   const copy = t(locale);
   return (
-    <article className="shell max-w-2xl py-20 md:py-28">
+    <article className="wrap max-w-2xl py-12 md:py-16">
       <p className="caps">{copy.customerCare}</p>
       <h1 className="serif mt-5 text-5xl md:text-6xl">{copy.shippingInfo}</h1>
       {locale === "ar" ? (

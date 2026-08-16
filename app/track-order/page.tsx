@@ -8,7 +8,7 @@ export default function TrackOrderPage() {
   const copy = t(locale);
 
   return (
-    <div className="shell max-w-lg py-20 md:py-28">
+    <div className="wrap max-w-lg py-12 md:py-16">
       <p className="caps">{copy.customerCare}</p>
       <h1 className="serif mt-5 text-5xl md:text-6xl">{copy.track}</h1>
       <p className="mt-6 font-light leading-8 text-[var(--muted)]">

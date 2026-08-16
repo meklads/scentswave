@@ -21,6 +21,16 @@ export function productShort(product: Product, locale: "ar" | "en") {
   return locale === "ar" ? product.shortAr : product.shortEn;
 }
 
+export function concentrationLabel(product: Product, locale: "ar" | "en") {
+  const map = {
+    edt: { ar: "تواليت", en: "Eau de toilette" },
+    edp: { ar: "بارفان", en: "Eau de parfum" },
+    parfum: { ar: "بارفوم", en: "Parfum" },
+    cologne: { ar: "كولونيا", en: "Cologne" },
+  } as const;
+  return `${map[product.concentration][locale]} ${product.sizeMl}ml`;
+}
+
 export function brandName(brand: Brand, locale: "ar" | "en") {
   return locale === "ar" ? brand.nameAr : brand.nameEn;
 }
