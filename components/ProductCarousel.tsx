@@ -75,28 +75,30 @@ export function ProductCarousel({
   return (
     <section className="hp-section">
       <div className="hp-head">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            type="button"
-            onClick={() => {
-              setActive(tab.id);
-              setPage(1);
-              rail.current?.scrollTo({ left: 0 });
-            }}
-            className={`hp-tab ${active === tab.id ? "is-on" : ""}`}
-          >
-            {tab.label}
-          </button>
-        ))}
+        <div className="hp-tabs">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => {
+                setActive(tab.id);
+                setPage(1);
+                rail.current?.scrollTo({ left: 0 });
+              }}
+              className={`hp-tab ${active === tab.id ? "is-on" : ""}`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
         <div className="hp-pager">
-          <button type="button" className="arrow" onClick={() => move(-1)} aria-label={copy.prev}>
+          <button type="button" className="hp-page-btn" onClick={() => move(-1)} aria-label={copy.prev}>
             <Chevron dir={locale === "ar" ? "right" : "left"} />
           </button>
           <span>
             {page}/{pages}
           </span>
-          <button type="button" className="arrow" onClick={() => move(1)} aria-label={copy.next}>
+          <button type="button" className="hp-page-btn" onClick={() => move(1)} aria-label={copy.next}>
             <Chevron dir={locale === "ar" ? "left" : "right"} />
           </button>
         </div>

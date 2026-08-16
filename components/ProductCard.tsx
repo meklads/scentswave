@@ -11,7 +11,8 @@ import type { Product } from "@/lib/types";
 export function ProductCard({ product }: { product: Product }) {
   const { locale, addToCart } = useStore();
   const copy = t(locale);
-  const image = product.images[0];
+  const primary = product.images[0];
+  const hover = product.images[1];
 
   return (
     <article className="group">
@@ -22,13 +23,22 @@ export function ProductCard({ product }: { product: Product }) {
           </span>
         )}
         <Link href={`/product/${product.slug}`} className="absolute inset-0">
-          {image && (
+          {primary && (
             <Image
-              src={image}
+              src={primary}
               alt={productShort(product, locale)}
               fill
               sizes="(max-width: 768px) 50vw, 25vw"
-              className="object-contain p-6 transition-transform duration-500 group-hover:scale-[1.03]"
+              className={`object-contain p-6 transition-opacity duration-500 ${hover ? "group-hover:opacity-0" : ""}`}
+            />
+          )}
+          {hover && (
+            <Image
+              src={hover}
+              alt=""
+              fill
+              sizes="(max-width: 768px) 50vw, 25vw"
+              className="object-contain p-6 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
             />
           )}
         </Link>
