@@ -204,7 +204,8 @@ button { cursor: pointer; }
   display: grid;
   place-items: center;
   color: #fff;
-  opacity: 0.85;
+  opacity: 0.9;
+  filter: drop-shadow(0 1px 6px rgba(0,0,0,.6));
 }
 .hero-arrow:hover { opacity: 1; }
 

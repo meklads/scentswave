@@ -24,9 +24,9 @@ export function HomeView() {
   ];
 
   const tiles = [
-    { title: copy.tile1Title, body: copy.tile1Body, cta: copy.tile1Cta, href: "/house", img: "/images/products/full-Tom-Ford-Ombre-Leather.jpg" },
-    { title: copy.tile2Title, body: copy.tile2Body, cta: copy.tile2Cta, href: "/shipping", img: "/images/products/full-Dior-Sauvage-Eau-de-Parfum.jpg" },
-    { title: copy.tile3Title, body: copy.tile3Body, cta: copy.tile3Cta, href: "/category/picks", img: "/images/products/full-Chanel-Bleu-De-For.jpg" },
+    { title: copy.tile1Title, body: copy.tile1Body, cta: copy.tile1Cta, href: "/house", img: "/images/logo/baner1.png" },
+    { title: copy.tile2Title, body: copy.tile2Body, cta: copy.tile2Cta, href: "/shipping", img: "/images/logo/baner2.png" },
+    { title: copy.tile3Title, body: copy.tile3Body, cta: copy.tile3Cta, href: "/category/picks", img: "/images/logo/baner3.png" },
   ];
 
   const collections = featured.slice(0, 3);
@@ -70,8 +70,8 @@ export function HomeView() {
       <section className="wrap grid gap-8 py-10 md:grid-cols-3 md:py-14">
         {tiles.map((tile) => (
           <article key={tile.title}>
-            <div className="relative aspect-[4/3] bg-[var(--paper)]">
-              <Image src={tile.img} alt="" fill className="object-contain p-8" />
+            <div className="relative aspect-[4/3] overflow-hidden bg-[var(--paper)]">
+              <Image src={tile.img} alt="" fill className="object-cover" />
             </div>
             <h3 className="serif mt-5 text-2xl">{tile.title}</h3>
             <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{tile.body}</p>
@@ -108,20 +108,11 @@ export function HomeView() {
 
       <section className="relative h-[48vh] min-h-[340px] overflow-hidden bg-black">
         <Image
-          src="/images/campaign/hero-leather.jpg"
+          src="/images/logo/baner2.png"
           alt=""
           fill
-          className="object-cover opacity-80"
+          className="object-cover"
         />
-        <div className="relative flex h-full items-end justify-end p-8 text-white md:p-12">
-          <div className="text-end">
-            <p className="text-[12px] tracking-[0.28em] uppercase text-[#e4d2a8]">قريبا بالاسواق</p>
-            <h2 className="serif mt-3 text-4xl md:text-5xl">{copy.consultTitle}</h2>
-            <Link href="/contact" className="u-link mt-4">
-              {copy.consultCta}
-            </Link>
-          </div>
-        </div>
       </section>
     </div>
   );

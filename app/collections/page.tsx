@@ -3,21 +3,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useStore } from "@/components/store";
-import { products } from "@/lib/catalog";
 import { t } from "@/lib/i18n";
 
 export default function CollectionsPage() {
   const { locale } = useStore();
   const copy = t(locale);
-  const men = products.find((p) => p.gender === "men");
-  const women = products.find((p) => p.gender === "women");
-  const sign = products.find((p) => p.featured);
 
   const tiles = [
-    { href: "/category/men", title: copy.men, img: men?.images[0] },
-    { href: "/category/women", title: copy.women, img: women?.images[0] },
-    { href: "/category/picks", title: copy.picks, img: sign?.images[0] },
-    { href: "/shop", title: copy.fragrances, img: products[4]?.images[0] },
+    { href: "/category/men", title: copy.men, img: "/images/logo/baner1.png" },
+    { href: "/category/women", title: copy.women, img: "/images/logo/baner2.png" },
+    { href: "/category/picks", title: copy.picks, img: "/images/logo/baner3.png" },
+    { href: "/shop", title: copy.fragrances, img: "/images/logo/baner1.png" },
   ];
 
   return (
@@ -29,10 +25,13 @@ export default function CollectionsPage() {
       <div className="wrap grid grid-cols-2 gap-4 pb-16 md:grid-cols-4 md:gap-5">
         {tiles.map((tile) => (
           <Link key={tile.href} href={tile.href} className="group">
-            <div className="relative aspect-[3/4] bg-[var(--paper)]">
-              {tile.img && (
-                <Image src={tile.img} alt={tile.title} fill className="object-contain p-8 transition-transform duration-500 group-hover:scale-[1.04]" />
-              )}
+            <div className="relative aspect-[3/4] overflow-hidden bg-[var(--paper)]">
+              <Image
+                src={tile.img}
+                alt={tile.title}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              />
             </div>
             <h2 className="serif mt-3 text-xl">{tile.title}</h2>
           </Link>
