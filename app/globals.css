@@ -186,26 +186,76 @@ button { cursor: pointer; }
   background: var(--line);
 }
 
+.mfk-hero {
+  position: relative;
+  width: 100%;
+  height: calc(100svh - 80px - 56px);
+  min-height: 420px;
+  max-height: 860px;
+  overflow: hidden;
+  background: #111;
+  user-select: none;
+  touch-action: pan-y;
+}
+@media (max-width: 767px) {
+  .mfk-hero {
+    height: min(62svh, 520px);
+    min-height: 320px;
+    max-height: none;
+  }
+}
+
+.mfk-hero-track {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  transition: transform 0.85s cubic-bezier(0.25, 0.1, 0.25, 1);
+  will-change: transform;
+}
+
+.mfk-hero-slide {
+  position: relative;
+  flex: 0 0 100%;
+  height: 100%;
+}
+
 .hero-progress {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  z-index: 12;
+  transform: translateX(-50%);
   height: 2px;
-  width: min(220px, 40vw);
-  background: rgba(255,255,255,0.28);
+  width: min(240px, 42vw);
+  background: rgba(255, 255, 255, 0.35);
 }
 .hero-progress > span {
   display: block;
   height: 100%;
+  width: 0;
   background: #fff;
-  transition: width 0.6s ease;
+  animation: heroFill linear forwards;
+  transform-origin: left;
+}
+.hero-progress > span.is-paused {
+  animation-play-state: paused;
+}
+@keyframes heroFill {
+  from { width: 0%; }
+  to { width: 100%; }
 }
 
 .hero-arrow {
-  width: 44px;
-  height: 44px;
+  position: absolute;
+  top: 50%;
+  z-index: 12;
   display: grid;
   place-items: center;
+  width: 44px;
+  height: 72px;
   color: #fff;
-  opacity: 0.9;
-  filter: drop-shadow(0 1px 6px rgba(0,0,0,.6));
+  transform: translateY(-50%);
+  opacity: 0.85;
 }
 .hero-arrow:hover { opacity: 1; }
 
@@ -239,4 +289,10 @@ button { cursor: pointer; }
 }
 @media (min-width: 768px) {
   .hp-pager { display: flex; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .mfk-hero-track { transition: none; }
+  .hero-progress > span { animation: none; width: 100%; }
 }

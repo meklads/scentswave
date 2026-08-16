@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { PointerEvent, useCallback, useEffect, useRef, useState } from "react";
 import { useStore } from "@/components/store";
 import { t } from "@/lib/i18n";
 
@@ -24,60 +23,87 @@ const SLIDES = [
   },
 ];
 
+const DURATION = 6000;
+
 export function Hero() {
   const { locale } = useStore();
   const copy = t(locale);
   const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const startX = useRef<number | null>(null);
 
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      setIndex((n) => (n + 1) % SLIDES.length);
-    }, 7000);
-    return () => window.clearInterval(id);
+  const go = useCallback((dir: number) => {
+    setIndex((n) => (n + dir + SLIDES.length) % SLIDES.length);
   }, []);
 
-  function go(dir: number) {
-    setIndex((n) => (n + dir + SLIDES.length) % SLIDES.length);
+  useEffect(() => {
+    if (paused) return;
+    const id = window.setInterval(() => go(1), DURATION);
+    return () => window.clearInterval(id);
+  }, [go, paused, index]);
+
+  function onPointerDown(event: PointerEvent<HTMLElement>) {
+    startX.current = event.clientX;
+  }
+  function onPointerUp(event: PointerEvent<HTMLElement>) {
+    if (startX.current == null) return;
+    const delta = event.clientX - startX.current;
+    startX.current = null;
+    if (Math.abs(delta) < 50) return;
+    go(delta < 0 ? 1 : -1);
   }
 
   return (
-    <section className="relative h-[72vh] min-h-[480px] max-h-[820px] overflow-hidden bg-black text-white">
-      {SLIDES.map((item, i) => (
-        <Image
-          key={item.src}
-          src={item.src}
-          alt={locale === "ar" ? item.titleAr : item.titleEn}
-          fill
-          priority={i === 0}
-          className={`object-cover object-center transition-opacity duration-700 ${i === index ? "opacity-100" : "opacity-0"}`}
-          sizes="100vw"
-        />
-      ))}
+    <section
+      dir="ltr"
+      className="mfk-hero group"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onPointerDown={onPointerDown}
+      onPointerUp={onPointerUp}
+    >
+      <div
+        className="mfk-hero-track"
+        style={{ transform: `translate3d(-${index * 100}%, 0, 0)` }}
+      >
+        {SLIDES.map((item, i) => (
+          <div key={item.src} className="mfk-hero-slide">
+            <Image
+              src={item.src}
+              alt={locale === "ar" ? item.titleAr : item.titleEn}
+              fill
+              priority={i === 0}
+              draggable={false}
+              className="object-cover object-center select-none"
+              sizes="100vw"
+            />
+          </div>
+        ))}
+      </div>
 
       <button
         type="button"
-        className="hero-arrow absolute start-2 top-1/2 z-10 -translate-y-1/2 md:start-5"
+        className="hero-arrow left-3 md:left-6"
         onClick={() => go(-1)}
         aria-label={copy.prev}
       >
-        <Chevron dir={locale === "ar" ? "right" : "left"} />
+        <Chevron dir="left" />
       </button>
       <button
         type="button"
-        className="hero-arrow absolute end-2 top-1/2 z-10 -translate-y-1/2 md:end-5"
+        className="hero-arrow right-3 md:right-6"
         onClick={() => go(1)}
         aria-label={copy.next}
       >
-        <Chevron dir={locale === "ar" ? "left" : "right"} />
+        <Chevron dir="right" />
       </button>
 
-      <div className="absolute inset-x-0 bottom-8 z-10 flex flex-col items-center gap-4">
-        <Link href="/house" className="u-link text-white">
-          {copy.discoverCollection}
-        </Link>
-        <div className="hero-progress">
-          <span style={{ width: `${((index + 1) / SLIDES.length) * 100}%` }} />
-        </div>
+      <div className="hero-progress">
+        <span
+          key={index}
+          className={paused ? "is-paused" : ""}
+          style={{ animationDuration: `${DURATION}ms` }}
+        />
       </div>
     </section>
   );
@@ -85,8 +111,8 @@ export function Hero() {
 
 function Chevron({ dir }: { dir: "left" | "right" }) {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
-      {dir === "left" ? <path d="M15 5 8 12l7 7" /> : <path d="M9 5l7 7-7 7" />}
+    <svg width="20" height="36" viewBox="0 0 20 36" fill="none" stroke="currentColor" strokeWidth="1.2">
+      {dir === "left" ? <path d="M14 2 4 18l10 16" /> : <path d="M6 2l10 16L6 34" />}
     </svg>
   );
 }
