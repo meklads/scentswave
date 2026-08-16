@@ -67,16 +67,16 @@ export default function ProductPage() {
         </div>
         <div className="flex flex-col justify-center px-6 py-12 md:px-14 lg:px-16">
           {brand && (
-            <Link href={`/category/${brand.slug}`} className="caps text-[var(--muted)]">
+            <Link href={`/category/${brand.slug}`} className="kicker">
               {locale === "ar" ? brand.nameAr : brand.nameEn}
             </Link>
           )}
-          <h1 className="serif mt-3">{productName(product, locale)}</h1>
-          <p className="mt-3 text-sm text-[var(--muted)]">
+          <h1 className="serif mt-4">{productName(product, locale)}</h1>
+          <p className="mt-4 text-[15px] text-[var(--muted)]">
             {concentrationLabel(product, locale)} · {descriptor(product, locale)}
           </p>
-          <p className="mt-4 text-lg">{formatMoney(product.price, locale)}</p>
-          <p className="mt-5 max-w-md text-sm leading-7 text-[var(--muted)]">
+          <p className="mt-5 text-[22px] font-medium">{formatMoney(product.price, locale)}</p>
+          <p className="mt-6 max-w-md text-[15px] leading-8 text-[var(--muted)]">
             {locale === "ar" ? product.descriptionAr : product.descriptionEn}
           </p>
           <dl className="mt-6 grid max-w-sm grid-cols-2 gap-y-2 text-sm">

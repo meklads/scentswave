@@ -38,13 +38,13 @@ export function Header() {
 
   return (
     <header className="site-header sticky top-0 z-50">
-      <div className="wrap grid h-[100px] grid-cols-[auto_1fr_auto] items-center gap-4 md:h-[120px]">
+      <div className="wrap grid h-[88px] grid-cols-[auto_1fr_auto] items-center gap-4 md:h-[100px]">
         <div className="flex items-center gap-3">
           <button type="button" className="header-icon lg:hidden" onClick={() => setOpen((v) => !v)} aria-label="menu">
             <Bars />
           </button>
-          <Logo variant="original" height={96} className="hidden md:inline-flex" />
-          <Logo variant="original" height={68} className="md:hidden" />
+          <Logo variant="original" height={80} className="hidden md:inline-flex" />
+          <Logo variant="original" height={58} className="md:hidden" />
         </div>
         <nav className="hidden items-center justify-center gap-6 xl:gap-9 lg:flex">
           {nav.map((item) => (
@@ -91,7 +91,7 @@ export function Header() {
       )}
       {open && (
         <div className="border-t border-white/15 px-5 py-8 lg:hidden">
-          <div className="flex flex-col gap-5 text-[15px] font-bold">
+          <div className="flex flex-col gap-5 text-[15px] font-medium">
             {nav.map((item) => (
               <Link key={item.href} href={item.href}>{item.label}</Link>
             ))}

@@ -23,8 +23,8 @@ export function CartDrawer() {
 
   return (
     <div className="fixed inset-0 z-[60]">
-      <button type="button" className="absolute inset-0 bg-black/25" onClick={closeCart} aria-label={copy.close} />
-      <aside className="absolute inset-y-0 end-0 flex w-full max-w-[420px] flex-col bg-white">
+      <button type="button" className="drawer-scrim absolute inset-0" onClick={closeCart} aria-label={copy.close} />
+      <aside className="absolute inset-y-0 end-0 flex w-full max-w-[440px] flex-col bg-white shadow-[-24px_0_60px_rgba(0,0,0,0.18)]">
         <div className="flex items-center justify-between border-b border-[var(--line)] px-6 py-5">
           <p className="text-sm">
             {copy.bagTitle} ({cart.reduce((n, i) => n + i.quantity, 0)} {copy.items})
@@ -50,7 +50,7 @@ export function CartDrawer() {
                     <Image src={line.product.images[0]} alt="" fill className="object-contain p-2" />
                   </Link>
                   <div className="flex-1">
-                    <Link href={`/product/${line.slug}`} onClick={closeCart} className="text-[13px] font-normal">
+                    <Link href={`/product/${line.slug}`} onClick={closeCart} className="text-[15px] font-medium">
                       {productShort(line.product, locale)}
                     </Link>
                     <p className="mt-1 text-sm">{formatMoney(line.product.price, locale)}</p>

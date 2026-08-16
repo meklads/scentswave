@@ -44,74 +44,79 @@ export function HomeView() {
         ]}
       />
 
-      <section className="wrap py-10 md:py-14">
-        <h2 className="serif">{copy.shopByCategory}</h2>
-        <p className="mt-3 max-w-xl text-sm text-[var(--muted)]">{copy.shopByCategoryBody}</p>
-        <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
+      <section className="wrap py-16 md:py-24">
+        <p className="kicker">{copy.maison}</p>
+        <h2 className="serif mt-3">{copy.shopByCategory}</h2>
+        <p className="mt-4 max-w-xl text-[15px] leading-8 text-[var(--muted)]">{copy.shopByCategoryBody}</p>
+        <div className="mt-10 grid grid-cols-2 gap-5 md:grid-cols-4 md:gap-7">
           {categories.map((item) => (
             <Link key={item.href} href={item.href} className="group">
-              <div className="relative aspect-[3/4] bg-[var(--paper)]">
+              <div className="relative aspect-[3/4] overflow-hidden bg-[var(--paper)]">
                 {item.img && (
-                  <Image src={item.img} alt={item.title} fill className="object-contain p-8 transition-transform duration-500 group-hover:scale-[1.04]" />
+                  <Image src={item.img} alt={item.title} fill className="object-contain p-10 transition-transform duration-700 group-hover:scale-[1.05]" />
                 )}
               </div>
-              <p className="mt-3 text-[17px] font-medium">{item.title}</p>
+              <p className="mt-4 text-[16px] font-medium">{item.title}</p>
             </Link>
           ))}
         </div>
       </section>
 
-      <p className="divider-label wrap py-6 serif">{copy.picks}</p>
+      <p className="divider-label wrap py-4 serif">{copy.picks}</p>
 
       <ProductCarousel
         tabs={[{ id: "signature", label: copy.picks, products: featured.concat(trending).slice(0, 12) }]}
       />
 
-      <section className="wrap grid gap-8 py-10 md:grid-cols-3 md:py-14">
+      <section className="wrap grid gap-10 py-16 md:grid-cols-3 md:py-24">
         {tiles.map((tile) => (
-          <article key={tile.title}>
+          <article key={tile.title} className="group">
             <div className="relative aspect-[4/3] overflow-hidden bg-[var(--paper)]">
-              <Image src={tile.img} alt="" fill className="object-cover" />
+              <Image src={tile.img} alt="" fill className="object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
             </div>
-            <h3 className="mt-5 text-[17px] font-medium">{tile.title}</h3>
-            <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{tile.body}</p>
-            <Link href={tile.href} className="u-link mt-4">
+            <h3 className="mt-6 text-[20px] font-medium leading-snug">{tile.title}</h3>
+            <p className="mt-3 text-[15px] leading-8 text-[var(--muted)]">{tile.body}</p>
+            <Link href={tile.href} className="u-link mt-5">
               {tile.cta}
             </Link>
           </article>
         ))}
       </section>
 
-      <section className="wrap grid items-start gap-10 border-t border-[var(--line)] py-12 md:grid-cols-[280px_1fr] md:py-16">
-        <div>
-          <h2 className="serif">{copy.collections}</h2>
-          <p className="mt-4 text-sm leading-7 text-[var(--muted)]">{copy.collectionsBody}</p>
-          <Link href="/collections" className="u-link mt-5">
-            {copy.discoverAll}
-          </Link>
-        </div>
-        <div className="grid gap-5 sm:grid-cols-3">
-          {collections.map((item) => (
-            <Link key={item.slug} href={`/product/${item.slug}`} className="group">
-              <div className="relative aspect-square bg-[var(--paper)]">
-                <Image src={item.images[0]} alt="" fill className="object-contain p-8 transition-transform duration-500 group-hover:scale-[1.04]" />
-              </div>
-              <h3 className="mt-3 text-[17px] font-medium">{locale === "ar" ? item.shortAr : item.shortEn}</h3>
-              <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
-                {locale === "ar" ? item.descriptionAr : item.descriptionEn}
-              </p>
-              <span className="u-link mt-3">{copy.discover}</span>
+      <section className="border-t border-[var(--line)]">
+        <div className="wrap grid items-start gap-12 py-16 md:grid-cols-[320px_1fr] md:py-24">
+          <div>
+            <p className="kicker">{copy.maison}</p>
+            <h2 className="serif mt-3">{copy.collections}</h2>
+            <p className="mt-5 text-[15px] leading-8 text-[var(--muted)]">{copy.collectionsBody}</p>
+            <Link href="/collections" className="u-link mt-6">
+              {copy.discoverAll}
             </Link>
-          ))}
+          </div>
+          <div className="grid gap-7 sm:grid-cols-3">
+            {collections.map((item) => (
+              <Link key={item.slug} href={`/product/${item.slug}`} className="group">
+                <div className="relative aspect-square overflow-hidden bg-[var(--paper)]">
+                  <Image src={item.images[0]} alt="" fill className="object-contain p-10 transition-transform duration-700 group-hover:scale-[1.05]" />
+                </div>
+                <h3 className="mt-4 text-[16px] font-medium">{locale === "ar" ? item.shortAr : item.shortEn}</h3>
+                <p className="mt-2 line-clamp-3 text-[14px] leading-7 text-[var(--muted)]">
+                  {locale === "ar" ? item.descriptionAr : item.descriptionEn}
+                </p>
+                <span className="u-link mt-4">{copy.discover}</span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="relative h-[48vh] min-h-[340px] overflow-hidden bg-black">
+      <section className="relative h-[58vh] min-h-[420px] overflow-hidden bg-black">
         <Image
           src="/images/logo/bannet2.png"
           alt=""
           fill
           className="object-cover"
+          quality={100}
         />
       </section>
     </div>

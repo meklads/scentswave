@@ -11,7 +11,7 @@ export default async function GatePage({
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-black px-6 py-16 text-center text-[#f4efe6]">
       <Logo variant="original" height={96} />
-      <p className="mt-8 text-[14px] font-medium text-[#c9b48a]">
+      <p className="mt-8 text-[14px] font-medium text-[#c4a35a]">
         قريبا بالاسواق
       </p>
       <form action={unlockSite} className="mt-10 w-full max-w-xs">
