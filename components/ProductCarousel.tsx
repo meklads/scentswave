@@ -74,36 +74,36 @@ export function ProductCarousel({
 
   return (
     <section className="hp-section">
-      <div className="hp-head">
-        <div className="hp-tabs">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              type="button"
-              onClick={() => {
-                setActive(tab.id);
-                setPage(1);
-                rail.current?.scrollTo({ left: 0 });
-              }}
-              className={`hp-tab ${active === tab.id ? "is-on" : ""}`}
-            >
-              {tab.label}
+      <div className="wrap">
+        <div className="hp-head">
+          <div className="hp-tabs">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => {
+                  setActive(tab.id);
+                  setPage(1);
+                  rail.current?.scrollTo({ left: 0 });
+                }}
+                className={`hp-tab ${active === tab.id ? "is-on" : ""}`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+          <div className="hp-pager">
+            <button type="button" className="hp-page-btn" onClick={() => move(-1)} aria-label={copy.prev}>
+              <Chevron dir={locale === "ar" ? "right" : "left"} />
             </button>
-          ))}
+            <span>
+              {page}/{pages}
+            </span>
+            <button type="button" className="hp-page-btn" onClick={() => move(1)} aria-label={copy.next}>
+              <Chevron dir={locale === "ar" ? "left" : "right"} />
+            </button>
+          </div>
         </div>
-        <div className="hp-pager">
-          <button type="button" className="hp-page-btn" onClick={() => move(-1)} aria-label={copy.prev}>
-            <Chevron dir={locale === "ar" ? "right" : "left"} />
-          </button>
-          <span>
-            {page}/{pages}
-          </span>
-          <button type="button" className="hp-page-btn" onClick={() => move(1)} aria-label={copy.next}>
-            <Chevron dir={locale === "ar" ? "left" : "right"} />
-          </button>
-        </div>
-      </div>
-      <div className="wrap py-8 md:py-10">
         <div ref={rail} className="rail">
           {current.products.map((product) => (
             <ProductCard key={product.slug} product={product} />

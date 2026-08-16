@@ -289,13 +289,19 @@ button { cursor: pointer; }
 
 .hp-section {
   background: #fff;
+  padding: 64px 0 48px;
+}
+@media (min-width: 768px) {
+  .hp-section {
+    padding: 88px 0 72px;
+  }
 }
 .hp-head {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-  border-bottom: 1px solid var(--line);
-  background: #fff;
+  gap: 20px;
+  margin-bottom: 28px;
 }
 .hp-tabs {
   display: flex;
@@ -306,7 +312,7 @@ button { cursor: pointer; }
 }
 .hp-tabs::-webkit-scrollbar { display: none; }
 .hp-tab {
-  min-height: 52px;
+  min-height: 48px;
   padding: 0 18px;
   display: grid;
   place-items: center;
@@ -319,17 +325,19 @@ button { cursor: pointer; }
   border-inline-end: 1px solid #fff;
 }
 @media (min-width: 768px) {
-  .hp-tab { padding: 0 32px; }
+  .hp-tab {
+    min-height: 52px;
+    padding: 0 32px;
+  }
 }
 .hp-tab.is-on {
   background: #3a3a3a;
   color: #fff;
 }
 .hp-pager {
-  display: none;
+  display: flex;
   align-items: center;
   gap: 6px;
-  padding: 0 28px;
   color: #8a8a8a;
   font-size: 13px;
   letter-spacing: 0.04em;
@@ -344,11 +352,8 @@ button { cursor: pointer; }
   color: #8a8a8a;
 }
 .hp-page-btn:hover { color: var(--ink); }
-@media (min-width: 768px) {
-  .hp-pager { display: flex; }
-}
 .hp-track {
-  margin-top: 28px;
+  margin-top: 32px;
   height: 1px;
   background: #e6e6e6;
 }
