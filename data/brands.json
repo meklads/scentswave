@@ -1,0 +1,254 @@
+[
+  {
+    "slug": "giorgio-armani",
+    "nameAr": "جورجيو أرماني",
+    "nameEn": "Giorgio Armani",
+    "logo": null,
+    "count": 4
+  },
+  {
+    "slug": "givenchy",
+    "nameAr": "جيفنشي",
+    "nameEn": "Givenchy",
+    "logo": "/images/brands/givenchy.jpg",
+    "count": 9
+  },
+  {
+    "slug": "aramis",
+    "nameAr": "اراميس",
+    "nameEn": "Aramis",
+    "logo": "/images/brands/aramis.jpg",
+    "count": 3
+  },
+  {
+    "slug": "bentley",
+    "nameAr": "بنتلي",
+    "nameEn": "Bentley",
+    "logo": "/images/brands/bentley.jpg",
+    "count": 2
+  },
+  {
+    "slug": "paco-rabanne",
+    "nameAr": "باكو رابان",
+    "nameEn": "Paco Rabanne",
+    "logo": "/images/brands/paco-rabanne.jpg",
+    "count": 4
+  },
+  {
+    "slug": "hugo-boss",
+    "nameAr": "هوغو بوس",
+    "nameEn": "Hugo Boss",
+    "logo": null,
+    "count": 2
+  },
+  {
+    "slug": "burberry",
+    "nameAr": "بربري",
+    "nameEn": "Burberry",
+    "logo": "/images/brands/burberry.jpg",
+    "count": 3
+  },
+  {
+    "slug": "bvlgari",
+    "nameAr": "بولغاري",
+    "nameEn": "Bvlgari",
+    "logo": "/images/brands/bvlgari.jpg",
+    "count": 4
+  },
+  {
+    "slug": "calvin-klein",
+    "nameAr": "كالفن كلاين",
+    "nameEn": "Calvin Klein",
+    "logo": null,
+    "count": 6
+  },
+  {
+    "slug": "carolina-herrera",
+    "nameAr": "كارولينا هيريرا",
+    "nameEn": "Carolina Herrera",
+    "logo": "/images/brands/carolina-herrera.jpg",
+    "count": 6
+  },
+  {
+    "slug": "caron",
+    "nameAr": "كارون",
+    "nameEn": "Caron",
+    "logo": "/images/brands/caron.jpg",
+    "count": 1
+  },
+  {
+    "slug": "cartier",
+    "nameAr": "كارتييه",
+    "nameEn": "Cartier",
+    "logo": null,
+    "count": 6
+  },
+  {
+    "slug": "chanel",
+    "nameAr": "شانيل",
+    "nameEn": "Chanel",
+    "logo": "/images/brands/chanel.jpg",
+    "count": 5
+  },
+  {
+    "slug": "chopard",
+    "nameAr": "شوبارد",
+    "nameEn": "Chopard",
+    "logo": "/images/brands/chopard.jpg",
+    "count": 4
+  },
+  {
+    "slug": "davidoff",
+    "nameAr": "دافيدوف",
+    "nameEn": "Davidoff",
+    "logo": null,
+    "count": 6
+  },
+  {
+    "slug": "dior",
+    "nameAr": "ديور",
+    "nameEn": "Dior",
+    "logo": "/images/brands/dior.jpg",
+    "count": 7
+  },
+  {
+    "slug": "dolce-gabbana",
+    "nameAr": "دولتشي أند غابانا",
+    "nameEn": "Dolce & Gabbana",
+    "logo": "/images/brands/dolcegabbana.jpg",
+    "count": 2
+  },
+  {
+    "slug": "dunhill",
+    "nameAr": "دنهل",
+    "nameEn": "Dunhill",
+    "logo": "/images/brands/dunhill.jpg",
+    "count": 9
+  },
+  {
+    "slug": "guerlain",
+    "nameAr": "غيرلان",
+    "nameEn": "Guerlain",
+    "logo": "/images/brands/guerlain.jpg",
+    "count": 5
+  },
+  {
+    "slug": "hermes",
+    "nameAr": "هيرمس",
+    "nameEn": "Hermès",
+    "logo": "/images/brands/hermes.jpg",
+    "count": 1
+  },
+  {
+    "slug": "joop",
+    "nameAr": "جوب",
+    "nameEn": "Joop",
+    "logo": "/images/brands/joop.jpg",
+    "count": 2
+  },
+  {
+    "slug": "juicy-couture",
+    "nameAr": "جوسي كوتور",
+    "nameEn": "Juicy Couture",
+    "logo": "/images/brands/juicy-couture.jpg",
+    "count": 3
+  },
+  {
+    "slug": "lacoste",
+    "nameAr": "لاكوست",
+    "nameEn": "Lacoste",
+    "logo": null,
+    "count": 6
+  },
+  {
+    "slug": "lalique",
+    "nameAr": "لاليك",
+    "nameEn": "Lalique",
+    "logo": "/images/brands/lalique.jpg",
+    "count": 3
+  },
+  {
+    "slug": "lancome",
+    "nameAr": "لانكوم",
+    "nameEn": "Lancôme",
+    "logo": "/images/brands/lancome.jpg",
+    "count": 8
+  },
+  {
+    "slug": "loewe",
+    "nameAr": "لويفي",
+    "nameEn": "Loewe",
+    "logo": "/images/brands/loewe.jpg",
+    "count": 3
+  },
+  {
+    "slug": "prada",
+    "nameAr": "برادا",
+    "nameEn": "Prada",
+    "logo": "/images/brands/prada.jpg",
+    "count": 2
+  },
+  {
+    "slug": "mancera",
+    "nameAr": "مانسيرا",
+    "nameEn": "Mancera",
+    "logo": "/images/brands/mancera.jpg",
+    "count": 1
+  },
+  {
+    "slug": "montblanc",
+    "nameAr": "مونت بلانك",
+    "nameEn": "Montblanc",
+    "logo": "/images/brands/mont-blanc.jpg",
+    "count": 5
+  },
+  {
+    "slug": "montale",
+    "nameAr": "مونتال",
+    "nameEn": "Montale",
+    "logo": "/images/brands/montale.jpg",
+    "count": 1
+  },
+  {
+    "slug": "roberto-cavalli",
+    "nameAr": "روبرتو كافالي",
+    "nameEn": "Roberto Cavalli",
+    "logo": "/images/brands/roberto-cavalli.jpg",
+    "count": 5
+  },
+  {
+    "slug": "st-dupont",
+    "nameAr": "اس تي ديبونت",
+    "nameEn": "S.T. Dupont",
+    "logo": "/images/brands/s-t-dupont.jpg",
+    "count": 2
+  },
+  {
+    "slug": "tom-ford",
+    "nameAr": "توم فورد",
+    "nameEn": "Tom Ford",
+    "logo": "/images/brands/tom-ford.jpg",
+    "count": 5
+  },
+  {
+    "slug": "trussardi",
+    "nameAr": "تروساردي",
+    "nameEn": "Trussardi",
+    "logo": "/images/brands/trussardi.jpg",
+    "count": 1
+  },
+  {
+    "slug": "versace",
+    "nameAr": "فيرساتشي",
+    "nameEn": "Versace",
+    "logo": "/images/brands/versace.jpg",
+    "count": 2
+  },
+  {
+    "slug": "ysl",
+    "nameAr": "إيف سان لوران",
+    "nameEn": "Yves Saint Laurent",
+    "logo": "/images/brands/yves-saint-laurent.jpg",
+    "count": 3
+  }
+]
