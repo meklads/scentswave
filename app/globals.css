@@ -255,21 +255,36 @@ button { cursor: pointer; }
 }
 .header-meta:hover { color: var(--gold-soft); }
 
+.hero-frame {
+  background: #fff;
+  padding: 12px 0 0;
+}
+@media (min-width: 768px) {
+  .hero-frame { padding-top: 16px; }
+}
+
 .mfk-hero {
   position: relative;
-  width: 100%;
-  height: calc(100svh - 100px);
-  min-height: 540px;
-  max-height: 960px;
+  width: min(1400px, calc(100% - 40px));
+  margin-inline: auto;
+  aspect-ratio: 2.45 / 1;
+  height: auto;
+  min-height: 220px;
+  max-height: 540px;
   overflow: hidden;
   background: #000;
   user-select: none;
   touch-action: pan-y;
 }
+@media (min-width: 768px) {
+  .mfk-hero {
+    width: min(1400px, calc(100% - 80px));
+    min-height: 360px;
+  }
+}
 @media (max-width: 767px) {
   .mfk-hero {
-    height: min(68svh, 620px);
-    min-height: 380px;
+    aspect-ratio: 16 / 10;
     max-height: none;
   }
 }
@@ -320,8 +335,8 @@ button { cursor: pointer; }
   z-index: 12;
   display: grid;
   place-items: center;
-  width: 48px;
-  height: 80px;
+  width: 40px;
+  height: 64px;
   color: #fff;
   transform: translateY(-50%);
   opacity: 0;
@@ -336,11 +351,11 @@ button { cursor: pointer; }
 
 .hp-section {
   background: #fff;
-  padding: 72px 0 56px;
+  padding: 40px 0 56px;
 }
 @media (min-width: 768px) {
   .hp-section {
-    padding: 96px 0 80px;
+    padding: 48px 0 80px;
   }
 }
 .hp-head {

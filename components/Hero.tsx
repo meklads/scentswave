@@ -54,65 +54,67 @@ export function Hero() {
   }
 
   return (
-    <section
-      dir="ltr"
-      className="mfk-hero group"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onPointerDown={onPointerDown}
-      onPointerUp={onPointerUp}
-    >
-      <div
-        className="mfk-hero-track"
-        style={{ transform: `translate3d(-${index * 100}%, 0, 0)` }}
+    <div className="hero-frame">
+      <section
+        dir="ltr"
+        className="mfk-hero group"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
       >
-        {SLIDES.map((item, i) => (
-          <div key={item.src} className="mfk-hero-slide">
-            <Image
-              src={item.src}
-              alt={locale === "ar" ? item.titleAr : item.titleEn}
-              fill
-              priority={i === 0}
-              draggable={false}
-              quality={100}
-              className="object-cover object-center select-none"
-              sizes="100vw"
-            />
-          </div>
-        ))}
-      </div>
+        <div
+          className="mfk-hero-track"
+          style={{ transform: `translate3d(-${index * 100}%, 0, 0)` }}
+        >
+          {SLIDES.map((item, i) => (
+            <div key={item.src} className="mfk-hero-slide">
+              <Image
+                src={item.src}
+                alt={locale === "ar" ? item.titleAr : item.titleEn}
+                fill
+                priority={i === 0}
+                draggable={false}
+                quality={100}
+                className="object-cover object-center select-none"
+                sizes="(max-width: 768px) 100vw, 1400px"
+              />
+            </div>
+          ))}
+        </div>
 
-      <button
-        type="button"
-        className="hero-arrow left-3 md:left-6"
-        onClick={() => go(-1)}
-        aria-label={copy.prev}
-      >
-        <Chevron dir="left" />
-      </button>
-      <button
-        type="button"
-        className="hero-arrow right-3 md:right-6"
-        onClick={() => go(1)}
-        aria-label={copy.next}
-      >
-        <Chevron dir="right" />
-      </button>
+        <button
+          type="button"
+          className="hero-arrow left-3 md:left-6"
+          onClick={() => go(-1)}
+          aria-label={copy.prev}
+        >
+          <Chevron dir="left" />
+        </button>
+        <button
+          type="button"
+          className="hero-arrow right-3 md:right-6"
+          onClick={() => go(1)}
+          aria-label={copy.next}
+        >
+          <Chevron dir="right" />
+        </button>
 
-      <div className="hero-progress">
-        <span
-          key={index}
-          className={paused ? "is-paused" : ""}
-          style={{ animationDuration: `${DURATION}ms` }}
-        />
-      </div>
-    </section>
+        <div className="hero-progress">
+          <span
+            key={index}
+            className={paused ? "is-paused" : ""}
+            style={{ animationDuration: `${DURATION}ms` }}
+          />
+        </div>
+      </section>
+    </div>
   );
 }
 
 function Chevron({ dir }: { dir: "left" | "right" }) {
   return (
-    <svg width="20" height="36" viewBox="0 0 20 36" fill="none" stroke="currentColor" strokeWidth="1.2">
+    <svg width="16" height="28" viewBox="0 0 20 36" fill="none" stroke="currentColor" strokeWidth="1.15">
       {dir === "left" ? <path d="M14 2 4 18l10 16" /> : <path d="M6 2l10 16L6 34" />}
     </svg>
   );
