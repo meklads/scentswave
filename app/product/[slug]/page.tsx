@@ -64,7 +64,7 @@ export default function ProductPage() {
 
       <div className="wrap grid gap-8 py-6 lg:grid-cols-2 lg:gap-14 lg:py-8">
         <div>
-          <div className="relative aspect-square bg-[var(--paper)]">
+          <div className="relative aspect-square bg-white">
             {product.salePercent > 0 && product.compareAtPrice > product.price && (
               <span className="sale-chip">-{product.salePercent}%</span>
             )}
@@ -86,7 +86,7 @@ export default function ProductPage() {
                   key={src}
                   type="button"
                   onClick={() => setActive(i)}
-                  className={`relative h-16 w-16 bg-[var(--paper)] ${active === i ? "outline outline-1 outline-[var(--ink)]" : ""}`}
+                  className={`relative h-16 w-16 bg-white ${active === i ? "outline outline-1 outline-[var(--ink)]" : ""}`}
                 >
                   <Image src={src} alt="" fill className="object-contain p-1.5" />
                 </button>

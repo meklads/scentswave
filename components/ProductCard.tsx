@@ -18,7 +18,7 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <article className="group">
-      <div className="relative aspect-square overflow-hidden bg-[var(--paper)]">
+      <div className="relative aspect-square overflow-hidden bg-white">
         {onSale && <span className="sale-chip">-{product.salePercent}%</span>}
         {product.featured && !onSale && (
           <span className="absolute start-3 top-3 z-10 text-[11px] font-medium tracking-[0.14em] text-[var(--gold)]">

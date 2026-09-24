@@ -52,7 +52,7 @@ export function CartDrawer() {
             <ul>
               {lines.map((line) => (
                 <li key={line.slug} className="flex gap-4 border-b border-[var(--line)] py-5">
-                  <Link href={`/product/${line.slug}`} onClick={closeCart} className="relative h-24 w-20 shrink-0 bg-[var(--paper)]">
+                  <Link href={`/product/${line.slug}`} onClick={closeCart} className="relative h-24 w-20 shrink-0 bg-white">
                     <Image src={line.product.images[0]} alt="" fill className="object-contain p-2" />
                   </Link>
                   <div className="flex-1">

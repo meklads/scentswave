@@ -18,7 +18,7 @@ export function CheckoutUpsell({ products }: { products: Product[] }) {
       <div className="grid gap-3">
         {products.map((product) => (
           <div key={product.slug} className="flex items-center gap-3">
-            <span className="relative h-14 w-12 shrink-0 bg-[var(--paper)]">
+            <span className="relative h-14 w-12 shrink-0 bg-white">
               <Image src={product.images[0]} alt="" fill className="object-contain p-1.5" />
             </span>
             <div className="min-w-0 flex-1">
