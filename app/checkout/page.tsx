@@ -170,7 +170,7 @@ export default function CheckoutPage() {
       <aside className="h-fit bg-[var(--paper)] p-5 text-sm lg:p-6">
         {lines.map((line) => (
           <div key={line.slug} className="flex items-center gap-3 border-b border-[var(--line)] py-3">
-            <span className="relative h-14 w-12 shrink-0 bg-white">
+            <span className="product-shot relative h-14 w-12 shrink-0">
               <span className="absolute -top-2 -end-2 z-10 grid h-5 min-w-5 place-items-center bg-black text-[10px] text-white">
                 {line.quantity}
               </span>

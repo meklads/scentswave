@@ -147,6 +147,17 @@ button { cursor: pointer; }
   background: var(--paper);
 }
 
+.product-shot,
+.product-shot span,
+.product-shot img {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+.product-shot img {
+  mix-blend-mode: multiply;
+}
+
 .plus {
   position: absolute;
   inset-inline-end: 14px;

@@ -54,7 +54,7 @@ export function HomeView() {
         <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
           {categories.map((item) => (
             <Link key={item.href} href={item.href} className="group">
-              <div className="relative aspect-square overflow-hidden bg-white">
+              <div className="product-shot relative aspect-square">
                 {item.img && (
                   <Image
                     src={item.img}

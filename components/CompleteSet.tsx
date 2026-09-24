@@ -52,7 +52,7 @@ function SetItem({ product }: { product: Product }) {
 
   return (
     <Link href={`/product/${product.slug}`} className="flex items-center gap-3">
-      <span className="relative h-20 w-16 shrink-0 bg-white">
+      <span className="product-shot relative h-20 w-16 shrink-0">
         <Image src={product.images[0]} alt="" fill className="object-contain p-2" />
       </span>
       <span>

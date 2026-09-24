@@ -57,7 +57,7 @@ export default function CartPage() {
             className="grid gap-4 border-b border-[var(--line)] py-5 md:grid-cols-[1fr_140px_160px_120px] md:items-center"
           >
             <Link href={`/product/${line.slug}`} className="flex items-center gap-4">
-              <span className="relative h-20 w-16 shrink-0 bg-white">
+              <span className="product-shot relative h-20 w-16 shrink-0">
                 <Image src={line.product.images[0]} alt="" fill className="object-contain p-2" />
               </span>
               <span className="text-[14px] font-medium">{productShort(line.product, locale)}</span>
