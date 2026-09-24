@@ -97,7 +97,7 @@ export default function ProductPage() {
 
         <div>
           <p className="kicker">{brandLabel}</p>
-          <h1 className="serif mt-2">{productShort(product, locale)}</h1>
+          <h1 className="serif mt-3">{productShort(product, locale)}</h1>
           <p className="mt-2 text-[13px] text-[var(--muted)]">
             {concentrationLabel(product, locale)} · {descriptor(product, locale)}
           </p>

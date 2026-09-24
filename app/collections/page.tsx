@@ -18,22 +18,23 @@ export default function CollectionsPage() {
 
   return (
     <div>
-      <section className="wrap py-10 md:py-14">
-        <h1 className="serif">{copy.collections}</h1>
-        <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--muted)]">{copy.collectionsBody}</p>
+      <section className="wrap py-14 text-center md:py-20">
+        <p className="kicker">{copy.houseOf}</p>
+        <h1 className="serif mt-5">{copy.collections}</h1>
+        <p className="mx-auto mt-5 max-w-xl text-[14px] leading-8 text-[var(--muted)]">{copy.collectionsBody}</p>
       </section>
-      <div className="wrap grid grid-cols-2 gap-4 pb-16 md:grid-cols-4 md:gap-5">
+      <div className="wrap grid grid-cols-2 gap-5 pb-20 md:grid-cols-4 md:gap-6">
         {tiles.map((tile) => (
           <Link key={tile.href} href={tile.href} className="group">
-            <div className="relative aspect-[3/4] overflow-hidden bg-white">
+            <div className="relative aspect-[3/4] overflow-hidden bg-[#121212]">
               <Image
                 src={tile.img}
                 alt={tile.title}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
               />
             </div>
-            <h2 className="mt-3 text-[17px] font-medium">{tile.title}</h2>
+            <h2 className="product-name mt-4 text-center">{tile.title}</h2>
           </Link>
         ))}
       </div>

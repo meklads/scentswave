@@ -77,7 +77,7 @@ export function Hero() {
                 draggable={false}
                 quality={100}
                 className="object-cover object-center select-none"
-                sizes="(max-width: 768px) 100vw, 1400px"
+                sizes="100vw"
               />
             </div>
           ))}

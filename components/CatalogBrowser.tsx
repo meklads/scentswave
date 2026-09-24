@@ -36,11 +36,11 @@ export function CatalogBrowser({
 
   return (
     <div>
-      <section className="wrap py-8 md:py-10">
-        <p className="caps text-[var(--muted)]">{copy.collections}</p>
-        <h1 className="serif mt-3">{locale === "ar" ? titleAr : titleEn}</h1>
-        {intro && <p className="mt-3 max-w-xl text-sm leading-7 text-[var(--muted)]">{intro}</p>}
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-4 text-[13px] font-medium text-[var(--muted)]">
+      <section className="wrap py-12 text-center md:py-16">
+        <p className="kicker">{copy.houseOf}</p>
+        <h1 className="serif mt-5">{locale === "ar" ? titleAr : titleEn}</h1>
+        {intro && <p className="mx-auto mt-5 max-w-xl text-[14px] leading-8 text-[var(--muted)]">{intro}</p>}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-[12px] text-[var(--muted)]">
           <p>
             {list.length} {copy.results}
           </p>

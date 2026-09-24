@@ -17,7 +17,7 @@ export function Price({
   const oldClass = size === "pdp" ? "text-[14px]" : "text-[12px]";
 
   return (
-    <p className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+    <p className={`flex flex-wrap items-baseline gap-x-2 gap-y-0.5 ${size === "card" ? "justify-center" : ""}`}>
       <span className={priceClass}>{formatMoney(product.price, locale)}</span>
       {onSale && (
         <span className={`${oldClass} text-[var(--muted)] line-through`}>

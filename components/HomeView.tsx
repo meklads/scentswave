@@ -28,6 +28,15 @@ export function HomeView() {
     <div>
       <Hero />
 
+      <section className="wrap py-14 text-center md:py-20">
+        <p className="kicker">{copy.houseOf}</p>
+        <h2 className="serif mx-auto mt-5 max-w-3xl">{copy.precious}</h2>
+        <p className="mx-auto mt-5 max-w-xl text-[14px] leading-8 text-[var(--muted)]">{copy.founding}</p>
+        <Link href="/house" className="u-link mt-8 inline-block">
+          {copy.discover}
+        </Link>
+      </section>
+
       <ProductCarousel
         title={copy.newLaunches}
         href="/shop"
@@ -64,7 +73,7 @@ export function HomeView() {
                   />
                 )}
               </div>
-              <p className="mt-2.5 text-center text-[13px] font-medium tracking-[0.08em]">{item.title}</p>
+              <p className="product-name mt-3 text-center">{item.title}</p>
             </Link>
           ))}
         </div>
@@ -84,7 +93,7 @@ export function HomeView() {
             { title: copy.tile3Title, body: copy.tile3Body, cta: copy.tile3Cta, href: "/category/picks" },
           ].map((tile) => (
             <article key={tile.title} className="text-center">
-              <h3 className="text-[15px] font-medium tracking-[0.08em]">{tile.title}</h3>
+              <h3 className="product-name">{tile.title}</h3>
               <p className="mt-2 text-[14px] leading-7 text-[var(--muted)]">{tile.body}</p>
               <Link href={tile.href} className="u-link mt-3">
                 {tile.cta}

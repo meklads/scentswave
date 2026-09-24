@@ -12,27 +12,29 @@ export default function HousePage() {
 
   return (
     <div>
-      <section className="wrap py-12 text-center md:py-16">
-        <Logo variant="full" height={88} className="justify-center" />
-        <h1 className="serif mx-auto mt-8 max-w-2xl">{copy.philosophyTitle}</h1>
-        <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-[var(--muted)]">{copy.philosophyBody}</p>
+      <section className="wrap py-16 text-center md:py-24">
+        <p className="kicker">{copy.houseOf}</p>
+        <Logo variant="full" height={72} className="mx-auto mt-8 justify-center" />
+        <h1 className="serif mx-auto mt-10 max-w-3xl">{copy.philosophyTitle}</h1>
+        <p className="mx-auto mt-6 max-w-xl text-[15px] leading-8 text-[var(--muted)]">{copy.philosophyBody}</p>
       </section>
-      <section className="relative h-[50vh] min-h-[360px] bg-[var(--paper)]">
+      <section className="relative h-[56vh] min-h-[380px] bg-[#121212]">
         <Image src="/images/logo/bannet1.png" alt="" fill className="object-cover" />
       </section>
-      <section className="wrap grid gap-10 py-12 md:grid-cols-3 md:py-16">
+      <section className="wrap grid gap-12 py-16 md:grid-cols-3 md:gap-16 md:py-24">
         {[copy.artTitle, copy.craftTitle, copy.packagingTitle].map((title, i) => (
-          <div key={title}>
-            <h2 className="text-[17px] font-medium">{title}</h2>
-            <p className="mt-4 text-sm leading-7 text-[var(--muted)]">
+          <div key={title} className="text-center">
+            <h2 className="product-name">{title}</h2>
+            <p className="mt-5 text-[14px] leading-8 text-[var(--muted)]">
               {[copy.artBody, copy.craftBody, copy.packagingBody][i]}
             </p>
           </div>
         ))}
       </section>
-      <section className="bg-[var(--paper)] py-16 text-center">
-        <p className="serif mx-auto max-w-2xl">{copy.brandStatement}</p>
-        <Link href="/shop" className="u-link mt-8 inline-block">
+      <section className="border-y border-[var(--line)] py-20 text-center md:py-24">
+        <p className="kicker">{copy.precious}</p>
+        <p className="serif mx-auto mt-6 max-w-3xl">{copy.brandStatement}</p>
+        <Link href="/shop" className="u-link mt-10 inline-block">
           {copy.discoverCollection}
         </Link>
       </section>

@@ -1,12 +1,24 @@
 import type { Metadata } from "next";
-import { Tajawal } from "next/font/google";
+import { Cormorant_Garamond, Jost, Noto_Naskh_Arabic } from "next/font/google";
 import { SiteShell } from "@/components/SiteShell";
 import "./globals.css";
 
-const sans = Tajawal({
+const display = Cormorant_Garamond({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const sans = Jost({
   variable: "--font-sans",
-  subsets: ["arabic", "latin"],
-  weight: ["300", "400", "500", "700", "800"],
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+});
+
+const arabic = Noto_Naskh_Arabic({
+  variable: "--font-arabic",
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -22,9 +34,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="ar"
       dir="rtl"
-      className={`${sans.variable} h-full antialiased`}
+      className={`${display.variable} ${sans.variable} ${arabic.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-white text-[var(--ink)]">
+      <body className="min-h-full flex flex-col bg-[var(--paper)] text-[var(--ink)]">
         <SiteShell>{children}</SiteShell>
       </body>
     </html>

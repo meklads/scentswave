@@ -49,13 +49,14 @@ export function ProductCard({ product }: { product: Product }) {
           )}
         </Link>
       </div>
-      <div className="flex flex-col gap-1 pt-3 text-center">
-        <p className="line-clamp-1 text-[11px] font-medium tracking-[0.06em] text-[var(--gold-dark)]">
+      <div className="flex flex-col items-center gap-1 pt-4 text-center">
+        <p className="caps text-[10px] text-[var(--muted)]">
           {brand ? brandName(brand, locale) : product.brand}
         </p>
-        <Link href={`/product/${product.slug}`} className="line-clamp-2 min-h-10 text-[13px] font-medium leading-snug">
+        <Link href={`/product/${product.slug}`} className="product-name line-clamp-2 min-h-12">
           {productShort(product, locale)}
         </Link>
+        <p className="text-[12px] text-[var(--muted)]">{product.sizeMl} ml</p>
         <Price product={product} locale={locale} />
         <button
           type="button"

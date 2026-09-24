@@ -37,8 +37,9 @@ export default function DiscoverPage() {
 
   return (
     <div>
-      <section className="wrap py-10 md:py-14">
-        <h1 className="serif">{copy.discover}</h1>
+      <section className="wrap py-12 text-center md:py-16">
+        <p className="kicker">{copy.houseOf}</p>
+        <h1 className="serif mt-5">{copy.discovery}</h1>
         <div className="mt-8 space-y-4">
           <Row>
             <Chip active={edit === "all"} onClick={() => setEdit("all")}>{copy.allBrands}</Chip>
@@ -79,7 +80,7 @@ export default function DiscoverPage() {
 }
 
 function Row({ children }: { children: React.ReactNode }) {
-  return <div className="flex flex-wrap gap-x-6 gap-y-3">{children}</div>;
+  return <div className="flex flex-wrap justify-center gap-x-6 gap-y-3">{children}</div>;
 }
 
 function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {

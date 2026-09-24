@@ -29,7 +29,7 @@ export function Logo({
         height={height}
         priority
         quality={100}
-        className="h-auto w-auto object-contain object-left"
+        className={`h-auto w-auto object-contain object-center ${variant === "full" ? "[mix-blend-mode:multiply]" : ""}`}
         style={{ height, width: "auto", maxWidth: "none" }}
       />
     </Link>
