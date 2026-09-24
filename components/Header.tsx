@@ -88,6 +88,15 @@ export function Header() {
           />
         </form>
       )}
+      <div className="cat-bar">
+        <div className="wrap cat-bar-inner">
+          {nav.map((item) => (
+            <Link key={item.href} href={item.href}>
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      </div>
       {open && (
         <div className="border-t border-white/15 px-5 py-8 lg:hidden">
           <div className="flex flex-col gap-5 text-[15px] font-medium">

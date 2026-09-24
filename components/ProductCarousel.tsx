@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef, useState } from "react";
 import { ProductCard } from "@/components/ProductCard";
 import { useStore } from "@/components/store";
@@ -9,9 +10,13 @@ import type { Product } from "@/lib/types";
 export function ProductCarousel({
   tabs,
   bar = false,
+  title,
+  href,
 }: {
   tabs: { id: string; label: string; products: Product[] }[];
   bar?: boolean;
+  title?: string;
+  href?: string;
 }) {
   const { locale } = useStore();
   const copy = t(locale);
@@ -24,8 +29,8 @@ export function ProductCarousel({
   function move(dir: number) {
     const node = rail.current;
     if (!node) return;
-    const card = node.firstElementChild?.clientWidth || 280;
-    const delta = (card + 16) * dir * (locale === "ar" ? -1 : 1);
+    const card = node.firstElementChild?.clientWidth || 220;
+    const delta = (card + 14) * dir * (locale === "ar" ? -1 : 1);
     node.scrollBy({ left: delta, behavior: "smooth" });
     setPage((n) => {
       const next = n + dir;
@@ -37,81 +42,69 @@ export function ProductCarousel({
 
   if (!current) return null;
 
-  if (!bar) {
-    return (
-      <section className="wrap py-8 md:py-10">
-        <div className="mb-4 flex items-end justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-6">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActive(tab.id)}
-                className={`caps pb-1 ${active === tab.id ? "border-b border-[var(--ink)]" : "text-[var(--muted)]"}`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
-          <div className="flex items-center gap-1">
-            <button type="button" className="arrow" onClick={() => move(-1)} aria-label={copy.prev}>
-              <Chevron dir={locale === "ar" ? "right" : "left"} />
-            </button>
-            <span className="text-[var(--muted)]">/</span>
-            <button type="button" className="arrow" onClick={() => move(1)} aria-label={copy.next}>
-              <Chevron dir={locale === "ar" ? "left" : "right"} />
-            </button>
-          </div>
-        </div>
-        <div ref={rail} className="rail">
-          {current.products.map((product) => (
-            <ProductCard key={product.slug} product={product} />
-          ))}
-        </div>
-      </section>
-    );
-  }
+  const heading = (
+    <div className="section-head">
+      <h2>{title || current.label}</h2>
+      {href && (
+        <Link href={href} className="u-link mt-2">
+          {copy.shopNow}
+        </Link>
+      )}
+    </div>
+  );
+
+  const pager = (
+    <div className="hp-pager">
+      <button type="button" className="hp-page-btn" onClick={() => move(-1)} aria-label={copy.prev}>
+        <Chevron dir={locale === "ar" ? "right" : "left"} />
+      </button>
+      <span>
+        {page}/{pages}
+      </span>
+      <button type="button" className="hp-page-btn" onClick={() => move(1)} aria-label={copy.next}>
+        <Chevron dir={locale === "ar" ? "left" : "right"} />
+      </button>
+    </div>
+  );
 
   return (
-    <section className="hp-section">
-      <div className="wrap">
-        <div className="hp-head">
-          <div className="hp-tabs">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => {
-                  setActive(tab.id);
-                  setPage(1);
-                  rail.current?.scrollTo({ left: 0 });
-                }}
-                className={`hp-tab ${active === tab.id ? "is-on" : ""}`}
-              >
-                {tab.label}
-              </button>
-            ))}
+    <section className={bar ? "hp-section" : "wrap py-8 md:py-10"}>
+      <div className={bar ? "wrap" : undefined}>
+        {heading}
+        {bar && tabs.length > 1 && (
+          <div className="hp-head">
+            <div className="hp-tabs">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => {
+                    setActive(tab.id);
+                    setPage(1);
+                    rail.current?.scrollTo({ left: 0 });
+                  }}
+                  className={`hp-tab ${active === tab.id ? "is-on" : ""}`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+            {pager}
           </div>
-          <div className="hp-pager">
-            <button type="button" className="hp-page-btn" onClick={() => move(-1)} aria-label={copy.prev}>
-              <Chevron dir={locale === "ar" ? "right" : "left"} />
-            </button>
-            <span>
-              {page}/{pages}
-            </span>
-            <button type="button" className="hp-page-btn" onClick={() => move(1)} aria-label={copy.next}>
-              <Chevron dir={locale === "ar" ? "left" : "right"} />
-            </button>
-          </div>
-        </div>
+        )}
+        {!bar && (
+          <div className="mb-4 flex justify-end">{pager}</div>
+        )}
         <div ref={rail} className="rail">
           {current.products.map((product) => (
             <ProductCard key={product.slug} product={product} />
           ))}
         </div>
-        <div className="hp-track">
-          <span style={{ width: `${(page / pages) * 100}%` }} />
-        </div>
+        {bar && (
+          <div className="hp-track">
+            <span style={{ width: `${(page / pages) * 100}%` }} />
+          </div>
+        )}
       </div>
     </section>
   );

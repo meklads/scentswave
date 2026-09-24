@@ -14,8 +14,8 @@ export function UpsellRail({
 
   return (
     <section className="wrap py-8 md:py-10">
-      <div className="mb-4 flex items-end justify-between gap-4">
-        <h2 className="serif">{title}</h2>
+      <div className="section-head">
+        <h2>{title}</h2>
       </div>
       <div className="rail">
         {products.map((product) => (

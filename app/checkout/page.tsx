@@ -79,7 +79,9 @@ export default function CheckoutPage() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const id = `SW-${Date.now().toString().slice(-8)}`;
-    const name = String(data.get("name") || "");
+    const first = String(data.get("firstName") || "");
+    const last = String(data.get("lastName") || "");
+    const name = `${first} ${last}`.trim() || String(data.get("name") || "");
     const phone = String(data.get("phone") || "");
     const city = String(data.get("city") || "");
     const address = String(data.get("address") || "");
@@ -103,27 +105,47 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="wrap grid gap-8 py-8 lg:grid-cols-[1fr_360px] lg:py-10">
-      <form onSubmit={onSubmit} className="space-y-3">
-        <h1 className="serif">{copy.checkout}</h1>
-        <p className="text-[13px] text-[var(--muted)]">{copy.guestHint}</p>
-        <input name="name" required placeholder={copy.name} className="w-full border-0 border-b border-[var(--line)] bg-transparent px-0 py-2.5 outline-none" />
-        <input name="phone" required placeholder={copy.phone} className="w-full border-0 border-b border-[var(--line)] bg-transparent px-0 py-2.5 outline-none" />
-        <input name="email" type="email" placeholder={copy.email} className="w-full border-0 border-b border-[var(--line)] bg-transparent px-0 py-2.5 outline-none" />
-        <input name="city" required placeholder={copy.city} className="w-full border-0 border-b border-[var(--line)] bg-transparent px-0 py-2.5 outline-none" />
-        <textarea name="address" required placeholder={copy.address} className="w-full border-0 border-b border-[var(--line)] bg-transparent px-0 py-2.5 outline-none" rows={2} />
-        <label className="flex items-start gap-3 border border-[var(--line)] p-3 text-[13px]">
-          <input type="checkbox" checked={gift} onChange={(e) => setGift(e.target.checked)} className="mt-0.5" />
-          <span>
-            <span className="block font-medium">{copy.giftWrap}</span>
-            <span className="text-[var(--muted)]">
-              {copy.giftWrapHint} · {formatMoney(GIFT_WRAP_FEE, locale)}
+    <div className="wrap grid gap-10 py-8 lg:grid-cols-[1.15fr_0.85fr] lg:py-10">
+      <form onSubmit={onSubmit} className="space-y-8">
+        <section>
+          <div className="mb-3 flex items-center justify-between">
+            <h2 className="text-[17px] font-medium">{copy.contactInfo}</h2>
+            <p className="text-[12px] text-[var(--muted)]">{copy.guestHint}</p>
+          </div>
+          <input name="email" type="email" placeholder={copy.email} className="field" />
+          <input name="phone" required placeholder={copy.phone} className="field mt-3" />
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-[17px] font-medium">{copy.delivery}</h2>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <input name="firstName" required placeholder={copy.firstName} className="field" />
+            <input name="lastName" required placeholder={copy.lastName} className="field" />
+          </div>
+          <input name="city" required placeholder={copy.city} className="field mt-3" />
+          <textarea name="address" required placeholder={copy.address} className="field mt-3" rows={2} />
+          <label className="mt-3 flex items-start gap-3 text-[13px]">
+            <input type="checkbox" checked={gift} onChange={(e) => setGift(e.target.checked)} className="mt-0.5" />
+            <span>
+              <span className="block font-medium">{copy.giftWrap}</span>
+              <span className="text-[var(--muted)]">
+                {copy.giftWrapHint} · {formatMoney(GIFT_WRAP_FEE, locale)}
+              </span>
             </span>
-          </span>
-        </label>
-        <fieldset className="space-y-2 pt-2">
-          <legend className="mb-2 text-[13px] font-medium">{copy.payment}</legend>
-          <label className="flex items-center gap-2 border border-[var(--line)] p-3 text-[13px]">
+          </label>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-[17px] font-medium">{copy.shippingMethod}</h2>
+          <div className="flex items-center justify-between border border-[var(--line)] px-4 py-3 text-[14px]">
+            <span>{copy.fastShip}</span>
+            <span>{shipping === 0 ? copy.free : formatMoney(shipping, locale)}</span>
+          </div>
+        </section>
+
+        <section>
+          <h2 className="mb-3 text-[17px] font-medium">{copy.payment}</h2>
+          <label className="flex items-center gap-2 border border-[var(--line)] px-4 py-3 text-[14px]">
             <input
               type="radio"
               checked={payment === "whatsapp"}
@@ -131,7 +153,7 @@ export default function CheckoutPage() {
             />
             {copy.payWhatsapp}
           </label>
-          <label className="flex items-center gap-2 border border-[var(--line)] p-3 text-[13px]">
+          <label className="mt-2 flex items-center gap-2 border border-[var(--line)] px-4 py-3 text-[14px]">
             <input
               type="radio"
               checked={payment === "cod"}
@@ -139,27 +161,32 @@ export default function CheckoutPage() {
             />
             {copy.payCod}
           </label>
-        </fieldset>
-        <button className="cta cta-solid mt-2 w-full">
-          {copy.orderWhatsapp}
-        </button>
+        </section>
+
+        <button className="cta cta-solid w-full">{copy.orderWhatsapp}</button>
         <p className="text-center text-[12px] text-[var(--muted)]">{copy.secureNote}</p>
       </form>
-      <aside className="h-fit bg-[var(--paper)] p-5 text-sm">
+
+      <aside className="h-fit bg-[var(--paper)] p-5 text-sm lg:p-6">
         {lines.map((line) => (
           <div key={line.slug} className="flex items-center gap-3 border-b border-[var(--line)] py-3">
             <span className="relative h-14 w-12 shrink-0 bg-white">
+              <span className="absolute -top-2 -end-2 z-10 grid h-5 min-w-5 place-items-center bg-black text-[10px] text-white">
+                {line.quantity}
+              </span>
               <Image src={line.product.images[0]} alt="" fill className="object-contain p-1.5" />
             </span>
-            <p className="min-w-0 flex-1">
-              <span className="line-clamp-2 block text-[13px]">
-                {productShort(line.product, locale)} × {line.quantity}
-              </span>
+            <p className="min-w-0 flex-1 line-clamp-2 text-[13px]">
+              {productShort(line.product, locale)}
             </p>
             <span className="text-[13px]">{formatMoney(line.product.price * line.quantity, locale)}</span>
           </div>
         ))}
         <p className="mt-4 flex justify-between text-[13px]">
+          <span>{copy.subtotal}</span>
+          <span>{formatMoney(subtotal, locale)}</span>
+        </p>
+        <p className="flex justify-between text-[13px]">
           <span>{copy.shipping}</span>
           <span>{shipping === 0 ? copy.free : formatMoney(shipping, locale)}</span>
         </p>
@@ -175,7 +202,7 @@ export default function CheckoutPage() {
             <span>{formatMoney(cod, locale)}</span>
           </p>
         )}
-        <p className="mt-3 flex justify-between border-t border-[var(--line)] pt-3 text-[15px] font-medium">
+        <p className="mt-3 flex justify-between border-t border-[var(--line)] pt-3 text-[16px] font-medium">
           <span>{copy.total}</span>
           <span>{formatMoney(total, locale)}</span>
         </p>

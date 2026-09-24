@@ -4,9 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Hero } from "@/components/Hero";
 import { ProductCarousel } from "@/components/ProductCarousel";
-import { UpsellRail } from "@/components/UpsellRail";
 import { useStore } from "@/components/store";
-import { complementaryProducts, products } from "@/lib/catalog";
+import { products } from "@/lib/catalog";
 import { t } from "@/lib/i18n";
 
 export function HomeView() {
@@ -15,8 +14,8 @@ export function HomeView() {
   const men = products.filter((item) => item.gender === "men");
   const women = products.filter((item) => item.gender === "women");
   const featured = products.filter((item) => item.featured);
+  const newest = [...products].slice(-12).reverse();
   const trending = products.slice(0, 12);
-  const wardrobe = featured[0] ? complementaryProducts(featured[0], 8) : trending.slice(0, 8);
 
   const categories = [
     { href: "/shop", title: copy.fragrances, img: men[1]?.images[0] },
@@ -30,7 +29,14 @@ export function HomeView() {
       <Hero />
 
       <ProductCarousel
+        title={copy.newLaunches}
+        href="/shop"
+        tabs={[{ id: "new", label: copy.newLaunches, products: newest }]}
+      />
+
+      <ProductCarousel
         bar
+        href="/shop"
         tabs={[
           { id: "fragrances", label: copy.fragrances, products: trending },
           { id: "men", label: copy.menEdit, products: men.slice(0, 12) },
@@ -39,19 +45,16 @@ export function HomeView() {
       />
 
       <section className="wrap py-8 md:py-10">
-        <div className="mb-5 flex items-end justify-between gap-4">
-          <div>
-            <p className="kicker">{copy.maison}</p>
-            <h2 className="serif mt-2">{copy.shopByCategory}</h2>
-          </div>
-          <Link href="/shop" className="u-link">
-            {copy.viewAll}
+        <div className="section-head">
+          <h2>{copy.shopByCategory}</h2>
+          <Link href="/shop" className="u-link mt-2">
+            {copy.shopNow}
           </Link>
         </div>
         <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
           {categories.map((item) => (
             <Link key={item.href} href={item.href} className="group">
-              <div className="relative aspect-[4/5] overflow-hidden bg-[var(--paper)]">
+              <div className="relative aspect-square overflow-hidden bg-[var(--paper)]">
                 {item.img && (
                   <Image
                     src={item.img}
@@ -61,17 +64,17 @@ export function HomeView() {
                   />
                 )}
               </div>
-              <p className="mt-2.5 text-[14px] font-medium">{item.title}</p>
+              <p className="mt-2.5 text-center text-[13px] font-medium tracking-[0.08em]">{item.title}</p>
             </Link>
           ))}
         </div>
       </section>
 
       <ProductCarousel
-        tabs={[{ id: "signature", label: copy.picks, products: featured.concat(trending).slice(0, 12) }]}
+        title={copy.bestSellers}
+        href="/category/picks"
+        tabs={[{ id: "best", label: copy.bestSellers, products: featured.concat(trending).slice(0, 12) }]}
       />
-
-      <UpsellRail title={copy.completeSet} products={wardrobe} />
 
       <section className="border-y border-[var(--line)]">
         <div className="wrap grid gap-6 py-8 md:grid-cols-3 md:gap-8 md:py-10">
@@ -80,26 +83,14 @@ export function HomeView() {
             { title: copy.tile2Title, body: copy.tile2Body, cta: copy.tile2Cta, href: "/shipping" },
             { title: copy.tile3Title, body: copy.tile3Body, cta: copy.tile3Cta, href: "/category/picks" },
           ].map((tile) => (
-            <article key={tile.title}>
-              <h3 className="text-[16px] font-medium">{tile.title}</h3>
+            <article key={tile.title} className="text-center">
+              <h3 className="text-[15px] font-medium tracking-[0.08em]">{tile.title}</h3>
               <p className="mt-2 text-[14px] leading-7 text-[var(--muted)]">{tile.body}</p>
               <Link href={tile.href} className="u-link mt-3">
                 {tile.cta}
               </Link>
             </article>
           ))}
-        </div>
-      </section>
-
-      <section className="hero-frame pb-8 md:pb-10">
-        <div className="mfk-hero" style={{ minHeight: 280, maxHeight: 420 }}>
-          <Image
-            src="/images/logo/bannet2.png"
-            alt=""
-            fill
-            className="object-cover"
-            quality={100}
-          />
         </div>
       </section>
     </div>

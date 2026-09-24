@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CompleteSet } from "@/components/CompleteSet";
+import { Price } from "@/components/Price";
+import { QtyControl } from "@/components/QtyControl";
 import { UpsellRail } from "@/components/UpsellRail";
 import { useStore } from "@/components/store";
 import {
@@ -16,14 +18,7 @@ import {
   productName,
   productShort,
 } from "@/lib/catalog";
-import {
-  descriptor,
-  labelFamily,
-  labelMood,
-  labelOccasion,
-  profile,
-} from "@/lib/fragrance";
-import { formatMoney } from "@/lib/format";
+import { descriptor, profile } from "@/lib/fragrance";
 import { t } from "@/lib/i18n";
 
 export default function ProductPage() {
@@ -55,26 +50,24 @@ export default function ProductPage() {
   const loved = wishlist.includes(product.slug);
   const p = profile(product);
   const image = product.images[active] || product.images[0];
+  const brandLabel = brand ? (locale === "ar" ? brand.nameAr : brand.nameEn) : product.brand;
 
   return (
     <div>
-      <div className="wrap grid gap-6 py-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:py-8">
-        <div className="flex gap-3">
-          {product.images.length > 1 && (
-            <div className="hidden w-16 shrink-0 flex-col gap-2 md:flex">
-              {product.images.map((src, i) => (
-                <button
-                  key={src}
-                  type="button"
-                  onClick={() => setActive(i)}
-                  className={`relative aspect-square bg-[var(--paper)] ${active === i ? "outline outline-1 outline-[var(--ink)]" : ""}`}
-                >
-                  <Image src={src} alt="" fill className="object-contain p-1.5" />
-                </button>
-              ))}
-            </div>
-          )}
-          <div className="relative aspect-square min-h-[320px] flex-1 bg-[var(--paper)]">
+      <nav className="wrap pt-5 text-[12px] text-[var(--muted)]">
+        <Link href="/">{copy.home}</Link>
+        <span className="px-2">/</span>
+        <Link href="/shop">{copy.fragrances}</Link>
+        <span className="px-2">/</span>
+        <span>{productShort(product, locale)}</span>
+      </nav>
+
+      <div className="wrap grid gap-8 py-6 lg:grid-cols-2 lg:gap-14 lg:py-8">
+        <div>
+          <div className="relative aspect-square bg-[var(--paper)]">
+            {product.salePercent > 0 && product.compareAtPrice > product.price && (
+              <span className="sale-chip">-{product.salePercent}%</span>
+            )}
             {image && (
               <Image
                 src={image}
@@ -86,70 +79,74 @@ export default function ProductPage() {
               />
             )}
           </div>
+          {product.images.length > 1 && (
+            <div className="mt-3 flex gap-2">
+              {product.images.map((src, i) => (
+                <button
+                  key={src}
+                  type="button"
+                  onClick={() => setActive(i)}
+                  className={`relative h-16 w-16 bg-[var(--paper)] ${active === i ? "outline outline-1 outline-[var(--ink)]" : ""}`}
+                >
+                  <Image src={src} alt="" fill className="object-contain p-1.5" />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
-        <div className="lg:sticky lg:top-[116px] lg:self-start">
-          {brand && (
-            <Link href={`/category/${brand.slug}`} className="kicker">
-              {locale === "ar" ? brand.nameAr : brand.nameEn}
-            </Link>
-          )}
+        <div>
+          <p className="kicker">{brandLabel}</p>
           <h1 className="serif mt-2">{productShort(product, locale)}</h1>
           <p className="mt-2 text-[13px] text-[var(--muted)]">
             {concentrationLabel(product, locale)} · {descriptor(product, locale)}
           </p>
-          <p className="mt-4 text-[22px] font-medium">{formatMoney(product.price, locale)}</p>
-          <p className="mt-4 max-w-md text-[14px] leading-7 text-[var(--muted)]">
-            {locale === "ar" ? product.descriptionAr : product.descriptionEn}
-          </p>
-          <dl className="mt-5 grid max-w-sm grid-cols-2 gap-y-1.5 text-[13px]">
-            <dt className="text-[var(--muted)]">{copy.family}</dt>
-            <dd>{labelFamily(p.family, locale)}</dd>
-            <dt className="text-[var(--muted)]">{copy.mood}</dt>
-            <dd>{labelMood(p.mood, locale)}</dd>
-            <dt className="text-[var(--muted)]">{copy.occasion}</dt>
-            <dd>{labelOccasion(p.occasion, locale)}</dd>
-            <dt className="text-[var(--muted)]">{copy.inStock}</dt>
-            <dd>{copy.inStock}</dd>
-          </dl>
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <input
-              type="number"
-              min={1}
-              value={qty}
-              onChange={(e) => setQty(Number(e.target.value) || 1)}
-              className="w-14 border-b border-[var(--line)] bg-transparent py-2 text-sm outline-none"
-            />
-            <button type="button" onClick={() => addToCart(product.slug, qty)} className="cta">
-              {copy.addToCart}
-            </button>
-            <Link href="/checkout" onClick={() => addToCart(product.slug, qty)} className="u-link">
-              {copy.buyNow}
-            </Link>
+          <div className="mt-4">
+            <Price product={product} locale={locale} size="pdp" />
           </div>
+
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <QtyControl value={qty} onChange={setQty} />
+            <button
+              type="button"
+              className="cta flex-1"
+              disabled={!product.inStock}
+              onClick={() => addToCart(product.slug, qty)}
+            >
+              {product.inStock ? copy.addToCart : copy.soldOut}
+            </button>
+          </div>
+          <Link href="/checkout" onClick={() => addToCart(product.slug, qty)} className="u-link mt-4">
+            {copy.buyNow}
+          </Link>
           <button
             type="button"
             onClick={() => toggleWishlist(product.slug)}
-            className="mt-3 text-[13px] font-medium text-[var(--muted)]"
+            className="mt-3 block text-[13px] font-medium text-[var(--muted)]"
           >
             {loved ? copy.added : copy.wishlist}
           </button>
           <p className="mt-5 text-[12px] text-[var(--muted)]">{copy.secureNote}</p>
-          <div className="mt-6 grid gap-6 border-t border-[var(--line)] pt-5 sm:grid-cols-2">
-            <div>
-              <p className="text-[14px] font-medium">{copy.theNotes}</p>
-              <ul className="mt-2 space-y-1.5 text-[13px]">
-                <li><span className="text-[var(--muted)]">{copy.topNotes} — </span>{p.top}</li>
-                <li><span className="text-[var(--muted)]">{copy.heartNotes} — </span>{p.heart}</li>
-                <li><span className="text-[var(--muted)]">{copy.baseNotes} — </span>{p.base}</li>
-              </ul>
-            </div>
-            <div>
-              <p className="text-[14px] font-medium">{copy.howToWear}</p>
-              <p className="mt-2 text-[13px] leading-6 text-[var(--muted)]">
-                {locale === "ar" ? "على النبض. بلا مبالغة. دعه يتحرك معك." : "On the pulse. Without excess. Let it move with you."}
-              </p>
-            </div>
+
+          <div className="mt-6">
+            <details className="acc" open>
+              <summary>{copy.description}</summary>
+              <div className="acc-body">
+                {locale === "ar" ? product.descriptionAr : product.descriptionEn}
+              </div>
+            </details>
+            <details className="acc">
+              <summary>{copy.theNotes}</summary>
+              <div className="acc-body">
+                <p>{copy.topNotes} — {p.top}</p>
+                <p>{copy.heartNotes} — {p.heart}</p>
+                <p>{copy.baseNotes} — {p.base}</p>
+              </div>
+            </details>
+            <details className="acc">
+              <summary>{copy.shippingInfo}</summary>
+              <div className="acc-body">{copy.secureNote}</div>
+            </details>
           </div>
         </div>
       </div>
