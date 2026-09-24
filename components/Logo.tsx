@@ -21,7 +21,7 @@ export function Logo({
   const { src, ratio } = VARIANTS[variant];
   const width = Math.round(height * ratio);
   return (
-    <Link href="/" className={`inline-flex shrink-0 ${className}`} aria-label="Scents Wave">
+    <Link href="/" className={`inline-flex shrink-0 ${className}`.trim()} aria-label="Scents Wave">
       <Image
         src={src}
         alt="Scents Wave — موجة عطر — Luxury Solid Perfume"

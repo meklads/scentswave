@@ -43,8 +43,7 @@ export function Header() {
           <button type="button" className="header-icon lg:hidden" onClick={() => setOpen((v) => !v)} aria-label="menu">
             <Bars />
           </button>
-          <Logo variant="original" height={80} className="hidden md:inline-flex" />
-          <Logo variant="original" height={58} className="md:hidden" />
+          <Logo variant="original" height={68} />
         </div>
         <nav className="hidden items-center justify-center gap-6 xl:gap-9 lg:flex">
           {nav.map((item) => (
