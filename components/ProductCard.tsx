@@ -30,7 +30,7 @@ export function ProductCard({ product }: { product: Product }) {
               alt={productShort(product, locale)}
               fill
               sizes="(max-width: 768px) 50vw, 25vw"
-              className={`object-contain p-8 transition-opacity duration-500 ${hover ? "group-hover:opacity-0" : ""}`}
+              className={`object-contain p-5 transition-opacity duration-500 ${hover ? "group-hover:opacity-0" : ""}`}
             />
           )}
           {hover && (
@@ -39,7 +39,7 @@ export function ProductCard({ product }: { product: Product }) {
               alt=""
               fill
               sizes="(max-width: 768px) 50vw, 25vw"
-              className="object-contain p-8 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+              className="object-contain p-5 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
             />
           )}
         </Link>
@@ -52,17 +52,17 @@ export function ProductCard({ product }: { product: Product }) {
           <BagMini />
         </button>
       </div>
-      <div className="flex flex-col gap-1.5 pt-3">
-        <p className="line-clamp-1 text-[12px] font-medium tracking-[0.06em] text-[var(--gold-dark)]">
+      <div className="flex flex-col gap-1 pt-2.5">
+        <p className="line-clamp-1 text-[11px] font-medium tracking-[0.06em] text-[var(--gold-dark)]">
           {brand ? brandName(brand, locale) : product.brand}
         </p>
-        <Link href={`/product/${product.slug}`} className="line-clamp-2 min-h-10 text-[15px] font-medium leading-snug">
+        <Link href={`/product/${product.slug}`} className="line-clamp-2 text-[14px] font-medium leading-snug">
           {productShort(product, locale)}
         </Link>
-        <p className="text-[13px] font-normal text-[var(--muted)]">
+        <p className="text-[12px] font-normal text-[var(--muted)]">
           {concentrationLabel(product, locale)}
         </p>
-        <p className="text-[16px] font-medium">{formatMoney(product.price, locale)}</p>
+        <p className="text-[15px] font-medium">{formatMoney(product.price, locale)}</p>
       </div>
     </article>
   );
@@ -71,7 +71,7 @@ export function ProductCard({ product }: { product: Product }) {
 export function ProductGrid({ products }: { products: Product[] }) {
   if (products.length === 0) return null;
   return (
-    <div className="grid grid-cols-2 gap-x-5 gap-y-12 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-7">
+    <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-5">
       {products.map((product) => (
         <ProductCard key={product.slug} product={product} />
       ))}

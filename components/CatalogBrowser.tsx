@@ -36,7 +36,7 @@ export function CatalogBrowser({
 
   return (
     <div>
-      <section className="wrap py-10 md:py-14">
+      <section className="wrap py-8 md:py-10">
         <p className="caps text-[var(--muted)]">{copy.collections}</p>
         <h1 className="serif mt-3">{locale === "ar" ? titleAr : titleEn}</h1>
         {intro && <p className="mt-3 max-w-xl text-sm leading-7 text-[var(--muted)]">{intro}</p>}

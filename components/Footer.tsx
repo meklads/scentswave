@@ -14,7 +14,7 @@ export function Footer() {
   return (
     <footer className="site-footer mt-auto">
       <div className="border-b border-white/10">
-        <div className="wrap grid gap-8 py-12 text-center text-[13px] leading-7 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="wrap grid gap-6 py-8 text-center text-[13px] leading-6 sm:grid-cols-3 lg:grid-cols-5">
           <Service icon={<Truck />} text={copy.serviceDelivery} />
           <Service icon={<Phone />} text={copy.serviceCare} />
           <Service icon={<Lock />} text={copy.servicePay} />
@@ -23,7 +23,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="wrap py-16 text-center">
+      <div className="wrap py-10 text-center">
         <p className="kicker">{copy.newsletter}</p>
         <h2 className="serif mt-3 text-[#f4efe6]">{copy.newsletterTitle}</h2>
         <p className="mt-3 text-[15px] text-[#a89f93]">{copy.newsletterSub}</p>
@@ -40,7 +40,7 @@ export function Footer() {
         </form>
       </div>
 
-      <div className="wrap grid gap-10 border-t border-white/10 py-14 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="wrap grid gap-8 border-t border-white/10 py-10 sm:grid-cols-2 lg:grid-cols-4">
         <Col title={copy.stores}>
           <p>{copy.ksa}</p>
           <Link href="/contact">{copy.contact}</Link>

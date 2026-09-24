@@ -39,8 +39,8 @@ export function ProductCarousel({
 
   if (!bar) {
     return (
-      <section className="wrap py-12 md:py-16">
-        <div className="mb-6 flex items-end justify-between gap-4">
+      <section className="wrap py-8 md:py-10">
+        <div className="mb-4 flex items-end justify-between gap-4">
           <div className="flex flex-wrap items-center gap-6">
             {tabs.map((tab) => (
               <button

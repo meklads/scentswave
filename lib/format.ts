@@ -12,6 +12,7 @@ export const EMAIL = "info@scentswave.com";
 export const FREE_SHIPPING_FROM = 131.25;
 export const SHIPPING_FEE = 26.06;
 export const COD_FEE = 15;
+export const GIFT_WRAP_FEE = 35;
 
 export function shippingFor(subtotal: number) {
   return subtotal >= FREE_SHIPPING_FROM ? 0 : SHIPPING_FEE;

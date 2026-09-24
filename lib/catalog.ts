@@ -48,6 +48,37 @@ export function relatedProducts(product: Product, limit = 4) {
   return [...sameBrand, ...sameGender].slice(0, limit);
 }
 
+export function pairProduct(product: Product) {
+  const pool = products.filter((item) => item.slug !== product.slug);
+  const ranked = pool
+    .map((item) => {
+      let score = 0;
+      if (item.gender === product.gender) score += 4;
+      if (item.brand !== product.brand) score += 3;
+      if (item.featured) score += 2;
+      if (item.concentration !== product.concentration) score += 1;
+      score -= Math.min(3, Math.abs(item.price - product.price) / 200);
+      return { item, score };
+    })
+    .sort((a, b) => b.score - a.score);
+  return ranked[0]?.item ?? null;
+}
+
+export function complementaryProducts(product: Product, limit = 4) {
+  const pair = pairProduct(product);
+  const related = relatedProducts(product, limit + 2).filter(
+    (item) => item.slug !== pair?.slug,
+  );
+  return [pair, ...related].filter((item): item is Product => Boolean(item)).slice(0, limit);
+}
+
+export function upsellProducts(exclude: string[] = [], limit = 4) {
+  const blocked = new Set(exclude);
+  const featured = products.filter((item) => item.featured && !blocked.has(item.slug));
+  const rest = products.filter((item) => !item.featured && !blocked.has(item.slug));
+  return [...featured, ...rest].slice(0, limit);
+}
+
 export function searchProducts(query: string) {
   const q = query.trim().toLowerCase();
   if (!q) return products;

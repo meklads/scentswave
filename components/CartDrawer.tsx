@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useStore } from "@/components/store";
-import { getProduct, productShort } from "@/lib/catalog";
+import { CheckoutUpsell } from "@/components/CheckoutUpsell";
+import { complementaryProducts, getProduct, productShort } from "@/lib/catalog";
 import { formatMoney, shippingFor } from "@/lib/format";
 import { t } from "@/lib/i18n";
 
@@ -18,6 +19,11 @@ export function CartDrawer() {
     .filter((item): item is NonNullable<typeof item> => item !== null);
   const subtotal = lines.reduce((sum, line) => sum + line.product.price * line.quantity, 0);
   const shipping = shippingFor(subtotal);
+  const extras = lines[0]
+    ? complementaryProducts(lines[0].product, 2).filter(
+        (item) => !lines.some((line) => line.slug === item.slug),
+      )
+    : [];
 
   if (!cartOpen) return null;
 
@@ -82,6 +88,7 @@ export function CartDrawer() {
               <span>{copy.shipping}</span>
               <span>{shipping === 0 ? copy.free : formatMoney(shipping, locale)}</span>
             </p>
+            <CheckoutUpsell products={extras} />
             <Link href="/checkout" onClick={closeCart} className="cta mt-5 w-full">
               {copy.checkout}
             </Link>

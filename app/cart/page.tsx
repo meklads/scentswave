@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useStore } from "@/components/store";
-import { getProduct, productShort } from "@/lib/catalog";
+import { CheckoutUpsell } from "@/components/CheckoutUpsell";
+import { getProduct, productShort, upsellProducts } from "@/lib/catalog";
 import { formatMoney, shippingFor } from "@/lib/format";
 import { t } from "@/lib/i18n";
 
@@ -36,7 +37,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="wrap grid gap-12 py-12 lg:grid-cols-[1fr_320px]">
+    <div className="wrap grid gap-8 py-8 lg:grid-cols-[1fr_360px]">
       <div>
         <h1 className="serif mb-10">{copy.cart}</h1>
         <ul className="divide-y divide-[var(--line)]">
@@ -92,7 +93,8 @@ export default function CartPage() {
           <span>{copy.total}</span>
           <span>{formatMoney(subtotal + shipping, locale)}</span>
         </p>
-        <Link href="/checkout" className="cta cta-solid mt-8 w-full">
+        <CheckoutUpsell products={upsellProducts(lines.map((line) => line.slug), 3)} />
+        <Link href="/checkout" className="cta cta-solid mt-6 w-full">
           {copy.checkout}
         </Link>
       </aside>

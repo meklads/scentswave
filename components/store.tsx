@@ -37,29 +37,33 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [recentlyViewed, setRecentlyViewed] = useState<string[]>([]);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     try {
       const raw = localStorage.getItem(KEY);
-      if (!raw) return;
-      const parsed = JSON.parse(raw) as Partial<StoreState>;
-      if (parsed.locale === "en" || parsed.locale === "ar") setLocaleState(parsed.locale);
-      if (Array.isArray(parsed.cart)) setCart(parsed.cart);
-      if (Array.isArray(parsed.wishlist)) setWishlist(parsed.wishlist);
-      if (Array.isArray(parsed.recentlyViewed)) setRecentlyViewed(parsed.recentlyViewed);
+      if (raw) {
+        const parsed = JSON.parse(raw) as Partial<StoreState>;
+        if (parsed.locale === "en" || parsed.locale === "ar") setLocaleState(parsed.locale);
+        if (Array.isArray(parsed.cart)) setCart(parsed.cart);
+        if (Array.isArray(parsed.wishlist)) setWishlist(parsed.wishlist);
+        if (Array.isArray(parsed.recentlyViewed)) setRecentlyViewed(parsed.recentlyViewed);
+      }
     } catch {
       /* ignore */
     }
+    setReady(true);
   }, []);
 
   useEffect(() => {
+    if (!ready) return;
     localStorage.setItem(
       KEY,
       JSON.stringify({ locale, cart, wishlist, recentlyViewed }),
     );
     document.documentElement.lang = locale;
     document.documentElement.dir = locale === "ar" ? "rtl" : "ltr";
-  }, [locale, cart, wishlist, recentlyViewed]);
+  }, [ready, locale, cart, wishlist, recentlyViewed]);
 
   const setLocale = useCallback((next: Locale) => setLocaleState(next), []);
   const openCart = useCallback(() => setCartOpen(true), []);
