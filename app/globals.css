@@ -612,30 +612,30 @@ button { cursor: pointer; }
 }
 .price-now {
   color: var(--royal);
-  font-size: 22px;
-  font-weight: 800;
-  line-height: 1;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
   white-space: nowrap;
   unicode-bidi: isolate;
 }
 .price-was {
   color: #9a9a9a;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1;
   text-decoration: line-through;
   white-space: nowrap;
 }
 .price-cut {
   color: var(--royal);
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 600;
   line-height: 1;
   white-space: nowrap;
 }
 .price-row.is-pdp { margin-top: 2px; }
-.price-row.is-pdp .price-now { font-size: 28px; }
+.price-row.is-pdp .price-now { font-size: 24px; font-weight: 800; }
 .price-row.is-pdp .price-was,
-.price-row.is-pdp .price-cut { font-size: 14px; }
+.price-row.is-pdp .price-cut { font-size: 13px; }
 .prose-ar p + p { margin-top: 10px; }
 
 .acc { border-bottom: 1px solid var(--line); }
@@ -1241,9 +1241,9 @@ html[lang="ar"] .acc > summary {
   }
   .card-brand { font-size: 12px; }
   .card-meta { font-size: 10px; }
-  .price-now { font-size: 18px; }
+  .price-now { font-size: 15px; }
   .price-was,
-  .price-cut { font-size: 12px; }
+  .price-cut { font-size: 11px; }
   .card-pop { font-size: 9px; padding: 4px 8px; }
   .card-plus {
     width: 30px;
