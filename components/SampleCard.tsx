@@ -5,11 +5,10 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Heart } from "@/components/ProductCard";
 import { useStore } from "@/components/store";
-import { brandName, getBrand, getProduct } from "@/lib/catalog";
+import { brandName, getBrand } from "@/lib/catalog";
 import { formatSize } from "@/lib/format";
-import { sizeRole } from "@/lib/discovery";
 import { sampleShot } from "@/lib/sample-image";
-import { defaultSize, formatSamplePrice, perfumeName, sampleTypeLabel } from "@/lib/samples";
+import { defaultSize, formatSamplePrice, perfumeName } from "@/lib/samples";
 import type { SampleProduct } from "@/lib/types";
 import styles from "./samples.module.css";
 
@@ -26,11 +25,9 @@ export function SampleCard({
 }) {
   const { locale, addToCart, toggleWishlist, wishlist } = useStore();
   const brand = getBrand(item.brand);
-  const source = getProduct(item.sourceSlug);
   const initial = useMemo(() => defaultSize(item), [item]);
   const [sku, setSku] = useState(initial.sku);
   const size = item.sizes.find((option) => option.sku === sku) || initial;
-  const role = sizeRole(size.sizeMl, locale);
   const loved = wishlist.includes(size.sku);
 
   return (
@@ -50,14 +47,13 @@ export function SampleCard({
         >
           <Heart filled={loved} />
         </button>
-        <span className={styles.badge}>{sampleTypeLabel(size.type, locale)}</span>
         <Link href={`/product/${size.sku}`} className="absolute inset-0">
           <Image
             src={sampleShot(item.sourceSlug, size.image)}
             alt={`${perfumeName(item, locale)} ${formatSize(size.sizeMl, locale)}`}
             fill
-            sizes="240px"
-            className="object-contain p-3"
+            sizes="(max-width: 768px) 46vw, 220px"
+            className="object-contain p-1.5"
           />
         </Link>
       </div>
@@ -66,22 +62,8 @@ export function SampleCard({
         <Link href={`/product/${size.sku}`} className={styles.name}>
           {perfumeName(item, locale)}
         </Link>
-        <p className={styles.meta}>
-          {source
-            ? locale === "ar"
-              ? source.concentration === "edt"
-                ? "تواليت"
-                : source.concentration === "parfum"
-                  ? "بارفوم"
-                  : "بارفان"
-              : source.concentration.toUpperCase()
-            : role.name}
-          {" · "}
-          {formatSize(size.sizeMl, locale)}
-        </p>
-        <p className={styles.price}>{formatSamplePrice(size.priceSAR, locale)}</p>
         {item.sizes.length > 1 && (
-          <div className={styles.sizes}>
+          <div className={styles.sizes} role="group" aria-label={locale === "ar" ? "الحجم" : "Size"}>
             {item.sizes.map((option) => (
               <button
                 key={option.sku}
@@ -94,6 +76,7 @@ export function SampleCard({
             ))}
           </div>
         )}
+        <p className={styles.price}>{formatSamplePrice(size.priceSAR, locale)}</p>
         <button
           type="button"
           className="card-atc"

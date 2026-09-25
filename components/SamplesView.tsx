@@ -6,8 +6,8 @@ import { SampleCard } from "@/components/SampleCard";
 import { SetCard } from "@/components/SetCard";
 import { useStore } from "@/components/store";
 import { brandName, getBrand } from "@/lib/catalog";
-import { EXPERIENCES, SIZE_ROLES, discoverySets, houseKindLabel, sizeRole } from "@/lib/discovery";
-import { formatMoney, formatSize } from "@/lib/format";
+import { SIZE_ROLES, discoverySets, houseKindLabel } from "@/lib/discovery";
+import { formatSize } from "@/lib/format";
 import {
   SAMPLE_SIZES,
   SAMPLE_TYPES,
@@ -258,139 +258,33 @@ export function SamplesView() {
           <p className={styles.eyebrow}>{text.eyebrow}</p>
           <h1 className={`serif ${styles.title}`}>{text.title}</h1>
           <p className={styles.subtitle}>{text.subtitle}</p>
-          <p className={styles.lead}>{text.lead}</p>
           <p className={styles.note}>{text.note}</p>
-          <div className={styles.heroCtas}>
-            <a href="#samples" className="cta cta-solid">
-              {text.ctaSamples}
-            </a>
-            <Link href="/sets" className="u-link">
-              {text.ctaSets}
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.band}>
-        <div className="wrap">
-          <h2 className={`serif ${styles.sectionTitle}`}>{text.which}</h2>
-          <div className={styles.sizeGuide}>
-            {([2, 5, 10] as const).map((ml) => {
-              const role = SIZE_ROLES[ml];
-              return (
-                <button key={ml} type="button" className={styles.sizeCard} onClick={() => setSizeMl(ml)}>
-                  <p className={styles.sizeName}>{locale === "ar" ? role.nameAr : role.nameEn}</p>
-                  <p className={styles.sizeMl}>{formatSize(ml, locale)}</p>
-                  <p className={styles.sizeRole}>{sizeRole(ml, locale).purpose}</p>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.bandAlt}>
-        <div className="wrap">
-          <h2 className={`serif ${styles.sectionTitle}`}>{text.houses}</h2>
-          <div className={styles.houses}>
-            {brands.map((slug) => {
-              const houseBrand = getBrand(slug);
-              return (
-                <button
-                  key={slug}
-                  type="button"
-                  className={brand === slug ? styles.houseOn : styles.house}
-                  onClick={() => {
-                    setBrand(slug);
-                    document.getElementById("samples")?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                >
-                  {houseBrand ? brandName(houseBrand, locale) : slug}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.band}>
-        <div className="wrap">
-          <h2 className={`serif ${styles.sectionTitle}`}>{text.experience}</h2>
-          <div className={styles.experiences}>
-            {EXPERIENCES.map((item) => (
-              <button
-                key={item.id}
-                type="button"
-                className={styles.exp}
-                onClick={() => {
-                  setSizeMl(item.sizeMl);
-                  document.getElementById("samples")?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                <p className={styles.sizeName}>{locale === "ar" ? item.nameAr : item.nameEn}</p>
-                <p className={styles.sizeRole}>{formatSize(item.sizeMl, locale)}</p>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.bandAlt}>
-        <div className="wrap">
-          <h2 className={`serif ${styles.sectionTitle}`}>{text.sets}</h2>
-          <div className={styles.setGrid}>
-            {discoverySets.map((set) => (
-              <SetCard key={set.id} set={set} action="link" />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.band}>
-        <div className="wrap">
-          <h2 className={`serif ${styles.sectionTitle}`}>{text.education}</h2>
-          <div className={styles.edu}>
-            <article>
-              <h3>{text.miniTitle}</h3>
-              <p>{text.miniBody}</p>
-            </article>
-            <article>
-              <h3>{text.decantTitle}</h3>
-              <p>{text.decantBody}</p>
-            </article>
-            <article>
-              <h3>{text.travelTitle}</h3>
-              <p>{text.travelBody}</p>
-            </article>
-            <article>
-              <h3>{text.lastTitle}</h3>
-              <p>{text.lastBody}</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.bandAlt}>
-        <div className="wrap">
-          <h2 className={`serif ${styles.sectionTitle}`}>{text.trust}</h2>
-          <div className={styles.edu}>
-            <article>
-              <h3>{text.trust1}</h3>
-              <p>{text.trust1b}</p>
-            </article>
-            <article>
-              <h3>{text.trust2}</h3>
-              <p>{text.trust2b}</p>
-            </article>
-            <article>
-              <h3>{text.trust3}</h3>
-              <p>{text.trust3b}</p>
-            </article>
-          </div>
+          <Link href="/sets" className={`u-link ${styles.heroLink}`}>
+            {text.ctaSets}
+          </Link>
         </div>
       </section>
 
       <div className="wrap" id="samples">
+        <div className={styles.sizeStrip}>
+          <button type="button" className={!sizeMl ? styles.sizeChipOn : styles.sizeChip} onClick={() => setSizeMl(undefined)}>
+            {text.all}
+          </button>
+          {([2, 5, 10] as const).map((ml) => {
+            const role = SIZE_ROLES[ml];
+            return (
+              <button
+                key={ml}
+                type="button"
+                className={sizeMl === ml ? styles.sizeChipOn : styles.sizeChip}
+                onClick={() => setSizeMl(ml)}
+              >
+                {locale === "ar" ? role.nameAr : role.nameEn}
+                <span>{formatSize(ml, locale)}</span>
+              </button>
+            );
+          })}
+        </div>
         <div className={styles.toolbar}>
           <input
             className={styles.search}
@@ -428,6 +322,41 @@ export function SamplesView() {
           </div>
         </div>
       </div>
+
+      <section className={styles.band}>
+        <div className="wrap">
+          <h2 className={`serif ${styles.sectionTitle}`}>{text.sets}</h2>
+          <div className={styles.setGrid}>
+            {discoverySets.map((set) => (
+              <SetCard key={set.id} set={set} action="link" />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.bandAlt}>
+        <div className="wrap">
+          <h2 className={`serif ${styles.sectionTitle}`}>{text.education}</h2>
+          <div className={styles.edu}>
+            <article>
+              <h3>{text.miniTitle}</h3>
+              <p>{text.miniBody}</p>
+            </article>
+            <article>
+              <h3>{text.decantTitle}</h3>
+              <p>{text.decantBody}</p>
+            </article>
+            <article>
+              <h3>{text.travelTitle}</h3>
+              <p>{text.travelBody}</p>
+            </article>
+            <article>
+              <h3>{text.trust1}</h3>
+              <p>{text.trust1b}</p>
+            </article>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

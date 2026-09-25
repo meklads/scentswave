@@ -44,17 +44,19 @@ export function SetCard({
         <p className={styles.sizeRole}>
           {items.length} × {formatSize(set.sizeMl, locale)}
         </p>
-        <p className={styles.setBody}>{setBody(set, locale)}</p>
         {showList && (
-          <ul className={styles.setList}>
-            {items.map((entry) => (
-              <li key={entry.item.id}>{perfumeName(entry.item, locale)}</li>
-            ))}
-          </ul>
+          <>
+            <p className={styles.setBody}>{setBody(set, locale)}</p>
+            <ul className={styles.setList}>
+              {items.map((entry) => (
+                <li key={entry.item.id}>{perfumeName(entry.item, locale)}</li>
+              ))}
+            </ul>
+          </>
         )}
         <p className={styles.price}>{formatMoney(setPrice(set), locale)}</p>
         {saved > 0 && (
-          <p className={styles.sizeRole}>
+          <p className={styles.setSave}>
             <span className="line-through">{formatMoney(setTotal(set), locale)}</span>
             {" · "}
             {locale === "ar" ? `وفّر ${formatMoney(saved, locale)}` : `Save ${formatMoney(saved, locale)}`}
