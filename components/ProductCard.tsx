@@ -25,7 +25,7 @@ export function ProductCard({ product }: { product: Product }) {
           type="button"
           aria-label={copy.wishlist}
           onClick={() => toggleWishlist(product.slug)}
-          className="absolute end-2 top-2 z-10 grid h-8 w-8 place-items-center text-[var(--ink)]"
+          className={`card-heart absolute end-2 top-2 z-10 grid h-8 w-8 place-items-center${loved ? " is-loved" : ""}`}
         >
           <Heart filled={loved} />
         </button>
@@ -92,7 +92,7 @@ function Heart({ filled }: { filled: boolean }) {
 export function ProductGrid({ products }: { products: Product[] }) {
   if (products.length === 0) return null;
   return (
-    <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-5 lg:gap-x-5">
+    <div className="product-grid">
       {products.map((product) => (
         <ProductCard key={product.slug} product={product} />
       ))}

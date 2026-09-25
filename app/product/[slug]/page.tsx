@@ -60,7 +60,7 @@ export default function ProductPage() {
           <button
             type="button"
             onClick={() => toggleWishlist(product.slug)}
-            className="absolute start-5 top-5 z-10 grid h-10 w-10 place-items-center"
+            className={`card-heart absolute start-5 top-5 z-10 grid h-10 w-10 place-items-center${loved ? " is-loved" : ""}`}
             aria-label={copy.wishlist}
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill={loved ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.4">

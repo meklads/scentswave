@@ -414,8 +414,27 @@ button { cursor: pointer; }
 }
 .rail::-webkit-scrollbar { display: none; }
 .rail > * {
+  position: relative;
   flex: 0 0 calc(50% - 9px);
   scroll-snap-align: start;
+}
+.rail > *:not(:last-child)::after,
+.product-grid > article:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: -9px;
+  top: 10%;
+  bottom: 8%;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(196, 165, 116, 0.22) 12%,
+    rgba(196, 165, 116, 0.55) 50%,
+    rgba(196, 165, 116, 0.22) 88%,
+    transparent
+  );
+  pointer-events: none;
 }
 @media (min-width: 768px) {
   .rail > * { flex-basis: calc(33.333% - 12px); }
@@ -423,6 +442,35 @@ button { cursor: pointer; }
 @media (min-width: 1100px) {
   .rail > * { flex-basis: calc(20% - 15px); }
 }
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 18px;
+  row-gap: 32px;
+}
+.product-grid > article { position: relative; }
+@media (max-width: 767px) {
+  .product-grid > article:nth-child(2n)::after { display: none; }
+}
+@media (min-width: 768px) {
+  .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .product-grid > article:nth-child(3n)::after { display: none; }
+}
+@media (min-width: 1100px) {
+  .product-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .product-grid > article:nth-child(3n)::after { display: block; }
+  .product-grid > article:nth-child(5n)::after { display: none; }
+}
+
+.card-heart {
+  color: var(--ink);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.card-heart.is-loved {
+  color: #c4a574;
+}
+.card-heart:hover { opacity: 0.7; }
 
 .arrow {
   width: 32px;
@@ -781,9 +829,9 @@ button { cursor: pointer; }
   color: #f3e6c8;
 }
 .footer-promises {
-  background: var(--ink-soft);
-  border-bottom: 1px solid rgba(212, 196, 168, 0.18);
-  color: var(--on-black);
+  background: #f4eee4;
+  border-bottom: 0;
+  color: var(--ink);
   font-size: 13px;
   line-height: 1.7;
 }
@@ -798,7 +846,7 @@ button { cursor: pointer; }
     top: 50%;
     width: 28px;
     height: 1px;
-    background: var(--champagne);
+    background: var(--gold);
     transform: translateY(-50%);
   }
 }
