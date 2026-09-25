@@ -1,23 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --white: #fffdf9;
-  --paper: #f7f1e8;
-  --line: #e5d9c8;
-  --ink: #2c261e;
-  --muted: #7a7268;
-  --gold: #a07c45;
-  --gold-soft: #d4c4a8;
+  --white: #ffffff;
+  --paper: #ffffff;
+  --line: #ececec;
+  --ink: #111111;
+  --muted: #6b6b6b;
+  --gold: #111111;
+  --gold-soft: #d4d4d4;
+  --sale: #e11d48;
+  --ship: #16a34a;
+  --coupon: #f3e8ff;
   --bg: var(--paper);
-  --ivory: #fbf7f1;
-  --porcelain: #fffdf9;
-  --cream: var(--paper);
-  --sand: #efe6da;
-  --champagne: #a07c45;
+  --ivory: #f7f7f8;
+  --porcelain: #ffffff;
+  --cream: #f7f7f8;
+  --sand: #f4f4f5;
+  --champagne: #111111;
   --charcoal: var(--ink);
   --bg-soft: var(--ivory);
-  --accent: var(--gold);
-  --gold-dark: #8a6a38;
+  --accent: var(--ink);
+  --gold-dark: #111111;
   --background: var(--paper);
   --foreground: var(--ink);
 }
@@ -25,8 +28,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-display: var(--font-display);
+  --font-sans: var(--font-arabic);
+  --font-display: var(--font-arabic);
 }
 
 * { box-sizing: border-box; }
@@ -41,11 +44,11 @@ body {
 }
 
 body {
-  font-family: var(--font-arabic), var(--font-sans), serif;
+  font-family: var(--font-arabic), var(--font-sans), sans-serif;
   font-weight: 400;
   font-size: 14px;
-  line-height: 1.75;
-  letter-spacing: 0.01em;
+  line-height: 1.65;
+  letter-spacing: 0;
   display: flex;
   flex-direction: column;
 }
@@ -69,22 +72,22 @@ button { cursor: pointer; }
 }
 
 .serif {
-  font-family: var(--font-display), var(--font-arabic), serif;
-  font-weight: 400;
-  font-size: 32px;
-  letter-spacing: 0.01em;
-  line-height: 1.15;
+  font-family: var(--font-arabic), var(--font-sans), sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: 0;
+  line-height: 1.35;
 }
 @media (min-width: 768px) {
-  .serif { font-size: 44px; }
+  .serif { font-size: 26px; }
 }
 
 .product-name {
-  font-family: var(--font-display), var(--font-arabic), serif;
-  font-weight: 400;
-  font-size: 18px;
-  letter-spacing: 0.01em;
-  line-height: 1.3;
+  font-family: var(--font-arabic), var(--font-sans), sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 1.45;
 }
 
 .kicker {
@@ -179,14 +182,15 @@ button { cursor: pointer; }
   }
 }
 .pdp-visual {
-  background: #f1e6dd;
+  position: relative;
+  background: #f7f7f8;
   display: grid;
   place-items: center;
   min-height: 420px;
   padding: 40px 24px;
 }
 .pdp-buy {
-  background: #fffdf9;
+  background: #fff;
   padding: 32px 24px 48px;
 }
 @media (min-width: 1024px) {
@@ -230,14 +234,14 @@ button { cursor: pointer; }
 
 .sale-chip {
   position: absolute;
-  inset-inline-end: 10px;
+  inset-inline-start: 10px;
   top: 10px;
   z-index: 2;
   min-width: 42px;
   padding: 3px 7px;
-  background: transparent;
-  color: var(--ink);
-  border: 1px solid var(--ink);
+  background: var(--sale);
+  color: #fff;
+  border: 0;
   font-family: var(--font-arabic), var(--font-sans), sans-serif;
   font-size: 10px;
   font-weight: 500;
@@ -294,14 +298,14 @@ button { cursor: pointer; }
   margin-bottom: 28px;
 }
 .section-head h2 {
-  font-family: var(--font-display), var(--font-arabic), serif;
-  font-size: 28px;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  line-height: 1.2;
+  font-family: var(--font-arabic), sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.3;
 }
 @media (min-width: 768px) {
-  .section-head h2 { font-size: 36px; }
+  .section-head h2 { font-size: 20px; }
 }
 
 .acc { border-bottom: 1px solid var(--line); }
@@ -365,8 +369,8 @@ button { cursor: pointer; }
 }
 
 .announce {
-  background: var(--sand);
-  color: var(--ink);
+  background: #111;
+  color: #fff;
   text-align: center;
   font-family: var(--font-arabic), var(--font-sans), sans-serif;
   font-size: 13px;
@@ -377,7 +381,7 @@ button { cursor: pointer; }
 }
 
 .site-header {
-  background: var(--ivory);
+  background: #fff;
   color: var(--ink);
   border-bottom: 1px solid var(--line);
 }
@@ -623,8 +627,29 @@ button { cursor: pointer; }
   transition: width 0.4s ease;
 }
 
+.ship-bar {
+  background: #f4fbf6;
+  border: 1px solid #d9f0e1;
+  padding: 12px 14px;
+}
+.ship-track {
+  margin-top: 8px;
+  height: 6px;
+  overflow: hidden;
+  background: #e5e7eb;
+}
+.ship-track > span {
+  display: block;
+  height: 100%;
+  background: var(--ship);
+}
+.coupon-card {
+  background: var(--coupon);
+  padding: 12px 14px;
+}
+
 .site-footer {
-  background: var(--ivory);
+  background: #fff;
   color: var(--ink);
   border-top: 1px solid var(--line);
 }

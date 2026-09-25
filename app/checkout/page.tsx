@@ -10,13 +10,14 @@ import {
   COD_FEE,
   GIFT_WRAP_FEE,
   WHATSAPP,
+  discountFor,
   formatMoney,
   shippingFor,
 } from "@/lib/format";
 import { t } from "@/lib/i18n";
 
 export default function CheckoutPage() {
-  const { locale, cart, clearCart } = useStore();
+  const { locale, cart, clearCart, coupon } = useStore();
   const copy = t(locale);
   const [payment, setPayment] = useState<"whatsapp" | "cod">("whatsapp");
   const [gift, setGift] = useState(false);
@@ -34,10 +35,12 @@ export default function CheckoutPage() {
     (sum, line) => sum + line.product.price * line.quantity,
     0,
   );
-  const shipping = shippingFor(subtotal);
+  const discount = discountFor(subtotal, coupon);
+  const afterDiscount = Math.max(0, subtotal - discount);
+  const shipping = shippingFor(afterDiscount);
   const wrap = gift ? GIFT_WRAP_FEE : 0;
   const cod = payment === "cod" ? COD_FEE : 0;
-  const total = subtotal + shipping + wrap + cod;
+  const total = afterDiscount + shipping + wrap + cod;
 
   const summary = useMemo(() => {
     return lines
@@ -93,6 +96,7 @@ export default function CheckoutPage() {
       `العنوان: ${address}`,
       `الدفع: ${payment === "cod" ? "عند الاستلام" : "واتساب"}`,
       gift ? "تغليف هدية: نعم" : "تغليف هدية: لا",
+      coupon ? `كوبون: ${coupon}` : "",
       summary,
       `الإجمالي: ${total} SAR`,
     ].join("\n");
@@ -186,6 +190,12 @@ export default function CheckoutPage() {
           <span>{copy.subtotal}</span>
           <span>{formatMoney(subtotal, locale)}</span>
         </p>
+        {discount > 0 && (
+          <p className="flex justify-between text-[13px] text-[var(--sale)]">
+            <span>{copy.discount} {coupon}</span>
+            <span>-{formatMoney(discount, locale)}</span>
+          </p>
+        )}
         <p className="flex justify-between text-[13px]">
           <span>{copy.shipping}</span>
           <span>{shipping === 0 ? copy.free : formatMoney(shipping, locale)}</span>

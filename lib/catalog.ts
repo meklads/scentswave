@@ -97,10 +97,30 @@ export function searchProducts(query: string) {
   });
 }
 
+export function saleProducts(limit = 12) {
+  return products
+    .filter((item) => item.compareAtPrice > item.price && item.salePercent > 0)
+    .sort((a, b) => b.salePercent - a.salePercent)
+    .slice(0, limit);
+}
+
+export function travelProducts(limit = 12) {
+  return [...products]
+    .filter((item) => item.sizeMl <= 80)
+    .sort((a, b) => a.sizeMl - b.sizeMl || a.price - b.price)
+    .slice(0, limit);
+}
+
+export function giftProducts(limit = 12) {
+  return products.filter((item) => item.featured).slice(0, limit);
+}
+
 export function filterProducts(options: {
   gender?: string;
   brand?: string;
   featured?: boolean;
+  sale?: boolean;
+  travel?: boolean;
   q?: string;
   sort?: string;
 }) {
@@ -113,6 +133,12 @@ export function filterProducts(options: {
   }
   if (options.featured) {
     list = list.filter((item) => item.featured);
+  }
+  if (options.sale) {
+    list = list.filter((item) => item.compareAtPrice > item.price);
+  }
+  if (options.travel) {
+    list = list.filter((item) => item.sizeMl <= 80);
   }
   if (options.q) {
     const q = options.q.trim().toLowerCase();

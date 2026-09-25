@@ -6,11 +6,11 @@ import { CheckoutUpsell } from "@/components/CheckoutUpsell";
 import { QtyControl } from "@/components/QtyControl";
 import { useStore } from "@/components/store";
 import { getProduct, productShort, upsellProducts } from "@/lib/catalog";
-import { formatMoney, shippingFor } from "@/lib/format";
+import { discountFor, formatMoney, shippingFor } from "@/lib/format";
 import { t } from "@/lib/i18n";
 
 export default function CartPage() {
-  const { locale, cart, setQty, removeFromCart } = useStore();
+  const { locale, cart, setQty, removeFromCart, coupon } = useStore();
   const copy = t(locale);
   const lines = cart
     .map((item) => {
@@ -22,7 +22,9 @@ export default function CartPage() {
     (sum, line) => sum + line.product.price * line.quantity,
     0,
   );
-  const shipping = shippingFor(subtotal);
+  const discount = discountFor(subtotal, coupon);
+  const afterDiscount = Math.max(0, subtotal - discount);
+  const shipping = shippingFor(afterDiscount);
 
   if (lines.length === 0) {
     return (
@@ -85,6 +87,12 @@ export default function CartPage() {
           <span>{copy.subtotal}</span>
           <span>{formatMoney(subtotal, locale)}</span>
         </p>
+        {discount > 0 && (
+          <p className="flex w-full max-w-sm justify-between text-[14px] text-[var(--sale)]">
+            <span>{copy.discount} {coupon}</span>
+            <span>-{formatMoney(discount, locale)}</span>
+          </p>
+        )}
         <p className="flex w-full max-w-sm justify-between text-[14px] text-[var(--muted)]">
           <span>{copy.shipping}</span>
           <span>{shipping === 0 ? copy.free : formatMoney(shipping, locale)}</span>

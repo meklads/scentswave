@@ -13,6 +13,8 @@ export function CatalogBrowser({
   gender,
   brand,
   featured,
+  sale,
+  travel,
   query = "",
   intro,
 }: {
@@ -21,6 +23,8 @@ export function CatalogBrowser({
   gender?: string;
   brand?: string;
   featured?: boolean;
+  sale?: boolean;
+  travel?: boolean;
   query?: string;
   intro?: string;
 }) {
@@ -30,8 +34,8 @@ export function CatalogBrowser({
   const params = useSearchParams();
   const sort = params.get("sort") || "default";
   const list = useMemo(
-    () => filterProducts({ gender, brand, featured, q: query, sort }),
-    [gender, brand, featured, query, sort],
+    () => filterProducts({ gender, brand, featured, sale, travel, q: query, sort }),
+    [gender, brand, featured, sale, travel, query, sort],
   );
 
   return (

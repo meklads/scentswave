@@ -33,6 +33,26 @@ function CategoryInner() {
       />
     );
   }
+  if (slug === "offers") {
+    return (
+      <CatalogBrowser
+        titleAr={copy.offers}
+        titleEn={copy.offers}
+        sale
+        intro={copy.founding}
+      />
+    );
+  }
+  if (slug === "samples") {
+    return (
+      <CatalogBrowser
+        titleAr={copy.samples}
+        titleEn={copy.samples}
+        travel
+        intro={copy.founding}
+      />
+    );
+  }
   if (slug === "picks") {
     return (
       <CatalogBrowser

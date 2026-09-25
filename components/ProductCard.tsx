@@ -9,16 +9,25 @@ import { t } from "@/lib/i18n";
 import type { Product } from "@/lib/types";
 
 export function ProductCard({ product }: { product: Product }) {
-  const { locale, addToCart } = useStore();
+  const { locale, addToCart, toggleWishlist, wishlist } = useStore();
   const copy = t(locale);
   const primary = product.images[0];
   const hover = product.images[1];
   const brand = getBrand(product.brand);
   const onSale = product.compareAtPrice > product.price && product.salePercent > 0;
+  const loved = wishlist.includes(product.slug);
 
   return (
     <article className="group">
       <div className="product-shot relative aspect-square">
+        <button
+          type="button"
+          aria-label={copy.wishlist}
+          onClick={() => toggleWishlist(product.slug)}
+          className="absolute end-2 top-2 z-10 grid h-8 w-8 place-items-center text-[var(--ink)]"
+        >
+          <Heart filled={loved} />
+        </button>
         {onSale && <span className="sale-chip">-{product.salePercent}%</span>}
         {product.featured && !onSale && (
           <span className="absolute start-3 top-3 z-10 text-[11px] font-medium tracking-[0.14em] text-[var(--gold)]">
@@ -49,7 +58,7 @@ export function ProductCard({ product }: { product: Product }) {
           )}
         </Link>
       </div>
-      <div className="flex flex-col items-center gap-1 pt-4 text-center">
+      <div className="flex flex-col items-start gap-1 pt-3 text-start">
         <p className="caps text-[10px] text-[var(--muted)]">
           {brand ? brandName(brand, locale) : product.brand}
         </p>
@@ -68,6 +77,14 @@ export function ProductCard({ product }: { product: Product }) {
         </button>
       </div>
     </article>
+  );
+}
+
+function Heart({ filled }: { filled: boolean }) {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.4">
+      <path d="M12 20s-7-4.4-9.2-8.2C1.2 9.2 2.4 6 5.6 5.6c1.8-.2 3.3.7 4.2 2 0.9-1.3 2.4-2.2 4.2-2 3.2.4 4.4 3.6 2.8 6.2C19 15.6 12 20 12 20z" />
+    </svg>
   );
 }
 

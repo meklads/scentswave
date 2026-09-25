@@ -56,10 +56,17 @@ export default function ProductPage() {
     <div>
       <div className="pdp">
         <div className="pdp-visual">
+          <button
+            type="button"
+            onClick={() => toggleWishlist(product.slug)}
+            className="absolute start-5 top-5 z-10 grid h-10 w-10 place-items-center"
+            aria-label={copy.wishlist}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill={loved ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.4">
+              <path d="M12 20s-7-4.4-9.2-8.2C1.2 9.2 2.4 6 5.6 5.6c1.8-.2 3.3.7 4.2 2 0.9-1.3 2.4-2.2 4.2-2 3.2.4 4.4 3.6 2.8 6.2C19 15.6 12 20 12 20z" />
+            </svg>
+          </button>
           <div className="product-shot relative aspect-square w-full max-w-[520px]">
-            {product.salePercent > 0 && product.compareAtPrice > product.price && (
-              <span className="sale-chip">-{product.salePercent}%</span>
-            )}
             {image && (
               <Image
                 src={image}
@@ -71,14 +78,34 @@ export default function ProductPage() {
               />
             )}
           </div>
+          {product.images.length > 1 && (
+            <div className="mt-4 flex justify-center gap-2">
+              {product.images.map((src, i) => (
+                <button
+                  key={src}
+                  type="button"
+                  onClick={() => setActive(i)}
+                  className={`product-shot relative h-14 w-14 ${active === i ? "outline outline-1 outline-[var(--ink)]" : ""}`}
+                >
+                  <Image src={src} alt="" fill className="object-contain p-1" />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="pdp-buy">
           <p className="kicker">{brandLabel}</p>
-          <h1 className="serif mt-4">{productShort(product, locale)}</h1>
-          <div className="mt-5">
+          <h1 className="serif mt-3">{productShort(product, locale)}</h1>
+          <div className="mt-4 flex flex-wrap items-center gap-2">
             <Price product={product} locale={locale} size="pdp" />
+            {product.salePercent > 0 && product.compareAtPrice > product.price && (
+              <span className="rounded-full bg-[var(--sale)] px-2 py-0.5 text-[12px] font-medium text-white">
+                -{product.salePercent}%
+              </span>
+            )}
           </div>
+          <p className="mt-1 text-[12px] text-[var(--muted)]">{copy.vatIncl}</p>
           <p className="mt-3 text-[13px] text-[var(--muted)]">
             {concentrationLabel(product, locale)} · {descriptor(product, locale)}
           </p>
@@ -99,19 +126,24 @@ export default function ProductPage() {
             {product.inStock ? copy.addToCart : copy.soldOut}
           </button>
 
-          <button
-            type="button"
-            onClick={() => toggleWishlist(product.slug)}
-            className="mt-4 text-[13px] text-[var(--muted)]"
-          >
-            {loved ? copy.added : copy.wishlist}
-          </button>
+          <div className="mt-8 rounded-2xl border border-[var(--line)] bg-[var(--ivory)] p-4">
+            <p className="text-[14px] font-semibold">{brandLabel}</p>
+            <p className="mt-1 text-[13px] text-[var(--muted)]">{copy.brandOriginal}</p>
+          </div>
 
-          <div className="mt-10">
+          <div className="mt-8">
             <details className="acc" open>
               <summary>{copy.description}</summary>
               <div className="acc-body">
                 {locale === "ar" ? product.descriptionAr : product.descriptionEn}
+              </div>
+            </details>
+            <details className="acc">
+              <summary>{copy.specs}</summary>
+              <div className="acc-body">
+                <p>{copy.size} — {product.sizeMl}ml</p>
+                <p>{copy.concentration} — {concentrationLabel(product, locale)}</p>
+                <p>{copy.gender} — {product.gender === "men" ? copy.men : copy.women}</p>
               </div>
             </details>
             <details className="acc">
@@ -130,8 +162,12 @@ export default function ProductPage() {
         </div>
       </div>
 
+      <section className="wrap py-10">
+        <p className="text-[16px] font-semibold">{copy.firstReview}</p>
+      </section>
+
       {pair && <CompleteSet product={product} pair={pair} />}
-      <UpsellRail title={copy.alsoLove} products={related} />
+      <UpsellRail title={copy.recommended} products={related} />
       <UpsellRail title={copy.recentlyViewed} products={recent} />
     </div>
   );

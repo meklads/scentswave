@@ -29,10 +29,10 @@ export function Header() {
 
   const nav = [
     { href: "/shop", label: copy.fragrances },
-    { href: "/collections", label: copy.collections },
+    { href: "/category/offers", label: copy.offers },
+    { href: "/category/samples", label: copy.samples },
     { href: "/category/picks", label: copy.gifts },
-    { href: "/discover", label: copy.discovery },
-    { href: "/house", label: copy.houseOf },
+    { href: "/house", label: copy.house },
   ];
 
   return (

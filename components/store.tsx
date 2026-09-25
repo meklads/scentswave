@@ -16,6 +16,8 @@ type StoreState = {
   wishlist: string[];
   cartOpen: boolean;
   recentlyViewed: string[];
+  coupon: string | null;
+  setCoupon: (code: string | null) => boolean;
   setLocale: (locale: Locale) => void;
   addToCart: (slug: string, quantity?: number) => void;
   setQty: (slug: string, quantity: number) => void;
@@ -37,6 +39,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [recentlyViewed, setRecentlyViewed] = useState<string[]>([]);
+  const [coupon, setCouponState] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -48,6 +51,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
         if (Array.isArray(parsed.cart)) setCart(parsed.cart);
         if (Array.isArray(parsed.wishlist)) setWishlist(parsed.wishlist);
         if (Array.isArray(parsed.recentlyViewed)) setRecentlyViewed(parsed.recentlyViewed);
+        if (typeof parsed.coupon === "string" || parsed.coupon === null) setCouponState(parsed.coupon ?? null);
       }
     } catch {
       /* ignore */
@@ -59,11 +63,11 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
     if (!ready) return;
     localStorage.setItem(
       KEY,
-      JSON.stringify({ locale, cart, wishlist, recentlyViewed }),
+      JSON.stringify({ locale, cart, wishlist, recentlyViewed, coupon }),
     );
     document.documentElement.lang = locale;
     document.documentElement.dir = locale === "ar" ? "rtl" : "ltr";
-  }, [ready, locale, cart, wishlist, recentlyViewed]);
+  }, [ready, locale, cart, wishlist, recentlyViewed, coupon]);
 
   const setLocale = useCallback((next: Locale) => setLocaleState(next), []);
   const openCart = useCallback(() => setCartOpen(true), []);
@@ -102,6 +106,17 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
     );
   }, []);
 
+  const setCoupon = useCallback((code: string | null) => {
+    if (!code) {
+      setCouponState(null);
+      return true;
+    }
+    const next = code.trim().toUpperCase();
+    if (next !== "WAVE20") return false;
+    setCouponState(next);
+    return true;
+  }, []);
+
   const viewProduct = useCallback((slug: string) => {
     setRecentlyViewed((prev) => [slug, ...prev.filter((s) => s !== slug)].slice(0, 8));
   }, []);
@@ -118,6 +133,8 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
       wishlist,
       cartOpen,
       recentlyViewed,
+      coupon,
+      setCoupon,
       setLocale,
       addToCart,
       setQty,
@@ -135,6 +152,8 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
       wishlist,
       cartOpen,
       recentlyViewed,
+      coupon,
+      setCoupon,
       setLocale,
       addToCart,
       setQty,

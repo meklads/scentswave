@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Hero } from "@/components/Hero";
 import { ProductCarousel } from "@/components/ProductCarousel";
 import { useStore } from "@/components/store";
-import { products } from "@/lib/catalog";
+import { giftProducts, products, saleProducts, travelProducts } from "@/lib/catalog";
 import { t } from "@/lib/i18n";
 
 export function HomeView() {
@@ -16,6 +16,9 @@ export function HomeView() {
   const featured = products.filter((item) => item.featured);
   const newest = [...products].slice(-12).reverse();
   const trending = products.slice(0, 12);
+  const offers = saleProducts(12);
+  const samples = travelProducts(12);
+  const gifts = giftProducts(12);
 
   const categories = [
     { href: "/shop", title: copy.fragrances, img: men[1]?.images[0] },
@@ -27,6 +30,12 @@ export function HomeView() {
   return (
     <div>
       <Hero />
+
+      <ProductCarousel
+        title={copy.offers}
+        href="/category/offers"
+        tabs={[{ id: "offers", label: copy.offers, products: offers }]}
+      />
 
       <ProductCarousel
         title={copy.newLaunches}
@@ -42,6 +51,18 @@ export function HomeView() {
           { id: "men", label: copy.menEdit, products: men.slice(0, 12) },
           { id: "women", label: copy.womenEdit, products: women.slice(0, 12) },
         ]}
+      />
+
+      <ProductCarousel
+        title={copy.samples}
+        href="/category/samples"
+        tabs={[{ id: "samples", label: copy.samples, products: samples }]}
+      />
+
+      <ProductCarousel
+        title={copy.gifts}
+        href="/category/picks"
+        tabs={[{ id: "gifts", label: copy.gifts, products: gifts }]}
       />
 
       <section className="salon">
