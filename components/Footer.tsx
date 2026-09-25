@@ -43,27 +43,27 @@ export function Footer() {
         </Col>
         <div>
           <p className="footer-label">{copy.signUp}</p>
-          <p className="mt-4 text-[14px] leading-8 text-[var(--cream-mute)]">{copy.insiderBody}</p>
+          <p className="mt-4 text-[14px] leading-8 text-[var(--on-black-soft)]">{copy.insiderBody}</p>
           <form className="footer-subscribe mt-7 flex items-end gap-4">
             <input
               type="email"
               required
               placeholder={copy.email}
-              className="w-full bg-transparent py-3 text-[14px] outline-none placeholder:text-[var(--cream-mute)]"
+              className="w-full bg-transparent py-3 text-[14px] outline-none placeholder:text-[var(--on-black-soft)]"
             />
             <button type="submit" className="footer-label pb-3">
               {copy.validate}
             </button>
           </form>
           <p className="footer-label mt-10 mb-3">{copy.followUs}</p>
-          <p className="text-[14px] text-[var(--cream-mute)]">{EMAIL}</p>
+          <p className="text-[14px] text-[var(--on-black-soft)]">{EMAIL}</p>
         </div>
       </div>
 
       <div className="footer-end">
         <div className="wrap flex flex-col items-center gap-6 py-12 text-center">
           <Logo height={72} variant="original" className="justify-center" />
-          <p className="max-w-md text-[13px] leading-7 text-[var(--cream-mute)]">{copy.founding}</p>
+          <p className="max-w-md text-[13px] leading-7 text-[var(--on-black-soft)]">{copy.founding}</p>
           <p className="footer-label">© {year} {copy.rights}</p>
         </div>
       </div>
@@ -75,7 +75,7 @@ function Col({ title, children }: { title: string; children: React.ReactNode }) 
   return (
     <div>
       <p className="footer-label mb-6">{title}</p>
-      <div className="flex flex-col gap-3 text-[14px] leading-7 text-[var(--cream-mute)]">
+      <div className="flex flex-col gap-3 text-[15px] leading-7 text-[var(--on-black-soft)]">
         {children}
       </div>
     </div>

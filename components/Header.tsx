@@ -90,7 +90,7 @@ export function Header() {
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder={copy.searchPlaceholder}
-              className="wrap w-full bg-transparent py-5 text-[15px] outline-none placeholder:text-[var(--cream-mute)]"
+              className="wrap w-full bg-transparent py-5 text-[15px] outline-none placeholder:text-[var(--on-black-soft)]"
             />
           </form>
         )}

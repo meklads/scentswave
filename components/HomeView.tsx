@@ -105,7 +105,7 @@ export function HomeView() {
         <div className="wrap py-20 text-center md:py-28">
           <p className="kicker kicker-light">{copy.houseOf}</p>
           <h2 className="serif mx-auto mt-5 max-w-3xl">{copy.precious}</h2>
-          <p className="mx-auto mt-5 max-w-lg text-[15px] leading-8 text-[var(--cream-mute)]">{copy.founding}</p>
+          <p className="mx-auto mt-5 max-w-lg text-[15px] leading-8 text-[var(--on-black-soft)]">{copy.founding}</p>
           <Link href="/house" className="u-link u-link-light mt-8 inline-block">
             {copy.discover}
           </Link>
