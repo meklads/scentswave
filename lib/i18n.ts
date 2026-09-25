@@ -217,6 +217,10 @@ export const dictionaries = {
     signUp: "سجّل",
     discovery: "اكتشف",
     precious: "نادر. حاضر. شخصي.",
+    promiseShip: "شحن داخل المملكة",
+    promiseCare: "عناية عبر واتساب",
+    promiseGift: "تغليف للهدية",
+    promiseOrigin: "عطور أصلية",
   },
   en: {
     storeName: "Scents Wave",
@@ -434,6 +438,10 @@ export const dictionaries = {
     signUp: "Sign up",
     discovery: "Discovery",
     precious: "Precious. Potent. Personal.",
+    promiseShip: "Kingdom-wide delivery",
+    promiseCare: "Care on WhatsApp",
+    promiseGift: "Gift wrapping",
+    promiseOrigin: "Original fragrances",
   },
 } as const;
 

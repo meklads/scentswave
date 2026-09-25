@@ -13,13 +13,21 @@ export function Footer() {
 
   return (
     <footer className="site-footer mt-auto">
-      <div className="wrap grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4 lg:gap-10 lg:py-20">
+      <div className="footer-promises">
+        <div className="wrap grid gap-6 py-10 text-center sm:grid-cols-2 lg:grid-cols-4">
+          <p>{copy.promiseShip}</p>
+          <p>{copy.promiseCare}</p>
+          <p>{copy.promiseGift}</p>
+          <p>{copy.promiseOrigin}</p>
+        </div>
+      </div>
+
+      <div className="wrap grid gap-14 py-16 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 lg:py-20">
         <Col title={copy.houseOf}>
           <Link href="/house">{copy.house}</Link>
           <Link href="/discover">{copy.discovery}</Link>
           <Link href="/journal">{copy.journal}</Link>
           <Link href="/contact">{copy.contact}</Link>
-          <p className="pt-2">{copy.founding}</p>
         </Col>
         <Col title={copy.customerCare}>
           <Link href="/contact">{copy.contact}</Link>
@@ -34,8 +42,8 @@ export function Footer() {
         </Col>
         <div>
           <p className="caps mb-5">{copy.signUp}</p>
-          <p className="text-[13px] leading-7 text-[var(--muted)]">{copy.insiderBody}</p>
-          <form className="mt-6 flex items-end gap-4 border-b border-[var(--ink)]">
+          <p className="text-[14px] leading-8 text-[var(--muted)]">{copy.insiderBody}</p>
+          <form className="mt-7 flex items-end gap-4 border-b border-[var(--ink)]/25">
             <input
               type="email"
               required
@@ -46,14 +54,15 @@ export function Footer() {
               {copy.validate}
             </button>
           </form>
-          <p className="caps mt-8 mb-3">{copy.followUs}</p>
-          <p className="text-[13px] text-[var(--muted)]">{EMAIL}</p>
+          <p className="caps mt-10 mb-3">{copy.followUs}</p>
+          <p className="text-[14px] text-[var(--muted)]">{EMAIL}</p>
         </div>
       </div>
 
-      <div className="border-t border-[rgba(18,18,18,0.1)]">
-        <div className="wrap flex flex-col items-center gap-5 py-8 text-center">
-          <Logo height={44} variant="full" className="justify-center" />
+      <div className="footer-end">
+        <div className="wrap flex flex-col items-center gap-6 py-10 text-center">
+          <Logo height={48} variant="full" className="justify-center" />
+          <p className="text-[13px] leading-7 text-[var(--muted)]">{copy.founding}</p>
           <p className="caps text-[var(--muted)]">© {year} {copy.rights}</p>
         </div>
       </div>
@@ -64,8 +73,8 @@ export function Footer() {
 function Col({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="caps mb-5">{title}</p>
-      <div className="flex flex-col gap-2.5 text-[13px] leading-7 text-[var(--muted)]">
+      <p className="caps mb-6">{title}</p>
+      <div className="flex flex-col gap-3 text-[14px] leading-7 text-[var(--muted)]">
         {children}
       </div>
     </div>

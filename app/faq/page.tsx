@@ -1,5 +1,6 @@
 "use client";
 
+import { PageIntro } from "@/components/PageIntro";
 import { useStore } from "@/components/store";
 import { t } from "@/lib/i18n";
 
@@ -11,7 +12,7 @@ const FAQ = {
     },
     {
       q: "ما طرق الدفع؟",
-      a: "مدى وفيزا وماستركارد عبر PayTabs، والدفع عند الاستلام برسوم ١٥ ريالًا.",
+      a: "تأكيد الطلب عبر واتساب، أو الدفع عند الاستلام برسوم ١٥ ريالًا.",
     },
     {
       q: "كيف يتم الشحن؟",
@@ -29,7 +30,7 @@ const FAQ = {
     },
     {
       q: "Which payment methods do you accept?",
-      a: "Mada, Visa and Mastercard via PayTabs, plus cash on delivery for SAR 15.",
+      a: "Confirm the order on WhatsApp, or pay cash on delivery for SAR 15.",
     },
     {
       q: "How does shipping work?",
@@ -48,15 +49,14 @@ export default function FaqPage() {
   const items = FAQ[locale];
 
   return (
-    <div className="wrap max-w-3xl py-12 md:py-16">
-      <p className="caps">{copy.customerCare}</p>
-      <h1 className="serif mt-5">{copy.faq}</h1>
-      <div className="mt-16 space-y-12">
+    <div>
+      <PageIntro kicker={copy.customerCare} title={copy.faq} />
+      <div className="wrap max-w-2xl pb-20">
         {items.map((item) => (
-          <section key={item.q}>
-            <h2 className="serif">{item.q}</h2>
-            <p className="mt-4 font-light leading-8 text-[var(--muted)]">{item.a}</p>
-          </section>
+          <details key={item.q} className="acc">
+            <summary>{item.q}</summary>
+            <div className="acc-body">{item.a}</div>
+          </details>
         ))}
       </div>
     </div>

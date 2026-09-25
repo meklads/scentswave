@@ -62,7 +62,7 @@ export default function ProductPage() {
         <span>{productShort(product, locale)}</span>
       </nav>
 
-      <div className="wrap grid gap-8 py-6 lg:grid-cols-2 lg:gap-14 lg:py-8">
+      <div className="wrap grid gap-10 py-10 lg:grid-cols-2 lg:gap-20 lg:py-16">
         <div>
           <div className="product-shot relative aspect-square">
             {product.salePercent > 0 && product.compareAtPrice > product.price && (

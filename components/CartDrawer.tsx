@@ -30,7 +30,7 @@ export function CartDrawer() {
   return (
     <div className="fixed inset-0 z-[60]">
       <button type="button" className="drawer-scrim absolute inset-0" onClick={closeCart} aria-label={copy.close} />
-      <aside className="absolute inset-y-0 end-0 flex w-full max-w-[440px] flex-col bg-white shadow-[-24px_0_60px_rgba(0,0,0,0.18)]">
+      <aside className="absolute inset-y-0 end-0 flex w-full max-w-[440px] flex-col bg-[var(--ivory)]">
         <div className="flex items-center justify-between border-b border-[var(--line)] px-6 py-5">
           <p className="text-sm">
             {copy.bagTitle} ({cart.reduce((n, i) => n + i.quantity, 0)} {copy.items})

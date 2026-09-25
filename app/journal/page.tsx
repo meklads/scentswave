@@ -10,9 +10,9 @@ export default function JournalPage() {
 
   return (
     <article>
-      <section className="wrap py-10 md:py-14">
-        <p className="caps text-[var(--muted)]">{copy.journal}</p>
-        <h1 className="serif mt-3 max-w-3xl">{copy.artTitle}</h1>
+      <section className="wrap py-14 text-center md:py-20">
+        <p className="kicker">{copy.journal}</p>
+        <h1 className="serif mx-auto mt-5 max-w-3xl">{copy.artTitle}</h1>
       </section>
       <div className="relative h-[50vh] min-h-[340px] bg-[var(--paper)]">
         <Image src="/images/logo/bannet3.png" alt="" fill className="object-cover" />

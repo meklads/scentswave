@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { PageIntro } from "@/components/PageIntro";
 import { ProductGrid } from "@/components/ProductCard";
 import { useStore } from "@/components/store";
 import { products } from "@/lib/catalog";
@@ -12,19 +13,20 @@ export default function WishlistPage() {
   const list = products.filter((item) => wishlist.includes(item.slug));
 
   return (
-    <div className="wrap py-12 md:py-16">
-      <p className="caps">{copy.maison}</p>
-      <h1 className="serif mt-5 mb-16">{copy.wishlist}</h1>
-      {list.length === 0 ? (
-        <div className="py-16">
-          <p className="text-[var(--muted)]">{copy.emptyWishlist}</p>
-          <Link href="/shop" className="cta cta-ghost mt-8 inline-flex">
-            {copy.continueShopping}
-          </Link>
-        </div>
-      ) : (
-        <ProductGrid products={list} />
-      )}
+    <div>
+      <PageIntro kicker={copy.maison} title={copy.wishlist} />
+      <div className="wrap pb-20">
+        {list.length === 0 ? (
+          <div className="py-8 text-center">
+            <p className="text-[var(--muted)]">{copy.emptyWishlist}</p>
+            <Link href="/shop" className="cta mt-8 inline-flex">
+              {copy.continueShopping}
+            </Link>
+          </div>
+        ) : (
+          <ProductGrid products={list} />
+        )}
+      </div>
     </div>
   );
 }

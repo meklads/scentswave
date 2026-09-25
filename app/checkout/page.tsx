@@ -57,7 +57,7 @@ export default function CheckoutPage() {
         <p className="mt-3 text-[var(--muted)]">
           {copy.orderNumber}: {done}
         </p>
-        <Link href="/shop" className="cta cta-solid mt-8">
+        <Link href="/shop" className="cta mt-8 inline-flex">
           {copy.continueShopping}
         </Link>
       </div>
@@ -163,15 +163,15 @@ export default function CheckoutPage() {
           </label>
         </section>
 
-        <button className="cta cta-solid w-full">{copy.orderWhatsapp}</button>
+        <button className="cta w-full">{copy.orderWhatsapp}</button>
         <p className="text-center text-[12px] text-[var(--muted)]">{copy.secureNote}</p>
       </form>
 
-      <aside className="h-fit bg-[var(--paper)] p-5 text-sm lg:p-6">
+      <aside className="panel h-fit text-sm">
         {lines.map((line) => (
           <div key={line.slug} className="flex items-center gap-3 border-b border-[var(--line)] py-3">
             <span className="product-shot relative h-14 w-12 shrink-0">
-              <span className="absolute -top-2 -end-2 z-10 grid h-5 min-w-5 place-items-center bg-black text-[10px] text-white">
+              <span className="absolute -top-2 -end-2 z-10 grid h-5 min-w-5 place-items-center border border-[var(--ink)] bg-[var(--ivory)] text-[10px]">
                 {line.quantity}
               </span>
               <Image src={line.product.images[0]} alt="" fill className="object-contain p-1.5" />

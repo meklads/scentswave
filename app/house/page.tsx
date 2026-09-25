@@ -18,7 +18,7 @@ export default function HousePage() {
         <h1 className="serif mx-auto mt-10 max-w-3xl">{copy.philosophyTitle}</h1>
         <p className="mx-auto mt-6 max-w-xl text-[15px] leading-8 text-[var(--muted)]">{copy.philosophyBody}</p>
       </section>
-      <section className="relative h-[56vh] min-h-[380px] bg-[#121212]">
+      <section className="relative h-[56vh] min-h-[380px] bg-[var(--sand)]">
         <Image src="/images/logo/bannet1.png" alt="" fill className="object-cover" />
       </section>
       <section className="wrap grid gap-12 py-16 md:grid-cols-3 md:gap-16 md:py-24">

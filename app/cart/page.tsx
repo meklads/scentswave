@@ -26,10 +26,11 @@ export default function CartPage() {
 
   if (lines.length === 0) {
     return (
-      <div className="wrap py-16 text-center">
-        <h1 className="serif">{copy.bagTitle}</h1>
+      <div className="wrap py-20 text-center">
+        <p className="kicker">{copy.houseOf}</p>
+        <h1 className="serif mt-5">{copy.bagTitle}</h1>
         <p className="mt-5 text-[var(--muted)]">{copy.emptyCart}</p>
-        <Link href="/shop" className="cta cta-solid mt-8">
+        <Link href="/shop" className="cta mt-10 inline-flex">
           {copy.continueShopping}
         </Link>
       </div>
@@ -37,13 +38,13 @@ export default function CartPage() {
   }
 
   return (
-    <div className="wrap py-8 md:py-10">
-      <nav className="mb-4 text-[12px] text-[var(--muted)]">
+    <div className="wrap py-12 md:py-16">
+      <nav className="mb-6 text-center text-[12px] text-[var(--muted)]">
         <Link href="/">{copy.home}</Link>
         <span className="px-2">/</span>
         <span>{copy.bagTitle}</span>
       </nav>
-      <h1 className="serif mb-8">{copy.bagTitle}</h1>
+      <h1 className="serif mb-12 text-center">{copy.bagTitle}</h1>
       <div className="hidden border-b border-[var(--line)] pb-3 text-[12px] text-[var(--muted)] md:grid md:grid-cols-[1fr_140px_160px_120px]">
         <span>{copy.productCol}</span>
         <span>{copy.priceCol}</span>
@@ -88,7 +89,7 @@ export default function CartPage() {
           <span>{copy.shipping}</span>
           <span>{shipping === 0 ? copy.free : formatMoney(shipping, locale)}</span>
         </p>
-        <Link href="/checkout" className="cta cta-solid w-full max-w-sm">
+        <Link href="/checkout" className="cta w-full max-w-sm">
           {copy.checkout}
         </Link>
         <Link href="/shop" className="u-link">

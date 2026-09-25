@@ -26,7 +26,7 @@ export default function CollectionsPage() {
       <div className="wrap grid grid-cols-2 gap-5 pb-20 md:grid-cols-4 md:gap-6">
         {tiles.map((tile) => (
           <Link key={tile.href} href={tile.href} className="group">
-            <div className="relative aspect-[3/4] overflow-hidden bg-[#121212]">
+            <div className="relative aspect-[3/4] overflow-hidden bg-[var(--sand)]">
               <Image
                 src={tile.img}
                 alt={tile.title}
