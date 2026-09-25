@@ -139,8 +139,11 @@ export function filterProducts(options: {
   inStock?: boolean;
 }) {
   let list = [...products];
-  if (options.gender === "men" || options.gender === "women") {
-    list = list.filter((item) => item.gender === options.gender);
+  if (options.gender === "men") {
+    list = list.filter((item) => item.gender === "men" || item.gender === "unisex");
+  }
+  if (options.gender === "women") {
+    list = list.filter((item) => item.gender === "women" || item.gender === "unisex");
   }
   if (options.brand) {
     list = list.filter((item) => item.brand === options.brand);

@@ -19,10 +19,12 @@ const HOME_SETS = ["women", "niche", "signature"];
 export function HomeView() {
   const { locale } = useStore();
   const copy = t(locale);
-  const men = products.filter((item) => item.gender === "men");
-  const women = products.filter((item) => item.gender === "women");
+  const rank = (a: (typeof products)[number], b: (typeof products)[number]) =>
+    Number(b.featured) - Number(a.featured) || a.price - b.price;
+  const men = products.filter((item) => item.gender === "men").sort(rank);
+  const women = products.filter((item) => item.gender === "women").sort(rank);
   const featured = products.filter((item) => item.featured);
-  const trending = products.slice(0, 12);
+  const trending = featured;
   const offers = saleProducts(12);
   const samples = sampleProducts.filter((item) => item.featured);
   const sets = HOME_SETS.map((id) => discoverySets.find((item) => item.id === id)).filter(

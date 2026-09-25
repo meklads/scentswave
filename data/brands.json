@@ -11,14 +11,14 @@
     "nameAr": "جيفنشي",
     "nameEn": "Givenchy",
     "logo": "/images/brands/givenchy.jpg",
-    "count": 9
+    "count": 4
   },
   {
     "slug": "aramis",
     "nameAr": "اراميس",
     "nameEn": "Aramis",
     "logo": "/images/brands/aramis.jpg",
-    "count": 3
+    "count": 1
   },
   {
     "slug": "bentley",
@@ -46,28 +46,28 @@
     "nameAr": "بربري",
     "nameEn": "Burberry",
     "logo": "/images/brands/burberry.jpg",
-    "count": 3
+    "count": 2
   },
   {
     "slug": "bvlgari",
     "nameAr": "بولغاري",
     "nameEn": "Bvlgari",
     "logo": "/images/brands/bvlgari.jpg",
-    "count": 4
+    "count": 3
   },
   {
     "slug": "calvin-klein",
     "nameAr": "كالفن كلاين",
     "nameEn": "Calvin Klein",
     "logo": null,
-    "count": 6
+    "count": 4
   },
   {
     "slug": "carolina-herrera",
     "nameAr": "كارولينا هيريرا",
     "nameEn": "Carolina Herrera",
     "logo": "/images/brands/carolina-herrera.jpg",
-    "count": 6
+    "count": 5
   },
   {
     "slug": "caron",
@@ -81,7 +81,7 @@
     "nameAr": "كارتييه",
     "nameEn": "Cartier",
     "logo": null,
-    "count": 6
+    "count": 3
   },
   {
     "slug": "chanel",
@@ -102,7 +102,7 @@
     "nameAr": "دافيدوف",
     "nameEn": "Davidoff",
     "logo": null,
-    "count": 6
+    "count": 1
   },
   {
     "slug": "dior",
@@ -123,14 +123,14 @@
     "nameAr": "دنهل",
     "nameEn": "Dunhill",
     "logo": "/images/brands/dunhill.jpg",
-    "count": 9
+    "count": 2
   },
   {
     "slug": "guerlain",
     "nameAr": "غيرلان",
     "nameEn": "Guerlain",
     "logo": "/images/brands/guerlain.jpg",
-    "count": 5
+    "count": 2
   },
   {
     "slug": "hermes",
@@ -144,42 +144,42 @@
     "nameAr": "جوب",
     "nameEn": "Joop",
     "logo": "/images/brands/joop.jpg",
-    "count": 2
+    "count": 1
   },
   {
     "slug": "juicy-couture",
     "nameAr": "جوسي كوتور",
     "nameEn": "Juicy Couture",
     "logo": "/images/brands/juicy-couture.jpg",
-    "count": 3
+    "count": 2
   },
   {
     "slug": "lacoste",
     "nameAr": "لاكوست",
     "nameEn": "Lacoste",
     "logo": null,
-    "count": 6
+    "count": 3
   },
   {
     "slug": "lalique",
     "nameAr": "لاليك",
     "nameEn": "Lalique",
     "logo": "/images/brands/lalique.jpg",
-    "count": 3
+    "count": 2
   },
   {
     "slug": "lancome",
     "nameAr": "لانكوم",
     "nameEn": "Lancôme",
     "logo": "/images/brands/lancome.jpg",
-    "count": 8
+    "count": 6
   },
   {
     "slug": "loewe",
     "nameAr": "لويفي",
     "nameEn": "Loewe",
     "logo": "/images/brands/loewe.jpg",
-    "count": 3
+    "count": 2
   },
   {
     "slug": "prada",
@@ -200,7 +200,7 @@
     "nameAr": "مونت بلانك",
     "nameEn": "Montblanc",
     "logo": "/images/brands/mont-blanc.jpg",
-    "count": 5
+    "count": 3
   },
   {
     "slug": "montale",
@@ -210,25 +210,11 @@
     "count": 1
   },
   {
-    "slug": "roberto-cavalli",
-    "nameAr": "روبرتو كافالي",
-    "nameEn": "Roberto Cavalli",
-    "logo": "/images/brands/roberto-cavalli.jpg",
-    "count": 5
-  },
-  {
-    "slug": "st-dupont",
-    "nameAr": "اس تي ديبونت",
-    "nameEn": "S.T. Dupont",
-    "logo": "/images/brands/s-t-dupont.jpg",
-    "count": 2
-  },
-  {
     "slug": "tom-ford",
     "nameAr": "توم فورد",
     "nameEn": "Tom Ford",
     "logo": "/images/brands/tom-ford.jpg",
-    "count": 5
+    "count": 4
   },
   {
     "slug": "trussardi",
@@ -249,6 +235,6 @@
     "nameAr": "إيف سان لوران",
     "nameEn": "Yves Saint Laurent",
     "logo": "/images/brands/yves-saint-laurent.jpg",
-    "count": 3
+    "count": 1
   }
 ]

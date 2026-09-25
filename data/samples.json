@@ -210,7 +210,7 @@
     "perfumeNameAr": "أومبر ليذر",
     "perfumeNameEn": "Ombre Leather",
     "brand": "tom-ford",
-    "gender": "men",
+    "gender": "unisex",
     "featured": true,
     "availability": true,
     "sizes": [
@@ -442,7 +442,7 @@
     "perfumeNameEn": "Y Le Parfum",
     "brand": "ysl",
     "gender": "men",
-    "featured": false,
+    "featured": true,
     "availability": true,
     "sizes": [
       {
@@ -465,39 +465,6 @@
         "priceSAR": 99,
         "sku": "sample-ysl-y-le-parfum-10",
         "image": "/images/samples/vial-10.svg"
-      }
-    ]
-  },
-  {
-    "id": "ysl-la-nuit",
-    "sourceSlug": "yves-saint-laurent-la-nuit-de-lhomme-intense",
-    "perfumeNameAr": "لا نوي إنتنس",
-    "perfumeNameEn": "La Nuit de L'Homme Intense",
-    "brand": "ysl",
-    "gender": "men",
-    "featured": true,
-    "availability": true,
-    "sizes": [
-      {
-        "sizeMl": 2,
-        "type": "sample",
-        "priceSAR": 35,
-        "sku": "sample-ysl-la-nuit-2",
-        "image": "/images/samples/vial-2.svg"
-      },
-      {
-        "sizeMl": 3,
-        "type": "sample",
-        "priceSAR": 49,
-        "sku": "sample-ysl-la-nuit-3",
-        "image": "/images/samples/vial-3.svg"
-      },
-      {
-        "sizeMl": 5,
-        "type": "decant",
-        "priceSAR": 69,
-        "sku": "sample-ysl-la-nuit-5",
-        "image": "/images/samples/vial-5.svg"
       }
     ]
   },
@@ -535,32 +502,6 @@
     ]
   },
   {
-    "id": "givenchy-ange-ou-demon",
-    "sourceSlug": "ange-ou-demon-givenchy",
-    "perfumeNameAr": "آنج أو ديمون",
-    "perfumeNameEn": "Ange ou Démon",
-    "brand": "givenchy",
-    "gender": "women",
-    "featured": false,
-    "availability": true,
-    "sizes": [
-      {
-        "sizeMl": 2,
-        "type": "sample",
-        "priceSAR": 32,
-        "sku": "sample-givenchy-ange-2",
-        "image": "/images/samples/vial-2.svg"
-      },
-      {
-        "sizeMl": 5,
-        "type": "decant",
-        "priceSAR": 65,
-        "sku": "sample-givenchy-ange-5",
-        "image": "/images/samples/vial-5.svg"
-      }
-    ]
-  },
-  {
     "id": "ck-euphoria",
     "sourceSlug": "calvin-klein-euphoria",
     "perfumeNameAr": "يوفوريا",
@@ -582,32 +523,6 @@
         "type": "decant",
         "priceSAR": 49,
         "sku": "sample-ck-euphoria-5",
-        "image": "/images/samples/vial-5.svg"
-      }
-    ]
-  },
-  {
-    "id": "carolina-herrera-chic",
-    "sourceSlug": "carolina-herrera-chic",
-    "perfumeNameAr": "شيك",
-    "perfumeNameEn": "Chic",
-    "brand": "carolina-herrera",
-    "gender": "women",
-    "featured": false,
-    "availability": true,
-    "sizes": [
-      {
-        "sizeMl": 2,
-        "type": "sample",
-        "priceSAR": 29,
-        "sku": "sample-ch-chic-2",
-        "image": "/images/samples/vial-2.svg"
-      },
-      {
-        "sizeMl": 5,
-        "type": "decant",
-        "priceSAR": 55,
-        "sku": "sample-ch-chic-5",
         "image": "/images/samples/vial-5.svg"
       }
     ]
@@ -641,6 +556,72 @@
         "type": "travel",
         "priceSAR": 95,
         "sku": "sample-cartier-declaration-10",
+        "image": "/images/samples/vial-10.svg"
+      }
+    ]
+  },
+  {
+    "id": "lancome-la-vie-est-belle",
+    "sourceSlug": "la-vie-est-belle-lancome",
+    "perfumeNameAr": "لا في إيست بيل",
+    "perfumeNameEn": "La Vie Est Belle",
+    "brand": "lancome",
+    "gender": "women",
+    "featured": true,
+    "availability": true,
+    "sizes": [
+      {
+        "sizeMl": 2,
+        "type": "sample",
+        "priceSAR": 35,
+        "sku": "sample-lancome-lveb-2",
+        "image": "/images/samples/vial-2.svg"
+      },
+      {
+        "sizeMl": 5,
+        "type": "decant",
+        "priceSAR": 69,
+        "sku": "sample-lancome-lveb-5",
+        "image": "/images/samples/vial-5.svg"
+      },
+      {
+        "sizeMl": 10,
+        "type": "travel",
+        "priceSAR": 99,
+        "sku": "sample-lancome-lveb-10",
+        "image": "/images/samples/vial-10.svg"
+      }
+    ]
+  },
+  {
+    "id": "lancome-idole-sample",
+    "sourceSlug": "lancome-idole",
+    "perfumeNameAr": "آيدول",
+    "perfumeNameEn": "Idôle",
+    "brand": "lancome",
+    "gender": "women",
+    "featured": true,
+    "availability": true,
+    "sizes": [
+      {
+        "sizeMl": 2,
+        "type": "sample",
+        "priceSAR": 35,
+        "sku": "sample-lancome-idole-2",
+        "image": "/images/samples/vial-2.svg"
+      },
+      {
+        "sizeMl": 5,
+        "type": "decant",
+        "priceSAR": 69,
+        "sku": "sample-lancome-idole-5",
+        "image": "/images/samples/vial-5.svg"
+      },
+      {
+        "sizeMl": 10,
+        "type": "travel",
+        "priceSAR": 99,
+        "sku": "sample-lancome-idole-10",
         "image": "/images/samples/vial-10.svg"
       }
     ]

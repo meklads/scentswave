@@ -15,6 +15,7 @@ const HOUSE_KIND: Record<string, "designer" | "niche"> = {
   "giorgio-armani": "designer",
   ysl: "designer",
   givenchy: "designer",
+  lancome: "designer",
   "calvin-klein": "designer",
   "carolina-herrera": "designer",
   cartier: "designer",

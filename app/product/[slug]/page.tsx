@@ -58,7 +58,8 @@ export default function ProductPage() {
   const hasNotes = Boolean(product.topNotes || product.heartNotes || product.baseNotes);
   const brandLabel = brand ? (locale === "ar" ? brand.nameAr : brand.nameEn) : product.brand;
   const genderHref = product.gender === "women" ? "/category/women" : "/category/men";
-  const genderLabel = product.gender === "women" ? copy.women : copy.men;
+  const genderLabel =
+    product.gender === "women" ? copy.women : product.gender === "unisex" ? copy.unisex : copy.men;
 
   return (
     <div className="pdp-page">

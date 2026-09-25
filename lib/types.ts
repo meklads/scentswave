@@ -1,5 +1,5 @@
 export type Locale = "ar" | "en";
-export type Gender = "men" | "women";
+export type Gender = "men" | "women" | "unisex";
 export type Concentration = "edt" | "edp" | "parfum" | "cologne";
 export type SampleType = "sample" | "decant" | "travel";
 export type SampleGender = Gender | "unisex";
