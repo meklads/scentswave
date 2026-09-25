@@ -12,11 +12,13 @@ export function ProductCarousel({
   bar = false,
   title,
   href,
+  tone = "paper",
 }: {
   tabs: { id: string; label: string; products: Product[] }[];
   bar?: boolean;
   title?: string;
   href?: string;
+  tone?: "paper" | "blush" | "mist" | "sand" | "dusk" | "stone" | "cream";
 }) {
   const { locale } = useStore();
   const copy = t(locale);
@@ -68,8 +70,8 @@ export function ProductCarousel({
   );
 
   return (
-    <section className={bar ? "hp-section" : "wrap py-6 md:py-8"}>
-      <div className={bar ? "wrap" : undefined}>
+    <section className={`band band-${tone} ${bar ? "hp-section" : "py-10 md:py-14"}`}>
+      <div className="wrap">
         {heading}
         {bar && tabs.length > 1 && (
           <div className="hp-head">

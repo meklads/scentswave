@@ -38,9 +38,12 @@ export function CatalogBrowser({
     [gender, brand, featured, sale, travel, query, sort],
   );
 
+  const introTone = sale ? "blush" : travel ? "sand" : featured ? "dusk" : gender === "women" ? "blush" : gender === "men" ? "mist" : "stone";
+
   return (
     <div>
-      <section className="wrap py-12 text-center md:py-16">
+      <section className={`band band-${introTone}`}>
+      <div className="wrap py-12 text-center md:py-16">
         <p className="kicker">{copy.houseOf}</p>
         <h1 className="serif mt-5">{locale === "ar" ? titleAr : titleEn}</h1>
         {intro && <p className="mx-auto mt-5 max-w-xl text-[14px] leading-8 text-[var(--muted)]">{intro}</p>}
@@ -66,8 +69,9 @@ export function CatalogBrowser({
             </select>
           </label>
         </div>
+      </div>
       </section>
-      <div className="wrap pb-16">
+      <div className="wrap py-12 md:py-16">
         {list.length === 0 ? (
           <p className="py-16 text-center text-[var(--muted)]">{copy.noResults}</p>
         ) : (

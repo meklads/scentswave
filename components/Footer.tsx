@@ -14,11 +14,12 @@ export function Footer() {
   return (
     <footer className="site-footer mt-auto">
       <div className="footer-promises">
-        <div className="wrap grid gap-6 py-10 text-center sm:grid-cols-2 lg:grid-cols-4">
-          <p>{copy.promiseShip}</p>
-          <p>{copy.promiseCare}</p>
-          <p>{copy.promiseGift}</p>
-          <p>{copy.promiseOrigin}</p>
+        <div className="wrap grid gap-8 py-12 text-center sm:grid-cols-2 lg:grid-cols-4">
+          {[copy.promiseShip, copy.promiseCare, copy.promiseGift, copy.promiseOrigin].map((item) => (
+            <p key={item} className="footer-promise">
+              {item}
+            </p>
+          ))}
         </div>
       </div>
 
@@ -41,29 +42,29 @@ export function Footer() {
           <Link href="/privacy">{copy.privacy}</Link>
         </Col>
         <div>
-          <p className="caps mb-5">{copy.signUp}</p>
-          <p className="text-[14px] leading-8 text-[var(--muted)]">{copy.insiderBody}</p>
-          <form className="mt-7 flex items-end gap-4 border-b border-[var(--ink)]/25">
+          <p className="footer-label">{copy.signUp}</p>
+          <p className="mt-4 text-[14px] leading-8 text-[var(--cream-mute)]">{copy.insiderBody}</p>
+          <form className="footer-subscribe mt-7 flex items-end gap-4">
             <input
               type="email"
               required
               placeholder={copy.email}
-              className="w-full bg-transparent py-3 text-[14px] outline-none placeholder:text-[var(--muted)]"
+              className="w-full bg-transparent py-3 text-[14px] outline-none placeholder:text-[var(--cream-mute)]"
             />
-            <button type="submit" className="caps pb-3">
+            <button type="submit" className="footer-label pb-3">
               {copy.validate}
             </button>
           </form>
-          <p className="caps mt-10 mb-3">{copy.followUs}</p>
-          <p className="text-[14px] text-[var(--muted)]">{EMAIL}</p>
+          <p className="footer-label mt-10 mb-3">{copy.followUs}</p>
+          <p className="text-[14px] text-[var(--cream-mute)]">{EMAIL}</p>
         </div>
       </div>
 
       <div className="footer-end">
-        <div className="wrap flex flex-col items-center gap-6 py-10 text-center">
-          <Logo height={48} variant="full" className="justify-center" />
-          <p className="text-[13px] leading-7 text-[var(--muted)]">{copy.founding}</p>
-          <p className="caps text-[var(--muted)]">© {year} {copy.rights}</p>
+        <div className="wrap flex flex-col items-center gap-6 py-12 text-center">
+          <Logo height={72} variant="original" className="justify-center" />
+          <p className="max-w-md text-[13px] leading-7 text-[var(--cream-mute)]">{copy.founding}</p>
+          <p className="footer-label">© {year} {copy.rights}</p>
         </div>
       </div>
     </footer>
@@ -73,8 +74,8 @@ export function Footer() {
 function Col({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="caps mb-6">{title}</p>
-      <div className="flex flex-col gap-3 text-[14px] leading-7 text-[var(--muted)]">
+      <p className="footer-label mb-6">{title}</p>
+      <div className="flex flex-col gap-3 text-[14px] leading-7 text-[var(--cream-mute)]">
         {children}
       </div>
     </div>

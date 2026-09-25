@@ -32,12 +32,14 @@ export function HomeView() {
       <Hero />
 
       <ProductCarousel
+        tone="blush"
         title={copy.offers}
         href="/category/offers"
         tabs={[{ id: "offers", label: copy.offers, products: offers }]}
       />
 
       <ProductCarousel
+        tone="paper"
         title={copy.newLaunches}
         href="/shop"
         tabs={[{ id: "new", label: copy.newLaunches, products: newest }]}
@@ -45,6 +47,7 @@ export function HomeView() {
 
       <ProductCarousel
         bar
+        tone="mist"
         href="/shop"
         tabs={[
           { id: "fragrances", label: copy.fragrances, products: trending },
@@ -54,18 +57,20 @@ export function HomeView() {
       />
 
       <ProductCarousel
+        tone="sand"
         title={copy.samples}
         href="/category/samples"
         tabs={[{ id: "samples", label: copy.samples, products: samples }]}
       />
 
       <ProductCarousel
+        tone="dusk"
         title={copy.gifts}
         href="/category/picks"
         tabs={[{ id: "gifts", label: copy.gifts, products: gifts }]}
       />
 
-      <section className="salon">
+      <section className="band band-stone">
         <div className="wrap py-16 md:py-20">
           <div className="section-head">
             <h2>{copy.shopByCategory}</h2>
@@ -73,9 +78,9 @@ export function HomeView() {
               {copy.shopNow}
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-10">
+          <div className="grid grid-cols-2 gap-5 md:grid-cols-4 md:gap-7">
             {categories.map((item) => (
-              <Link key={item.href} href={item.href} className="group text-center">
+              <Link key={item.href} href={item.href} className="group category-tile text-center">
                 <div className="product-shot relative aspect-square">
                   {item.img && (
                     <Image
@@ -94,34 +99,39 @@ export function HomeView() {
       </section>
 
       <ProductCarousel
+        tone="cream"
         title={copy.bestSellers}
         href="/category/picks"
         tabs={[{ id: "best", label: copy.bestSellers, products: featured.concat(trending).slice(0, 12) }]}
       />
 
-      <section className="wrap py-16 text-center md:py-20">
-        <p className="kicker">{copy.houseOf}</p>
-        <h2 className="serif mx-auto mt-5 max-w-3xl">{copy.precious}</h2>
-        <p className="mx-auto mt-5 max-w-lg text-[15px] leading-8 text-[var(--muted)]">{copy.founding}</p>
-        <Link href="/house" className="u-link mt-8 inline-block">
-          {copy.discover}
-        </Link>
+      <section className="band band-ink">
+        <div className="wrap py-20 text-center md:py-28">
+          <p className="kicker kicker-light">{copy.houseOf}</p>
+          <h2 className="serif mx-auto mt-5 max-w-3xl">{copy.precious}</h2>
+          <p className="mx-auto mt-5 max-w-lg text-[15px] leading-8 text-[var(--cream-mute)]">{copy.founding}</p>
+          <Link href="/house" className="u-link u-link-light mt-8 inline-block">
+            {copy.discover}
+          </Link>
+        </div>
       </section>
 
-      <section className="wrap grid gap-12 py-12 text-center md:grid-cols-3 md:gap-16 md:py-16">
-        {[
-          { title: copy.tile1Title, body: copy.tile1Body, cta: copy.tile1Cta, href: "/house" },
-          { title: copy.tile2Title, body: copy.tile2Body, cta: copy.tile2Cta, href: "/shipping" },
-          { title: copy.tile3Title, body: copy.tile3Body, cta: copy.tile3Cta, href: "/category/picks" },
-        ].map((tile) => (
-          <article key={tile.title}>
-            <h3 className="product-name">{tile.title}</h3>
-            <p className="mt-4 text-[14px] leading-8 text-[var(--muted)]">{tile.body}</p>
-            <Link href={tile.href} className="u-link mt-5 inline-block">
-              {tile.cta}
-            </Link>
-          </article>
-        ))}
+      <section className="band band-olive">
+        <div className="wrap grid gap-5 py-14 md:grid-cols-3 md:gap-6 md:py-20">
+          {[
+            { title: copy.tile1Title, body: copy.tile1Body, cta: copy.tile1Cta, href: "/house" },
+            { title: copy.tile2Title, body: copy.tile2Body, cta: copy.tile2Cta, href: "/shipping" },
+            { title: copy.tile3Title, body: copy.tile3Body, cta: copy.tile3Cta, href: "/category/picks" },
+          ].map((tile) => (
+            <article key={tile.title} className="promise-card">
+              <h3 className="product-name">{tile.title}</h3>
+              <p className="mt-4 text-[14px] leading-8 text-[var(--muted)]">{tile.body}</p>
+              <Link href={tile.href} className="u-link mt-5 inline-block">
+                {tile.cta}
+              </Link>
+            </article>
+          ))}
+        </div>
       </section>
     </div>
   );

@@ -162,13 +162,15 @@ export default function ProductPage() {
         </div>
       </div>
 
-      <section className="wrap py-10">
-        <p className="text-[16px] font-semibold">{copy.firstReview}</p>
+      <section className="band band-stone">
+        <div className="wrap py-12">
+          <p className="text-[16px] font-semibold">{copy.firstReview}</p>
+        </div>
       </section>
 
       {pair && <CompleteSet product={product} pair={pair} />}
-      <UpsellRail title={copy.recommended} products={related} />
-      <UpsellRail title={copy.recentlyViewed} products={recent} />
+      <UpsellRail title={copy.recommended} products={related} tone="mist" />
+      <UpsellRail title={copy.recentlyViewed} products={recent} tone="cream" />
     </div>
   );
 }

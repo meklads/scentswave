@@ -19,8 +19,9 @@ export function CompleteSet({
   const copy = t(locale);
 
   return (
-    <section className="wrap py-8">
-      <div className="border border-[var(--line)] p-4 md:p-5">
+    <section className="band band-blush py-10">
+      <div className="wrap">
+      <div className="complete-set">
         <p className="kicker">{copy.completeSet}</p>
         <div className="mt-4 grid items-center gap-4 md:grid-cols-[1fr_auto_1fr_auto] md:gap-6">
           <SetItem product={product} />
@@ -42,6 +43,7 @@ export function CompleteSet({
             </button>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

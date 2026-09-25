@@ -14,12 +14,20 @@ export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState(false);
+  const [compact, setCompact] = useState(false);
   const [q, setQ] = useState("");
 
   useEffect(() => {
     setOpen(false);
     setSearch(false);
   }, [pathname]);
+
+  useEffect(() => {
+    const onScroll = () => setCompact(window.scrollY > 48);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   function onSearch(event: FormEvent) {
     event.preventDefault();
@@ -36,7 +44,7 @@ export function Header() {
   ];
 
   return (
-    <div className="sticky top-0 z-50">
+    <div className={`sticky top-0 z-50${compact ? " is-compact" : ""}`}>
       <p className="announce">{copy.announce}</p>
       <header className="site-header">
         <div className="wrap header-top">
@@ -52,7 +60,7 @@ export function Header() {
               🇸🇦 {locale === "ar" ? "AR" : "EN"}
             </button>
           </div>
-          <Logo variant="full" height={52} className="justify-self-center" />
+          <Logo variant="full" crop className="justify-self-center" />
           <div className="flex items-center gap-2 justify-self-end sm:gap-3">
             <button type="button" className="header-icon" onClick={() => setSearch((v) => !v)} aria-label="search">
               <Search />
