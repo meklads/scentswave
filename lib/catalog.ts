@@ -1,6 +1,7 @@
 import brandsData from "@/data/brands.json";
 import productsData from "@/data/products.json";
 import { formatSize } from "@/lib/format";
+import { getSetAsProduct } from "@/lib/discovery";
 import { getSampleAsProduct } from "@/lib/samples";
 import type { Brand, Product } from "@/lib/types";
 
@@ -16,7 +17,7 @@ export const products = (productsData as Product[]).map(withWholePrices);
 export const brands = brandsData as Brand[];
 
 export function getProduct(slug: string) {
-  return products.find((item) => item.slug === slug) ?? getSampleAsProduct(slug);
+  return products.find((item) => item.slug === slug) ?? getSampleAsProduct(slug) ?? getSetAsProduct(slug);
 }
 
 export function getBrand(slug: string) {

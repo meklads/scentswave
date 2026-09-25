@@ -1,5 +1,5 @@
 import { sampleProducts, defaultSize, findSample, houseKind } from "@/lib/samples";
-import type { Locale, SampleProduct } from "@/lib/types";
+import type { Locale, Product, SampleProduct } from "@/lib/types";
 
 export type HouseKind = "designer" | "niche";
 export { houseKind };
@@ -58,6 +58,7 @@ export type DiscoverySet = {
   bodyEn: string;
   sampleIds: string[];
   sizeMl: 2 | 5;
+  offerSAR: number;
 };
 
 export const discoverySets: DiscoverySet[] = [
@@ -69,6 +70,7 @@ export const discoverySets: DiscoverySet[] = [
     bodyEn: "Five distinctive fragrances to begin with, in Mini size.",
     sampleIds: ["dior-sauvage-edp", "chanel-bleu-edp", "tom-ford-ombre-leather", "ysl-la-nuit", "mancera-red-tobacco"],
     sizeMl: 2,
+    offerSAR: 239,
   },
   {
     id: "men",
@@ -78,6 +80,7 @@ export const discoverySets: DiscoverySet[] = [
     bodyEn: "A men's selection to try before the full bottle.",
     sampleIds: ["dior-sauvage-edp", "chanel-bleu-edp", "tom-ford-grey-vetiver", "armani-code", "cartier-declaration"],
     sizeMl: 2,
+    offerSAR: 229,
   },
   {
     id: "women",
@@ -87,6 +90,7 @@ export const discoverySets: DiscoverySet[] = [
     bodyEn: "A women's selection in a small size for getting to know the scent.",
     sampleIds: ["givenchy-linterdit", "givenchy-ange-ou-demon", "ck-euphoria", "carolina-herrera-chic"],
     sizeMl: 2,
+    offerSAR: 139,
   },
   {
     id: "niche",
@@ -96,6 +100,7 @@ export const discoverySets: DiscoverySet[] = [
     bodyEn: "Niche fragrances from the current inventory, to try at an unhurried pace.",
     sampleIds: ["mancera-red-tobacco", "montale-black-aoud", "tom-ford-black-orchid"],
     sizeMl: 2,
+    offerSAR: 149,
   },
   {
     id: "icons",
@@ -105,6 +110,7 @@ export const discoverySets: DiscoverySet[] = [
     bodyEn: "Widely known fragrances, in Pocket size.",
     sampleIds: ["dior-sauvage-edp", "dior-sauvage-edt", "chanel-bleu-edp", "chanel-allure-sport", "acqua-di-gio"],
     sizeMl: 5,
+    offerSAR: 399,
   },
 ];
 
@@ -120,6 +126,50 @@ export function setItems(set: DiscoverySet) {
 
 export function setTotal(set: DiscoverySet) {
   return setItems(set).reduce((sum, entry) => sum + entry.size.priceSAR, 0);
+}
+
+export function setPrice(set: DiscoverySet) {
+  return set.offerSAR;
+}
+
+export function setSaving(set: DiscoverySet) {
+  return Math.max(0, setTotal(set) - set.offerSAR);
+}
+
+export function findSet(id: string) {
+  const slug = id.startsWith("set-") ? id.slice(4) : id;
+  return discoverySets.find((item) => item.id === slug);
+}
+
+export function getSetAsProduct(slug: string): Product | undefined {
+  if (!slug.startsWith("set-")) return undefined;
+  const set = findSet(slug);
+  if (!set) return undefined;
+  const items = setItems(set);
+  if (items.length === 0) return undefined;
+  const value = setTotal(set);
+  const namesAr = items.map((entry) => entry.item.perfumeNameAr).join(" · ");
+  const namesEn = items.map((entry) => entry.item.perfumeNameEn).join(" · ");
+  return {
+    slug: `set-${set.id}`,
+    stem: set.id,
+    nameAr: set.nameAr,
+    nameEn: set.nameEn,
+    shortAr: set.nameAr,
+    shortEn: set.nameEn,
+    brand: items[0].item.brand,
+    gender: (set.id === "women" ? "women" : "men") as "men" | "women",
+    sizeMl: set.sizeMl * items.length,
+    concentration: "edp" as const,
+    price: set.offerSAR,
+    compareAtPrice: value,
+    salePercent: value > set.offerSAR ? Math.round(((value - set.offerSAR) / value) * 100) : 0,
+    featured: true,
+    inStock: true,
+    images: [items[0].size.image],
+    descriptionAr: `${items.length} × ${set.sizeMl} مل: ${namesAr}`,
+    descriptionEn: `${items.length} × ${set.sizeMl}ml: ${namesEn}`,
+  };
 }
 
 export function setName(set: DiscoverySet, locale: Locale) {

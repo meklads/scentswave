@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { SampleCard } from "@/components/SampleCard";
 import { useStore } from "@/components/store";
 import { brandName, getBrand } from "@/lib/catalog";
-import { EXPERIENCES, SIZE_ROLES, discoverySets, houseKindLabel, setBody, setItems, setName, setTotal, sizeRole } from "@/lib/discovery";
+import { EXPERIENCES, SIZE_ROLES, discoverySets, houseKindLabel, setBody, setItems, setName, setPrice as setOfferPrice, setSaving, setTotal, sizeRole } from "@/lib/discovery";
 import { formatMoney, formatSize } from "@/lib/format";
 import {
   SAMPLE_SIZES,
@@ -347,7 +347,12 @@ export function SamplesView() {
                     {items.length} × {formatSize(set.sizeMl, locale)}
                   </p>
                   <p className={styles.setBody}>{setBody(set, locale)}</p>
-                  <p className={styles.price}>{formatMoney(setTotal(set), locale)}</p>
+                  <p className={styles.price}>{formatMoney(setOfferPrice(set), locale)}</p>
+                  {setSaving(set) > 0 && (
+                    <p className={styles.sizeRole}>
+                      <span className="line-through">{formatMoney(setTotal(set), locale)}</span>
+                    </p>
+                  )}
                   <Link href="/sets" className="u-link">
                     {text.viewSet}
                   </Link>

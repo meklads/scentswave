@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { SampleCard } from "@/components/SampleCard";
 import { useStore } from "@/components/store";
-import { discoverySets, setBody, setItems, setName, setTotal } from "@/lib/discovery";
+import { discoverySets, setBody, setItems, setName, setPrice, setSaving, setTotal } from "@/lib/discovery";
 import { formatMoney, formatSize } from "@/lib/format";
 import { defaultSize, perfumeName, sampleProducts } from "@/lib/samples";
 import styles from "./samples.module.css";
@@ -32,9 +32,8 @@ export function SetsView() {
   }
 
   function addSet(id: string) {
-    const set = discoverySets.find((item) => item.id === id);
-    if (!set) return;
-    setItems(set).forEach((entry) => addToCart(entry.size.sku, 1));
+    if (!discoverySets.some((item) => item.id === id)) return;
+    addToCart(`set-${id}`, 1);
   }
 
   function addOwn() {
@@ -50,8 +49,8 @@ export function SetsView() {
           <h1 className={`serif ${styles.title}`}>{locale === "ar" ? "مجموعات الاكتشاف" : "Discovery sets"}</h1>
           <p className={styles.subtitle}>
             {locale === "ar"
-              ? "مختارات جاهزة من العينات الحالية. تُضاف إلى سلتك كمنتجات منفصلة."
-              : "Ready selections from the current sample inventory. Each fragrance is added to your existing bag."}
+              ? "مختارات جاهزة بسعر المجموعة. تُضاف إلى سلتك الحالية كمنتج واحد، مع ذكر ما تتضمنه."
+              : "Ready selections at a set price. Added to your existing bag as one item, with the contents listed."}
           </p>
         </div>
       </section>
@@ -73,7 +72,14 @@ export function SetsView() {
                       <li key={entry.item.id}>{perfumeName(entry.item, locale)}</li>
                     ))}
                   </ul>
-                  <p className={styles.price}>{formatMoney(setTotal(set), locale)}</p>
+                  <p className={styles.price}>{formatMoney(setPrice(set), locale)}</p>
+                  {setSaving(set) > 0 && (
+                    <p className={styles.sizeRole}>
+                      <span className="line-through">{formatMoney(setTotal(set), locale)}</span>
+                      {" · "}
+                      {locale === "ar" ? `وفّر ${formatMoney(setSaving(set), locale)}` : `Save ${formatMoney(setSaving(set), locale)}`}
+                    </p>
+                  )}
                   <button type="button" className="card-atc" onClick={() => addSet(set.id)}>
                     {locale === "ar" ? "أضف المجموعة للسلة" : "Add set to bag"}
                   </button>

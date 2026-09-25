@@ -46,7 +46,9 @@ export default function CheckoutPage() {
     return lines
       .map(
         (line) =>
-          `${productShort(line.product, "ar")} x${line.quantity} — ${line.product.price}`,
+          `${productShort(line.product, "ar")} x${line.quantity} — ${line.product.price}${
+            line.product.slug.startsWith("set-") ? `\n${line.product.descriptionAr}` : ""
+          }`,
       )
       .join("\n");
   }, [lines]);
