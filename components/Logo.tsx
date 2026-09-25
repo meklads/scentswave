@@ -25,17 +25,18 @@ export function Logo({
   const width = Math.round(height * (nativeW / nativeH));
 
   if (crop) {
-    const header = VARIANTS.header;
+    const lockup = VARIANTS.original;
     return (
       <Link href="/" className={`header-brand ${className}`.trim()} aria-label="Scents Wave">
         <Image
-          src={header.src}
+          src={lockup.src}
           alt="Scents Wave — موجة عطر — Luxury Solid Perfume"
-          width={header.nativeW}
-          height={header.nativeH}
+          width={lockup.nativeW}
+          height={lockup.nativeH}
           priority
           quality={100}
-          sizes="176px"
+          unoptimized
+          sizes="220px"
           className="header-brand-img"
         />
       </Link>

@@ -44,7 +44,7 @@ export function Header() {
   ];
 
   return (
-    <div className={`sticky top-0 z-50${compact ? " is-compact" : ""}`}>
+    <div className={`sticky top-0 z-50 bg-black${compact ? " is-compact" : ""}`}>
       <p className="announce">{copy.announce}</p>
       <header className="site-header">
         <div className="wrap header-top">
@@ -60,7 +60,7 @@ export function Header() {
               🇸🇦 {locale === "ar" ? "AR" : "EN"}
             </button>
           </div>
-          <Logo variant="full" crop className="justify-self-center" />
+          <Logo variant="original" crop className="justify-self-center" />
           <div className="flex items-center gap-2 justify-self-end sm:gap-3">
             <button type="button" className="header-icon" onClick={() => setSearch((v) => !v)} aria-label="search">
               <Search />
@@ -84,18 +84,18 @@ export function Header() {
           ))}
         </nav>
         {search && (
-          <form onSubmit={onSearch} className="border-t border-[rgba(18,18,18,0.08)]">
+          <form onSubmit={onSearch} className="header-search">
             <input
               autoFocus
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder={copy.searchPlaceholder}
-              className="wrap w-full bg-transparent py-5 text-[15px] outline-none placeholder:text-[var(--muted)]"
+              className="wrap w-full bg-transparent py-5 text-[15px] outline-none placeholder:text-[var(--cream-mute)]"
             />
           </form>
         )}
         {open && (
-          <div className="border-t border-[rgba(18,18,18,0.08)] px-5 py-8 lg:hidden">
+          <div className="header-search px-5 py-8 lg:hidden">
             <div className="flex flex-col gap-5">
               {nav.map((item) => (
                 <Link key={item.href} href={item.href} className="nav-link w-fit">

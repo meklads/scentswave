@@ -22,8 +22,8 @@
   --dusk: #f5f1f6;
   --stone: #f0ebe3;
   --olive: #f1f2ea;
-  --ink-deep: #161310;
-  --ink-soft: #1f1a16;
+  --ink-deep: #000000;
+  --ink-soft: #000000;
   --champagne: #d4c4a8;
   --charcoal: var(--ink);
   --bg-soft: var(--ivory);
@@ -410,7 +410,7 @@ button { cursor: pointer; }
 }
 
 .announce {
-  background: #111;
+  background: #000;
   color: #fff;
   text-align: center;
   font-family: var(--font-arabic), var(--font-sans), sans-serif;
@@ -422,9 +422,9 @@ button { cursor: pointer; }
 }
 
 .site-header {
-  background: #fff;
-  color: var(--ink);
-  border-bottom: 1px solid var(--line);
+  background: #000;
+  color: var(--cream);
+  border-bottom: 1px solid rgba(212, 196, 168, 0.16);
 }
 
 .header-top {
@@ -446,10 +446,10 @@ button { cursor: pointer; }
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 44px;
+  height: 48px;
 }
 @media (min-width: 768px) {
-  .header-brand { height: 52px; }
+  .header-brand { height: 56px; }
 }
 .header-brand-img {
   height: 100% !important;
@@ -487,14 +487,14 @@ button { cursor: pointer; }
   font-size: 13px;
   font-weight: 400;
   letter-spacing: 0.02em;
-  color: var(--ink);
+  color: var(--cream);
   padding-bottom: 3px;
   border-bottom: 1px solid transparent;
   transition: opacity 0.2s ease, border-color 0.2s ease;
 }
 .nav-link:hover {
   opacity: 0.55;
-  border-bottom-color: var(--ink);
+  border-bottom-color: var(--champagne);
 }
 
 .header-icon {
@@ -502,7 +502,7 @@ button { cursor: pointer; }
   place-items: center;
   width: 36px;
   height: 36px;
-  color: var(--ink);
+  color: var(--cream);
   transition: opacity 0.2s ease;
 }
 .header-icon:hover { opacity: 0.5; }
@@ -513,9 +513,14 @@ button { cursor: pointer; }
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.04em;
-  color: var(--ink);
+  color: var(--cream);
 }
 .header-meta:hover { opacity: 0.55; }
+
+.header-search {
+  border-top: 1px solid rgba(212, 196, 168, 0.16);
+  color: var(--cream);
+}
 
 .hero-frame {
   background: var(--blush);
@@ -764,7 +769,7 @@ button { cursor: pointer; }
 }
 .footer-end {
   border-top: 1px solid rgba(212, 196, 168, 0.18);
-  background: #100e0c;
+  background: #000;
 }
 
 .wa-fab {
