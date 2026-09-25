@@ -32,7 +32,7 @@ export function ProductCarousel({
     const node = rail.current;
     if (!node) return;
     const card = node.firstElementChild?.clientWidth || 220;
-    const delta = (card + 14) * dir * (locale === "ar" ? -1 : 1);
+    const delta = (card + 12) * dir * (locale === "ar" ? -1 : 1);
     node.scrollBy({ left: delta, behavior: "smooth" });
     setPage((n) => {
       const next = n + dir;
@@ -46,9 +46,10 @@ export function ProductCarousel({
 
   const heading = (
     <SectionHead
+      layout="bar"
       title={title || current.label}
       href={href}
-      action={href ? copy.shopNow : undefined}
+      action={href ? copy.viewAll : undefined}
     />
   );
 

@@ -41,16 +41,16 @@ export function HomeView() {
       <Hero />
 
       <ProductCarousel
-        tone="blush"
+        tone="paper"
         title={copy.offers}
         href="/category/offers"
         tabs={[{ id: "offers", label: copy.offers, products: offers }]}
       />
 
-      <section className="band band-sand">
-        <div className="wrap py-14 md:py-16">
-          <SectionHead title={copy.startWithSet} href="/sets" action={copy.discoverySets} />
-          <p className="mx-auto mt-4 max-w-lg text-center text-[15px] leading-8 text-[var(--muted)]">
+      <section className="band band-paper">
+        <div className="wrap py-10 md:py-12">
+          <SectionHead layout="bar" title={copy.startWithSet} href="/sets" action={copy.viewAll} />
+          <p className="mb-5 max-w-lg text-[13px] leading-7 text-[var(--muted)]">
             {copy.startWithSetBody}
           </p>
           <div className={styles.setGrid}>
@@ -85,12 +85,12 @@ export function HomeView() {
       </section>
 
       <section className="band band-paper">
-        <div className="wrap py-14 md:py-16">
-          <SectionHead title={copy.sampleNow} href="/category/samples" action={copy.exploreSamples} />
-          <p className="mx-auto mt-4 max-w-lg text-center text-[15px] leading-8 text-[var(--muted)]">
+        <div className="wrap py-10 md:py-12">
+          <SectionHead layout="bar" title={copy.sampleNow} href="/category/samples" action={copy.viewAll} />
+          <p className="mb-5 max-w-lg text-[13px] leading-7 text-[var(--muted)]">
             {copy.tryBeforeBody}
           </p>
-          <div className="rail mt-10">
+          <div className="rail">
             {samples.map((item) => (
               <SampleCard key={item.id} item={item} />
             ))}
@@ -100,7 +100,8 @@ export function HomeView() {
 
       <ProductCarousel
         bar
-        tone="mist"
+        tone="paper"
+        title={copy.bestSellers}
         href="/shop"
         tabs={[
           { id: "best", label: copy.bestSellers, products: featured.concat(trending).slice(0, 12) },
@@ -109,9 +110,9 @@ export function HomeView() {
         ]}
       />
 
-      <section className="band band-stone">
-        <div className="wrap py-14 md:py-16">
-          <SectionHead title={copy.shopByCategory} href="/shop" action={copy.shopNow} />
+      <section className="band band-paper">
+        <div className="wrap py-10 md:py-12">
+          <SectionHead layout="bar" title={copy.shopByCategory} href="/shop" action={copy.viewAll} />
           <div className="grid grid-cols-2 gap-5 md:grid-cols-4 md:gap-7">
             {paths.map((item) => (
               <Link key={item.href} href={item.href} className="group category-tile text-center">

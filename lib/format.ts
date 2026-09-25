@@ -19,6 +19,10 @@ export function formatSale(percent: number, locale: "ar" | "en" = "ar") {
   return locale === "ar" ? `خصم ${easternDigits(percent)}٪` : `-${percent}%`;
 }
 
+export function formatSaleShort(percent: number, locale: "ar" | "en" = "ar") {
+  return locale === "ar" ? `−${easternDigits(percent)}٪` : `−${percent}%`;
+}
+
 export function formatSize(ml: number, locale: "ar" | "en" = "ar") {
   return locale === "ar" ? `${easternDigits(ml)} مل` : `${ml} ml`;
 }

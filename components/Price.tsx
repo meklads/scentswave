@@ -1,6 +1,6 @@
 "use client";
 
-import { formatMoney } from "@/lib/format";
+import { formatMoney, formatSaleShort } from "@/lib/format";
 import type { Locale, Product } from "@/lib/types";
 
 export function Price({
@@ -12,18 +12,13 @@ export function Price({
   locale: Locale;
   size?: "card" | "pdp";
 }) {
-  const onSale = product.compareAtPrice > product.price;
-  const priceClass = size === "pdp" ? "text-[22px] font-medium" : "text-[15px] font-medium";
-  const oldClass = size === "pdp" ? "text-[14px]" : "text-[12px]";
+  const onSale = product.compareAtPrice > product.price && product.salePercent > 0;
 
   return (
-    <p className={`flex flex-wrap items-baseline gap-x-2 gap-y-0.5 ${size === "pdp" ? "text-[20px]" : ""}`}>
-      <span className={priceClass}>{formatMoney(product.price, locale)}</span>
-      {onSale && (
-        <span className={`${oldClass} text-[var(--muted)] line-through`}>
-          {formatMoney(product.compareAtPrice, locale)}
-        </span>
-      )}
+    <p className={`price-row${size === "pdp" ? " is-pdp" : ""}`}>
+      {onSale && <span className="price-cut">{formatSaleShort(product.salePercent, locale)}</span>}
+      {onSale && <span className="price-was">{formatMoney(product.compareAtPrice, locale)}</span>}
+      <span className="price-now">{formatMoney(product.price, locale)}</span>
     </p>
   );
 }

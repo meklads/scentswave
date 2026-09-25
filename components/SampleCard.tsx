@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { Heart } from "@/components/ProductCard";
 import { useStore } from "@/components/store";
 import { brandName, getBrand, getProduct } from "@/lib/catalog";
 import { formatSize } from "@/lib/format";
@@ -23,32 +24,43 @@ export function SampleCard({
   selected?: boolean;
   onToggle?: () => void;
 }) {
-  const { locale, addToCart } = useStore();
+  const { locale, addToCart, toggleWishlist, wishlist } = useStore();
   const brand = getBrand(item.brand);
   const source = getProduct(item.sourceSlug);
   const initial = useMemo(() => defaultSize(item), [item]);
   const [sku, setSku] = useState(initial.sku);
   const size = item.sizes.find((option) => option.sku === sku) || initial;
   const role = sizeRole(size.sizeMl, locale);
+  const loved = wishlist.includes(size.sku);
 
   return (
-    <article className={styles.card}>
+    <article className={`ticket ${styles.card}`}>
       {selectable && (
         <label className={styles.pick}>
           <input type="checkbox" checked={Boolean(selected)} onChange={onToggle} />
           {locale === "ar" ? "أضف للمجموعة" : "Add to set"}
         </label>
       )}
-      <Link href={`/product/${size.sku}`} className={`product-shot ${styles.shot}`}>
+      <div className={`product-shot ${styles.shot}`}>
+        <button
+          type="button"
+          className={`card-heart${loved ? " is-loved" : ""}`}
+          aria-label={locale === "ar" ? "المحفوظات" : "Wishlist"}
+          onClick={() => toggleWishlist(size.sku)}
+        >
+          <Heart filled={loved} />
+        </button>
         <span className={styles.badge}>{sampleTypeLabel(size.type, locale)}</span>
-        <Image
-          src={sampleShot(item.sourceSlug, size.image)}
-          alt={`${perfumeName(item, locale)} ${formatSize(size.sizeMl, locale)}`}
-          fill
-          sizes="240px"
-          className="object-contain p-3"
-        />
-      </Link>
+        <Link href={`/product/${size.sku}`} className="absolute inset-0">
+          <Image
+            src={sampleShot(item.sourceSlug, size.image)}
+            alt={`${perfumeName(item, locale)} ${formatSize(size.sizeMl, locale)}`}
+            fill
+            sizes="240px"
+            className="object-contain p-3"
+          />
+        </Link>
+      </div>
       <div className={styles.copy}>
         <p className={styles.brand}>{brand ? brandName(brand, locale) : item.brand}</p>
         <Link href={`/product/${size.sku}`} className={styles.name}>
@@ -82,15 +94,6 @@ export function SampleCard({
             ))}
           </div>
         )}
-        <p className={styles.meta}>
-          {item.availability
-            ? locale === "ar"
-              ? "متوفر"
-              : "In stock"
-            : locale === "ar"
-              ? "غير متوفر"
-              : "Unavailable"}
-        </p>
         <button
           type="button"
           className="card-atc"
