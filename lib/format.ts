@@ -6,25 +6,22 @@ export function formatMoney(value: number, locale: "ar" | "en" = "ar") {
   return new Intl.NumberFormat(locale === "ar" ? "ar-SA" : "en-SA", {
     style: "currency",
     currency: "SAR",
+    numberingSystem: "latn",
     maximumFractionDigits: 0,
     minimumFractionDigits: 0,
   }).format(money(value));
 }
 
-function easternDigits(value: number | string) {
-  return String(value).replace(/\d/g, (digit) => "٠١٢٣٤٥٦٧٨٩"[Number(digit)]);
-}
-
 export function formatSale(percent: number, locale: "ar" | "en" = "ar") {
-  return locale === "ar" ? `خصم ${easternDigits(percent)}٪` : `-${percent}%`;
+  return locale === "ar" ? `خصم ${percent}٪` : `-${percent}%`;
 }
 
 export function formatSaleShort(percent: number, locale: "ar" | "en" = "ar") {
-  return locale === "ar" ? `−${easternDigits(percent)}٪` : `−${percent}%`;
+  return locale === "ar" ? `−${percent}٪` : `−${percent}%`;
 }
 
 export function formatSize(ml: number, locale: "ar" | "en" = "ar") {
-  return locale === "ar" ? `${easternDigits(ml)} مل` : `${ml} ml`;
+  return locale === "ar" ? `${ml} مل` : `${ml} ml`;
 }
 
 export const WHATSAPP = "966502786513";
@@ -40,7 +37,7 @@ export function shippingFor(subtotal: number) {
 }
 
 export const COUPONS = {
-  WAVE20: { percent: 20, labelAr: "خصم ٢٠٪", labelEn: "20% off" },
+  WAVE20: { percent: 20, labelAr: "خصم 20٪", labelEn: "20% off" },
 } as const;
 
 export type CouponCode = keyof typeof COUPONS;
