@@ -21,10 +21,10 @@ export default async function GatePage({
           required
           autoFocus
           placeholder="كلمة السر"
-          className="w-full border-0 border-b border-[#e6c98a]/40 bg-transparent py-3 text-center text-[#e6c98a] outline-none placeholder:text-[#d4b56a]/70"
+          className="w-full border-0 border-b border-white/35 bg-transparent py-3 text-center text-white outline-none placeholder:text-white/40"
         />
         {error && (
-          <p className="mt-3 text-sm text-[#d4b56a]">كلمة السر غير صحيحة</p>
+          <p className="mt-3 text-sm text-white/55">كلمة السر غير صحيحة</p>
         )}
         <button type="submit" className="cta mt-8 w-full">
           دخول
