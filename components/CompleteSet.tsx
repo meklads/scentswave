@@ -19,31 +19,29 @@ export function CompleteSet({
   const copy = t(locale);
 
   return (
-    <section className="band band-blush py-10">
+    <section className="band band-paper py-6 md:py-10">
       <div className="wrap">
-      <div className="complete-set">
-        <p className="kicker">{copy.completeSet}</p>
-        <div className="mt-4 grid items-center gap-4 md:grid-cols-[1fr_auto_1fr_auto] md:gap-6">
-          <SetItem product={product} />
-          <span className="hidden text-center text-lg text-[var(--gold)] md:block">+</span>
-          <SetItem product={pair} />
-          <div className="flex flex-col items-start gap-2 md:items-end">
-            <p className="text-[18px] font-medium">
-              {formatMoney(product.price + pair.price, locale)}
-            </p>
-            <button
-              type="button"
-              className="cta"
-              onClick={() => {
-                addToCart(product.slug, 1);
-                addToCart(pair.slug, 1);
-              }}
-            >
-              {copy.addBoth}
-            </button>
+        <div className="complete-set">
+          <p className="pdp-brand">{copy.completeSet}</p>
+          <div className="mt-4 grid items-center gap-4 md:grid-cols-[1fr_auto_1fr_auto] md:gap-6">
+            <SetItem product={product} />
+            <span className="hidden text-center text-lg text-[#bbb] md:block">+</span>
+            <SetItem product={pair} />
+            <div className="flex flex-col items-start gap-2 md:items-end">
+              <p className="price-now">{formatMoney(product.price + pair.price, locale)}</p>
+              <button
+                type="button"
+                className="pdp-atc pdp-atc-mini"
+                onClick={() => {
+                  addToCart(product.slug, 1);
+                  addToCart(pair.slug, 1);
+                }}
+              >
+                {copy.addBoth}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </section>
   );
@@ -61,7 +59,7 @@ function SetItem({ product }: { product: Product }) {
         <span className="block text-[13px] font-medium leading-snug">
           {productShort(product, locale)}
         </span>
-        <span className="mt-1 block text-[13px] text-[var(--muted)]">
+        <span className="price-now mt-1 block text-[16px]">
           {formatMoney(product.price, locale)}
         </span>
       </span>

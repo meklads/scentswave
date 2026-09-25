@@ -1,23 +1,24 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { Heart } from "@/components/ProductCard";
+import { PdpGallery } from "@/components/PdpGallery";
 import { SampleCard } from "@/components/SampleCard";
+import { SectionHead } from "@/components/SectionHead";
 import { useStore } from "@/components/store";
 import { brandName, getBrand, getProduct } from "@/lib/catalog";
 import { sizeRole } from "@/lib/discovery";
 import { formatMoney, formatSize } from "@/lib/format";
+import { t } from "@/lib/i18n";
 import { sampleGallery, sampleShot } from "@/lib/sample-image";
 import { findSampleBySku, perfumeName, sampleProducts, sampleTypeLabel } from "@/lib/samples";
-import { t } from "@/lib/i18n";
 
 export function SampleProductView({ sku }: { sku: string }) {
   const found = findSampleBySku(sku);
-  const { locale, addToCart } = useStore();
+  const { locale, addToCart, toggleWishlist, wishlist } = useStore();
   const copy = t(locale);
   const [current, setCurrent] = useState(sku);
-  const [active, setActive] = useState(0);
 
   if (!found) return <p className="wrap py-16 text-center">{copy.noResults}</p>;
 
@@ -26,13 +27,14 @@ export function SampleProductView({ sku }: { sku: string }) {
   const brand = getBrand(item.brand);
   const full = getProduct(item.sourceSlug);
   const role = sizeRole(size.sizeMl, locale);
-  const related = sampleProducts.filter((entry) => entry.id !== item.id && (entry.brand === item.brand || entry.gender === item.gender)).slice(0, 4);
+  const related = sampleProducts.filter((entry) => entry.id !== item.id && (entry.brand === item.brand || entry.gender === item.gender)).slice(0, 8);
   const brandLabel = brand ? brandName(brand, locale) : item.brand;
   const gallery = sampleGallery(item.sourceSlug, size.image);
   const shot = sampleShot(item.sourceSlug, size.image);
+  const loved = wishlist.includes(size.sku);
 
   return (
-    <div>
+    <div className="pdp-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -51,55 +53,64 @@ export function SampleProductView({ sku }: { sku: string }) {
         }}
       />
       <div className="pdp">
-        <div className="pdp-visual">
-          <div className="product-shot relative aspect-square w-full max-w-[520px]">
-            <Image
-              src={gallery[active] || shot}
-              alt={perfumeName(item, locale)}
-              fill
-              className="object-contain p-4"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-          </div>
-          {gallery.length > 1 && (
-            <div className="mt-4 flex justify-center gap-2">
-              {gallery.map((src, index) => (
-                <button
-                  key={src}
-                  type="button"
-                  onClick={() => setActive(index)}
-                  className={`product-shot relative h-14 w-14 ${active === index ? "outline outline-1 outline-[var(--ink)]" : ""}`}
-                >
-                  <Image src={src} alt="" fill className="object-contain p-1" />
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
         <div className="pdp-buy">
-          <p className="kicker">{brandLabel}</p>
-          <h1 className="serif mt-3">{perfumeName(item, locale)}</h1>
-          <p className="mt-3 text-[13px] text-[var(--muted)]">
-            {sampleTypeLabel(size.type, locale)} · {role.name !== sampleTypeLabel(size.type, locale) ? `${role.name} · ` : ""}
+          <nav className="pdp-crumb">
+            <Link href="/">{copy.home}</Link>
+            <Link href="/category/samples">{copy.samples}</Link>
+            <span>{perfumeName(item, locale)}</span>
+          </nav>
+
+          <div className="pdp-head">
+            <button
+              type="button"
+              onClick={() => toggleWishlist(size.sku)}
+              className={`pdp-heart${loved ? " is-loved" : ""}`}
+              aria-label={copy.wishlist}
+            >
+              <Heart filled={loved} />
+            </button>
+            <div>
+              {item.featured && item.availability && <span className="card-pop pdp-pop">{copy.bestSellers}</span>}
+              {!item.availability && <span className="card-pop pdp-pop is-gone">{copy.soldOut}</span>}
+              <p className="pdp-brand">{brandLabel}</p>
+              <h1 className="pdp-title">{perfumeName(item, locale)}</h1>
+            </div>
+          </div>
+
+          <p className="price-row is-pdp">
+            <span className="price-now">{formatMoney(size.priceSAR, locale)}</span>
+          </p>
+          <p className="pdp-vat">
+            {copy.vatIncl}
+            {" · "}
+            {sampleTypeLabel(size.type, locale)}
+            {" · "}
             {formatSize(size.sizeMl, locale)}
           </p>
-          <p className="mt-4 text-[22px] font-medium">{formatMoney(size.priceSAR, locale)}</p>
-          <p className="mt-2 text-[13px] text-[var(--muted)]">{role.purpose}</p>
-          <div className="mt-6 flex flex-wrap gap-2">
+          {role.purpose && <p className="pdp-note">{role.purpose}</p>}
+
+          <div className="pdp-opts">
             {item.sizes.map((option) => (
               <button
                 key={option.sku}
                 type="button"
                 onClick={() => setCurrent(option.sku)}
-                className={`size-chip ${option.sku === size.sku ? "outline outline-1 outline-[var(--ink)]" : ""}`}
+                className={`size-chip${option.sku === size.sku ? " is-on" : ""}`}
               >
                 {formatSize(option.sizeMl, locale)}
               </button>
             ))}
           </div>
+
+          {full && (
+            <Link href={`/product/${full.slug}`} className="pdp-try">
+              {locale === "ar" ? "استكشف الزجاجة الكاملة" : "Explore the full bottle"}
+            </Link>
+          )}
+
           <button
             type="button"
-            className="cta cta-solid mt-6 w-full"
+            className="pdp-atc"
             disabled={!item.availability}
             onClick={() => addToCart(size.sku, 1)}
           >
@@ -109,29 +120,17 @@ export function SampleProductView({ sku }: { sku: string }) {
             <span className="price-now">{formatMoney(size.priceSAR, locale)}</span>
             <button
               type="button"
-              className="cta cta-solid"
+              className="pdp-atc"
               disabled={!item.availability}
               onClick={() => addToCart(size.sku, 1)}
             >
               {item.availability ? copy.addToCart : copy.soldOut}
             </button>
           </div>
-          {full && (
-            <Link href={`/product/${full.slug}`} className="u-link mt-6 inline-block">
-              {locale === "ar" ? "استكشف الزجاجة الكاملة" : "Explore the full bottle"}
-            </Link>
-          )}
-          <div className="mt-8 border border-[var(--line)] p-4">
-            <p className="text-[14px] font-semibold">{copy.authenticityTitle}</p>
-            <p className="mt-2 text-[13px] leading-7 text-[var(--muted)]">
-              {locale === "ar"
-                ? "هذا الحجم الصغير يُعبأ من العطر الأصلي نفسه الذي نبيعه بالزجاجة الكاملة. ليس عينة المصنع الرسمية. موجة عطر ليست الموزع الرسمي للدار."
-                : "This smaller fill comes from the same original fragrance we sell as a full bottle. It is not a manufacturer-issued sample. Scents Wave is not the official distributor of the house."}
-            </p>
-          </div>
-          <div className="mt-8">
+
+          <div className="pdp-acc">
             <details className="acc" open>
-              <summary>{locale === "ar" ? "العطر" : "The fragrance"}</summary>
+              <summary>{copy.description}</summary>
               <div className="acc-body">
                 <p>
                   {locale === "ar"
@@ -141,19 +140,26 @@ export function SampleProductView({ sku }: { sku: string }) {
               </div>
             </details>
             <details className="acc">
-              <summary>{locale === "ar" ? "لماذا هذا الحجم؟" : "Why this size?"}</summary>
+              <summary>{copy.specs}</summary>
               <div className="acc-body">
-                <p>{role.purpose}</p>
+                <p>
+                  {locale === "ar"
+                    ? "هذا الحجم الصغير يُعبأ من العطر الأصلي نفسه الذي نبيعه بالزجاجة الكاملة. ليس عينة المصنع الرسمية. موجة عطر ليست الموزع الرسمي للدار."
+                    : "This smaller fill comes from the same original fragrance we sell as a full bottle. It is not a manufacturer-issued sample. Scents Wave is not the official distributor of the house."}
+                </p>
               </div>
             </details>
           </div>
         </div>
+
+        <PdpGallery images={gallery.length ? gallery : [shot]} alt={perfumeName(item, locale)} />
       </div>
+
       {related.length > 0 && (
-        <section className="band band-stone">
-          <div className="wrap py-14">
-            <h2 className="serif text-center">{copy.youMayEnjoy}</h2>
-            <div className="product-grid mt-10">
+        <section className="band band-paper py-10 md:py-14">
+          <div className="wrap">
+            <SectionHead layout="bar" title={copy.recommended} href="/category/samples" action={copy.viewAll} />
+            <div className="rail">
               {related.map((entry) => (
                 <SampleCard key={entry.id} item={entry} />
               ))}

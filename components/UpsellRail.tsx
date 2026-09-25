@@ -22,7 +22,7 @@ export function UpsellRail({
   return (
     <section className={`band band-${tone} py-10 md:py-14`}>
       <div className="wrap">
-        <SectionHead title={title} />
+        <SectionHead layout="bar" title={title} />
         <div className="rail">
           {products.map((product) => (
             <ProductCard key={product.slug} product={product} />
