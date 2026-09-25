@@ -4,7 +4,15 @@ import { formatSize } from "@/lib/format";
 import { getSampleAsProduct } from "@/lib/samples";
 import type { Brand, Product } from "@/lib/types";
 
-export const products = productsData as Product[];
+function withWholePrices(product: Product): Product {
+  return {
+    ...product,
+    price: Math.round(product.price),
+    compareAtPrice: Math.round(product.compareAtPrice),
+  };
+}
+
+export const products = (productsData as Product[]).map(withWholePrices);
 export const brands = brandsData as Brand[];
 
 export function getProduct(slug: string) {
@@ -125,6 +133,9 @@ export function filterProducts(options: {
   travel?: boolean;
   q?: string;
   sort?: string;
+  size?: "travel" | "100" | "large";
+  price?: "low" | "mid" | "high";
+  inStock?: boolean;
 }) {
   let list = [...products];
   if (options.gender === "men" || options.gender === "women") {
@@ -142,6 +153,13 @@ export function filterProducts(options: {
   if (options.travel) {
     list = list.filter((item) => item.sizeMl <= 80);
   }
+  if (options.size === "travel") list = list.filter((item) => item.sizeMl <= 80);
+  if (options.size === "100") list = list.filter((item) => item.sizeMl === 100);
+  if (options.size === "large") list = list.filter((item) => item.sizeMl > 100);
+  if (options.price === "low") list = list.filter((item) => item.price <= 400);
+  if (options.price === "mid") list = list.filter((item) => item.price > 400 && item.price <= 700);
+  if (options.price === "high") list = list.filter((item) => item.price > 700);
+  if (options.inStock) list = list.filter((item) => item.inStock);
   if (options.q) {
     const q = options.q.trim().toLowerCase();
     list = list.filter((item) =>

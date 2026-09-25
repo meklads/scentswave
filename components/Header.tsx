@@ -37,10 +37,10 @@ export function Header() {
 
   const nav = [
     { href: "/shop", label: copy.fragrances },
-    { href: "/category/offers", label: copy.offers },
+    { href: "/category/men", label: copy.men },
+    { href: "/category/women", label: copy.women },
     { href: "/category/samples", label: copy.samples },
-    { href: "/category/picks", label: copy.gifts },
-    { href: "/house", label: copy.house },
+    { href: "/discover", label: copy.findScent },
   ];
 
   return (

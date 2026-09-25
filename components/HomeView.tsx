@@ -6,7 +6,7 @@ import { Hero } from "@/components/Hero";
 import { ProductCarousel } from "@/components/ProductCarousel";
 import { SectionHead } from "@/components/SectionHead";
 import { useStore } from "@/components/store";
-import { giftProducts, products, saleProducts, travelProducts } from "@/lib/catalog";
+import { giftProducts, products, saleProducts } from "@/lib/catalog";
 import { t } from "@/lib/i18n";
 
 export function HomeView() {
@@ -18,7 +18,6 @@ export function HomeView() {
   const newest = [...products].slice(-12).reverse();
   const trending = products.slice(0, 12);
   const offers = saleProducts(12);
-  const samples = travelProducts(12);
   const gifts = giftProducts(12);
 
   const categories = [
@@ -31,6 +30,16 @@ export function HomeView() {
   return (
     <div>
       <Hero />
+      <section className="band band-paper">
+        <div className="wrap flex flex-col items-center gap-4 py-8 text-center md:flex-row md:justify-center md:gap-10 md:py-10">
+          <Link href="/shop" className="cta cta-solid">
+            {copy.discoverFragrances}
+          </Link>
+          <Link href="/category/samples" className="u-link">
+            {copy.exploreSamples}
+          </Link>
+        </div>
+      </section>
 
       <ProductCarousel
         tone="blush"
@@ -57,12 +66,12 @@ export function HomeView() {
         ]}
       />
 
-      <ProductCarousel
-        tone="sand"
-        title={copy.samples}
-        href="/category/samples"
-        tabs={[{ id: "samples", label: copy.samples, products: samples }]}
-      />
+      <section className="band band-sand">
+        <div className="wrap py-16 text-center md:py-20">
+          <SectionHead title={copy.tryBefore} href="/category/samples" action={copy.exploreSamples} />
+          <p className="mx-auto mt-4 max-w-lg text-[15px] leading-8 text-[var(--muted)]">{copy.tryBeforeBody}</p>
+        </div>
+      </section>
 
       <ProductCarousel
         tone="dusk"
@@ -73,7 +82,7 @@ export function HomeView() {
 
       <section className="band band-stone">
         <div className="wrap py-16 md:py-20">
-          <SectionHead kicker={copy.houseOf} title={copy.shopByCategory} href="/shop" action={copy.shopNow} />
+          <SectionHead title={copy.shopByCategory} href="/shop" action={copy.shopNow} />
           <div className="grid grid-cols-2 gap-5 md:grid-cols-4 md:gap-7">
             {categories.map((item) => (
               <Link key={item.href} href={item.href} className="group category-tile text-center">
@@ -103,12 +112,31 @@ export function HomeView() {
 
       <section className="band band-ink">
         <div className="wrap py-20 text-center md:py-28">
-          <p className="kicker kicker-light">{copy.houseOf}</p>
+          <p className="kicker kicker-light">{copy.maison}</p>
           <h2 className="serif mx-auto mt-5 max-w-3xl">{copy.precious}</h2>
           <p className="mx-auto mt-5 max-w-lg text-[15px] leading-8 text-[var(--on-black-soft)]">{copy.founding}</p>
           <Link href="/house" className="u-link u-link-light mt-8 inline-block">
             {copy.discover}
           </Link>
+        </div>
+      </section>
+
+      <section className="band band-mist">
+        <div className="wrap grid gap-10 py-16 text-center md:grid-cols-2 md:py-20">
+          <article>
+            <h2 className="serif">{copy.findScent}</h2>
+            <p className="mx-auto mt-4 max-w-md text-[14px] leading-8 text-[var(--muted)]">{copy.findScentBody}</p>
+            <Link href="/discover" className="u-link mt-6 inline-block">
+              {copy.findScent}
+            </Link>
+          </article>
+          <article>
+            <h2 className="serif">{copy.talkAdvisor}</h2>
+            <p className="mx-auto mt-4 max-w-md text-[14px] leading-8 text-[var(--muted)]">{copy.consultBody}</p>
+            <a href="https://wa.me/966502786513" className="u-link mt-6 inline-block">
+              {copy.talkAdvisor}
+            </a>
+          </article>
         </div>
       </section>
 

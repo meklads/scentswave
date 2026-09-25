@@ -44,6 +44,10 @@ export type Product = {
   descriptionAr: string;
   descriptionEn: string;
   sizeOptions?: SizeOption[];
+  topNotes?: string;
+  heartNotes?: string;
+  baseNotes?: string;
+  fragranceFamily?: string;
 };
 
 export type Brand = {

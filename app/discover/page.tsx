@@ -38,8 +38,10 @@ export default function DiscoverPage() {
   return (
     <div>
       <section className="wrap py-12 text-center md:py-16">
-        <p className="kicker">{copy.houseOf}</p>
-        <h1 className="serif mt-5">{copy.discovery}</h1>
+        <p className="kicker">{copy.maison}</p>
+        <h1 className="serif mt-5">{copy.findScent}</h1>
+        <p className="mx-auto mt-5 max-w-lg text-[14px] leading-8 text-[var(--muted)]">{copy.findScentBody}</p>
+        <p className="mt-3 text-[13px] text-[var(--muted)]">{copy.youMayEnjoy}</p>
         <div className="mt-8 space-y-4">
           <Row>
             <Chip active={edit === "all"} onClick={() => setEdit("all")}>{copy.allBrands}</Chip>

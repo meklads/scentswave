@@ -18,7 +18,6 @@ import {
   productName,
   productShort,
 } from "@/lib/catalog";
-import { descriptor, profile } from "@/lib/fragrance";
 import { formatSale, formatSize } from "@/lib/format";
 import { t } from "@/lib/i18n";
 
@@ -49,12 +48,32 @@ export default function ProductPage() {
     .filter((item): item is NonNullable<typeof item> => Boolean(item))
     .slice(0, 8);
   const loved = wishlist.includes(product.slug);
-  const p = profile(product);
   const image = product.images[active] || product.images[0];
+  const hasNotes = Boolean(product.topNotes || product.heartNotes || product.baseNotes);
   const brandLabel = brand ? (locale === "ar" ? brand.nameAr : brand.nameEn) : product.brand;
 
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: productName(product, "en"),
+            brand: { "@type": "Brand", name: brandLabel },
+            image: product.images,
+            offers: {
+              "@type": "Offer",
+              priceCurrency: "SAR",
+              price: product.price,
+              availability: product.inStock
+                ? "https://schema.org/InStock"
+                : "https://schema.org/OutOfStock",
+            },
+          }),
+        }}
+      />
       <div className="pdp">
         <div className="pdp-visual">
           <button
@@ -108,7 +127,7 @@ export default function ProductPage() {
           </div>
           <p className="mt-1 text-[12px] text-[var(--muted)]">{copy.vatIncl}</p>
           <p className="mt-3 text-[13px] text-[var(--muted)]">
-            {concentrationLabel(product, locale)} · {descriptor(product, locale)}
+            {concentrationLabel(product, locale)} · {product.inStock ? copy.inStock : copy.soldOut}
           </p>
 
           <div className="mt-6 flex items-center gap-3">
@@ -127,9 +146,9 @@ export default function ProductPage() {
             {product.inStock ? copy.addToCart : copy.soldOut}
           </button>
 
-          <div className="mt-8 rounded-2xl border border-[var(--line)] bg-[var(--ivory)] p-4">
-            <p className="text-[14px] font-semibold">{brandLabel}</p>
-            <p className="mt-1 text-[13px] text-[var(--muted)]">{copy.brandOriginal}</p>
+          <div className="mt-8 border border-[var(--line)] p-4">
+            <p className="text-[14px] font-semibold">{copy.authenticityTitle}</p>
+            <p className="mt-2 text-[13px] leading-7 text-[var(--muted)]">{copy.authenticityBody}</p>
           </div>
 
           <div className="mt-8">
@@ -152,14 +171,16 @@ export default function ProductPage() {
                 <p>{copy.gender} — {product.gender === "men" ? copy.men : copy.women}</p>
               </div>
             </details>
-            <details className="acc">
-              <summary>{copy.theNotes}</summary>
-              <div className="acc-body">
-                <p>{copy.topNotes} — {p.top}</p>
-                <p>{copy.heartNotes} — {p.heart}</p>
-                <p>{copy.baseNotes} — {p.base}</p>
-              </div>
-            </details>
+            {hasNotes && (
+              <details className="acc">
+                <summary>{copy.theNotes}</summary>
+                <div className="acc-body">
+                  {product.topNotes && <p>{copy.topNotes} — {product.topNotes}</p>}
+                  {product.heartNotes && <p>{copy.heartNotes} — {product.heartNotes}</p>}
+                  {product.baseNotes && <p>{copy.baseNotes} — {product.baseNotes}</p>}
+                </div>
+              </details>
+            )}
             <details className="acc">
               <summary>{copy.shippingInfo}</summary>
               <div className="acc-body">{copy.secureNote}</div>
@@ -169,8 +190,12 @@ export default function ProductPage() {
       </div>
 
       <section className="band band-stone">
-        <div className="wrap py-12">
-          <p className="text-[16px] font-semibold">{copy.firstReview}</p>
+        <div className="wrap py-12 text-center">
+          <p className="text-[16px] font-semibold">{copy.talkAdvisor}</p>
+          <p className="mx-auto mt-3 max-w-md text-[14px] leading-8 text-[var(--muted)]">{copy.consultBody}</p>
+          <a href="https://wa.me/966502786513" className="u-link mt-5 inline-block">
+            {copy.talkAdvisor}
+          </a>
         </div>
       </section>
 

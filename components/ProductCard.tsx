@@ -31,8 +31,8 @@ export function ProductCard({ product }: { product: Product }) {
         </button>
         {onSale && <span className="sale-chip">{formatSale(product.salePercent, locale)}</span>}
         {product.featured && !onSale && (
-          <span className="absolute start-3 top-3 z-10 text-[11px] font-medium tracking-[0.14em] text-[var(--gold)]">
-            {copy.exclusive}
+          <span className="absolute start-3 top-3 z-10 text-[11px] font-medium text-[var(--gold)]">
+            {copy.selection}
           </span>
         )}
         {!product.inStock && (

@@ -24,22 +24,24 @@ export function Footer() {
       </div>
 
       <div className="wrap grid gap-14 py-16 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 lg:py-20">
-        <Col title={copy.houseOf}>
+        <Col title={copy.shop}>
+          <Link href="/shop">{copy.fragrances}</Link>
+          <Link href="/category/men">{copy.men}</Link>
+          <Link href="/category/women">{copy.women}</Link>
+          <Link href="/category/samples">{copy.samples}</Link>
+          <Link href="/collections">{copy.collections}</Link>
+        </Col>
+        <Col title={copy.discovery}>
+          <Link href="/discover">{copy.findScent}</Link>
+          <Link href="/contact">{copy.talkAdvisor}</Link>
           <Link href="/house">{copy.house}</Link>
-          <Link href="/discover">{copy.discovery}</Link>
-          <Link href="/journal">{copy.journal}</Link>
-          <Link href="/contact">{copy.contact}</Link>
         </Col>
         <Col title={copy.customerCare}>
-          <Link href="/contact">{copy.contact}</Link>
-          <Link href="/track-order">{copy.track}</Link>
-          <Link href="/faq">{copy.faq}</Link>
           <Link href="/shipping">{copy.shippingInfo}</Link>
+          <Link href="/terms">{copy.returns}</Link>
+          <Link href="/faq">{copy.faq}</Link>
+          <Link href="/contact">{copy.contact}</Link>
           <p>{PHONE_DISPLAY}</p>
-        </Col>
-        <Col title={copy.legal}>
-          <Link href="/terms">{copy.terms}</Link>
-          <Link href="/privacy">{copy.privacy}</Link>
         </Col>
         <div>
           <p className="footer-label">{copy.signUp}</p>
@@ -57,6 +59,11 @@ export function Footer() {
           </form>
           <p className="footer-label mt-10 mb-3">{copy.followUs}</p>
           <p className="text-[14px] text-[var(--on-black-soft)]">{EMAIL}</p>
+          <p className="footer-label mt-8 mb-3">{copy.legal}</p>
+          <div className="flex flex-col gap-3 text-[15px] leading-7 text-[var(--on-black-soft)]">
+            <Link href="/privacy">{copy.privacy}</Link>
+            <Link href="/terms">{copy.terms}</Link>
+          </div>
         </div>
       </div>
 
@@ -64,6 +71,7 @@ export function Footer() {
         <div className="wrap flex flex-col items-center gap-6 py-12 text-center">
           <Logo height={72} variant="original" className="justify-center" />
           <p className="max-w-md text-[13px] leading-7 text-[var(--on-black-soft)]">{copy.founding}</p>
+          <p className="max-w-lg text-[12px] leading-7 text-[var(--on-black-soft)]">{copy.authenticityBody}</p>
           <p className="footer-label">© {year} {copy.rights}</p>
         </div>
       </div>

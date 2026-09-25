@@ -19,7 +19,7 @@ export default function CollectionsPage() {
   return (
     <div>
       <section className="wrap py-14 text-center md:py-20">
-        <p className="kicker">{copy.houseOf}</p>
+        <p className="kicker">{copy.maison}</p>
         <h1 className="serif mt-5">{copy.collections}</h1>
         <p className="mx-auto mt-5 max-w-xl text-[14px] leading-8 text-[var(--muted)]">{copy.collectionsBody}</p>
       </section>

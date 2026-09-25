@@ -1,9 +1,14 @@
+export function money(value: number) {
+  return Math.round(Number(value) || 0);
+}
+
 export function formatMoney(value: number, locale: "ar" | "en" = "ar") {
   return new Intl.NumberFormat(locale === "ar" ? "ar-SA" : "en-SA", {
     style: "currency",
     currency: "SAR",
-    maximumFractionDigits: value % 1 === 0 ? 0 : 2,
-  }).format(value);
+    maximumFractionDigits: 0,
+    minimumFractionDigits: 0,
+  }).format(money(value));
 }
 
 function easternDigits(value: number | string) {
@@ -21,8 +26,8 @@ export function formatSize(ml: number, locale: "ar" | "en" = "ar") {
 export const WHATSAPP = "966502786513";
 export const PHONE_DISPLAY = "050 278 6513";
 export const EMAIL = "info@scentswave.com";
-export const FREE_SHIPPING_FROM = 131.25;
-export const SHIPPING_FEE = 26.06;
+export const FREE_SHIPPING_FROM = 131;
+export const SHIPPING_FEE = 26;
 export const COD_FEE = 15;
 export const GIFT_WRAP_FEE = 35;
 
@@ -45,9 +50,9 @@ export function discountFor(subtotal: number, code: string | null) {
   if (!code) return 0;
   const coupon = COUPONS[code as CouponCode];
   if (!coupon) return 0;
-  return Math.round(subtotal * (coupon.percent / 100) * 100) / 100;
+  return money((subtotal * coupon.percent) / 100);
 }
 
 export function remainingForFreeShip(subtotal: number) {
-  return Math.max(0, Math.round((FREE_SHIPPING_FROM - subtotal) * 100) / 100);
+  return Math.max(0, money(FREE_SHIPPING_FROM - subtotal));
 }

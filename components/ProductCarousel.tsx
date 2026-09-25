@@ -46,7 +46,6 @@ export function ProductCarousel({
 
   const heading = (
     <SectionHead
-      kicker={copy.houseOf}
       title={title || current.label}
       href={href}
       action={href ? copy.shopNow : undefined}

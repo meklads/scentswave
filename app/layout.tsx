@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     default: "Scents Wave — موجة عطر",
     template: "%s — Scents Wave",
   },
-  description: "Official online store. Original luxury fragrances, travel sizes, and gifts shipped across Saudi Arabia.",
+  description: "موجة عطر — عطور أصلية، عينات وأحجام سفر، شحن داخل المملكة العربية السعودية.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -25,6 +25,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${arabic.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[var(--paper)] text-[var(--ink)]">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Scents Wave",
+              url: "https://scentswave.com",
+              email: "info@scentswave.com",
+              telephone: "+966502786513",
+            }),
+          }}
+        />
         <SiteShell>{children}</SiteShell>
       </body>
     </html>

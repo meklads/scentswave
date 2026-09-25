@@ -8,7 +8,7 @@ const FAQ = {
   ar: [
     {
       q: "هل العطور أصلية؟",
-      a: "نعم. موجة عطر تختار عطورًا أصلية من دور العطور، وتعرضها كأعمال لا كسلع.",
+      a: "نعم. موجة عطر تختار عطورًا أصلية من دورها. لسنا الموزع الرسمي لهذه الدور.",
     },
     {
       q: "ما طرق الدفع؟",
@@ -16,7 +16,27 @@ const FAQ = {
     },
     {
       q: "كيف يتم الشحن؟",
-      a: "داخل المملكة. يُجهّز الطلب خلال يوم إلى ثلاثة أيام عمل حسب التوفر.",
+      a: "داخل المملكة. يُجهّز الطلب خلال يوم إلى ثلاثة أيام عمل حسب التوفر. الشحن مجاني من ١٣١ ر.س، وإلا ٢٦ ر.س.",
+    },
+    {
+      q: "هل يمكن إرجاع العطر؟",
+      a: "يمكن إرجاع المنتج غير المفتوح بحالته الأصلية خلال ١٤ يومًا. العطور المفتوحة غير قابلة للإرجاع. تكلفة الشحن لا تُعاد إلا إذا وقع خطأ من موجة عطر. منتجات العروض نهائية.",
+    },
+    {
+      q: "هل تقدمون عينات؟",
+      a: "نعم. قسم مسافر وعينات يضم أحجام ٢ و٣ و٥ و١٠ مل حسب التوفر.",
+    },
+    {
+      q: "ما الفرق بين العينة وديكانت وحجم السفر؟",
+      a: "العينة حجم صغير للتجربة (٢–٣ مل). الديكانت تعبئة صغيرة (٥ مل). حجم السفر أكبر قليلًا (١٠ مل). ليست الزجاجة الكاملة.",
+    },
+    {
+      q: "كيف أختار عطرًا؟",
+      a: "استخدم «ابحث عن عطرك» للاقتراحات، أو تحدث مع مستشار عبر واتساب.",
+    },
+    {
+      q: "كيف أتتبع الطلب؟",
+      a: "أرسل رقم الطلب على واتساب ٠٥٠٢٧٨٦٥١٣.",
     },
     {
       q: "كيف أتواصل معكم؟",
@@ -26,7 +46,7 @@ const FAQ = {
   en: [
     {
       q: "Are the fragrances original?",
-      a: "Yes. Scents Wave selects original maisons and presents them as works, not commodities.",
+      a: "Yes. Scents Wave selects original fragrances from their houses. We are not the official distributor of these maisons.",
     },
     {
       q: "Which payment methods do you accept?",
@@ -34,7 +54,27 @@ const FAQ = {
     },
     {
       q: "How does shipping work?",
-      a: "Across Saudi Arabia. Orders are prepared within one to three business days.",
+      a: "Across Saudi Arabia. Orders are prepared within 1–3 business days. Shipping is free from SAR 131, otherwise SAR 26.",
+    },
+    {
+      q: "Can I return a fragrance?",
+      a: "Unopened products may be returned in original condition within 14 days. Opened fragrances cannot be returned. Outbound shipping is refunded only if Scents Wave made an error. Sale items are final.",
+    },
+    {
+      q: "Do you offer samples?",
+      a: "Yes. Travel & Samples includes 2, 3, 5 and 10 ml sizes when available.",
+    },
+    {
+      q: "What is the difference between a sample, decant and travel size?",
+      a: "A sample is a small try (2–3 ml). A decant is a small fill (5 ml). Travel size is slightly larger (10 ml). None of these is the full bottle.",
+    },
+    {
+      q: "How can I choose a fragrance?",
+      a: "Use Find Your Scent for suggestions, or speak with an advisor on WhatsApp.",
+    },
+    {
+      q: "How can I track my order?",
+      a: "Send your order number on WhatsApp 0502786513.",
     },
     {
       q: "How can I reach you?",
