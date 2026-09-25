@@ -71,7 +71,7 @@ export const discoverySets: DiscoverySet[] = [
     bodyEn: "Five distinctive fragrances to begin with, in Mini size.",
     sampleIds: ["dior-sauvage-edp", "chanel-bleu-edp", "tom-ford-ombre-leather", "ysl-la-nuit", "mancera-red-tobacco"],
     sizeMl: 2,
-    offerSAR: 239,
+    offerSAR: 169,
   },
   {
     id: "men",
@@ -81,7 +81,7 @@ export const discoverySets: DiscoverySet[] = [
     bodyEn: "A men's selection to try before the full bottle.",
     sampleIds: ["dior-sauvage-edp", "chanel-bleu-edp", "tom-ford-grey-vetiver", "armani-code", "cartier-declaration"],
     sizeMl: 2,
-    offerSAR: 229,
+    offerSAR: 159,
   },
   {
     id: "women",
@@ -91,7 +91,7 @@ export const discoverySets: DiscoverySet[] = [
     bodyEn: "A women's selection in a small size for getting to know the scent.",
     sampleIds: ["givenchy-linterdit", "givenchy-ange-ou-demon", "ck-euphoria", "carolina-herrera-chic"],
     sizeMl: 2,
-    offerSAR: 139,
+    offerSAR: 109,
   },
   {
     id: "niche",
@@ -101,7 +101,7 @@ export const discoverySets: DiscoverySet[] = [
     bodyEn: "Niche fragrances from the current inventory, to try at an unhurried pace.",
     sampleIds: ["mancera-red-tobacco", "montale-black-aoud", "tom-ford-black-orchid"],
     sizeMl: 2,
-    offerSAR: 149,
+    offerSAR: 109,
   },
   {
     id: "icons",
@@ -111,7 +111,7 @@ export const discoverySets: DiscoverySet[] = [
     bodyEn: "Widely known fragrances, in Pocket size.",
     sampleIds: ["dior-sauvage-edp", "dior-sauvage-edt", "chanel-bleu-edp", "chanel-allure-sport", "acqua-di-gio"],
     sizeMl: 5,
-    offerSAR: 399,
+    offerSAR: 289,
   },
 ];
 
