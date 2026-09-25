@@ -18,7 +18,7 @@ export function ProductCarousel({
   bar?: boolean;
   title?: string;
   href?: string;
-  tone?: "paper" | "blush" | "mist" | "sand" | "dusk" | "stone" | "cream";
+  tone?: "paper" | "blush" | "mist" | "sand" | "dusk" | "stone" | "cream" | "white";
 }) {
   const { locale } = useStore();
   const copy = t(locale);

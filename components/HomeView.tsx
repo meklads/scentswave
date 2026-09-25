@@ -40,6 +40,18 @@ export function HomeView() {
     <div>
       <Hero />
 
+      <div className="band band-white">
+        <div className="wrap">
+          <div className="trust-row">
+            {[copy.promiseShip, copy.promiseCare, copy.promiseGift, copy.promiseOrigin].map((item) => (
+              <p key={item} className="trust-item">
+                {item}
+              </p>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <ProductCarousel
         tone="paper"
         title={copy.offers}
@@ -47,7 +59,7 @@ export function HomeView() {
         tabs={[{ id: "offers", label: copy.offers, products: offers }]}
       />
 
-      <section className="band band-paper">
+      <section className="band band-white">
         <div className="wrap py-10 md:py-12">
           <SectionHead layout="bar" title={copy.startWithSet} href="/sets" action={copy.viewAll} />
           <p className="mb-5 max-w-lg text-[13px] leading-7 text-[var(--muted)]">
@@ -77,7 +89,7 @@ export function HomeView() {
 
       <ProductCarousel
         bar
-        tone="paper"
+        tone="white"
         title={copy.bestSellers}
         href="/shop"
         tabs={[
@@ -90,9 +102,9 @@ export function HomeView() {
       <section className="band band-paper">
         <div className="wrap py-10 md:py-12">
           <SectionHead layout="bar" title={copy.shopByCategory} href="/shop" action={copy.viewAll} />
-          <div className="grid grid-cols-2 gap-5 md:grid-cols-4 md:gap-7">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
             {paths.map((item) => (
-              <Link key={item.href} href={item.href} className="group category-tile text-center">
+              <Link key={item.href} href={item.href} className="group category-tile text-start">
                 <div className="product-shot relative aspect-square">
                   {item.img && (
                     <Image
@@ -103,43 +115,43 @@ export function HomeView() {
                     />
                   )}
                 </div>
-                <p className="product-name mt-4">{item.title}</p>
+                <p className="card-brand mt-3 px-1">{item.title}</p>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="band band-mist">
-        <div className="wrap grid gap-10 py-14 text-center md:grid-cols-2 md:py-16">
-          <article>
-            <h2 className="serif">{copy.findScent}</h2>
-            <p className="mx-auto mt-4 max-w-md text-[14px] leading-8 text-[var(--muted)]">{copy.findScentBody}</p>
-            <Link href="/discover" className="u-link mt-6 inline-block">
+      <section className="band band-paper">
+        <div className="wrap grid gap-3 py-10 md:grid-cols-2 md:py-12">
+          <article className="help-card">
+            <h2>{copy.findScent}</h2>
+            <p>{copy.findScentBody}</p>
+            <Link href="/discover" className="pdp-atc pdp-atc-mini">
               {copy.findScent}
             </Link>
           </article>
-          <article>
-            <h2 className="serif">{copy.talkAdvisor}</h2>
-            <p className="mx-auto mt-4 max-w-md text-[14px] leading-8 text-[var(--muted)]">{copy.consultBody}</p>
-            <a href="https://wa.me/966502786513" className="u-link mt-6 inline-block">
+          <article className="help-card">
+            <h2>{copy.talkAdvisor}</h2>
+            <p>{copy.consultBody}</p>
+            <a href="https://wa.me/966502786513" className="pdp-atc pdp-atc-mini">
               {copy.talkAdvisor}
             </a>
           </article>
         </div>
       </section>
 
-      <section className="band band-olive">
-        <div className="wrap grid gap-5 py-14 md:grid-cols-3 md:gap-6 md:py-16">
+      <section className="band band-white">
+        <div className="wrap grid gap-3 py-10 md:grid-cols-3 md:gap-4 md:py-12">
           {[
             { title: copy.tile1Title, body: copy.tile1Body, cta: copy.tile1Cta, href: "/house" },
             { title: copy.tile2Title, body: copy.tile2Body, cta: copy.tile2Cta, href: "/shipping" },
             { title: copy.tile3Title, body: copy.tile3Body, cta: copy.tile3Cta, href: "/sets" },
           ].map((tile) => (
             <article key={tile.title} className="promise-card">
-              <h3 className="product-name">{tile.title}</h3>
-              <p className="mt-4 text-[14px] leading-8 text-[var(--muted)]">{tile.body}</p>
-              <Link href={tile.href} className="u-link mt-5 inline-block">
+              <h3 className="card-brand">{tile.title}</h3>
+              <p className="mt-3 text-[13px] leading-7 text-[var(--muted)]">{tile.body}</p>
+              <Link href={tile.href} className="u-link mt-4 inline-block">
                 {tile.cta}
               </Link>
             </article>

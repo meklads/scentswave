@@ -77,7 +77,7 @@ export function Header() {
             <button type="button" onClick={openCart} className="header-icon relative" aria-label={copy.cart}>
               <Bag />
               {cartCount > 0 && (
-                <span className="absolute -top-1.5 -end-1 min-w-3 text-center text-[10px]">{cartCount}</span>
+                <span className="cart-count">{cartCount}</span>
               )}
             </button>
           </div>
