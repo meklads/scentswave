@@ -23,6 +23,11 @@ export function Header() {
   }, [pathname]);
 
   useEffect(() => {
+    document.body.classList.toggle("is-locked", open || search);
+    return () => document.body.classList.remove("is-locked");
+  }, [open, search]);
+
+  useEffect(() => {
     const onScroll = () => setCompact(window.scrollY > 48);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -66,7 +71,7 @@ export function Header() {
             <button type="button" className="header-icon" onClick={() => setSearch((v) => !v)} aria-label="search">
               <Search />
             </button>
-            <Link href="/account" aria-label={copy.account} className="header-icon hidden sm:grid">
+            <Link href="/account" aria-label={copy.account} className="header-icon hidden lg:grid">
               <User />
             </Link>
             <button type="button" onClick={openCart} className="header-icon relative" aria-label={copy.cart}>
@@ -96,17 +101,31 @@ export function Header() {
           </form>
         )}
         {open && (
-          <div className="header-search px-5 py-8 lg:hidden">
-            <div className="flex flex-col gap-5">
-              {nav.map((item) => (
-                <Link key={item.href} href={item.href} className="nav-link w-fit">
-                  {item.label}
-                </Link>
-              ))}
-              <button type="button" className="header-meta text-start" onClick={() => setLocale(locale === "ar" ? "en" : "ar")}>
-                🇸🇦 / {copy.sar}
+          <div className="mobile-nav lg:hidden">
+            <div className="mobile-nav-bar">
+              <p>{copy.fragrances}</p>
+              <button type="button" onClick={() => setOpen(false)}>
+                {copy.close}
               </button>
             </div>
+            {nav.map((item) => (
+              <Link key={item.href} href={item.href} className="mobile-nav-link">
+                {item.label}
+              </Link>
+            ))}
+            <Link href="/account" className="mobile-nav-link">
+              {copy.account}
+            </Link>
+            <Link href="/wishlist" className="mobile-nav-link">
+              {copy.wishlist}
+            </Link>
+            <button
+              type="button"
+              className="mobile-nav-link"
+              onClick={() => setLocale(locale === "ar" ? "en" : "ar")}
+            >
+              🇸🇦 {locale === "ar" ? "English" : "العربية"}
+            </button>
           </div>
         )}
       </header>

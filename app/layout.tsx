@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import { SiteShell } from "@/components/SiteShell";
 import "./globals.css";
@@ -8,6 +8,13 @@ const arabic = IBM_Plex_Sans_Arabic({
   subsets: ["arabic", "latin"],
   weight: ["300", "400", "500", "600", "700"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#000000",
+};
 
 export const metadata: Metadata = {
   title: {
@@ -24,7 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       dir="rtl"
       className={`${arabic.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[var(--paper)] text-[var(--ink)]">
+      <body className="min-h-full flex flex-col bg-[var(--ash)] text-[var(--ink)]">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

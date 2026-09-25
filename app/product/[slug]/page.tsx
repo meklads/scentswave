@@ -19,7 +19,7 @@ import {
   productName,
   productShort,
 } from "@/lib/catalog";
-import { formatSale, formatSize } from "@/lib/format";
+import { formatMoney, formatSale, formatSize } from "@/lib/format";
 import { t } from "@/lib/i18n";
 import { defaultSize, findSampleBySku, findSampleBySource } from "@/lib/samples";
 
@@ -165,6 +165,17 @@ export default function ProductPage() {
           >
             {product.inStock ? copy.addToCart : copy.soldOut}
           </button>
+          <div className="pdp-dock">
+            <span className="price-now">{formatMoney(product.price, locale)}</span>
+            <button
+              type="button"
+              className="cta cta-solid"
+              disabled={!product.inStock}
+              onClick={() => addToCart(product.slug, qty)}
+            >
+              {product.inStock ? copy.addToCart : copy.soldOut}
+            </button>
+          </div>
 
           <div className="mt-8 border border-[var(--line)] p-4">
             <p className="text-[14px] font-semibold">{copy.authenticityTitle}</p>

@@ -14,7 +14,7 @@ export function Footer() {
   return (
     <footer className="site-footer mt-auto">
       <div className="footer-promises">
-        <div className="wrap grid gap-8 py-12 text-center sm:grid-cols-2 lg:grid-cols-4">
+        <div className="wrap grid gap-6 py-8 text-center sm:grid-cols-2 sm:gap-8 sm:py-12 lg:grid-cols-4">
           {[copy.promiseShip, copy.promiseCare, copy.promiseGift, copy.promiseOrigin].map((item) => (
             <p key={item} className="footer-promise">
               {item}
@@ -23,7 +23,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="wrap grid gap-14 py-16 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 lg:py-20">
+      <div className="wrap grid gap-10 py-10 md:grid-cols-2 md:gap-14 md:py-16 lg:grid-cols-4 lg:gap-12 lg:py-20">
         <Col title={copy.shop}>
           <Link href="/shop">{copy.fragrances}</Link>
           <Link href="/category/men">{copy.men}</Link>
@@ -70,8 +70,8 @@ export function Footer() {
       </div>
 
       <div className="footer-end">
-        <div className="wrap flex flex-col items-center gap-6 py-12 text-center">
-          <Logo height={72} variant="original" className="justify-center" />
+        <div className="wrap flex flex-col items-center gap-5 py-8 text-center md:gap-6 md:py-12">
+          <Logo height={56} variant="original" className="justify-center" />
           <p className="max-w-md text-[13px] leading-7 text-[var(--on-black-soft)]">{copy.founding}</p>
           <p className="max-w-lg text-[12px] leading-7 text-[var(--on-black-soft)]">{copy.authenticityBody}</p>
           <p className="footer-label">© {year} {copy.rights}</p>

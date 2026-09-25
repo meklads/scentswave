@@ -105,6 +105,17 @@ export function SampleProductView({ sku }: { sku: string }) {
           >
             {item.availability ? copy.addToCart : copy.soldOut}
           </button>
+          <div className="pdp-dock">
+            <span className="price-now">{formatMoney(size.priceSAR, locale)}</span>
+            <button
+              type="button"
+              className="cta cta-solid"
+              disabled={!item.availability}
+              onClick={() => addToCart(size.sku, 1)}
+            >
+              {item.availability ? copy.addToCart : copy.soldOut}
+            </button>
+          </div>
           {full && (
             <Link href={`/product/${full.slug}`} className="u-link mt-6 inline-block">
               {locale === "ar" ? "استكشف الزجاجة الكاملة" : "Explore the full bottle"}

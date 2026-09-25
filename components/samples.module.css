@@ -424,3 +424,31 @@
   .mobileFilters { display: none; }
   .desktopFilters { display: block; }
 }
+
+@media (max-width: 767px) {
+  .hero { padding: 32px 0 24px; }
+  .title { font-size: 22px; }
+  .subtitle,
+  .lead { font-size: 14px; }
+  .band,
+  .bandAlt { padding: 32px 0; }
+  .setGrid {
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .setShot { aspect-ratio: 1.2; }
+  .setCopy { padding: 8px 6px 0; }
+  .price { font-size: 18px; }
+  .copy { padding: 6px 4px 0; }
+  .name { font-size: 12px; min-height: calc(1.3em * 2); }
+  .grid {
+    column-gap: 8px;
+    row-gap: 8px;
+  }
+  .sizes button {
+    min-width: 32px;
+    min-height: 32px;
+    padding: 4px 5px;
+  }
+  .toolbar { padding: 0 0 16px; }
+}
