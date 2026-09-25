@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useRef, useState } from "react";
 import { ProductCard } from "@/components/ProductCard";
+import { SectionHead } from "@/components/SectionHead";
 import { useStore } from "@/components/store";
 import { t } from "@/lib/i18n";
 import type { Product } from "@/lib/types";
@@ -45,14 +45,12 @@ export function ProductCarousel({
   if (!current) return null;
 
   const heading = (
-    <div className="section-head">
-      <h2>{title || current.label}</h2>
-      {href && (
-        <Link href={href} className="u-link mt-2">
-          {copy.shopNow}
-        </Link>
-      )}
-    </div>
+    <SectionHead
+      kicker={copy.houseOf}
+      title={title || current.label}
+      href={href}
+      action={href ? copy.shopNow : undefined}
+    />
   );
 
   const pager = (

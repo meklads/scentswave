@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Price } from "@/components/Price";
 import { useStore } from "@/components/store";
-import { getBrand, brandName, productShort } from "@/lib/catalog";
+import { concentrationLabel, getBrand, brandName, productShort } from "@/lib/catalog";
+import { formatSale } from "@/lib/format";
 import { t } from "@/lib/i18n";
 import type { Product } from "@/lib/types";
 
@@ -28,7 +29,7 @@ export function ProductCard({ product }: { product: Product }) {
         >
           <Heart filled={loved} />
         </button>
-        {onSale && <span className="sale-chip">-{product.salePercent}%</span>}
+        {onSale && <span className="sale-chip">{formatSale(product.salePercent, locale)}</span>}
         {product.featured && !onSale && (
           <span className="absolute start-3 top-3 z-10 text-[11px] font-medium tracking-[0.14em] text-[var(--gold)]">
             {copy.exclusive}
@@ -58,14 +59,14 @@ export function ProductCard({ product }: { product: Product }) {
           )}
         </Link>
       </div>
-      <div className="flex flex-col items-start gap-1 pt-3 text-start">
-        <p className="caps text-[10px] text-[var(--muted)]">
+      <div className="card-copy">
+        <p className="card-brand">
           {brand ? brandName(brand, locale) : product.brand}
         </p>
-        <Link href={`/product/${product.slug}`} className="product-name line-clamp-2 min-h-12">
+        <Link href={`/product/${product.slug}`} className="product-name line-clamp-2">
           {productShort(product, locale)}
         </Link>
-        <p className="text-[12px] text-[var(--muted)]">{product.sizeMl} ml</p>
+        <p className="card-meta">{concentrationLabel(product, locale)}</p>
         <Price product={product} locale={locale} />
         <button
           type="button"

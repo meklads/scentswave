@@ -19,6 +19,7 @@ import {
   productShort,
 } from "@/lib/catalog";
 import { descriptor, profile } from "@/lib/fragrance";
+import { formatSale, formatSize } from "@/lib/format";
 import { t } from "@/lib/i18n";
 
 export default function ProductPage() {
@@ -100,8 +101,8 @@ export default function ProductPage() {
           <div className="mt-4 flex flex-wrap items-center gap-2">
             <Price product={product} locale={locale} size="pdp" />
             {product.salePercent > 0 && product.compareAtPrice > product.price && (
-              <span className="rounded-full bg-[var(--sale)] px-2 py-0.5 text-[12px] font-medium text-white">
-                -{product.salePercent}%
+              <span className="sale-chip sale-chip-inline">
+                {formatSale(product.salePercent, locale)}
               </span>
             )}
           </div>
@@ -111,7 +112,7 @@ export default function ProductPage() {
           </p>
 
           <div className="mt-6 flex items-center gap-3">
-            <span className="size-chip">{product.sizeMl}ml</span>
+            <span className="size-chip">{formatSize(product.sizeMl, locale)}</span>
             <QtyControl value={qty} onChange={setQty} />
           </div>
 
@@ -134,14 +135,19 @@ export default function ProductPage() {
           <div className="mt-8">
             <details className="acc" open>
               <summary>{copy.description}</summary>
-              <div className="acc-body">
-                {locale === "ar" ? product.descriptionAr : product.descriptionEn}
+              <div className="acc-body prose-ar">
+                {(locale === "ar" ? product.descriptionAr : product.descriptionEn)
+                  .split(/(?<=[.؟!])\s+/)
+                  .filter(Boolean)
+                  .map((part) => (
+                    <p key={part}>{part}</p>
+                  ))}
               </div>
             </details>
             <details className="acc">
               <summary>{copy.specs}</summary>
               <div className="acc-body">
-                <p>{copy.size} — {product.sizeMl}ml</p>
+                <p>{copy.size} — {formatSize(product.sizeMl, locale)}</p>
                 <p>{copy.concentration} — {concentrationLabel(product, locale)}</p>
                 <p>{copy.gender} — {product.gender === "men" ? copy.men : copy.women}</p>
               </div>

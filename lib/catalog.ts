@@ -1,5 +1,6 @@
 import brandsData from "@/data/brands.json";
 import productsData from "@/data/products.json";
+import { formatSize } from "@/lib/format";
 import type { Brand, Product } from "@/lib/types";
 
 export const products = productsData as Product[];
@@ -28,7 +29,7 @@ export function concentrationLabel(product: Product, locale: "ar" | "en") {
     parfum: { ar: "بارفوم", en: "Parfum" },
     cologne: { ar: "كولونيا", en: "Cologne" },
   } as const;
-  return `${map[product.concentration][locale]} ${product.sizeMl}ml`;
+  return `${map[product.concentration][locale]} · ${formatSize(product.sizeMl, locale)}`;
 }
 
 export function brandName(brand: Brand, locale: "ar" | "en") {

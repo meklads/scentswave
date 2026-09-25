@@ -6,6 +6,18 @@ export function formatMoney(value: number, locale: "ar" | "en" = "ar") {
   }).format(value);
 }
 
+function easternDigits(value: number | string) {
+  return String(value).replace(/\d/g, (digit) => "٠١٢٣٤٥٦٧٨٩"[Number(digit)]);
+}
+
+export function formatSale(percent: number, locale: "ar" | "en" = "ar") {
+  return locale === "ar" ? `خصم ${easternDigits(percent)}٪` : `-${percent}%`;
+}
+
+export function formatSize(ml: number, locale: "ar" | "en" = "ar") {
+  return locale === "ar" ? `${easternDigits(ml)} مل` : `${ml} ml`;
+}
+
 export const WHATSAPP = "966502786513";
 export const PHONE_DISPLAY = "050 278 6513";
 export const EMAIL = "info@scentswave.com";

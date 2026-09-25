@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Hero } from "@/components/Hero";
 import { ProductCarousel } from "@/components/ProductCarousel";
+import { SectionHead } from "@/components/SectionHead";
 import { useStore } from "@/components/store";
 import { giftProducts, products, saleProducts, travelProducts } from "@/lib/catalog";
 import { t } from "@/lib/i18n";
@@ -72,12 +73,7 @@ export function HomeView() {
 
       <section className="band band-stone">
         <div className="wrap py-16 md:py-20">
-          <div className="section-head">
-            <h2>{copy.shopByCategory}</h2>
-            <Link href="/shop" className="u-link mt-3">
-              {copy.shopNow}
-            </Link>
-          </div>
+          <SectionHead kicker={copy.houseOf} title={copy.shopByCategory} href="/shop" action={copy.shopNow} />
           <div className="grid grid-cols-2 gap-5 md:grid-cols-4 md:gap-7">
             {categories.map((item) => (
               <Link key={item.href} href={item.href} className="group category-tile text-center">
