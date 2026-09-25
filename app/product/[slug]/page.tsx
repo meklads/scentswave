@@ -54,17 +54,9 @@ export default function ProductPage() {
 
   return (
     <div>
-      <nav className="wrap pt-5 text-[12px] text-[var(--muted)]">
-        <Link href="/">{copy.home}</Link>
-        <span className="px-2">/</span>
-        <Link href="/shop">{copy.fragrances}</Link>
-        <span className="px-2">/</span>
-        <span>{productShort(product, locale)}</span>
-      </nav>
-
-      <div className="wrap grid gap-10 py-10 lg:grid-cols-2 lg:gap-20 lg:py-16">
-        <div>
-          <div className="product-shot relative aspect-square">
+      <div className="pdp">
+        <div className="pdp-visual">
+          <div className="product-shot relative aspect-square w-full max-w-[520px]">
             {product.salePercent > 0 && product.compareAtPrice > product.price && (
               <span className="sale-chip">-{product.salePercent}%</span>
             )}
@@ -73,62 +65,49 @@ export default function ProductPage() {
                 src={image}
                 alt={productName(product, locale)}
                 fill
-                className="object-contain p-2"
+                className="object-contain p-4"
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 priority
               />
             )}
           </div>
-          {product.images.length > 1 && (
-            <div className="mt-3 flex gap-2">
-              {product.images.map((src, i) => (
-                <button
-                  key={src}
-                  type="button"
-                  onClick={() => setActive(i)}
-                  className={`product-shot relative h-16 w-16 ${active === i ? "outline outline-1 outline-[var(--ink)]" : ""}`}
-                >
-                  <Image src={src} alt="" fill className="object-contain p-1" />
-                </button>
-              ))}
-            </div>
-          )}
         </div>
 
-        <div>
+        <div className="pdp-buy">
           <p className="kicker">{brandLabel}</p>
-          <h1 className="serif mt-3">{productShort(product, locale)}</h1>
-          <p className="mt-2 text-[13px] text-[var(--muted)]">
-            {concentrationLabel(product, locale)} · {descriptor(product, locale)}
-          </p>
-          <div className="mt-4">
+          <h1 className="serif mt-4">{productShort(product, locale)}</h1>
+          <div className="mt-5">
             <Price product={product} locale={locale} size="pdp" />
           </div>
+          <p className="mt-3 text-[13px] text-[var(--muted)]">
+            {concentrationLabel(product, locale)} · {descriptor(product, locale)}
+          </p>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <div className="mt-6 flex items-center gap-3">
+            <span className="size-chip">{product.sizeMl}ml</span>
             <QtyControl value={qty} onChange={setQty} />
-            <button
-              type="button"
-              className="cta flex-1"
-              disabled={!product.inStock}
-              onClick={() => addToCart(product.slug, qty)}
-            >
-              {product.inStock ? copy.addToCart : copy.soldOut}
-            </button>
           </div>
-          <Link href="/checkout" onClick={() => addToCart(product.slug, qty)} className="u-link mt-4">
-            {copy.buyNow}
-          </Link>
+
+          <p className="mt-5 text-[13px] text-[var(--muted)]">{copy.giftWrap} · {copy.giftWrapHint}</p>
+
+          <button
+            type="button"
+            className="cta cta-solid mt-6 w-full"
+            disabled={!product.inStock}
+            onClick={() => addToCart(product.slug, qty)}
+          >
+            {product.inStock ? copy.addToCart : copy.soldOut}
+          </button>
+
           <button
             type="button"
             onClick={() => toggleWishlist(product.slug)}
-            className="mt-3 block text-[13px] font-medium text-[var(--muted)]"
+            className="mt-4 text-[13px] text-[var(--muted)]"
           >
             {loved ? copy.added : copy.wishlist}
           </button>
-          <p className="mt-5 text-[12px] text-[var(--muted)]">{copy.secureNote}</p>
 
-          <div className="mt-6">
+          <div className="mt-10">
             <details className="acc" open>
               <summary>{copy.description}</summary>
               <div className="acc-body">

@@ -28,15 +28,6 @@ export function HomeView() {
     <div>
       <Hero />
 
-      <section className="wrap py-16 text-center md:py-24">
-        <p className="kicker">{copy.houseOf}</p>
-        <h2 className="serif mx-auto mt-6 max-w-3xl">{copy.precious}</h2>
-        <p className="mx-auto mt-6 max-w-lg text-[15px] leading-8 text-[var(--muted)]">{copy.founding}</p>
-        <Link href="/house" className="u-link mt-10 inline-block">
-          {copy.discover}
-        </Link>
-      </section>
-
       <ProductCarousel
         title={copy.newLaunches}
         href="/shop"
@@ -87,7 +78,16 @@ export function HomeView() {
         tabs={[{ id: "best", label: copy.bestSellers, products: featured.concat(trending).slice(0, 12) }]}
       />
 
-      <section className="wrap grid gap-12 py-16 text-center md:grid-cols-3 md:gap-16 md:py-24">
+      <section className="wrap py-16 text-center md:py-20">
+        <p className="kicker">{copy.houseOf}</p>
+        <h2 className="serif mx-auto mt-5 max-w-3xl">{copy.precious}</h2>
+        <p className="mx-auto mt-5 max-w-lg text-[15px] leading-8 text-[var(--muted)]">{copy.founding}</p>
+        <Link href="/house" className="u-link mt-8 inline-block">
+          {copy.discover}
+        </Link>
+      </section>
+
+      <section className="wrap grid gap-12 py-12 text-center md:grid-cols-3 md:gap-16 md:py-16">
         {[
           { title: copy.tile1Title, body: copy.tile1Body, cta: copy.tile1Cta, href: "/house" },
           { title: copy.tile2Title, body: copy.tile2Body, cta: copy.tile2Cta, href: "/shipping" },

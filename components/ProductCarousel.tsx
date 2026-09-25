@@ -68,7 +68,7 @@ export function ProductCarousel({
   );
 
   return (
-    <section className={bar ? "hp-section" : "wrap py-8 md:py-10"}>
+    <section className={bar ? "hp-section" : "wrap py-6 md:py-8"}>
       <div className={bar ? "wrap" : undefined}>
         {heading}
         {bar && tabs.length > 1 && (

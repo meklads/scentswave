@@ -100,12 +100,16 @@ export function Hero() {
           <Chevron dir="right" />
         </button>
 
-        <div className="hero-progress">
-          <span
-            key={index}
-            className={paused ? "is-paused" : ""}
-            style={{ animationDuration: `${DURATION}ms` }}
-          />
+        <div className="hero-dots">
+          {SLIDES.map((item, i) => (
+            <button
+              key={item.src}
+              type="button"
+              className={i === index ? "is-on" : ""}
+              onClick={() => setIndex(i)}
+              aria-label={`${i + 1}`}
+            />
+          ))}
         </div>
       </section>
     </div>
