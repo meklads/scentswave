@@ -32,6 +32,8 @@ export function Footer() {
           <Link href="/collections">{copy.collections}</Link>
         </Col>
         <Col title={copy.discovery}>
+          <Link href="/category/samples">{copy.samples}</Link>
+          <Link href="/sets">{copy.discoverySets}</Link>
           <Link href="/discover">{copy.findScent}</Link>
           <Link href="/contact">{copy.talkAdvisor}</Link>
           <Link href="/house">{copy.house}</Link>

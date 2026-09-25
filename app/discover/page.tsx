@@ -2,11 +2,13 @@
 
 import { useMemo, useState } from "react";
 import { ProductGrid } from "@/components/ProductCard";
+import { SampleCard } from "@/components/SampleCard";
 import { useStore } from "@/components/store";
 import { products } from "@/lib/catalog";
 import type { Family, Mood, Occasion } from "@/lib/fragrance";
 import { labelFamily, labelMood, labelOccasion, profile } from "@/lib/fragrance";
 import { t } from "@/lib/i18n";
+import { findSampleBySource } from "@/lib/samples";
 
 const FAMILIES: Family[] = ["woody", "floral", "oriental", "fresh", "leather"];
 const MOODS: Mood[] = ["intimate", "radiant", "nocturnal", "clean"];
@@ -33,7 +35,8 @@ export default function DiscoverPage() {
     });
   }, [family, mood, occasion, edit]);
 
-  const shown = edit === "bestsellers" ? list.slice(0, 12) : list.slice(0, 16);
+  const shown = (edit === "bestsellers" ? list.slice(0, 12) : list.slice(0, 16)).slice(0, 5);
+  const samplePicks = shown.map((item) => findSampleBySource(item.slug)).filter((item): item is NonNullable<typeof item> => Boolean(item));
 
   return (
     <div>
@@ -73,9 +76,19 @@ export default function DiscoverPage() {
       </section>
       <div className="wrap pb-16">
         <p className="mb-8 text-[13px] font-medium text-[var(--muted)]">
-          {shown.length} {copy.results}
+          {copy.youMayEnjoy} · {shown.length} {copy.results}
         </p>
         <ProductGrid products={shown} />
+        {samplePicks.length > 0 && (
+          <div className="mt-16">
+            <p className="mb-8 text-[13px] font-medium">{copy.tryItFirst}</p>
+            <div className="product-grid">
+              {samplePicks.map((item) => (
+                <SampleCard key={item.id} item={item} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

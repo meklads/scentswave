@@ -70,6 +70,9 @@ export function HomeView() {
         <div className="wrap py-16 text-center md:py-20">
           <SectionHead title={copy.tryBefore} href="/category/samples" action={copy.exploreSamples} />
           <p className="mx-auto mt-4 max-w-lg text-[15px] leading-8 text-[var(--muted)]">{copy.tryBeforeBody}</p>
+          <Link href="/sets" className="u-link mt-6 inline-block">
+            {copy.discoverySets}
+          </Link>
         </div>
       </section>
 

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { CompleteSet } from "@/components/CompleteSet";
 import { Price } from "@/components/Price";
 import { QtyControl } from "@/components/QtyControl";
+import { SampleProductView } from "@/components/SampleProductView";
 import { UpsellRail } from "@/components/UpsellRail";
 import { useStore } from "@/components/store";
 import {
@@ -20,10 +21,12 @@ import {
 } from "@/lib/catalog";
 import { formatSale, formatSize } from "@/lib/format";
 import { t } from "@/lib/i18n";
+import { defaultSize, findSampleBySku, findSampleBySource } from "@/lib/samples";
 
 export default function ProductPage() {
   const slug = String(useParams().slug || "");
-  const product = getProduct(slug);
+  const sampleMatch = findSampleBySku(slug);
+  const product = sampleMatch ? undefined : getProduct(slug);
   const { locale, addToCart, toggleWishlist, wishlist, viewProduct, recentlyViewed } = useStore();
   const copy = t(locale);
   const [qty, setQty] = useState(1);
@@ -34,6 +37,10 @@ export default function ProductPage() {
     setActive(0);
     setQty(1);
   }, [product, viewProduct]);
+
+  if (sampleMatch) {
+    return <SampleProductView sku={slug} />;
+  }
 
   if (!product) {
     return <p className="wrap py-16 text-center text-[var(--muted)]">{copy.noResults}</p>;
@@ -48,6 +55,7 @@ export default function ProductPage() {
     .filter((item): item is NonNullable<typeof item> => Boolean(item))
     .slice(0, 8);
   const loved = wishlist.includes(product.slug);
+  const sample = findSampleBySource(product.slug);
   const image = product.images[active] || product.images[0];
   const hasNotes = Boolean(product.topNotes || product.heartNotes || product.baseNotes);
   const brandLabel = brand ? (locale === "ar" ? brand.nameAr : brand.nameEn) : product.brand;
@@ -134,6 +142,18 @@ export default function ProductPage() {
             <span className="size-chip">{formatSize(product.sizeMl, locale)}</span>
             <QtyControl value={qty} onChange={setQty} />
           </div>
+
+          {sample && (
+            <div className="mt-6 border border-[var(--line)] p-4">
+              <p className="text-[14px] font-semibold">{copy.tryItFirst}</p>
+              <p className="mt-2 text-[13px] leading-7 text-[var(--muted)]">
+                {sample.sizes.map((option) => formatSize(option.sizeMl, locale)).join(" · ")}
+              </p>
+              <Link href={`/product/${defaultSize(sample).sku}`} className="u-link mt-3 inline-block">
+                {copy.exploreSamples}
+              </Link>
+            </div>
+          )}
 
           <p className="mt-5 text-[13px] text-[var(--muted)]">{copy.giftWrap} · {copy.giftWrapHint}</p>
 

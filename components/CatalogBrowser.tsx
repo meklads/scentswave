@@ -4,10 +4,12 @@ import { useMemo } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ProductGrid } from "@/components/ProductCard";
+import { SampleCard } from "@/components/SampleCard";
 import { useStore } from "@/components/store";
 import { brandName, brands, filterProducts } from "@/lib/catalog";
 import { WHATSAPP } from "@/lib/format";
 import { t } from "@/lib/i18n";
+import { filterSamples } from "@/lib/samples";
 
 export function CatalogBrowser({
   titleAr,
@@ -53,6 +55,7 @@ export function CatalogBrowser({
       }),
     [gender, brandFilter, featured, sale, travel, query, sort, size, price],
   );
+  const sampleHits = useMemo(() => (query ? filterSamples({ q: query }).slice(0, 4) : []), [query]);
 
   const introTone = sale ? "blush" : travel ? "sand" : featured ? "dusk" : gender === "women" ? "blush" : gender === "men" ? "mist" : "stone";
 
@@ -142,6 +145,16 @@ export function CatalogBrowser({
         </div>
       </section>
       <div className="wrap py-12 md:py-16">
+        {sampleHits.length > 0 && (
+          <div className="mb-14">
+            <p className="mb-6 text-[13px] font-medium">{copy.tryItFirst}</p>
+            <div className="product-grid">
+              {sampleHits.map((item) => (
+                <SampleCard key={item.id} item={item} />
+              ))}
+            </div>
+          </div>
+        )}
         {list.length === 0 ? (
           <p className="py-16 text-center text-[var(--muted)]">
             {query ? copy.emptySearch : copy.noResults}

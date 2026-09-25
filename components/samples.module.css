@@ -29,6 +29,139 @@
   color: #6b6b6b;
 }
 
+.lead {
+  margin: 16px auto 0;
+  max-width: 36rem;
+  font-size: 14px;
+  line-height: 1.9;
+  color: #6b6b6b;
+}
+
+.heroCtas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 28px;
+}
+
+.band,
+.bandAlt {
+  padding: 48px 0;
+}
+
+.bandAlt {
+  background: #f1ebe2;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.sizeGuide,
+.experiences,
+.edu,
+.setGrid {
+  display: grid;
+  gap: 18px;
+  margin-top: 28px;
+}
+
+@media (min-width: 768px) {
+  .sizeGuide,
+  .experiences,
+  .edu,
+  .setGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .edu {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.sizeCard,
+.exp,
+.setCard {
+  background: #fff;
+  padding: 22px 20px;
+  text-align: start;
+}
+
+.sizeName {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: #8a7a62;
+}
+
+.sizeMl {
+  margin-top: 8px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.sizeRole,
+.setBody {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #6b6b6b;
+}
+
+.houses {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 18px;
+  margin-top: 28px;
+}
+
+.house,
+.houseOn {
+  background: none;
+  border: 0;
+  padding: 6px 0;
+  font-size: 13px;
+  color: #6b6b6b;
+}
+
+.houseOn {
+  color: #111;
+  border-bottom: 1px solid #111;
+}
+
+.edu h3 {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.edu p {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.85;
+  color: #6b6b6b;
+}
+
+.setList {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #6b6b6b;
+}
+
+.pick {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #6b6b6b;
+}
+
 .note {
   margin: 18px auto 0;
   max-width: 32rem;

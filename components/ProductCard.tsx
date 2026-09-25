@@ -7,6 +7,7 @@ import { useStore } from "@/components/store";
 import { concentrationLabel, getBrand, brandName, productShort } from "@/lib/catalog";
 import { formatSale } from "@/lib/format";
 import { t } from "@/lib/i18n";
+import { defaultSize, findSampleBySource } from "@/lib/samples";
 import type { Product } from "@/lib/types";
 
 export function ProductCard({ product }: { product: Product }) {
@@ -17,6 +18,7 @@ export function ProductCard({ product }: { product: Product }) {
   const brand = getBrand(product.brand);
   const onSale = product.compareAtPrice > product.price && product.salePercent > 0;
   const loved = wishlist.includes(product.slug);
+  const sample = findSampleBySource(product.slug);
 
   return (
     <article className="group">
@@ -76,6 +78,11 @@ export function ProductCard({ product }: { product: Product }) {
         >
           {product.inStock ? copy.addToCart : copy.soldOut}
         </button>
+        {sample && (
+          <Link href={`/product/${defaultSize(sample).sku}`} className="u-link mt-2 text-[12px]">
+            {copy.tryItFirst}
+          </Link>
+        )}
       </div>
     </article>
   );

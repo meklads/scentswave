@@ -40,6 +40,7 @@ export function Header() {
     { href: "/category/men", label: copy.men },
     { href: "/category/women", label: copy.women },
     { href: "/category/samples", label: copy.samples },
+    { href: "/sets", label: copy.discoverySets },
     { href: "/discover", label: copy.findScent },
   ];
 

@@ -7,11 +7,29 @@ export const sampleProducts = samplesData as SampleProduct[];
 export const SAMPLE_SIZES = [2, 3, 5, 10] as const;
 export const SAMPLE_TYPES: SampleType[] = ["sample", "decant", "travel"];
 
+const HOUSE_KIND: Record<string, "designer" | "niche"> = {
+  dior: "designer",
+  chanel: "designer",
+  "tom-ford": "designer",
+  "giorgio-armani": "designer",
+  ysl: "designer",
+  givenchy: "designer",
+  "calvin-klein": "designer",
+  "carolina-herrera": "designer",
+  cartier: "designer",
+  mancera: "niche",
+  montale: "niche",
+};
+
+export function houseKind(brand: string) {
+  return HOUSE_KIND[brand];
+}
+
 export function sampleTypeLabel(type: SampleType, locale: Locale) {
   const map = {
-    sample: { ar: "عينة", en: "Sample" },
+    sample: { ar: "تجربة", en: "Mini" },
     decant: { ar: "ديكانت", en: "Decant" },
-    travel: { ar: "حجم سفر", en: "Travel Size" },
+    travel: { ar: "سفر", en: "Travel" },
   } as const;
   return map[type][locale];
 }
@@ -39,6 +57,22 @@ export function findSample(id: string) {
 
 export function findSize(item: SampleProduct, sku: string) {
   return item.sizes.find((size) => size.sku === sku);
+}
+
+export function findSampleBySku(sku: string) {
+  for (const item of sampleProducts) {
+    const size = item.sizes.find((option) => option.sku === sku);
+    if (size) return { item, size };
+  }
+  return undefined;
+}
+
+export function findSampleBySource(slug: string) {
+  return sampleProducts.find((item) => item.sourceSlug === slug);
+}
+
+export function fromPrice(item: SampleProduct) {
+  return Math.min(...item.sizes.map((size) => size.priceSAR));
 }
 
 export function sampleAsProduct(item: SampleProduct, size: SizeOption): Product {
@@ -88,6 +122,7 @@ export type SampleFilters = {
   type?: SampleType;
   gender?: SampleGender;
   price?: "under-80" | "80-150" | "over-150";
+  house?: "designer" | "niche";
   q?: string;
   sort?: "best" | "newest" | "price-asc" | "price-desc";
 };
@@ -96,6 +131,7 @@ export function filterSamples(options: SampleFilters = {}) {
   let list = [...sampleProducts];
 
   if (options.brand) list = list.filter((item) => item.brand === options.brand);
+  if (options.house) list = list.filter((item) => houseKind(item.brand) === options.house);
   if (options.gender) list = list.filter((item) => item.gender === options.gender);
   if (options.sizeMl) list = list.filter((item) => item.sizes.some((size) => size.sizeMl === options.sizeMl));
   if (options.type) list = list.filter((item) => item.sizes.some((size) => size.type === options.type));
@@ -108,10 +144,11 @@ export function filterSamples(options: SampleFilters = {}) {
     });
   }
   if (options.q) {
-    const q = options.q.trim().toLowerCase();
-    list = list.filter((item) =>
-      [item.perfumeNameAr, item.perfumeNameEn, item.brand, item.sourceSlug].join(" ").toLowerCase().includes(q),
-    );
+    const tokens = options.q.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    list = list.filter((item) => {
+      const hay = [item.perfumeNameAr, item.perfumeNameEn, item.brand, item.sourceSlug].join(" ").toLowerCase();
+      return tokens.every((token) => hay.includes(token));
+    });
   }
 
   switch (options.sort) {
