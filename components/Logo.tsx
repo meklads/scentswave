@@ -6,6 +6,7 @@ import Link from "next/link";
 const VARIANTS = {
   original: { src: "/images/logo/sw-logo-original.png", nativeW: 1024, nativeH: 512 },
   full: { src: "/images/logo/sw-logo.png", nativeW: 1024, nativeH: 1024 },
+  header: { src: "/images/logo/sw-logo-header.png", nativeW: 1600, nativeH: 879 },
   mark: { src: "/images/logo/sw-mark.png", nativeW: 328, nativeH: 243 },
 } as const;
 
@@ -24,17 +25,17 @@ export function Logo({
   const width = Math.round(height * (nativeW / nativeH));
 
   if (crop) {
+    const header = VARIANTS.header;
     return (
       <Link href="/" className={`header-brand ${className}`.trim()} aria-label="Scents Wave">
         <Image
-          src={src}
+          src={header.src}
           alt="Scents Wave — موجة عطر — Luxury Solid Perfume"
-          width={nativeW}
-          height={nativeH}
+          width={header.nativeW}
+          height={header.nativeH}
           priority
           quality={100}
-          unoptimized
-          sizes="(max-width: 767px) 360px, 720px"
+          sizes="176px"
           className="header-brand-img"
         />
       </Link>
