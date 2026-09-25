@@ -1,13 +1,14 @@
 import brandsData from "@/data/brands.json";
 import productsData from "@/data/products.json";
 import { formatSize } from "@/lib/format";
+import { getSampleAsProduct } from "@/lib/samples";
 import type { Brand, Product } from "@/lib/types";
 
 export const products = productsData as Product[];
 export const brands = brandsData as Brand[];
 
 export function getProduct(slug: string) {
-  return products.find((item) => item.slug === slug);
+  return products.find((item) => item.slug === slug) ?? getSampleAsProduct(slug);
 }
 
 export function getBrand(slug: string) {

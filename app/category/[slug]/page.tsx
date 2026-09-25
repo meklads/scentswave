@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation";
 import { Suspense } from "react";
 import { CatalogBrowser } from "@/components/CatalogBrowser";
+import { SamplesView } from "@/components/SamplesView";
 import { getBrand } from "@/lib/catalog";
 import { t } from "@/lib/i18n";
 import { useStore } from "@/components/store";
@@ -44,14 +45,7 @@ function CategoryInner() {
     );
   }
   if (slug === "samples") {
-    return (
-      <CatalogBrowser
-        titleAr={copy.samples}
-        titleEn={copy.samples}
-        travel
-        intro={copy.founding}
-      />
-    );
+    return <SamplesView />;
   }
   if (slug === "picks") {
     return (

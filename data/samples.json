@@ -1,0 +1,300 @@
+[
+  {
+    "id": "dior-sauvage-edp",
+    "sourceSlug": "dior-sauvage-eau-de-parfum",
+    "perfumeNameAr": "سوفاج",
+    "perfumeNameEn": "Sauvage Eau de Parfum",
+    "brand": "dior",
+    "gender": "men",
+    "featured": true,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 49, "sku": "sample-dior-sauvage-edp-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 3, "type": "sample", "priceSAR": 65, "sku": "sample-dior-sauvage-edp-3", "image": "/images/samples/vial-3.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 95, "sku": "sample-dior-sauvage-edp-5", "image": "/images/samples/vial-5.svg" },
+      { "sizeMl": 10, "type": "travel", "priceSAR": 159, "sku": "sample-dior-sauvage-edp-10", "image": "/images/samples/vial-10.svg" }
+    ]
+  },
+  {
+    "id": "dior-sauvage-edt",
+    "sourceSlug": "sauvage",
+    "perfumeNameAr": "سوفاج تواليت",
+    "perfumeNameEn": "Sauvage Eau de Toilette",
+    "brand": "dior",
+    "gender": "men",
+    "featured": true,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 45, "sku": "sample-dior-sauvage-edt-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 89, "sku": "sample-dior-sauvage-edt-5", "image": "/images/samples/vial-5.svg" },
+      { "sizeMl": 10, "type": "travel", "priceSAR": 149, "sku": "sample-dior-sauvage-edt-10", "image": "/images/samples/vial-10.svg" }
+    ]
+  },
+  {
+    "id": "dior-homme-intense",
+    "sourceSlug": "dior-homme-instense",
+    "perfumeNameAr": "هوم إنتنس",
+    "perfumeNameEn": "Homme Intense",
+    "brand": "dior",
+    "gender": "men",
+    "featured": false,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 49, "sku": "sample-dior-homme-intense-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 95, "sku": "sample-dior-homme-intense-5", "image": "/images/samples/vial-5.svg" },
+      { "sizeMl": 10, "type": "travel", "priceSAR": 159, "sku": "sample-dior-homme-intense-10", "image": "/images/samples/vial-10.svg" }
+    ]
+  },
+  {
+    "id": "dior-fahrenheit",
+    "sourceSlug": "dior-fahrenheit",
+    "perfumeNameAr": "فهرنهايت",
+    "perfumeNameEn": "Fahrenheit",
+    "brand": "dior",
+    "gender": "men",
+    "featured": false,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 45, "sku": "sample-dior-fahrenheit-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 89, "sku": "sample-dior-fahrenheit-5", "image": "/images/samples/vial-5.svg" }
+    ]
+  },
+  {
+    "id": "chanel-bleu-edp",
+    "sourceSlug": "chanel-bleu-de-for",
+    "perfumeNameAr": "بلو دو شانيل",
+    "perfumeNameEn": "Bleu de Chanel Eau de Parfum",
+    "brand": "chanel",
+    "gender": "men",
+    "featured": true,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 59, "sku": "sample-chanel-bleu-edp-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 3, "type": "sample", "priceSAR": 79, "sku": "sample-chanel-bleu-edp-3", "image": "/images/samples/vial-3.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 119, "sku": "sample-chanel-bleu-edp-5", "image": "/images/samples/vial-5.svg" },
+      { "sizeMl": 10, "type": "travel", "priceSAR": 189, "sku": "sample-chanel-bleu-edp-10", "image": "/images/samples/vial-10.svg" }
+    ]
+  },
+  {
+    "id": "chanel-allure-sport",
+    "sourceSlug": "chanel-allure-sport",
+    "perfumeNameAr": "ألور سبورت",
+    "perfumeNameEn": "Allure Homme Sport",
+    "brand": "chanel",
+    "gender": "men",
+    "featured": false,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 55, "sku": "sample-chanel-allure-sport-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 109, "sku": "sample-chanel-allure-sport-5", "image": "/images/samples/vial-5.svg" },
+      { "sizeMl": 10, "type": "travel", "priceSAR": 179, "sku": "sample-chanel-allure-sport-10", "image": "/images/samples/vial-10.svg" }
+    ]
+  },
+  {
+    "id": "tom-ford-ombre-leather",
+    "sourceSlug": "tom-ford-ombre-leather",
+    "perfumeNameAr": "أومبر ليذر",
+    "perfumeNameEn": "Ombre Leather",
+    "brand": "tom-ford",
+    "gender": "men",
+    "featured": true,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 69, "sku": "sample-tom-ford-ombre-leather-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 129, "sku": "sample-tom-ford-ombre-leather-5", "image": "/images/samples/vial-5.svg" },
+      { "sizeMl": 10, "type": "travel", "priceSAR": 199, "sku": "sample-tom-ford-ombre-leather-10", "image": "/images/samples/vial-10.svg" }
+    ]
+  },
+  {
+    "id": "tom-ford-black-orchid",
+    "sourceSlug": "tom-ford-black-orchid",
+    "perfumeNameAr": "بلاك أوركيد",
+    "perfumeNameEn": "Black Orchid",
+    "brand": "tom-ford",
+    "gender": "unisex",
+    "featured": true,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 69, "sku": "sample-tom-ford-black-orchid-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 3, "type": "sample", "priceSAR": 89, "sku": "sample-tom-ford-black-orchid-3", "image": "/images/samples/vial-3.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 129, "sku": "sample-tom-ford-black-orchid-5", "image": "/images/samples/vial-5.svg" },
+      { "sizeMl": 10, "type": "travel", "priceSAR": 199, "sku": "sample-tom-ford-black-orchid-10", "image": "/images/samples/vial-10.svg" }
+    ]
+  },
+  {
+    "id": "tom-ford-grey-vetiver",
+    "sourceSlug": "tom-ford-grey-vetiver",
+    "perfumeNameAr": "غراي فيتيفير",
+    "perfumeNameEn": "Grey Vetiver",
+    "brand": "tom-ford",
+    "gender": "men",
+    "featured": false,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 75, "sku": "sample-tom-ford-grey-vetiver-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 149, "sku": "sample-tom-ford-grey-vetiver-5", "image": "/images/samples/vial-5.svg" },
+      { "sizeMl": 10, "type": "travel", "priceSAR": 229, "sku": "sample-tom-ford-grey-vetiver-10", "image": "/images/samples/vial-10.svg" }
+    ]
+  },
+  {
+    "id": "mancera-red-tobacco",
+    "sourceSlug": "mancera-red-tobacco",
+    "perfumeNameAr": "ريد توباكو",
+    "perfumeNameEn": "Red Tobacco",
+    "brand": "mancera",
+    "gender": "unisex",
+    "featured": true,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 55, "sku": "sample-mancera-red-tobacco-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 105, "sku": "sample-mancera-red-tobacco-5", "image": "/images/samples/vial-5.svg" },
+      { "sizeMl": 10, "type": "travel", "priceSAR": 169, "sku": "sample-mancera-red-tobacco-10", "image": "/images/samples/vial-10.svg" }
+    ]
+  },
+  {
+    "id": "montale-black-aoud",
+    "sourceSlug": "montale-black-aoud",
+    "perfumeNameAr": "بلاك عود",
+    "perfumeNameEn": "Black Aoud",
+    "brand": "montale",
+    "gender": "unisex",
+    "featured": false,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 55, "sku": "sample-montale-black-aoud-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 105, "sku": "sample-montale-black-aoud-5", "image": "/images/samples/vial-5.svg" },
+      { "sizeMl": 10, "type": "travel", "priceSAR": 169, "sku": "sample-montale-black-aoud-10", "image": "/images/samples/vial-10.svg" }
+    ]
+  },
+  {
+    "id": "armani-code",
+    "sourceSlug": "armani-code",
+    "perfumeNameAr": "كود",
+    "perfumeNameEn": "Code",
+    "brand": "giorgio-armani",
+    "gender": "men",
+    "featured": false,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 39, "sku": "sample-armani-code-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 79, "sku": "sample-armani-code-5", "image": "/images/samples/vial-5.svg" },
+      { "sizeMl": 10, "type": "travel", "priceSAR": 129, "sku": "sample-armani-code-10", "image": "/images/samples/vial-10.svg" }
+    ]
+  },
+  {
+    "id": "acqua-di-gio",
+    "sourceSlug": "acqua-di-gio",
+    "perfumeNameAr": "أكوا دي جيو",
+    "perfumeNameEn": "Acqua di Gio",
+    "brand": "giorgio-armani",
+    "gender": "men",
+    "featured": false,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 39, "sku": "sample-acqua-di-gio-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 79, "sku": "sample-acqua-di-gio-5", "image": "/images/samples/vial-5.svg" }
+    ]
+  },
+  {
+    "id": "ysl-y-le-parfum",
+    "sourceSlug": "yves-saint-laurent-y-le-parfum",
+    "perfumeNameAr": "واي لو بارفان",
+    "perfumeNameEn": "Y Le Parfum",
+    "brand": "ysl",
+    "gender": "men",
+    "featured": false,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 49, "sku": "sample-ysl-y-le-parfum-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 95, "sku": "sample-ysl-y-le-parfum-5", "image": "/images/samples/vial-5.svg" },
+      { "sizeMl": 10, "type": "travel", "priceSAR": 159, "sku": "sample-ysl-y-le-parfum-10", "image": "/images/samples/vial-10.svg" }
+    ]
+  },
+  {
+    "id": "ysl-la-nuit",
+    "sourceSlug": "yves-saint-laurent-la-nuit-de-lhomme-intense",
+    "perfumeNameAr": "لا نوي إنتنس",
+    "perfumeNameEn": "La Nuit de L'Homme Intense",
+    "brand": "ysl",
+    "gender": "men",
+    "featured": true,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 49, "sku": "sample-ysl-la-nuit-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 3, "type": "sample", "priceSAR": 65, "sku": "sample-ysl-la-nuit-3", "image": "/images/samples/vial-3.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 95, "sku": "sample-ysl-la-nuit-5", "image": "/images/samples/vial-5.svg" }
+    ]
+  },
+  {
+    "id": "givenchy-linterdit",
+    "sourceSlug": "givenchy-linterdit",
+    "perfumeNameAr": "لانتردي",
+    "perfumeNameEn": "L'Interdit",
+    "brand": "givenchy",
+    "gender": "women",
+    "featured": true,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 45, "sku": "sample-givenchy-linterdit-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 85, "sku": "sample-givenchy-linterdit-5", "image": "/images/samples/vial-5.svg" },
+      { "sizeMl": 10, "type": "travel", "priceSAR": 139, "sku": "sample-givenchy-linterdit-10", "image": "/images/samples/vial-10.svg" }
+    ]
+  },
+  {
+    "id": "givenchy-ange-ou-demon",
+    "sourceSlug": "ange-ou-demon-givenchy",
+    "perfumeNameAr": "آنج أو ديمون",
+    "perfumeNameEn": "Ange ou Démon",
+    "brand": "givenchy",
+    "gender": "women",
+    "featured": false,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 45, "sku": "sample-givenchy-ange-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 85, "sku": "sample-givenchy-ange-5", "image": "/images/samples/vial-5.svg" }
+    ]
+  },
+  {
+    "id": "ck-euphoria",
+    "sourceSlug": "calvin-klein-euphoria",
+    "perfumeNameAr": "يوفوريا",
+    "perfumeNameEn": "Euphoria",
+    "brand": "calvin-klein",
+    "gender": "women",
+    "featured": false,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 35, "sku": "sample-ck-euphoria-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 69, "sku": "sample-ck-euphoria-5", "image": "/images/samples/vial-5.svg" }
+    ]
+  },
+  {
+    "id": "carolina-herrera-chic",
+    "sourceSlug": "carolina-herrera-chic",
+    "perfumeNameAr": "شيك",
+    "perfumeNameEn": "Chic",
+    "brand": "carolina-herrera",
+    "gender": "women",
+    "featured": false,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 39, "sku": "sample-ch-chic-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 75, "sku": "sample-ch-chic-5", "image": "/images/samples/vial-5.svg" }
+    ]
+  },
+  {
+    "id": "cartier-declaration",
+    "sourceSlug": "cartier-declaration",
+    "perfumeNameAr": "ديكلاراسيون",
+    "perfumeNameEn": "Déclaration",
+    "brand": "cartier",
+    "gender": "men",
+    "featured": false,
+    "availability": true,
+    "sizes": [
+      { "sizeMl": 2, "type": "sample", "priceSAR": 45, "sku": "sample-cartier-declaration-2", "image": "/images/samples/vial-2.svg" },
+      { "sizeMl": 5, "type": "decant", "priceSAR": 89, "sku": "sample-cartier-declaration-5", "image": "/images/samples/vial-5.svg" },
+      { "sizeMl": 10, "type": "travel", "priceSAR": 145, "sku": "sample-cartier-declaration-10", "image": "/images/samples/vial-10.svg" }
+    ]
+  }
+]

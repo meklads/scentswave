@@ -1,6 +1,28 @@
 export type Locale = "ar" | "en";
 export type Gender = "men" | "women";
 export type Concentration = "edt" | "edp" | "parfum" | "cologne";
+export type SampleType = "sample" | "decant" | "travel";
+export type SampleGender = Gender | "unisex";
+
+export type SizeOption = {
+  sizeMl: 2 | 3 | 5 | 10;
+  type: SampleType;
+  priceSAR: number;
+  sku: string;
+  image: string;
+};
+
+export type SampleProduct = {
+  id: string;
+  sourceSlug: string;
+  perfumeNameAr: string;
+  perfumeNameEn: string;
+  brand: string;
+  gender: SampleGender;
+  featured: boolean;
+  availability: boolean;
+  sizes: SizeOption[];
+};
 
 export type Product = {
   slug: string;
@@ -21,6 +43,7 @@ export type Product = {
   images: string[];
   descriptionAr: string;
   descriptionEn: string;
+  sizeOptions?: SizeOption[];
 };
 
 export type Brand = {
