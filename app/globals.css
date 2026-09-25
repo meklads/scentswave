@@ -33,9 +33,10 @@
   --gold-dark: #b8924a;
   --background: var(--paper);
   --foreground: var(--ink);
-  --ash: #ececec;
+  --ash: #f3f3f3;
   --ticket: #ffffff;
-  --royal: #9b1c32;
+  --royal: #e11d2e;
+  --pop: #12b76a;
 }
 
 @theme inline {
@@ -399,19 +400,19 @@ button { cursor: pointer; }
   position: relative;
   min-width: 0;
   background: var(--ticket);
-  border-radius: 16px;
-  padding: 8px 8px 12px;
-  box-shadow: 0 1px 2px rgba(17, 17, 17, 0.04);
+  border-radius: 18px;
+  padding: 10px 10px 14px;
+  box-shadow: 0 1px 3px rgba(17, 17, 17, 0.04);
 }
 
 .card-copy {
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: 2px;
+  gap: 3px;
   width: 100%;
   min-width: 0;
-  padding: 8px 6px 0;
+  padding: 10px 4px 2px;
   text-align: start;
 }
 .card-copy .product-name {
@@ -421,14 +422,15 @@ button { cursor: pointer; }
   overflow: hidden;
   min-height: calc(1.35em * 2);
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.35;
+  color: #333;
 }
 .card-brand {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0;
-  color: #222;
+  color: #111;
 }
 .card-meta {
   font-size: 11px;
@@ -436,26 +438,50 @@ button { cursor: pointer; }
   letter-spacing: 0;
   color: #8a8a8a;
 }
-.card-mark {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin-bottom: 2px;
-  font-size: 11px;
-  font-weight: 600;
+.card-pop {
+  position: absolute;
+  inset-inline-end: 8px;
+  top: 10px;
+  z-index: 3;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--pop);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
   line-height: 1;
-  color: #c4a574;
+  white-space: nowrap;
 }
+.card-pop.is-gone {
+  background: #8a8a8a;
+}
+.card-plus {
+  position: absolute;
+  inset-inline-start: 8px;
+  bottom: 8px;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid #d8d8d8;
+  background: #fff;
+  color: #222;
+  box-shadow: 0 1px 2px rgba(17, 17, 17, 0.06);
+}
+.card-plus:hover { border-color: #111; }
+.card-plus:disabled { opacity: 0.35; }
 .price-row {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 6px 8px;
-  margin-top: 4px;
+  margin-top: 6px;
 }
 .price-now {
   color: var(--royal);
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 800;
   line-height: 1;
   white-space: nowrap;
@@ -463,14 +489,14 @@ button { cursor: pointer; }
 }
 .price-was {
   color: #9a9a9a;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1;
   text-decoration: line-through;
   white-space: nowrap;
 }
 .price-cut {
   color: var(--royal);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   line-height: 1;
   white-space: nowrap;
@@ -542,9 +568,9 @@ button { cursor: pointer; }
   z-index: 3;
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
-  color: #8d8d8d;
+  width: 34px;
+  height: 34px;
+  color: #8a8a8a;
   background: transparent;
   transition: color 0.2s ease;
 }
@@ -1068,11 +1094,11 @@ html[lang="ar"] .acc > summary {
   .section-all { font-size: 12px; }
 
   .ticket {
-    padding: 6px 6px 10px;
-    border-radius: 14px;
+    padding: 8px 8px 12px;
+    border-radius: 16px;
   }
   .card-copy {
-    padding: 6px 4px 0;
+    padding: 8px 2px 0;
     gap: 2px;
   }
   .card-copy .product-name {
@@ -1080,11 +1106,16 @@ html[lang="ar"] .acc > summary {
     line-height: 1.3;
     min-height: calc(1.3em * 2);
   }
-  .card-brand { font-size: 11px; }
+  .card-brand { font-size: 12px; }
   .card-meta { font-size: 10px; }
-  .price-now { font-size: 16px; }
+  .price-now { font-size: 18px; }
   .price-was,
-  .price-cut { font-size: 11px; }
+  .price-cut { font-size: 12px; }
+  .card-pop { font-size: 9px; padding: 4px 8px; }
+  .card-plus {
+    width: 30px;
+    height: 30px;
+  }
   .card-atc { font-size: 11px; margin-top: 4px; }
 
   .rail {

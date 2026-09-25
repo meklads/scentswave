@@ -16,9 +16,9 @@ export function Price({
 
   return (
     <p className={`price-row${size === "pdp" ? " is-pdp" : ""}`}>
+      <span className="price-now">{formatMoney(product.price, locale)}</span>
       {onSale && <span className="price-cut">{formatSaleShort(product.salePercent, locale)}</span>}
       {onSale && <span className="price-was">{formatMoney(product.compareAtPrice, locale)}</span>}
-      <span className="price-now">{formatMoney(product.price, locale)}</span>
     </p>
   );
 }

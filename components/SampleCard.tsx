@@ -3,10 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { Heart } from "@/components/ProductCard";
+import { Heart, Plus } from "@/components/ProductCard";
 import { useStore } from "@/components/store";
 import { brandName, getBrand } from "@/lib/catalog";
 import { formatSize } from "@/lib/format";
+import { t } from "@/lib/i18n";
 import { sampleShot } from "@/lib/sample-image";
 import { defaultSize, formatSamplePrice, perfumeName } from "@/lib/samples";
 import type { SampleProduct } from "@/lib/types";
@@ -24,6 +25,7 @@ export function SampleCard({
   onToggle?: () => void;
 }) {
   const { locale, addToCart, toggleWishlist, wishlist } = useStore();
+  const copy = t(locale);
   const brand = getBrand(item.brand);
   const initial = useMemo(() => defaultSize(item), [item]);
   const [sku, setSku] = useState(initial.sku);
@@ -42,24 +44,35 @@ export function SampleCard({
         <button
           type="button"
           className={`card-heart${loved ? " is-loved" : ""}`}
-          aria-label={locale === "ar" ? "المحفوظات" : "Wishlist"}
+          aria-label={copy.wishlist}
           onClick={() => toggleWishlist(size.sku)}
         >
           <Heart filled={loved} />
         </button>
+        {item.featured && item.availability && <span className="card-pop">{copy.bestSellers}</span>}
+        {!item.availability && <span className="card-pop is-gone">{copy.soldOut}</span>}
         <Link href={`/product/${size.sku}`} className="absolute inset-0">
           <Image
             src={sampleShot(item.sourceSlug, size.image)}
             alt={`${perfumeName(item, locale)} ${formatSize(size.sizeMl, locale)}`}
             fill
             sizes="(max-width: 768px) 46vw, 220px"
-            className="object-contain p-1.5"
+            className="object-contain p-4"
           />
         </Link>
+        <button
+          type="button"
+          className="card-plus"
+          aria-label={copy.addToCart}
+          disabled={!item.availability}
+          onClick={() => addToCart(size.sku, 1)}
+        >
+          <Plus />
+        </button>
       </div>
-      <div className={styles.copy}>
-        <p className={styles.brand}>{brand ? brandName(brand, locale) : item.brand}</p>
-        <Link href={`/product/${size.sku}`} className={styles.name}>
+      <div className={`card-copy ${styles.copy}`}>
+        <p className="card-brand">{brand ? brandName(brand, locale) : item.brand}</p>
+        <Link href={`/product/${size.sku}`} className="product-name">
           {perfumeName(item, locale)}
         </Link>
         {item.sizes.length > 1 && (
@@ -76,15 +89,7 @@ export function SampleCard({
             ))}
           </div>
         )}
-        <p className={styles.price}>{formatSamplePrice(size.priceSAR, locale)}</p>
-        <button
-          type="button"
-          className="card-atc"
-          disabled={!item.availability}
-          onClick={() => addToCart(size.sku, 1)}
-        >
-          {locale === "ar" ? "أضف للسلة" : "Add to bag"}
-        </button>
+        <p className="price-now">{formatSamplePrice(size.priceSAR, locale)}</p>
       </div>
     </article>
   );

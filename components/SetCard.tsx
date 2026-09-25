@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Plus } from "@/components/ProductCard";
 import { useStore } from "@/components/store";
 import { setBody, setItems, setName, setPrice, setSaving, setShots, setTotal, type DiscoverySet } from "@/lib/discovery";
 import { formatMoney, formatSize } from "@/lib/format";
@@ -38,10 +39,24 @@ export function SetCard({
             />
           </span>
         ))}
+        {action === "add" ? (
+          <button
+            type="button"
+            className="card-plus"
+            aria-label={copy.addSet}
+            onClick={() => addToCart(`set-${set.id}`, 1)}
+          >
+            <Plus />
+          </button>
+        ) : (
+          <Link href="/sets" className="card-plus" aria-label={locale === "ar" ? "اكتشف المجموعة" : "See the set"}>
+            <Plus />
+          </Link>
+        )}
       </div>
-      <div className={styles.setCopy}>
-        <p className={styles.sizeName}>{setName(set, locale)}</p>
-        <p className={styles.sizeRole}>
+      <div className={`card-copy ${styles.setCopy}`}>
+        <p className="card-brand">{setName(set, locale)}</p>
+        <p className="card-meta">
           {items.length} × {formatSize(set.sizeMl, locale)}
         </p>
         {showList && (
@@ -54,23 +69,17 @@ export function SetCard({
             </ul>
           </>
         )}
-        <p className={styles.price}>{formatMoney(setPrice(set), locale)}</p>
-        {saved > 0 && (
-          <p className={styles.setSave}>
-            <span className="line-through">{formatMoney(setTotal(set), locale)}</span>
-            {" · "}
-            {locale === "ar" ? `وفّر ${formatMoney(saved, locale)}` : `Save ${formatMoney(saved, locale)}`}
-          </p>
-        )}
-        {action === "add" ? (
-          <button type="button" className="card-atc" onClick={() => addToCart(`set-${set.id}`, 1)}>
-            {copy.addSet}
-          </button>
-        ) : (
-          <Link href="/sets" className="u-link">
-            {locale === "ar" ? "اكتشف المجموعة" : "See the set"}
-          </Link>
-        )}
+        <p className="price-row">
+          <span className="price-now">{formatMoney(setPrice(set), locale)}</span>
+          {saved > 0 && (
+            <>
+              <span className="price-cut">
+                {locale === "ar" ? `وفّر ${formatMoney(saved, locale)}` : `Save ${formatMoney(saved, locale)}`}
+              </span>
+              <span className="price-was">{formatMoney(setTotal(set), locale)}</span>
+            </>
+          )}
+        </p>
       </div>
     </article>
   );
