@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { SampleCard } from "@/components/SampleCard";
+import { SetCard } from "@/components/SetCard";
 import { useStore } from "@/components/store";
 import { brandName, getBrand } from "@/lib/catalog";
-import { EXPERIENCES, SIZE_ROLES, discoverySets, houseKindLabel, setBody, setItems, setName, setPrice as setOfferPrice, setSaving, setTotal, sizeRole } from "@/lib/discovery";
+import { EXPERIENCES, SIZE_ROLES, discoverySets, houseKindLabel, sizeRole } from "@/lib/discovery";
 import { formatMoney, formatSize } from "@/lib/format";
 import {
   SAMPLE_SIZES,
@@ -338,27 +339,9 @@ export function SamplesView() {
         <div className="wrap">
           <h2 className={`serif ${styles.sectionTitle}`}>{text.sets}</h2>
           <div className={styles.setGrid}>
-            {discoverySets.map((set) => {
-              const items = setItems(set);
-              return (
-                <article key={set.id} className={styles.setCard}>
-                  <p className={styles.sizeName}>{setName(set, locale)}</p>
-                  <p className={styles.sizeRole}>
-                    {items.length} × {formatSize(set.sizeMl, locale)}
-                  </p>
-                  <p className={styles.setBody}>{setBody(set, locale)}</p>
-                  <p className={styles.price}>{formatMoney(setOfferPrice(set), locale)}</p>
-                  {setSaving(set) > 0 && (
-                    <p className={styles.sizeRole}>
-                      <span className="line-through">{formatMoney(setTotal(set), locale)}</span>
-                    </p>
-                  )}
-                  <Link href="/sets" className="u-link">
-                    {text.viewSet}
-                  </Link>
-                </article>
-              );
-            })}
+            {discoverySets.map((set) => (
+              <SetCard key={set.id} set={set} action="link" />
+            ))}
           </div>
         </div>
       </section>

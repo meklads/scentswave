@@ -92,6 +92,40 @@
   border-radius: 16px;
 }
 
+.setCard {
+  padding: 8px 8px 16px;
+}
+
+.setShot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1.15;
+  overflow: hidden;
+  background: #fff;
+}
+
+.setShotItem {
+  position: relative;
+  flex: 1 1 0;
+  height: 88%;
+  min-width: 0;
+}
+
+.setShot[data-count="3"] .setShotItem,
+.setShot[data-count="4"] .setShotItem {
+  margin-inline: -6%;
+}
+
+.setShot[data-count="5"] .setShotItem {
+  margin-inline: -8%;
+}
+
+.setCopy {
+  padding: 10px 8px 0;
+  text-align: start;
+}
+
 .sizeName {
   font-size: 12px;
   letter-spacing: 0.08em;

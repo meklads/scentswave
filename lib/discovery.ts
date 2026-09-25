@@ -1,3 +1,4 @@
+import { sampleShot } from "@/lib/sample-image";
 import { sampleProducts, defaultSize, findSample, houseKind } from "@/lib/samples";
 import type { Locale, Product, SampleProduct } from "@/lib/types";
 
@@ -124,6 +125,10 @@ export function setItems(set: DiscoverySet) {
     });
 }
 
+export function setShots(set: DiscoverySet) {
+  return setItems(set).map((entry) => sampleShot(entry.item.sourceSlug, entry.size.image));
+}
+
 export function setTotal(set: DiscoverySet) {
   return setItems(set).reduce((sum, entry) => sum + entry.size.priceSAR, 0);
 }
@@ -166,7 +171,7 @@ export function getSetAsProduct(slug: string): Product | undefined {
     salePercent: value > set.offerSAR ? Math.round(((value - set.offerSAR) / value) * 100) : 0,
     featured: true,
     inStock: true,
-    images: [items[0].size.image],
+    images: setShots(set),
     descriptionAr: `${items.length} × ${set.sizeMl} مل: ${namesAr}`,
     descriptionEn: `${items.length} × ${set.sizeMl}ml: ${namesEn}`,
   };

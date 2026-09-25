@@ -6,10 +6,10 @@ import { Hero } from "@/components/Hero";
 import { ProductCarousel } from "@/components/ProductCarousel";
 import { SampleCard } from "@/components/SampleCard";
 import { SectionHead } from "@/components/SectionHead";
+import { SetCard } from "@/components/SetCard";
 import { useStore } from "@/components/store";
 import { products, saleProducts } from "@/lib/catalog";
-import { discoverySets, setBody, setItems, setName, setPrice, setSaving, setTotal } from "@/lib/discovery";
-import { formatMoney, formatSize } from "@/lib/format";
+import { discoverySets } from "@/lib/discovery";
 import { t } from "@/lib/i18n";
 import { sampleProducts } from "@/lib/samples";
 import styles from "./samples.module.css";
@@ -17,7 +17,7 @@ import styles from "./samples.module.css";
 const HOME_SETS = ["women", "niche", "signature"];
 
 export function HomeView() {
-  const { locale, addToCart } = useStore();
+  const { locale } = useStore();
   const copy = t(locale);
   const men = products.filter((item) => item.gender === "men");
   const women = products.filter((item) => item.gender === "women");
@@ -54,32 +54,9 @@ export function HomeView() {
             {copy.startWithSetBody}
           </p>
           <div className={styles.setGrid}>
-            {sets.map((set) => {
-              const items = setItems(set);
-              const value = setTotal(set);
-              const price = setPrice(set);
-              const saved = setSaving(set);
-              return (
-                <article key={set.id} className={styles.setCard}>
-                  <p className={styles.sizeName}>{setName(set, locale)}</p>
-                  <p className={styles.sizeRole}>
-                    {items.length} × {formatSize(set.sizeMl, locale)}
-                  </p>
-                  <p className={styles.setBody}>{setBody(set, locale)}</p>
-                  <p className={styles.price}>{formatMoney(price, locale)}</p>
-                  {saved > 0 && (
-                    <p className={styles.sizeRole}>
-                      <span className="line-through">{formatMoney(value, locale)}</span>
-                      {" · "}
-                      {locale === "ar" ? `وفّر ${formatMoney(saved, locale)}` : `Save ${formatMoney(saved, locale)}`}
-                    </p>
-                  )}
-                  <button type="button" className="card-atc mt-4" onClick={() => addToCart(`set-${set.id}`, 1)}>
-                    {copy.addSet}
-                  </button>
-                </article>
-              );
-            })}
+            {sets.map((set) => (
+              <SetCard key={set.id} set={set} />
+            ))}
           </div>
         </div>
       </section>

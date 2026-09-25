@@ -2,10 +2,11 @@
 
 import { useMemo, useState } from "react";
 import { SampleCard } from "@/components/SampleCard";
+import { SetCard } from "@/components/SetCard";
 import { useStore } from "@/components/store";
-import { discoverySets, setBody, setItems, setName, setPrice, setSaving, setTotal } from "@/lib/discovery";
-import { formatMoney, formatSize } from "@/lib/format";
-import { defaultSize, perfumeName, sampleProducts } from "@/lib/samples";
+import { discoverySets } from "@/lib/discovery";
+import { formatMoney } from "@/lib/format";
+import { defaultSize, sampleProducts } from "@/lib/samples";
 import styles from "./samples.module.css";
 
 export function SetsView() {
@@ -31,11 +32,6 @@ export function SetsView() {
     });
   }
 
-  function addSet(id: string) {
-    if (!discoverySets.some((item) => item.id === id)) return;
-    addToCart(`set-${id}`, 1);
-  }
-
   function addOwn() {
     if (!ready) return;
     selected.forEach((item) => addToCart(defaultSize(item).sku, 1));
@@ -58,34 +54,9 @@ export function SetsView() {
       <section className={styles.band}>
         <div className="wrap">
           <div className={styles.setGrid}>
-            {discoverySets.map((set) => {
-              const items = setItems(set);
-              return (
-                <article key={set.id} className={styles.setCard}>
-                  <p className={styles.sizeName}>{setName(set, locale)}</p>
-                  <p className={styles.sizeRole}>
-                    {items.length} × {formatSize(set.sizeMl, locale)}
-                  </p>
-                  <p className={styles.setBody}>{setBody(set, locale)}</p>
-                  <ul className={styles.setList}>
-                    {items.map((entry) => (
-                      <li key={entry.item.id}>{perfumeName(entry.item, locale)}</li>
-                    ))}
-                  </ul>
-                  <p className={styles.price}>{formatMoney(setPrice(set), locale)}</p>
-                  {setSaving(set) > 0 && (
-                    <p className={styles.sizeRole}>
-                      <span className="line-through">{formatMoney(setTotal(set), locale)}</span>
-                      {" · "}
-                      {locale === "ar" ? `وفّر ${formatMoney(setSaving(set), locale)}` : `Save ${formatMoney(setSaving(set), locale)}`}
-                    </p>
-                  )}
-                  <button type="button" className="card-atc" onClick={() => addSet(set.id)}>
-                    {locale === "ar" ? "أضف المجموعة للسلة" : "Add set to bag"}
-                  </button>
-                </article>
-              );
-            })}
+            {discoverySets.map((set) => (
+              <SetCard key={set.id} set={set} showList />
+            ))}
           </div>
         </div>
       </section>
