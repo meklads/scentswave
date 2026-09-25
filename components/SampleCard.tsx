@@ -49,51 +49,57 @@ export function SampleCard({
           className="object-contain p-3"
         />
       </Link>
-      <p className={styles.brand}>{brand ? brandName(brand, locale) : item.brand}</p>
-      <Link href={`/product/${size.sku}`} className={styles.name}>
-        {perfumeName(item, locale)}
-      </Link>
-      {source && (
+      <div className={styles.copy}>
+        <p className={styles.brand}>{brand ? brandName(brand, locale) : item.brand}</p>
+        <Link href={`/product/${size.sku}`} className={styles.name}>
+          {perfumeName(item, locale)}
+        </Link>
         <p className={styles.meta}>
-          {locale === "ar"
-            ? source.concentration === "edt"
-              ? "تواليت"
-              : source.concentration === "parfum"
-                ? "بارفوم"
-                : "بارفان"
-            : source.concentration.toUpperCase()}
+          {source
+            ? locale === "ar"
+              ? source.concentration === "edt"
+                ? "تواليت"
+                : source.concentration === "parfum"
+                  ? "بارفوم"
+                  : "بارفان"
+              : source.concentration.toUpperCase()
+            : role.name}
+          {" · "}
+          {formatSize(size.sizeMl, locale)}
         </p>
-      )}
-      <p className={styles.meta}>
-        {role.name}
-        {role.name !== sampleTypeLabel(size.type, locale) ? ` · ${sampleTypeLabel(size.type, locale)}` : ""}
-        {" · "}
-        {formatSize(size.sizeMl, locale)}
-      </p>
-      <p className={styles.price}>{formatSamplePrice(size.priceSAR, locale)}</p>
-      {item.sizes.length > 1 && (
-        <div className={styles.sizes}>
-          {item.sizes.map((option) => (
-            <button
-              key={option.sku}
-              type="button"
-              className={option.sku === size.sku ? styles.sizeOn : ""}
-              onClick={() => setSku(option.sku)}
-            >
-              {formatSize(option.sizeMl, locale)}
-            </button>
-          ))}
-        </div>
-      )}
-      <p className={styles.meta}>{item.availability ? (locale === "ar" ? "متوفر" : "In stock") : locale === "ar" ? "غير متوفر" : "Unavailable"}</p>
-      <button
-        type="button"
-        className="card-atc"
-        disabled={!item.availability}
-        onClick={() => addToCart(size.sku, 1)}
-      >
-        {locale === "ar" ? "أضف للسلة" : "Add to bag"}
-      </button>
+        <p className={styles.price}>{formatSamplePrice(size.priceSAR, locale)}</p>
+        {item.sizes.length > 1 && (
+          <div className={styles.sizes}>
+            {item.sizes.map((option) => (
+              <button
+                key={option.sku}
+                type="button"
+                className={option.sku === size.sku ? styles.sizeOn : ""}
+                onClick={() => setSku(option.sku)}
+              >
+                {formatSize(option.sizeMl, locale)}
+              </button>
+            ))}
+          </div>
+        )}
+        <p className={styles.meta}>
+          {item.availability
+            ? locale === "ar"
+              ? "متوفر"
+              : "In stock"
+            : locale === "ar"
+              ? "غير متوفر"
+              : "Unavailable"}
+        </p>
+        <button
+          type="button"
+          className="card-atc"
+          disabled={!item.availability}
+          onClick={() => addToCart(size.sku, 1)}
+        >
+          {locale === "ar" ? "أضف للسلة" : "Add to bag"}
+        </button>
+      </div>
     </article>
   );
 }
