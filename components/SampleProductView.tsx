@@ -8,6 +8,7 @@ import { useStore } from "@/components/store";
 import { brandName, getBrand, getProduct } from "@/lib/catalog";
 import { sizeRole } from "@/lib/discovery";
 import { formatMoney, formatSize } from "@/lib/format";
+import { sampleGallery, sampleShot } from "@/lib/sample-image";
 import { findSampleBySku, perfumeName, sampleProducts, sampleTypeLabel } from "@/lib/samples";
 import { t } from "@/lib/i18n";
 
@@ -16,6 +17,7 @@ export function SampleProductView({ sku }: { sku: string }) {
   const { locale, addToCart } = useStore();
   const copy = t(locale);
   const [current, setCurrent] = useState(sku);
+  const [active, setActive] = useState(0);
 
   if (!found) return <p className="wrap py-16 text-center">{copy.noResults}</p>;
 
@@ -26,6 +28,8 @@ export function SampleProductView({ sku }: { sku: string }) {
   const role = sizeRole(size.sizeMl, locale);
   const related = sampleProducts.filter((entry) => entry.id !== item.id && (entry.brand === item.brand || entry.gender === item.gender)).slice(0, 4);
   const brandLabel = brand ? brandName(brand, locale) : item.brand;
+  const gallery = sampleGallery(item.sourceSlug, size.image);
+  const shot = sampleShot(item.sourceSlug, size.image);
 
   return (
     <div>
@@ -49,8 +53,28 @@ export function SampleProductView({ sku }: { sku: string }) {
       <div className="pdp">
         <div className="pdp-visual">
           <div className="product-shot relative aspect-square w-full max-w-[520px]">
-            <Image src={size.image} alt="" fill unoptimized className="object-contain p-8" />
+            <Image
+              src={gallery[active] || shot}
+              alt={perfumeName(item, locale)}
+              fill
+              className="object-contain p-4"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
           </div>
+          {gallery.length > 1 && (
+            <div className="mt-4 flex justify-center gap-2">
+              {gallery.map((src, index) => (
+                <button
+                  key={src}
+                  type="button"
+                  onClick={() => setActive(index)}
+                  className={`product-shot relative h-14 w-14 ${active === index ? "outline outline-1 outline-[var(--ink)]" : ""}`}
+                >
+                  <Image src={src} alt="" fill className="object-contain p-1" />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
         <div className="pdp-buy">
           <p className="kicker">{brandLabel}</p>

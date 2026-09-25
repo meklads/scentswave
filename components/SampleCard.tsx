@@ -7,6 +7,7 @@ import { useStore } from "@/components/store";
 import { brandName, getBrand, getProduct } from "@/lib/catalog";
 import { formatSize } from "@/lib/format";
 import { sizeRole } from "@/lib/discovery";
+import { sampleShot } from "@/lib/sample-image";
 import { defaultSize, formatSamplePrice, perfumeName, sampleTypeLabel } from "@/lib/samples";
 import type { SampleProduct } from "@/lib/types";
 import styles from "./samples.module.css";
@@ -38,9 +39,15 @@ export function SampleCard({
           {locale === "ar" ? "أضف للمجموعة" : "Add to set"}
         </label>
       )}
-      <Link href={`/product/${size.sku}`} className={styles.shot}>
+      <Link href={`/product/${size.sku}`} className={`product-shot ${styles.shot}`}>
         <span className={styles.badge}>{sampleTypeLabel(size.type, locale)}</span>
-        <Image src={size.image} alt={`${perfumeName(item, locale)} ${size.sizeMl}ml`} fill unoptimized sizes="240px" />
+        <Image
+          src={sampleShot(item.sourceSlug, size.image)}
+          alt={`${perfumeName(item, locale)} ${formatSize(size.sizeMl, locale)}`}
+          fill
+          sizes="240px"
+          className="object-contain p-3"
+        />
       </Link>
       <p className={styles.brand}>{brand ? brandName(brand, locale) : item.brand}</p>
       <Link href={`/product/${size.sku}`} className={styles.name}>

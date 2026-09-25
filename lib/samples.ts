@@ -1,5 +1,6 @@
 import samplesData from "@/data/samples.json";
 import { formatMoney, formatSize } from "@/lib/format";
+import { sampleShot } from "@/lib/sample-image";
 import type { Locale, Product, SampleGender, SampleProduct, SampleType, SizeOption } from "@/lib/types";
 
 export const sampleProducts = samplesData as SampleProduct[];
@@ -93,7 +94,7 @@ export function sampleAsProduct(item: SampleProduct, size: SizeOption): Product 
     salePercent: 0,
     featured: item.featured,
     inStock: item.availability,
-    images: [size.image],
+    images: [sampleShot(item.sourceSlug, size.image)],
     descriptionAr: `عينة ${formatSize(size.sizeMl, "ar")} من ${item.perfumeNameAr} — لاكتشاف العطر قبل الزجاجة الكاملة.`,
     descriptionEn: `${size.sizeMl}ml ${size.type} of ${item.perfumeNameEn} — try before the full bottle.`,
     sizeOptions: item.sizes,
