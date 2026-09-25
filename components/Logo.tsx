@@ -36,7 +36,7 @@ export function Logo({
           priority
           quality={100}
           unoptimized
-          sizes="340px"
+          sizes="510px"
           className="header-brand-img"
         />
       </Link>
