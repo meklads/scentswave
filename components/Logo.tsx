@@ -6,7 +6,7 @@ import Link from "next/link";
 const VARIANTS = {
   original: { src: "/images/logo/sw-logo-original.png", nativeW: 1024, nativeH: 512 },
   full: { src: "/images/logo/sw-logo.png", nativeW: 1024, nativeH: 1024 },
-  header: { src: "/images/logo/sw-logo-header.png", nativeW: 1600, nativeH: 879 },
+  header: { src: "/images/logo/sw-logo-header.png", nativeW: 2400, nativeH: 1200 },
   mark: { src: "/images/logo/sw-mark.png", nativeW: 328, nativeH: 243 },
 } as const;
 
@@ -25,7 +25,7 @@ export function Logo({
   const width = Math.round(height * (nativeW / nativeH));
 
   if (crop) {
-    const lockup = VARIANTS.original;
+    const lockup = VARIANTS.header;
     return (
       <Link href="/" className={`header-brand ${className}`.trim()} aria-label="Scents Wave">
         <Image
@@ -36,7 +36,7 @@ export function Logo({
           priority
           quality={100}
           unoptimized
-          sizes="220px"
+          sizes="340px"
           className="header-brand-img"
         />
       </Link>
